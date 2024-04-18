@@ -7,7 +7,7 @@
 
 import XCTest
 
-final class nestymate_iosUITestsLaunchTests: XCTestCase {
+final class NestymateUITestsLaunchTests: XCTestCase {
 
     override class var runsForEachTargetApplicationUIConfiguration: Bool {
         true
