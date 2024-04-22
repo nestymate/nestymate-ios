@@ -8,7 +8,7 @@
 import SwiftUI
 
 @main
-struct nestymate_iosApp: App {
+struct Nestymate: App {
     var body: some Scene {
         WindowGroup {
             ContentView()

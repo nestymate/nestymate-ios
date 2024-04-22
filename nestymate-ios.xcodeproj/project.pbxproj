@@ -7,13 +7,16 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		01A1B4FB2BD10D8D0053BE3A /* nestymate_iosApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01A1B4FA2BD10D8D0053BE3A /* nestymate_iosApp.swift */; };
+		011165D82BD69D7700817935 /* Nestymate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 011165D72BD69D7700817935 /* Nestymate.swift */; };
+		018A04752BD114660051A3A4 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 018A04742BD114660051A3A4 /* LoginView.swift */; };
 		01A1B4FD2BD10D8D0053BE3A /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01A1B4FC2BD10D8D0053BE3A /* ContentView.swift */; };
 		01A1B4FF2BD10D920053BE3A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 01A1B4FE2BD10D920053BE3A /* Assets.xcassets */; };
 		01A1B5022BD10D920053BE3A /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 01A1B5012BD10D920053BE3A /* Preview Assets.xcassets */; };
 		01A1B50C2BD10D930053BE3A /* nestymate_iosTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01A1B50B2BD10D930053BE3A /* nestymate_iosTests.swift */; };
 		01A1B5162BD10D930053BE3A /* nestymate_iosUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01A1B5152BD10D930053BE3A /* nestymate_iosUITests.swift */; };
 		01A1B5182BD10D930053BE3A /* nestymate_iosUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01A1B5172BD10D930053BE3A /* nestymate_iosUITestsLaunchTests.swift */; };
+		01B6DF992BD6A1D500E2983E /* FontManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01B6DF982BD6A1D500E2983E /* FontManager.swift */; };
+		01B6DF9E2BD6A3D900E2983E /* ColorManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01B6DF9D2BD6A3D900E2983E /* ColorManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -34,8 +37,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		011165D72BD69D7700817935 /* Nestymate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Nestymate.swift; path = "nestymate-ios/Nestymate.swift"; sourceTree = SOURCE_ROOT; };
+		018A04742BD114660051A3A4 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		01A1B4F72BD10D8D0053BE3A /* nestymate-ios.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "nestymate-ios.app"; sourceTree = BUILT_PRODUCTS_DIR; };
-		01A1B4FA2BD10D8D0053BE3A /* nestymate_iosApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = nestymate_iosApp.swift; sourceTree = "<group>"; };
 		01A1B4FC2BD10D8D0053BE3A /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		01A1B4FE2BD10D920053BE3A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		01A1B5012BD10D920053BE3A /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
@@ -44,6 +48,8 @@
 		01A1B5112BD10D930053BE3A /* nestymate-iosUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "nestymate-iosUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		01A1B5152BD10D930053BE3A /* nestymate_iosUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = nestymate_iosUITests.swift; sourceTree = "<group>"; };
 		01A1B5172BD10D930053BE3A /* nestymate_iosUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = nestymate_iosUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		01B6DF982BD6A1D500E2983E /* FontManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FontManager.swift; sourceTree = "<group>"; };
+		01B6DF9D2BD6A3D900E2983E /* ColorManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -71,6 +77,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		018A04732BD114330051A3A4 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				01A1B4FC2BD10D8D0053BE3A /* ContentView.swift */,
+				018A04742BD114660051A3A4 /* LoginView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
 		01A1B4EE2BD10D8C0053BE3A = {
 			isa = PBXGroup;
 			children = (
@@ -94,8 +109,9 @@
 		01A1B4F92BD10D8D0053BE3A /* nestymate-ios */ = {
 			isa = PBXGroup;
 			children = (
-				01A1B4FA2BD10D8D0053BE3A /* nestymate_iosApp.swift */,
-				01A1B4FC2BD10D8D0053BE3A /* ContentView.swift */,
+				01B6DF9C2BD6A3C400E2983E /* Utils */,
+				018A04732BD114330051A3A4 /* Views */,
+				011165D72BD69D7700817935 /* Nestymate.swift */,
 				01A1B4FE2BD10D920053BE3A /* Assets.xcassets */,
 				01A1B5002BD10D920053BE3A /* Preview Content */,
 			);
@@ -127,6 +143,15 @@
 			path = "nestymate-iosUITests";
 			sourceTree = "<group>";
 		};
+		01B6DF9C2BD6A3C400E2983E /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				01B6DF982BD6A1D500E2983E /* FontManager.swift */,
+				01B6DF9D2BD6A3D900E2983E /* ColorManager.swift */,
+			);
+			path = Utils;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -137,6 +162,7 @@
 				01A1B4F32BD10D8D0053BE3A /* Sources */,
 				01A1B4F42BD10D8D0053BE3A /* Frameworks */,
 				01A1B4F52BD10D8D0053BE3A /* Resources */,
+				01B6DF9B2BD6A2CA00E2983E /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -215,6 +241,8 @@
 				Base,
 			);
 			mainGroup = 01A1B4EE2BD10D8C0053BE3A;
+			packageReferences = (
+			);
 			productRefGroup = 01A1B4F82BD10D8D0053BE3A /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -252,13 +280,37 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		01B6DF9B2BD6A2CA00E2983E /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "export PATH=\"$PATH:/opt/homebrew/bin\"\nif which swiftlint > /dev/null; then\n  swiftlint\nelse\n  echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		01A1B4F32BD10D8D0053BE3A /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				011165D82BD69D7700817935 /* Nestymate.swift in Sources */,
+				01B6DF9E2BD6A3D900E2983E /* ColorManager.swift in Sources */,
+				018A04752BD114660051A3A4 /* LoginView.swift in Sources */,
+				01B6DF992BD6A1D500E2983E /* FontManager.swift in Sources */,
 				01A1B4FD2BD10D8D0053BE3A /* ContentView.swift in Sources */,
-				01A1B4FB2BD10D8D0053BE3A /* nestymate_iosApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -424,7 +476,10 @@
 				DEVELOPMENT_ASSET_PATHS = "\"nestymate-ios/Preview Content\"";
 				DEVELOPMENT_TEAM = 4L623JD48M;
 				ENABLE_PREVIEWS = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = Nestymate;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -453,7 +508,10 @@
 				DEVELOPMENT_ASSET_PATHS = "\"nestymate-ios/Preview Content\"";
 				DEVELOPMENT_TEAM = 4L623JD48M;
 				ENABLE_PREVIEWS = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = Nestymate;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
