@@ -1,5 +1,5 @@
 //
-//  nestymate_iosUITestsLaunchTests.swift
+//  NestymateUITestsLaunchTests.swift
 //  nestymate-iosUITests
 //
 //  Created by Selini Kyriazidou on 18/4/24.
@@ -8,7 +8,6 @@
 import XCTest
 
 final class NestymateUITestsLaunchTests: XCTestCase {
-
     override class var runsForEachTargetApplicationUIConfiguration: Bool {
         true
     }

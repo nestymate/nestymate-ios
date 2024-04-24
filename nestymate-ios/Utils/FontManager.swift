@@ -8,7 +8,7 @@
 import Foundation
 import SwiftUI
 
-struct FontManager {
+enum FontManager {
     public static let text: Font = .body
     public static let title: Font = .title
     public static let button: Font = .body
