@@ -7,14 +7,26 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0106B6052BE1851B0024AFCB /* MainScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0106B6042BE1851B0024AFCB /* MainScreenView.swift */; };
+		0106B6072BE1859F0024AFCB /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0106B6062BE1859F0024AFCB /* ProfileView.swift */; };
+		0106B6092BE185B40024AFCB /* ExpensesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0106B6082BE185B40024AFCB /* ExpensesView.swift */; };
+		0106B60F2BE18A5E0024AFCB /* LoginService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0106B60E2BE18A5E0024AFCB /* LoginService.swift */; };
+		0106B6142BE191640024AFCB /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0106B6132BE191640024AFCB /* LoginViewModel.swift */; };
+		0106B6162BE191B50024AFCB /* LoginUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0106B6152BE191B50024AFCB /* LoginUseCase.swift */; };
+		0106B6192BE195F10024AFCB /* AuthenticationCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0106B6182BE195F10024AFCB /* AuthenticationCoordinator.swift */; };
+		0106B61B2BE811B30024AFCB /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0106B61A2BE811B30024AFCB /* AppCoordinator.swift */; };
+		0106B61D2BE811E60024AFCB /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0106B61C2BE811E60024AFCB /* MainView.swift */; };
 		011165D82BD69D7700817935 /* Nestymate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 011165D72BD69D7700817935 /* Nestymate.swift */; };
+		013504792BD7D9950000C859 /* ActionButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 013504782BD7D9950000C859 /* ActionButton.swift */; };
+		0135047B2BD7DBE20000C859 /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = 0135047A2BD7DBE20000C859 /* Localizable.xcstrings */; };
+		0135047D2BD8F95E0000C859 /* NestymateTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0135047C2BD8F95E0000C859 /* NestymateTests.swift */; };
+		013504822BD8FA6E0000C859 /* NestymateUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0135047E2BD8F96B0000C859 /* NestymateUITests.swift */; };
+		013504832BD8FA730000C859 /* NestymateUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0135047F2BD8F96B0000C859 /* NestymateUITestsLaunchTests.swift */; };
+		013504852BD900460000C859 /* PaddingManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 013504842BD900460000C859 /* PaddingManager.swift */; };
+		013504872BD90FDB0000C859 /* LoginTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 013504862BD90FDB0000C859 /* LoginTextField.swift */; };
 		018A04752BD114660051A3A4 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 018A04742BD114660051A3A4 /* LoginView.swift */; };
-		01A1B4FD2BD10D8D0053BE3A /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01A1B4FC2BD10D8D0053BE3A /* ContentView.swift */; };
 		01A1B4FF2BD10D920053BE3A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 01A1B4FE2BD10D920053BE3A /* Assets.xcassets */; };
 		01A1B5022BD10D920053BE3A /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 01A1B5012BD10D920053BE3A /* Preview Assets.xcassets */; };
-		01A1B50C2BD10D930053BE3A /* nestymate_iosTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01A1B50B2BD10D930053BE3A /* nestymate_iosTests.swift */; };
-		01A1B5162BD10D930053BE3A /* nestymate_iosUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01A1B5152BD10D930053BE3A /* nestymate_iosUITests.swift */; };
-		01A1B5182BD10D930053BE3A /* nestymate_iosUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01A1B5172BD10D930053BE3A /* nestymate_iosUITestsLaunchTests.swift */; };
 		01B6DF992BD6A1D500E2983E /* FontManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01B6DF982BD6A1D500E2983E /* FontManager.swift */; };
 		01B6DF9E2BD6A3D900E2983E /* ColorManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01B6DF9D2BD6A3D900E2983E /* ColorManager.swift */; };
 /* End PBXBuildFile section */
@@ -37,17 +49,29 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0106B6042BE1851B0024AFCB /* MainScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainScreenView.swift; sourceTree = "<group>"; };
+		0106B6062BE1859F0024AFCB /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
+		0106B6082BE185B40024AFCB /* ExpensesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpensesView.swift; sourceTree = "<group>"; };
+		0106B60E2BE18A5E0024AFCB /* LoginService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginService.swift; sourceTree = "<group>"; };
+		0106B6132BE191640024AFCB /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
+		0106B6152BE191B50024AFCB /* LoginUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginUseCase.swift; sourceTree = "<group>"; };
+		0106B6182BE195F10024AFCB /* AuthenticationCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationCoordinator.swift; sourceTree = "<group>"; };
+		0106B61A2BE811B30024AFCB /* AppCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCoordinator.swift; sourceTree = "<group>"; };
+		0106B61C2BE811E60024AFCB /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		011165D72BD69D7700817935 /* Nestymate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Nestymate.swift; path = "nestymate-ios/Nestymate.swift"; sourceTree = SOURCE_ROOT; };
+		013504782BD7D9950000C859 /* ActionButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionButton.swift; sourceTree = "<group>"; };
+		0135047A2BD7DBE20000C859 /* Localizable.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = Localizable.xcstrings; sourceTree = "<group>"; };
+		0135047C2BD8F95E0000C859 /* NestymateTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NestymateTests.swift; sourceTree = "<group>"; };
+		0135047E2BD8F96B0000C859 /* NestymateUITests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NestymateUITests.swift; sourceTree = "<group>"; };
+		0135047F2BD8F96B0000C859 /* NestymateUITestsLaunchTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NestymateUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		013504842BD900460000C859 /* PaddingManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaddingManager.swift; sourceTree = "<group>"; };
+		013504862BD90FDB0000C859 /* LoginTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginTextField.swift; sourceTree = "<group>"; };
 		018A04742BD114660051A3A4 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		01A1B4F72BD10D8D0053BE3A /* nestymate-ios.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "nestymate-ios.app"; sourceTree = BUILT_PRODUCTS_DIR; };
-		01A1B4FC2BD10D8D0053BE3A /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		01A1B4FE2BD10D920053BE3A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		01A1B5012BD10D920053BE3A /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		01A1B5072BD10D930053BE3A /* nestymate-iosTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "nestymate-iosTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
-		01A1B50B2BD10D930053BE3A /* nestymate_iosTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = nestymate_iosTests.swift; sourceTree = "<group>"; };
 		01A1B5112BD10D930053BE3A /* nestymate-iosUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "nestymate-iosUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
-		01A1B5152BD10D930053BE3A /* nestymate_iosUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = nestymate_iosUITests.swift; sourceTree = "<group>"; };
-		01A1B5172BD10D930053BE3A /* nestymate_iosUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = nestymate_iosUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		01B6DF982BD6A1D500E2983E /* FontManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FontManager.swift; sourceTree = "<group>"; };
 		01B6DF9D2BD6A3D900E2983E /* ColorManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -77,11 +101,71 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0106B60A2BE185B90024AFCB /* MainScreen */ = {
+			isa = PBXGroup;
+			children = (
+				0106B6082BE185B40024AFCB /* ExpensesView.swift */,
+				0106B6042BE1851B0024AFCB /* MainScreenView.swift */,
+				0106B6062BE1859F0024AFCB /* ProfileView.swift */,
+			);
+			path = MainScreen;
+			sourceTree = "<group>";
+		};
+		0106B60B2BE18A310024AFCB /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				0106B6132BE191640024AFCB /* LoginViewModel.swift */,
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		0106B60C2BE18A3D0024AFCB /* UseCases */ = {
+			isa = PBXGroup;
+			children = (
+				0106B6152BE191B50024AFCB /* LoginUseCase.swift */,
+			);
+			path = UseCases;
+			sourceTree = "<group>";
+		};
+		0106B60D2BE18A4C0024AFCB /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				0106B60E2BE18A5E0024AFCB /* LoginService.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		0106B6122BE191310024AFCB /* Models */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		0106B6172BE195DC0024AFCB /* Coordinators */ = {
+			isa = PBXGroup;
+			children = (
+				0106B6182BE195F10024AFCB /* AuthenticationCoordinator.swift */,
+				0106B61A2BE811B30024AFCB /* AppCoordinator.swift */,
+			);
+			path = Coordinators;
+			sourceTree = "<group>";
+		};
+		013504772BD7D9800000C859 /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				013504782BD7D9950000C859 /* ActionButton.swift */,
+				013504862BD90FDB0000C859 /* LoginTextField.swift */,
+			);
+			path = Components;
+			sourceTree = "<group>";
+		};
 		018A04732BD114330051A3A4 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				01A1B4FC2BD10D8D0053BE3A /* ContentView.swift */,
 				018A04742BD114660051A3A4 /* LoginView.swift */,
+				0106B60A2BE185B90024AFCB /* MainScreen */,
+				0106B61C2BE811E60024AFCB /* MainView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -89,6 +173,7 @@
 		01A1B4EE2BD10D8C0053BE3A = {
 			isa = PBXGroup;
 			children = (
+				0135047A2BD7DBE20000C859 /* Localizable.xcstrings */,
 				01A1B4F92BD10D8D0053BE3A /* nestymate-ios */,
 				01A1B50A2BD10D930053BE3A /* nestymate-iosTests */,
 				01A1B5142BD10D930053BE3A /* nestymate-iosUITests */,
@@ -109,9 +194,15 @@
 		01A1B4F92BD10D8D0053BE3A /* nestymate-ios */ = {
 			isa = PBXGroup;
 			children = (
+				0106B6172BE195DC0024AFCB /* Coordinators */,
+				0106B6122BE191310024AFCB /* Models */,
+				0106B60D2BE18A4C0024AFCB /* Services */,
+				0106B60C2BE18A3D0024AFCB /* UseCases */,
+				0106B60B2BE18A310024AFCB /* ViewModels */,
+				011165D72BD69D7700817935 /* Nestymate.swift */,
+				013504772BD7D9800000C859 /* Components */,
 				01B6DF9C2BD6A3C400E2983E /* Utils */,
 				018A04732BD114330051A3A4 /* Views */,
-				011165D72BD69D7700817935 /* Nestymate.swift */,
 				01A1B4FE2BD10D920053BE3A /* Assets.xcassets */,
 				01A1B5002BD10D920053BE3A /* Preview Content */,
 			);
@@ -129,7 +220,7 @@
 		01A1B50A2BD10D930053BE3A /* nestymate-iosTests */ = {
 			isa = PBXGroup;
 			children = (
-				01A1B50B2BD10D930053BE3A /* nestymate_iosTests.swift */,
+				0135047C2BD8F95E0000C859 /* NestymateTests.swift */,
 			);
 			path = "nestymate-iosTests";
 			sourceTree = "<group>";
@@ -137,8 +228,8 @@
 		01A1B5142BD10D930053BE3A /* nestymate-iosUITests */ = {
 			isa = PBXGroup;
 			children = (
-				01A1B5152BD10D930053BE3A /* nestymate_iosUITests.swift */,
-				01A1B5172BD10D930053BE3A /* nestymate_iosUITestsLaunchTests.swift */,
+				0135047E2BD8F96B0000C859 /* NestymateUITests.swift */,
+				0135047F2BD8F96B0000C859 /* NestymateUITestsLaunchTests.swift */,
 			);
 			path = "nestymate-iosUITests";
 			sourceTree = "<group>";
@@ -148,6 +239,7 @@
 			children = (
 				01B6DF982BD6A1D500E2983E /* FontManager.swift */,
 				01B6DF9D2BD6A3D900E2983E /* ColorManager.swift */,
+				013504842BD900460000C859 /* PaddingManager.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -239,6 +331,7 @@
 			knownRegions = (
 				en,
 				Base,
+				el,
 			);
 			mainGroup = 01A1B4EE2BD10D8C0053BE3A;
 			packageReferences = (
@@ -261,6 +354,7 @@
 			files = (
 				01A1B5022BD10D920053BE3A /* Preview Assets.xcassets in Resources */,
 				01A1B4FF2BD10D920053BE3A /* Assets.xcassets in Resources */,
+				0135047B2BD7DBE20000C859 /* Localizable.xcstrings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -306,11 +400,22 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				013504852BD900460000C859 /* PaddingManager.swift in Sources */,
 				011165D82BD69D7700817935 /* Nestymate.swift in Sources */,
+				0106B6072BE1859F0024AFCB /* ProfileView.swift in Sources */,
+				013504872BD90FDB0000C859 /* LoginTextField.swift in Sources */,
+				0106B61B2BE811B30024AFCB /* AppCoordinator.swift in Sources */,
 				01B6DF9E2BD6A3D900E2983E /* ColorManager.swift in Sources */,
+				0106B6052BE1851B0024AFCB /* MainScreenView.swift in Sources */,
 				018A04752BD114660051A3A4 /* LoginView.swift in Sources */,
+				0106B60F2BE18A5E0024AFCB /* LoginService.swift in Sources */,
+				0106B6142BE191640024AFCB /* LoginViewModel.swift in Sources */,
+				0106B6092BE185B40024AFCB /* ExpensesView.swift in Sources */,
+				0106B61D2BE811E60024AFCB /* MainView.swift in Sources */,
 				01B6DF992BD6A1D500E2983E /* FontManager.swift in Sources */,
-				01A1B4FD2BD10D8D0053BE3A /* ContentView.swift in Sources */,
+				0106B6162BE191B50024AFCB /* LoginUseCase.swift in Sources */,
+				0106B6192BE195F10024AFCB /* AuthenticationCoordinator.swift in Sources */,
+				013504792BD7D9950000C859 /* ActionButton.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -318,7 +423,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				01A1B50C2BD10D930053BE3A /* nestymate_iosTests.swift in Sources */,
+				0135047D2BD8F95E0000C859 /* NestymateTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -326,8 +431,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				01A1B5162BD10D930053BE3A /* nestymate_iosUITests.swift in Sources */,
-				01A1B5182BD10D930053BE3A /* nestymate_iosUITestsLaunchTests.swift in Sources */,
+				013504832BD8FA730000C859 /* NestymateUITestsLaunchTests.swift in Sources */,
+				013504822BD8FA6E0000C859 /* NestymateUITests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

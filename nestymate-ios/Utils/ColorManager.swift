@@ -7,8 +7,12 @@
 
 import Foundation
 import SwiftUI
-struct ColorManager {
-    public static let textColour: Color = .black
-    public static let buttonTextColour: Color = .white
-    public static let buttonBackgroundColour: Color = .accentColor
+
+enum ColorManager {
+    public static let textColour: Color = .darkGrey
+    public static let buttonTextColour: Color = .black
+    public static let buttonBackgroundColour: Color = .bezColour
+    public static let backgroundColour: Color = .backgroundColour
+    public static let seperatorColour: Color = .lightGrey
+    public static let linkColour: Color = .normalBlue
 }

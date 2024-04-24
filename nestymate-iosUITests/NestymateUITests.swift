@@ -1,5 +1,5 @@
 //
-//  nestymate_iosUITests.swift
+//  NestymateUITests.swift
 //  nestymate-iosUITests
 //
 //  Created by Selini Kyriazidou on 18/4/24.
@@ -8,13 +8,11 @@
 import XCTest
 
 final class NestymateUITests: XCTestCase {
-
     override func setUpWithError() throws {
         // Put setup code here. This method is called before the invocation of each test method in the class.
 
         // In UI tests it is usually best to stop immediately when a failure occurs.
         continueAfterFailure = false
-
     }
 
     override func tearDownWithError() throws {
