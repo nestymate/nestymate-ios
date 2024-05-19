@@ -8,8 +8,9 @@
 import SwiftUI
 
 struct ExpensesView: View {
+    var token = KeychainHelper().read() ?? "No token"
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        Text(token)
     }
 }
 

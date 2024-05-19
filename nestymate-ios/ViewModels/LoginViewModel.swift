@@ -17,4 +17,8 @@ class LoginViewModel: ObservableObject {
         guard let username, let password else { return }
         useCase.login(username: username, password: password, completionHandler: completionHandler)
     }
+
+    public func checkHomeForUser(completionHandler: @escaping (Home?) -> Void) {
+        useCase.checkHomeForUser(completionHandler: completionHandler)
+    }
 }

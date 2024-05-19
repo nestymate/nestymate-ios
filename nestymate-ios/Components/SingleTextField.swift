@@ -1,5 +1,5 @@
 //
-//  LoginTextField.swift
+//  SingleTextField.swift
 //  nestymate-ios
 //
 //  Created by Selini Kyriazidou on 24/4/24.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct LoginTextField: View {
+struct SingleTextField: View {
     var title: String
     var value: Binding<String>
 
@@ -29,5 +29,5 @@ struct LoginTextField: View {
 }
 
 #Preview {
-    LoginTextField(title: "username", value: .constant(""))
+    SingleTextField(title: "username", value: .constant(""))
 }
