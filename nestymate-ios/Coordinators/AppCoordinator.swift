@@ -6,14 +6,12 @@
 //
 
 import SwiftUI
-
+@MainActor
 final class AppCoordinator: ObservableObject {
     @Published var path: NavigationPath
-
     init(path: NavigationPath) {
         self.path = path
     }
-
     @ViewBuilder
     func view() -> some View {
         MainView()

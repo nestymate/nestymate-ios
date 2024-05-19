@@ -11,8 +11,8 @@ import SwiftUI
 enum LoginPage {
     case login
     case mainScreen
+    case createHome
 }
-
 final class AuthenticationCoordinator: Hashable {
     @Binding var navigationPath: NavigationPath
     private var id: UUID
@@ -37,6 +37,8 @@ final class AuthenticationCoordinator: Hashable {
             loginView()
         case .mainScreen:
             mainScreenView()
+        case .createHome:
+            createHome()
         }
     }
 
@@ -64,6 +66,14 @@ private extension AuthenticationCoordinator {
                             page: .mainScreen
                         )
                     )
+                },
+                goToCreateHome: {
+                    self.push(
+                        AuthenticationCoordinator(
+                            navigationPath: self.$navigationPath,
+                            page: .createHome
+                        )
+                    )
                 }
             )
         )
@@ -71,7 +81,24 @@ private extension AuthenticationCoordinator {
     }
 
     func mainScreenView() -> some View {
-        return MainScreenView()
+        return MainScreenView(output:
+            .init()
+        )
+    }
+
+    func createHome() -> some View {
+        return CreateHomeView(output: CreateHomeView.Output(goToMainScreen: {
+            self.push(
+                AuthenticationCoordinator(
+                    navigationPath: self.$navigationPath,
+                    page: .mainScreen
+                )
+            )
+        }))
+    }
+
+    func popLast() {
+        navigationPath.removeLast()
     }
 
     func push<V>(_ value: V) where V: Hashable {
