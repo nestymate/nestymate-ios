@@ -11,21 +11,26 @@ struct LoginView: View {
     @ObservedObject var viewModel: LoginViewModel = .init()
     struct Output {
         var goToMainScreen: () -> Void
+        var goToCreateHome: () -> Void
     }
 
     var output: Output
     var body: some View {
         VStack {
             Text("login").font(FontManager.title)
-            LoginTextField(title: "Username", value: Binding<String>(
+            SingleTextField(title: "Username", value: Binding<String>(
                 get: { self.viewModel.username ?? "" },
                 set: { self.viewModel.username = $0 }))
-            LoginTextField(title: "Password", value: Binding<String>(
+            SingleTextField(title: "Password", value: Binding<String>(
                 get: { self.viewModel.password ?? "" },
                 set: { self.viewModel.password = $0 }))
             ActionButton(title: "login") {
-                viewModel.login(username: viewModel.username, password: viewModel.password) {
-                    self.output.goToMainScreen()
+                // viewModel.username
+                // viewModel.password
+                viewModel.login(username: "test123", password: "test321") {
+                    viewModel.checkHomeForUser { home in
+                        home == nil ?  self.output.goToCreateHome() : self.output.goToMainScreen()
+                    }
                 }
             }
             HStack {
@@ -45,5 +50,5 @@ struct LoginView: View {
 }
 
 #Preview {
-    LoginView(output: LoginView.Output(goToMainScreen: {}))
+    LoginView(output: LoginView.Output(goToMainScreen: {}, goToCreateHome: {}))
 }

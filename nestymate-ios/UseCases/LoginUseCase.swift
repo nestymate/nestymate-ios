@@ -9,11 +9,17 @@ import Foundation
 
 protocol LoginUseCase {
     func login(username: String, password: String, completionHandler: @escaping () -> Void)
+    func checkHomeForUser(completionHandler: @escaping (Home?) -> Void)
 }
 
 class LoginUseCaseImpl: LoginUseCase {
     let service: LoginService = LoginServiceImpl()
+    let homeService: HomeService = HomeServiceImpl()
     func login(username: String, password: String, completionHandler: @escaping () -> Void) {
         service.login(username: username, password: password, completionHandler: completionHandler)
+    }
+
+    func checkHomeForUser(completionHandler: @escaping (Home?) -> Void) {
+        homeService.getHome(completionHandler: completionHandler)
     }
 }

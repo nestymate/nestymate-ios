@@ -8,21 +8,12 @@
 import Combine
 import Foundation
 
-struct Login: Encodable {
-    let username: String
-    let password: String
-}
-
-struct Response: Decodable {
-    let token: String
-}
-
 protocol LoginService {
     func login(username: String, password: String, completionHandler: @escaping () -> Void)
 }
 
 class LoginServiceImpl: LoginService {
-    let mainUrl = URL(string: "http://192.168.1.10:8080/auth")!
+    let mainUrl = URL(string: "http://192.168.1.10/auth")!
     var cancellable = Set<AnyCancellable>()
     func login(username: String, password: String, completionHandler: @escaping () -> Void) {
         let url: URL = mainUrl.appending(path: "login")
@@ -62,6 +53,8 @@ class LoginServiceImpl: LoginService {
                         fatalError("Failed to decode \(data) from bundle.")
                     }
                     print(response.token)
+                    let helper = KeychainHelper()
+                    helper.save(Data(response.token.utf8))
                     completionHandler()
                 }
             )

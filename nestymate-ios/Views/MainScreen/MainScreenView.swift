@@ -8,6 +8,10 @@
 import SwiftUI
 
 struct MainScreenView: View {
+    var viewModel: MainScreenViewModel = .init()
+    struct Output {}
+
+    var output: Output
     var body: some View {
         TabView {
             ExpensesView()
@@ -20,10 +24,11 @@ struct MainScreenView: View {
                     Label("Profile", systemImage: "square.and.pencil")
                 }
         }
+        .onAppear(perform: {})
         .navigationBarBackButtonHidden()
     }
 }
 
 #Preview {
-    MainScreenView()
+    MainScreenView(output: MainScreenView.Output())
 }
