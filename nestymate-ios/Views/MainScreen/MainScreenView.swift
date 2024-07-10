@@ -9,6 +9,7 @@ import SwiftUI
 
 struct MainScreenView: View {
     var viewModel: MainScreenViewModel = .init()
+    @EnvironmentObject var appCoordinator: AppCoordinator
     struct Output {}
 
     var output: Output
@@ -19,7 +20,15 @@ struct MainScreenView: View {
                     Label("Expenses", systemImage: "list.dash")
                 }
 
-            ProfileView()
+            HomeScreenCoordinator(
+                navigationPath: $appCoordinator.path,
+                output: .init(
+                    goToMainScreen: {
+                        print("Go to main screen (MainTabView)")
+                    }
+                ),
+                page: .profile
+            ).view()
                 .tabItem {
                     Label("Profile", systemImage: "square.and.pencil")
                 }
