@@ -39,6 +39,8 @@
 		01A6061D2C3EBFAD00B7622E /* ProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01A6061C2C3EBFAD00B7622E /* ProfileViewModel.swift */; };
 		01A6061F2C3EC01400B7622E /* ProfileUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01A6061E2C3EC01400B7622E /* ProfileUseCase.swift */; };
 		01A606212C3EC86200B7622E /* HomeScreenCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01A606202C3EC86200B7622E /* HomeScreenCoordinator.swift */; };
+		01A606232C3F207500B7622E /* ActivityIndicatorIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01A606222C3F207500B7622E /* ActivityIndicatorIView.swift */; };
+		01A606252C3F259300B7622E /* View+Extenstion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01A606242C3F259300B7622E /* View+Extenstion.swift */; };
 		01B6DF992BD6A1D500E2983E /* FontManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01B6DF982BD6A1D500E2983E /* FontManager.swift */; };
 		01B6DF9E2BD6A3D900E2983E /* ColorManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01B6DF9D2BD6A3D900E2983E /* ColorManager.swift */; };
 /* End PBXBuildFile section */
@@ -97,6 +99,8 @@
 		01A6061C2C3EBFAD00B7622E /* ProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewModel.swift; sourceTree = "<group>"; };
 		01A6061E2C3EC01400B7622E /* ProfileUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileUseCase.swift; sourceTree = "<group>"; };
 		01A606202C3EC86200B7622E /* HomeScreenCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeScreenCoordinator.swift; sourceTree = "<group>"; };
+		01A606222C3F207500B7622E /* ActivityIndicatorIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityIndicatorIView.swift; sourceTree = "<group>"; };
+		01A606242C3F259300B7622E /* View+Extenstion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+Extenstion.swift"; sourceTree = "<group>"; };
 		01B6DF982BD6A1D500E2983E /* FontManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FontManager.swift; sourceTree = "<group>"; };
 		01B6DF9D2BD6A3D900E2983E /* ColorManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -192,6 +196,8 @@
 			children = (
 				013504782BD7D9950000C859 /* ActionButton.swift */,
 				013504862BD90FDB0000C859 /* SingleTextField.swift */,
+				01A606222C3F207500B7622E /* ActivityIndicatorIView.swift */,
+				01A606242C3F259300B7622E /* View+Extenstion.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -440,6 +446,7 @@
 			files = (
 				0106B6282BFA5E920024AFCB /* Login.swift in Sources */,
 				013504852BD900460000C859 /* PaddingManager.swift in Sources */,
+				01A606252C3F259300B7622E /* View+Extenstion.swift in Sources */,
 				011165D82BD69D7700817935 /* Nestymate.swift in Sources */,
 				0106B6072BE1859F0024AFCB /* ProfileView.swift in Sources */,
 				013504872BD90FDB0000C859 /* SingleTextField.swift in Sources */,
@@ -449,6 +456,7 @@
 				01B6DF9E2BD6A3D900E2983E /* ColorManager.swift in Sources */,
 				0106B6052BE1851B0024AFCB /* MainScreenView.swift in Sources */,
 				0106B6202BFA5CC30024AFCB /* CreateHomeView.swift in Sources */,
+				01A606232C3F207500B7622E /* ActivityIndicatorIView.swift in Sources */,
 				01A6061D2C3EBFAD00B7622E /* ProfileViewModel.swift in Sources */,
 				018A04752BD114660051A3A4 /* LoginView.swift in Sources */,
 				0106B60F2BE18A5E0024AFCB /* LoginService.swift in Sources */,
