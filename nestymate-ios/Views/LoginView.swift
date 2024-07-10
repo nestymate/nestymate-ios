@@ -29,7 +29,7 @@ struct LoginView: View {
                 // viewModel.password
                 viewModel.login(username: "test123", password: "test321") {
                     viewModel.checkHomeForUser { home in
-                        home == nil ?  self.output.goToCreateHome() : self.output.goToMainScreen()
+                        home == nil ? self.output.goToCreateHome() : self.output.goToMainScreen()
                     }
                 }
             }
@@ -46,6 +46,7 @@ struct LoginView: View {
         }
         .padding([.top], 64)
         .background(ColorManager.backgroundColour)
+        .navigationBarBackButtonHidden()
     }
 }
 

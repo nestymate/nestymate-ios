@@ -12,7 +12,7 @@ struct MainView: View {
 
     var body: some View {
         Group {
-            AuthenticationCoordinator(
+            LoginCoordinator(
                 navigationPath: $appCoordinator.path,
                 output: .init(
                     goToMainScreen: {
