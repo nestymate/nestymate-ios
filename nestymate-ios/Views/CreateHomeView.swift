@@ -15,29 +15,34 @@ struct CreateHomeView: View {
 
     var output: Output
     var body: some View {
-        VStack {
-            Text("New Home").font(FontManager.title)
-            SingleTextField(title: "name", value: Binding<String>(
-                get: { self.viewModel.name ?? "" },
-                set: { self.viewModel.name = $0 }))
-            SingleTextField(title: "description", value: Binding<String>(
-                get: { self.viewModel.description ?? "" },
-                set: { self.viewModel.description = $0 }))
-            SingleTextField(title: "address", value: Binding<String>(
-                get: { self.viewModel.address ?? "" },
-                set: { self.viewModel.address = $0 }))
-            ActionButton(title: "Create") {
-                viewModel.createHome(
-                    name: viewModel.name,
-                    description: viewModel.description,
-                    address: viewModel.address
-                ) {
-                    self.output.goToMainScreen()
+        ActivityIndicatorIView(isShowing: Binding<Bool>(
+            get: { self.viewModel.shouldShow ?? false },
+            set: { self.viewModel.shouldShow = $0 }
+        )) {
+            VStack {
+                Text("New Home").font(FontManager.title)
+                SingleTextField(title: "name", value: Binding<String>(
+                    get: { self.viewModel.name ?? "" },
+                    set: { self.viewModel.name = $0 }))
+                SingleTextField(title: "description", value: Binding<String>(
+                    get: { self.viewModel.description ?? "" },
+                    set: { self.viewModel.description = $0 }))
+                SingleTextField(title: "address", value: Binding<String>(
+                    get: { self.viewModel.address ?? "" },
+                    set: { self.viewModel.address = $0 }))
+                ActionButton(title: "Create") {
+                    viewModel.createHome(
+                        name: viewModel.name,
+                        description: viewModel.description,
+                        address: viewModel.address
+                    ) {
+                        self.output.goToMainScreen()
+                    }
                 }
+                Spacer()
             }
-            Spacer()
+            .background(ColorManager.backgroundColour)
         }
-        .background(ColorManager.backgroundColour)
     }
 }
 

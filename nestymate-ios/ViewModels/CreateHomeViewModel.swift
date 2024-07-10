@@ -13,6 +13,7 @@ class CreateHomeViewModel: ObservableObject {
     @Published public var name: String?
     @Published public var description: String?
     @Published public var address: String?
+    @Published public var shouldShow: Bool?
 
     public func createHome(
         name: String?,
@@ -21,6 +22,10 @@ class CreateHomeViewModel: ObservableObject {
         completionHandler: @escaping () -> Void
     ) {
         guard let name, let description, let address else { return }
-        useCase.createHome(name: name, description: description, address: address, completionHandler: completionHandler)
+        shouldShow = true
+        useCase.createHome(name: name, description: description, address: address) { [weak self] in
+            self?.shouldShow = false
+            completionHandler()
+        }
     }
 }

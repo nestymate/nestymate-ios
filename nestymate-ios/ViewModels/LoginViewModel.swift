@@ -12,13 +12,16 @@ class LoginViewModel: ObservableObject {
     let useCase: LoginUseCase = LoginUseCaseImpl()
     @Published public var username: String?
     @Published public var password: String?
+    @Published public var shouldShow: Bool?
 
-    public func login(username: String?, password: String?, completionHandler: @escaping () -> Void) {
+    @MainActor public func login(username: String?, password: String?, completionHandler: @escaping (Home?) -> Void) {
         guard let username, let password else { return }
-        useCase.login(username: username, password: password, completionHandler: completionHandler)
-    }
-
-    public func checkHomeForUser(completionHandler: @escaping (Home?) -> Void) {
-        useCase.checkHomeForUser(completionHandler: completionHandler)
+        shouldShow = true
+        useCase.login(username: username, password: password) { [weak self] in
+            self?.useCase.checkHomeForUser { [weak self] home in
+                self?.shouldShow = false
+                completionHandler(home)
+            }
+        }
     }
 }

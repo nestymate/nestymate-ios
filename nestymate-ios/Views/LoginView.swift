@@ -16,37 +16,41 @@ struct LoginView: View {
 
     var output: Output
     var body: some View {
-        VStack {
-            Text("login").font(FontManager.title)
-            SingleTextField(title: "Username", value: Binding<String>(
-                get: { self.viewModel.username ?? "" },
-                set: { self.viewModel.username = $0 }))
-            SingleTextField(title: "Password", value: Binding<String>(
-                get: { self.viewModel.password ?? "" },
-                set: { self.viewModel.password = $0 }))
-            ActionButton(title: "login") {
-                // viewModel.username
-                // viewModel.password
-                viewModel.login(username: "test123", password: "test321") {
-                    viewModel.checkHomeForUser { home in
+        ActivityIndicatorIView(isShowing: Binding<Bool>(
+            get: { self.viewModel.shouldShow ?? false },
+            set: { self.viewModel.shouldShow = $0 }
+        )) {
+            VStack {
+                Text("login").font(FontManager.title)
+                SingleTextField(title: "Username", value: Binding<String>(
+                    get: { self.viewModel.username ?? "" },
+                    set: { self.viewModel.username = $0 }))
+                SingleTextField(title: "Password", value: Binding<String>(
+                    get: { self.viewModel.password ?? "" },
+                    set: { self.viewModel.password = $0 }))
+
+                ActionButton(title: "login") {
+                    // viewModel.username
+                    // viewModel.password
+                    viewModel.login(username: "test123", password: "test321") { home in
                         home == nil ? self.output.goToCreateHome() : self.output.goToMainScreen()
                     }
                 }
-            }
-            HStack {
-                Text("New to Nestymate?").font(FontManager.button)
-                Button {} label: {
-                    Text("Sign up here")
-                        .foregroundColor(ColorManager.linkColour)
-                        .underline()
-                        .font(FontManager.button)
+                HStack {
+                    Text("New to Nestymate?").font(FontManager.button)
+                    Button {} label: {
+                        Text("Sign up here")
+                            .foregroundColor(ColorManager.linkColour)
+                            .underline()
+                            .font(FontManager.button)
+                    }
                 }
+                Spacer()
             }
-            Spacer()
+            .padding([.top], 64)
+            .background(ColorManager.backgroundColour)
+            .navigationBarBackButtonHidden()
         }
-        .padding([.top], 64)
-        .background(ColorManager.backgroundColour)
-        .navigationBarBackButtonHidden()
     }
 }
 

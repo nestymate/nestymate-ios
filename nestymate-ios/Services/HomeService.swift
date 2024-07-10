@@ -43,8 +43,7 @@ class HomeServiceImpl: HomeService {
 
                 throw URLError(.badServerResponse)
             }
-            // decode the response from tryMap into a custom data structure
-            // .decode(type: Lo.self, decoder: JSONDecoder())
+            .receive(on: DispatchQueue.main)
             .eraseToAnyPublisher()
             .sink(
                 receiveCompletion: { status in
@@ -92,8 +91,7 @@ class HomeServiceImpl: HomeService {
                 }
                 return element.data
             }
-            // decode the response from tryMap into a custom data structure
-            // .decode(type: Lo.self, decoder: JSONDecoder())
+            .receive(on: DispatchQueue.main)
             .eraseToAnyPublisher()
             .sink(
                 receiveCompletion: { status in
