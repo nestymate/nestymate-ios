@@ -12,10 +12,14 @@
       }
     },
     "Expenses" : {
-
-    },
-    "Hello, World!" : {
-
+      "localizations" : {
+        "el" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Δαπάνες"
+          }
+        }
+      }
     },
     "login" : {
       "extractionState" : "manual",
@@ -35,7 +39,14 @@
       }
     },
     "New Home" : {
-
+      "localizations" : {
+        "el" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Νέο Σπιτι"
+          }
+        }
+      }
     },
     "New to Nestymate?" : {
       "localizations" : {
@@ -48,7 +59,14 @@
       }
     },
     "Profile" : {
-
+      "localizations" : {
+        "el" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Προφιλ"
+          }
+        }
+      }
     },
     "Sign up here" : {
       "localizations" : {

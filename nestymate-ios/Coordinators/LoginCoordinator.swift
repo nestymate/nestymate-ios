@@ -1,5 +1,5 @@
 //
-//  AuthenticationCoordinator.swift
+//  LoginCoordinator.swift
 //  nestymate-ios
 //
 //  Created by Selini Kyriazidou on 1/5/24.
@@ -13,7 +13,8 @@ enum LoginPage {
     case mainScreen
     case createHome
 }
-final class AuthenticationCoordinator: Hashable {
+
+final class LoginCoordinator: Hashable {
     @Binding var navigationPath: NavigationPath
     private var id: UUID
     private var output: Output?
@@ -47,21 +48,21 @@ final class AuthenticationCoordinator: Hashable {
     }
 
     static func == (
-        lhs: AuthenticationCoordinator,
-        rhs: AuthenticationCoordinator
+        lhs: LoginCoordinator,
+        rhs: LoginCoordinator
     ) -> Bool {
         lhs.id == rhs.id
     }
 }
 
-private extension AuthenticationCoordinator {
+private extension LoginCoordinator {
     func loginView() -> some View {
         let loginView = LoginView(
             output:
             .init(
                 goToMainScreen: {
                     self.push(
-                        AuthenticationCoordinator(
+                        LoginCoordinator(
                             navigationPath: self.$navigationPath,
                             page: .mainScreen
                         )
@@ -69,7 +70,7 @@ private extension AuthenticationCoordinator {
                 },
                 goToCreateHome: {
                     self.push(
-                        AuthenticationCoordinator(
+                        LoginCoordinator(
                             navigationPath: self.$navigationPath,
                             page: .createHome
                         )
@@ -89,7 +90,7 @@ private extension AuthenticationCoordinator {
     func createHome() -> some View {
         return CreateHomeView(output: CreateHomeView.Output(goToMainScreen: {
             self.push(
-                AuthenticationCoordinator(
+                LoginCoordinator(
                     navigationPath: self.$navigationPath,
                     page: .mainScreen
                 )

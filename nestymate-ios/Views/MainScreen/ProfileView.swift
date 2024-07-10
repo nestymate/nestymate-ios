@@ -8,11 +8,21 @@
 import SwiftUI
 
 struct ProfileView: View {
+    var viewModel: ProfileViewModel = .init()
+    struct Output {
+        var goToLogin: () -> Void
+    }
+
+    var output: Output
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        ActionButton(title: "Logout") {
+            viewModel.logout {
+                self.output.goToLogin()
+            }
+        }
     }
 }
 
 #Preview {
-    ProfileView()
+    ProfileView(output: ProfileView.Output(goToLogin: {}))
 }
