@@ -7,11 +7,16 @@
 import Foundation
 
 protocol CreateHomeUseCase {
+    func createValid(isNameValid: Bool, isDescriptionValid: Bool, isAddressValid: Bool) -> Bool
     func createHome(name: String, description: String, address: String, completionHandler: @escaping () -> Void)
 }
 
 class CreateHomeUseCaseImpl: CreateHomeUseCase {
     let service: HomeService = HomeServiceImpl()
+    func createValid(isNameValid: Bool, isDescriptionValid: Bool, isAddressValid: Bool) -> Bool {
+        return isNameValid && isDescriptionValid && isAddressValid
+    }
+
     func createHome(name: String, description: String, address: String, completionHandler: @escaping () -> Void) {
         service.createHome(name: name, description: description, address: address, completionHandler: completionHandler)
     }

@@ -26,6 +26,8 @@
 		0106B62E2BFA78B50024AFCB /* MainScreenViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0106B62D2BFA78B50024AFCB /* MainScreenViewModel.swift */; };
 		0106B6302BFA79450024AFCB /* MainScreenUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0106B62F2BFA79450024AFCB /* MainScreenUseCase.swift */; };
 		011165D82BD69D7700817935 /* Nestymate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 011165D72BD69D7700817935 /* Nestymate.swift */; };
+		012815912C413539001FFA2D /* FieldModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 012815902C413539001FFA2D /* FieldModel.swift */; };
+		012815932C4135A2001FFA2D /* FieldType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 012815922C4135A2001FFA2D /* FieldType.swift */; };
 		013504792BD7D9950000C859 /* ActionButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 013504782BD7D9950000C859 /* ActionButton.swift */; };
 		0135047B2BD7DBE20000C859 /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = 0135047A2BD7DBE20000C859 /* Localizable.xcstrings */; };
 		0135047D2BD8F95E0000C859 /* NestymateTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0135047C2BD8F95E0000C859 /* NestymateTests.swift */; };
@@ -41,6 +43,11 @@
 		01A606212C3EC86200B7622E /* HomeScreenCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01A606202C3EC86200B7622E /* HomeScreenCoordinator.swift */; };
 		01A606232C3F207500B7622E /* ActivityIndicatorIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01A606222C3F207500B7622E /* ActivityIndicatorIView.swift */; };
 		01A606252C3F259300B7622E /* View+Extenstion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01A606242C3F259300B7622E /* View+Extenstion.swift */; };
+		01A606272C3FC41E00B7622E /* SignUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01A606262C3FC41E00B7622E /* SignUpView.swift */; };
+		01A606292C3FC5ED00B7622E /* SignUpViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01A606282C3FC5ED00B7622E /* SignUpViewModel.swift */; };
+		01A6062B2C3FC62D00B7622E /* SignUpUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01A6062A2C3FC62D00B7622E /* SignUpUseCase.swift */; };
+		01A6062D2C3FCB9E00B7622E /* PasswordTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01A6062C2C3FCB9E00B7622E /* PasswordTextField.swift */; };
+		01A606332C4017A900B7622E /* String+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01A606322C4017A900B7622E /* String+Extension.swift */; };
 		01B6DF992BD6A1D500E2983E /* FontManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01B6DF982BD6A1D500E2983E /* FontManager.swift */; };
 		01B6DF9E2BD6A3D900E2983E /* ColorManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01B6DF9D2BD6A3D900E2983E /* ColorManager.swift */; };
 /* End PBXBuildFile section */
@@ -83,6 +90,8 @@
 		0106B62D2BFA78B50024AFCB /* MainScreenViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainScreenViewModel.swift; sourceTree = "<group>"; };
 		0106B62F2BFA79450024AFCB /* MainScreenUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainScreenUseCase.swift; sourceTree = "<group>"; };
 		011165D72BD69D7700817935 /* Nestymate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Nestymate.swift; path = "nestymate-ios/Nestymate.swift"; sourceTree = SOURCE_ROOT; };
+		012815902C413539001FFA2D /* FieldModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FieldModel.swift; sourceTree = "<group>"; };
+		012815922C4135A2001FFA2D /* FieldType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FieldType.swift; sourceTree = "<group>"; };
 		013504782BD7D9950000C859 /* ActionButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionButton.swift; sourceTree = "<group>"; };
 		0135047A2BD7DBE20000C859 /* Localizable.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = Localizable.xcstrings; sourceTree = "<group>"; };
 		0135047C2BD8F95E0000C859 /* NestymateTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NestymateTests.swift; sourceTree = "<group>"; };
@@ -101,6 +110,11 @@
 		01A606202C3EC86200B7622E /* HomeScreenCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeScreenCoordinator.swift; sourceTree = "<group>"; };
 		01A606222C3F207500B7622E /* ActivityIndicatorIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityIndicatorIView.swift; sourceTree = "<group>"; };
 		01A606242C3F259300B7622E /* View+Extenstion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+Extenstion.swift"; sourceTree = "<group>"; };
+		01A606262C3FC41E00B7622E /* SignUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpView.swift; sourceTree = "<group>"; };
+		01A606282C3FC5ED00B7622E /* SignUpViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewModel.swift; sourceTree = "<group>"; };
+		01A6062A2C3FC62D00B7622E /* SignUpUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpUseCase.swift; sourceTree = "<group>"; };
+		01A6062C2C3FCB9E00B7622E /* PasswordTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordTextField.swift; sourceTree = "<group>"; };
+		01A606322C4017A900B7622E /* String+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extension.swift"; sourceTree = "<group>"; };
 		01B6DF982BD6A1D500E2983E /* FontManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FontManager.swift; sourceTree = "<group>"; };
 		01B6DF9D2BD6A3D900E2983E /* ColorManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -147,6 +161,7 @@
 				0106B6212BFA5D910024AFCB /* CreateHomeViewModel.swift */,
 				0106B62D2BFA78B50024AFCB /* MainScreenViewModel.swift */,
 				01A6061C2C3EBFAD00B7622E /* ProfileViewModel.swift */,
+				01A606282C3FC5ED00B7622E /* SignUpViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -158,6 +173,7 @@
 				0106B6232BFA5DE00024AFCB /* CreateHomeUseCase.swift */,
 				0106B62F2BFA79450024AFCB /* MainScreenUseCase.swift */,
 				01A6061E2C3EC01400B7622E /* ProfileUseCase.swift */,
+				01A6062A2C3FC62D00B7622E /* SignUpUseCase.swift */,
 			);
 			path = UseCases;
 			sourceTree = "<group>";
@@ -177,6 +193,8 @@
 			children = (
 				0106B6272BFA5E920024AFCB /* Login.swift */,
 				0106B62B2BFA746C0024AFCB /* Home.swift */,
+				012815902C413539001FFA2D /* FieldModel.swift */,
+				012815922C4135A2001FFA2D /* FieldType.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -194,10 +212,9 @@
 		013504772BD7D9800000C859 /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				01A6062F2C3FCBDD00B7622E /* Textfields */,
 				013504782BD7D9950000C859 /* ActionButton.swift */,
-				013504862BD90FDB0000C859 /* SingleTextField.swift */,
 				01A606222C3F207500B7622E /* ActivityIndicatorIView.swift */,
-				01A606242C3F259300B7622E /* View+Extenstion.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -209,6 +226,7 @@
 				0106B60A2BE185B90024AFCB /* MainScreen */,
 				0106B61C2BE811E60024AFCB /* MainView.swift */,
 				0106B61F2BFA5CC30024AFCB /* CreateHomeView.swift */,
+				01A606262C3FC41E00B7622E /* SignUpView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -244,6 +262,7 @@
 				0106B60C2BE18A3D0024AFCB /* UseCases */,
 				0106B60B2BE18A310024AFCB /* ViewModels */,
 				011165D72BD69D7700817935 /* Nestymate.swift */,
+				01A6062E2C3FCBBF00B7622E /* Extensions */,
 				013504772BD7D9800000C859 /* Components */,
 				01B6DF9C2BD6A3C400E2983E /* Utils */,
 				018A04732BD114330051A3A4 /* Views */,
@@ -276,6 +295,24 @@
 				0135047F2BD8F96B0000C859 /* NestymateUITestsLaunchTests.swift */,
 			);
 			path = "nestymate-iosUITests";
+			sourceTree = "<group>";
+		};
+		01A6062E2C3FCBBF00B7622E /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				01A606242C3F259300B7622E /* View+Extenstion.swift */,
+				01A606322C4017A900B7622E /* String+Extension.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		01A6062F2C3FCBDD00B7622E /* Textfields */ = {
+			isa = PBXGroup;
+			children = (
+				013504862BD90FDB0000C859 /* SingleTextField.swift */,
+				01A6062C2C3FCB9E00B7622E /* PasswordTextField.swift */,
+			);
+			path = Textfields;
 			sourceTree = "<group>";
 		};
 		01B6DF9C2BD6A3C400E2983E /* Utils */ = {
@@ -444,7 +481,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				012815932C4135A2001FFA2D /* FieldType.swift in Sources */,
 				0106B6282BFA5E920024AFCB /* Login.swift in Sources */,
+				01A6062D2C3FCB9E00B7622E /* PasswordTextField.swift in Sources */,
 				013504852BD900460000C859 /* PaddingManager.swift in Sources */,
 				01A606252C3F259300B7622E /* View+Extenstion.swift in Sources */,
 				011165D82BD69D7700817935 /* Nestymate.swift in Sources */,
@@ -452,6 +491,7 @@
 				013504872BD90FDB0000C859 /* SingleTextField.swift in Sources */,
 				0106B62E2BFA78B50024AFCB /* MainScreenViewModel.swift in Sources */,
 				0106B61B2BE811B30024AFCB /* AppCoordinator.swift in Sources */,
+				012815912C413539001FFA2D /* FieldModel.swift in Sources */,
 				01A6061F2C3EC01400B7622E /* ProfileUseCase.swift in Sources */,
 				01B6DF9E2BD6A3D900E2983E /* ColorManager.swift in Sources */,
 				0106B6052BE1851B0024AFCB /* MainScreenView.swift in Sources */,
@@ -460,7 +500,9 @@
 				01A6061D2C3EBFAD00B7622E /* ProfileViewModel.swift in Sources */,
 				018A04752BD114660051A3A4 /* LoginView.swift in Sources */,
 				0106B60F2BE18A5E0024AFCB /* LoginService.swift in Sources */,
+				01A606272C3FC41E00B7622E /* SignUpView.swift in Sources */,
 				0106B6142BE191640024AFCB /* LoginViewModel.swift in Sources */,
+				01A606292C3FC5ED00B7622E /* SignUpViewModel.swift in Sources */,
 				0106B6222BFA5D910024AFCB /* CreateHomeViewModel.swift in Sources */,
 				0106B62C2BFA746C0024AFCB /* Home.swift in Sources */,
 				0106B6242BFA5DE00024AFCB /* CreateHomeUseCase.swift in Sources */,
@@ -469,11 +511,13 @@
 				0106B61D2BE811E60024AFCB /* MainView.swift in Sources */,
 				01B6DF992BD6A1D500E2983E /* FontManager.swift in Sources */,
 				0106B6162BE191B50024AFCB /* LoginUseCase.swift in Sources */,
+				01A606332C4017A900B7622E /* String+Extension.swift in Sources */,
 				0106B6192BE195F10024AFCB /* LoginCoordinator.swift in Sources */,
 				0106B6302BFA79450024AFCB /* MainScreenUseCase.swift in Sources */,
 				013504792BD7D9950000C859 /* ActionButton.swift in Sources */,
 				0106B62A2BFA610B0024AFCB /* KeychainHelper.swift in Sources */,
 				01A606212C3EC86200B7622E /* HomeScreenCoordinator.swift in Sources */,
+				01A6062B2C3FC62D00B7622E /* SignUpUseCase.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

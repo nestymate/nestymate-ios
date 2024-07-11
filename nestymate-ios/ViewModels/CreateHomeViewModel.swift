@@ -10,22 +10,25 @@ import SwiftUI
 
 class CreateHomeViewModel: ObservableObject {
     let useCase: CreateHomeUseCase = CreateHomeUseCaseImpl()
-    @Published public var name: String?
-    @Published public var description: String?
-    @Published public var address: String?
-    @Published public var shouldShow: Bool?
+    @Published public var name: FieldModel = .init(value: "", fieldType: .name)
+    @Published public var description: FieldModel = .init(value: "", fieldType: .description)
+    @Published public var address: FieldModel = .init(value: "", fieldType: .address)
+    @Published public var shouldShowLoader: Bool?
 
-    public func createHome(
-        name: String?,
-        description: String?,
-        address: String?,
-        completionHandler: @escaping () -> Void
-    ) {
-        guard let name, let description, let address else { return }
-        shouldShow = true
-        useCase.createHome(name: name, description: description, address: address) { [weak self] in
-            self?.shouldShow = false
-            completionHandler()
+    public func createHome(completionHandler: @escaping () -> Void) {
+        if useCase.createValid(
+            isNameValid: name.onValidate(),
+            isDescriptionValid: description.onValidate(),
+            isAddressValid: address.onValidate()
+        ) {
+            shouldShowLoader = true
+            useCase.createHome(name: name.value,
+                               description: description.value,
+                               address: address.value)
+            { [weak self] in
+                self?.shouldShowLoader = false
+                completionHandler()
+            }
         }
     }
 }

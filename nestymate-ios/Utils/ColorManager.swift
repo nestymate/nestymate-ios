@@ -17,4 +17,5 @@ enum ColorManager {
     public static let linkColour: Color = .normalBlue
     public static let mainColor: Color = .black
     public static let secondaryColor: Color = .bezColour
+    public static let errorColor: Color = .accentColor
 }

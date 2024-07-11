@@ -12,4 +12,5 @@ enum FontManager {
     public static let text: Font = .body
     public static let title: Font = .title
     public static let button: Font = .body
+    public static let footnote: Font = .footnote
 }

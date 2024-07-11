@@ -16,30 +16,31 @@ struct CreateHomeView: View {
     var output: Output
     var body: some View {
         ActivityIndicatorIView(isShowing: Binding<Bool>(
-            get: { self.viewModel.shouldShow ?? false },
-            set: { self.viewModel.shouldShow = $0 }
+            get: { self.viewModel.shouldShowLoader ?? false },
+            set: { self.viewModel.shouldShowLoader = $0 }
         )) {
-            VStack {
-                Text("New Home").font(FontManager.title)
-                SingleTextField(title: "name", value: Binding<String>(
-                    get: { self.viewModel.name ?? "" },
-                    set: { self.viewModel.name = $0 }))
-                SingleTextField(title: "description", value: Binding<String>(
-                    get: { self.viewModel.description ?? "" },
-                    set: { self.viewModel.description = $0 }))
-                SingleTextField(title: "address", value: Binding<String>(
-                    get: { self.viewModel.address ?? "" },
-                    set: { self.viewModel.address = $0 }))
-                ActionButton(title: "Create") {
-                    viewModel.createHome(
-                        name: viewModel.name,
-                        description: viewModel.description,
-                        address: viewModel.address
-                    ) {
-                        self.output.goToMainScreen()
+            ScrollView {
+                VStack {
+                    Text("New Home").font(FontManager.title)
+                    SingleTextField(fieldModel: $viewModel.name)
+                        .onSubmit {
+                            _ = viewModel.name.onSubmitError()
+                        }
+                    SingleTextField(fieldModel: $viewModel.description)
+                        .onSubmit {
+                            _ = viewModel.description.onSubmitError()
+                        }
+                    SingleTextField(fieldModel: $viewModel.address)
+                        .onSubmit {
+                            _ = viewModel.address.onSubmitError()
+                        }
+                    ActionButton(title: "Create") {
+                        viewModel.createHome {
+                            self.output.goToMainScreen()
+                        }
                     }
+                    Spacer()
                 }
-                Spacer()
             }
             .background(ColorManager.backgroundColour)
         }
