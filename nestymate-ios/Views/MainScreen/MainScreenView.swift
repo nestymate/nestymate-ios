@@ -33,7 +33,6 @@ struct MainScreenView: View {
                     Label("Profile", systemImage: "square.and.pencil")
                 }
         }
-        .onAppear(perform: {})
         .navigationBarBackButtonHidden()
     }
 }

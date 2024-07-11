@@ -19,7 +19,7 @@ final class KeychainHelper {
             kSecValueData: data,
             kSecClass: kSecClassGenericPassword,
             kSecAttrService: service,
-            kSecAttrAccount: account
+            kSecAttrAccount: account,
         ] as CFDictionary
 
         delete()
@@ -38,7 +38,7 @@ final class KeychainHelper {
             kSecAttrService: service,
             kSecAttrAccount: account,
             kSecClass: kSecClassGenericPassword,
-            kSecReturnData: true
+            kSecReturnData: true,
         ] as CFDictionary
 
         var result: AnyObject?
@@ -52,7 +52,7 @@ final class KeychainHelper {
         let query = [
             kSecAttrService: service,
             kSecAttrAccount: account,
-            kSecClass: kSecClassGenericPassword
+            kSecClass: kSecClassGenericPassword,
         ] as CFDictionary
 
         // Delete item from keychain

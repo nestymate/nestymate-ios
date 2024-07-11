@@ -68,6 +68,26 @@
         }
       }
     },
+    "Show Expenses" : {
+      "localizations" : {
+        "el" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Δαπανες"
+          }
+        }
+      }
+    },
+    "Sign up" : {
+      "localizations" : {
+        "el" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Εγγραφη"
+          }
+        }
+      }
+    },
     "Sign up here" : {
       "localizations" : {
         "el" : {
