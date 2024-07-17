@@ -51,6 +51,9 @@ struct LoginView: View {
             .padding([.top], 64)
             .background(ColorManager.backgroundColour)
             .navigationBarBackButtonHidden()
+            .alert(item: $viewModel.error) { error in
+                error.alert
+            }
         }
     }
 }

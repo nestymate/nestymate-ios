@@ -28,6 +28,10 @@
 		011165D82BD69D7700817935 /* Nestymate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 011165D72BD69D7700817935 /* Nestymate.swift */; };
 		012815912C413539001FFA2D /* FieldModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 012815902C413539001FFA2D /* FieldModel.swift */; };
 		012815932C4135A2001FFA2D /* FieldType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 012815922C4135A2001FFA2D /* FieldType.swift */; };
+		012815952C4830B8001FFA2D /* APICalls.swift in Sources */ = {isa = PBXBuildFile; fileRef = 012815942C4830B8001FFA2D /* APICalls.swift */; };
+		012815992C484128001FFA2D /* Error.swift in Sources */ = {isa = PBXBuildFile; fileRef = 012815982C484128001FFA2D /* Error.swift */; };
+		0128159B2C485470001FFA2D /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0128159A2C485470001FFA2D /* Reachability.swift */; };
+		0128159D2C485607001FFA2D /* APIResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0128159C2C485607001FFA2D /* APIResponse.swift */; };
 		013504792BD7D9950000C859 /* ActionButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 013504782BD7D9950000C859 /* ActionButton.swift */; };
 		0135047B2BD7DBE20000C859 /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = 0135047A2BD7DBE20000C859 /* Localizable.xcstrings */; };
 		0135047D2BD8F95E0000C859 /* NestymateTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0135047C2BD8F95E0000C859 /* NestymateTests.swift */; };
@@ -92,6 +96,10 @@
 		011165D72BD69D7700817935 /* Nestymate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Nestymate.swift; path = "nestymate-ios/Nestymate.swift"; sourceTree = SOURCE_ROOT; };
 		012815902C413539001FFA2D /* FieldModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FieldModel.swift; sourceTree = "<group>"; };
 		012815922C4135A2001FFA2D /* FieldType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FieldType.swift; sourceTree = "<group>"; };
+		012815942C4830B8001FFA2D /* APICalls.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APICalls.swift; sourceTree = "<group>"; };
+		012815982C484128001FFA2D /* Error.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Error.swift; sourceTree = "<group>"; };
+		0128159A2C485470001FFA2D /* Reachability.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reachability.swift; sourceTree = "<group>"; };
+		0128159C2C485607001FFA2D /* APIResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIResponse.swift; sourceTree = "<group>"; };
 		013504782BD7D9950000C859 /* ActionButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionButton.swift; sourceTree = "<group>"; };
 		0135047A2BD7DBE20000C859 /* Localizable.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = Localizable.xcstrings; sourceTree = "<group>"; };
 		0135047C2BD8F95E0000C859 /* NestymateTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NestymateTests.swift; sourceTree = "<group>"; };
@@ -195,6 +203,7 @@
 				0106B62B2BFA746C0024AFCB /* Home.swift */,
 				012815902C413539001FFA2D /* FieldModel.swift */,
 				012815922C4135A2001FFA2D /* FieldType.swift */,
+				0128159C2C485607001FFA2D /* APIResponse.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -321,6 +330,9 @@
 				01B6DF982BD6A1D500E2983E /* FontManager.swift */,
 				01B6DF9D2BD6A3D900E2983E /* ColorManager.swift */,
 				013504842BD900460000C859 /* PaddingManager.swift */,
+				012815942C4830B8001FFA2D /* APICalls.swift */,
+				012815982C484128001FFA2D /* Error.swift */,
+				0128159A2C485470001FFA2D /* Reachability.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -487,16 +499,20 @@
 				013504852BD900460000C859 /* PaddingManager.swift in Sources */,
 				01A606252C3F259300B7622E /* View+Extenstion.swift in Sources */,
 				011165D82BD69D7700817935 /* Nestymate.swift in Sources */,
+				0128159B2C485470001FFA2D /* Reachability.swift in Sources */,
 				0106B6072BE1859F0024AFCB /* ProfileView.swift in Sources */,
 				013504872BD90FDB0000C859 /* SingleTextField.swift in Sources */,
 				0106B62E2BFA78B50024AFCB /* MainScreenViewModel.swift in Sources */,
 				0106B61B2BE811B30024AFCB /* AppCoordinator.swift in Sources */,
+				012815952C4830B8001FFA2D /* APICalls.swift in Sources */,
 				012815912C413539001FFA2D /* FieldModel.swift in Sources */,
 				01A6061F2C3EC01400B7622E /* ProfileUseCase.swift in Sources */,
 				01B6DF9E2BD6A3D900E2983E /* ColorManager.swift in Sources */,
 				0106B6052BE1851B0024AFCB /* MainScreenView.swift in Sources */,
 				0106B6202BFA5CC30024AFCB /* CreateHomeView.swift in Sources */,
+				012815992C484128001FFA2D /* Error.swift in Sources */,
 				01A606232C3F207500B7622E /* ActivityIndicatorIView.swift in Sources */,
+				0128159D2C485607001FFA2D /* APIResponse.swift in Sources */,
 				01A6061D2C3EBFAD00B7622E /* ProfileViewModel.swift in Sources */,
 				018A04752BD114660051A3A4 /* LoginView.swift in Sources */,
 				0106B60F2BE18A5E0024AFCB /* LoginService.swift in Sources */,

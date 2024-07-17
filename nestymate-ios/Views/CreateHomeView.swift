@@ -43,6 +43,9 @@ struct CreateHomeView: View {
                 }
             }
             .background(ColorManager.backgroundColour)
+            .alert(item: $viewModel.error) { error in
+                error.alert
+            }
         }
     }
 }

@@ -14,6 +14,7 @@ class CreateHomeViewModel: ObservableObject {
     @Published public var description: FieldModel = .init(value: "", fieldType: .description)
     @Published public var address: FieldModel = .init(value: "", fieldType: .address)
     @Published public var shouldShowLoader: Bool?
+    @Published var error: Error?
 
     public func createHome(completionHandler: @escaping () -> Void) {
         if useCase.createValid(
@@ -25,8 +26,9 @@ class CreateHomeViewModel: ObservableObject {
             useCase.createHome(name: name.value,
                                description: description.value,
                                address: address.value)
-            { [weak self] in
+            { [weak self] error in
                 self?.shouldShowLoader = false
+                self?.error = error
                 completionHandler()
             }
         }
