@@ -11,6 +11,9 @@
         }
       }
     },
+    "An error occurred, please try again" : {
+
+    },
     "Expenses" : {
       "localizations" : {
         "el" : {
@@ -58,6 +61,20 @@
         }
       }
     },
+    "No internet" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "el" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Δεν υπαρχει συνδεση στο διαδυκτιο"
+          }
+        }
+      }
+    },
+    "No internet connection" : {
+
+    },
     "Profile" : {
       "localizations" : {
         "el" : {
@@ -94,6 +111,17 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Εγγραφείτε εδώ"
+          }
+        }
+      }
+    },
+    "Something happen please try again" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "el" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Καποιο σφαλμα συνέβη, παρακαλω προσπαθηστε αργότερα"
           }
         }
       }

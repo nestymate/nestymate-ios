@@ -9,8 +9,8 @@ import Foundation
 
 protocol LoginUseCase {
     func loginValid(isUsernameValid: Bool, isPasswordValid: Bool) -> Bool
-    func login(username: String, password: String, completionHandler: @escaping () -> Void)
-    func checkHomeForUser(completionHandler: @escaping (Home?) -> Void)
+    func login(username: String, password: String, completionHandler: @escaping (Error?) -> Void)
+    func checkHomeForUser(completionHandler: @escaping (Home?, Error?) -> Void)
 }
 
 class LoginUseCaseImpl: LoginUseCase {
@@ -21,11 +21,11 @@ class LoginUseCaseImpl: LoginUseCase {
         isUsernameValid && isPasswordValid
     }
 
-    func login(username: String, password: String, completionHandler: @escaping () -> Void) {
+    func login(username: String, password: String, completionHandler: @escaping (Error?) -> Void) {
         service.login(username: username, password: password, completionHandler: completionHandler)
     }
 
-    func checkHomeForUser(completionHandler: @escaping (Home?) -> Void) {
+    func checkHomeForUser(completionHandler: @escaping (Home?, Error?) -> Void) {
         homeService.getHome(completionHandler: completionHandler)
     }
 }
