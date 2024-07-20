@@ -21,13 +21,14 @@ struct PasswordTextField: View {
                         SecureField(
                             "",
                             text: fieldModel.value,
-                            prompt: Text(fieldModel.fieldType.wrappedValue.placeHolder).foregroundColor(.gray)
+                            prompt: Text(fieldModel.fieldType.wrappedValue.placeHolder)
+                                .foregroundColor(ColorManager.separatorColour)
                         )
                         .textInputAutocapitalization(.never)
                         .disableAutocorrection(true)
                         Divider()
                             .frame(height: 1)
-                            .background(ColorManager.seperatorColour)
+                            .background(ColorManager.separatorColour)
                     }
                     .padding(PaddingManager.normalPadding)
 
@@ -42,7 +43,7 @@ struct PasswordTextField: View {
                         .disableAutocorrection(true)
                         Divider()
                             .frame(height: 1)
-                            .background(ColorManager.seperatorColour)
+                            .background(ColorManager.separatorColour)
                     }
                     .padding(PaddingManager.normalPadding)
                 }

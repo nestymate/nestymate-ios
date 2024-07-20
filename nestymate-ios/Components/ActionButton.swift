@@ -9,6 +9,7 @@ import SwiftUI
 
 struct ActionButton: View {
     var title: String = ""
+    let shouldEnableButton: Bool
     let customAction: () -> Void
     var body: some View {
         Button {
@@ -28,10 +29,12 @@ struct ActionButton: View {
             )
             .fill(ColorManager.buttonBackgroundColour)
         )
+        .opacity(shouldEnableButton ? 1 : 0.7)
+        .disabled(!shouldEnableButton)
         .padding()
     }
 }
 
 #Preview {
-    ActionButton(title: "test", customAction: {})
+    ActionButton(title: "test", shouldEnableButton: true, customAction: {})
 }

@@ -7,23 +7,23 @@
 
 import Foundation
 
-protocol FielValidatorProtocol {
+protocol FieldValidatorProtocol {
     func validate(value: String) -> String?
 }
 
-enum FieldType: FielValidatorProtocol {
-    case email
+enum FieldType: FieldValidatorProtocol {
     case username
     case repeatPassword
     case password
     case name
+    case surname
     case description
     case address
+    case gender
+    case birthday
 
     var placeHolder: String {
         switch self {
-        case .email:
-            return "Email"
         case .username:
             return "Username"
         case .password:
@@ -36,13 +36,17 @@ enum FieldType: FielValidatorProtocol {
             return "Address"
         case .repeatPassword:
             return "Repeat Password"
+        case .surname:
+            return "Surname"
+        case .gender:
+            return "Gender"
+        case .birthday:
+            return "Birthday"
         }
     }
 
     func validate(value: String) -> String? {
         switch self {
-        case .email:
-            return !value.isValidEmail ? "Enter a valid email" : nil
         case .username:
             return value.isEmpty ? "The username can not be empty" : nil
         case .password:
@@ -52,9 +56,19 @@ enum FieldType: FielValidatorProtocol {
         case .description:
             return value.isEmpty ? "The description can not be empty" : nil
         case .address:
-            return value.isEmpty ? "The adress can not be empty" : nil
+            return value.isEmpty ? "The address can not be empty" : nil
         case .repeatPassword:
             return value.isEmpty ? "The password can not be empty" : nil
+        case .surname:
+            return value.isEmpty ? "The surname can not be empty" : nil
+        case .gender:
+            return value.isEmpty ? "Gender field can not be empty" : nil
+        case .birthday:
+            return value.isEmpty ? "Birthday field can not be empty" : nil
         }
+    }
+
+    func validate(value: Date) -> String? {
+        return value == .now ? "Birthday field can not be same as today" : nil
     }
 }

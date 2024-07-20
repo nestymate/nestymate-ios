@@ -9,11 +9,13 @@ import Foundation
 
 struct FieldModel {
     var value: String
+    var dateValue: Date
     var error: String?
     var fieldType: FieldType
 
-    init(value: String, fieldType: FieldType, error: String? = nil) {
+    init(value: String, dateValue: Date = .now, fieldType: FieldType, error: String? = nil) {
         self.value = value
+        self.dateValue = dateValue
         self.fieldType = fieldType
         self.error = error
     }
@@ -24,6 +26,19 @@ struct FieldModel {
     }
 
     mutating func onSubmitError() -> Bool {
+        let isValid = fieldType.validate(value: value)
+        return error == isValid
+    }
+}
+
+// For date
+extension FieldModel {
+    mutating func onValidateDate() -> Bool {
+        error = fieldType.validate(value: dateValue)
+        return error == nil
+    }
+
+    mutating func onSubmitDateError() -> Bool {
         let isValid = fieldType.validate(value: value)
         return error == isValid
     }

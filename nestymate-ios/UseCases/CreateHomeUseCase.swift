@@ -12,7 +12,12 @@ protocol CreateHomeUseCase {
 }
 
 class CreateHomeUseCaseImpl: CreateHomeUseCase {
-    let service: HomeService = HomeServiceImpl()
+    let service: HomeService
+
+    init(service: HomeService) {
+        self.service = service
+    }
+
     func createValid(isNameValid: Bool, isDescriptionValid: Bool, isAddressValid: Bool) -> Bool {
         return isNameValid && isDescriptionValid && isAddressValid
     }

@@ -75,6 +75,12 @@
     "No internet connection" : {
 
     },
+    "Please choose from" : {
+
+    },
+    "Please select:" : {
+
+    },
     "Profile" : {
       "localizations" : {
         "el" : {

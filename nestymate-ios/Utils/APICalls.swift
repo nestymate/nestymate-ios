@@ -61,8 +61,7 @@ class APICalls {
         }
         session.dataTaskPublisher(for: request)
             .tryMap { element -> (APIResponse) in
-                guard let response = element.response as? HTTPURLResponse,
-                      (200 ... 299).contains(response.statusCode)
+                guard let response = element.response as? HTTPURLResponse
                 else {
                     return APIResponse(element.data, 500, .badServerResponse)
                 }

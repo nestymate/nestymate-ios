@@ -14,8 +14,13 @@ protocol LoginUseCase {
 }
 
 class LoginUseCaseImpl: LoginUseCase {
-    let service: LoginService = LoginServiceImpl()
-    let homeService: HomeService = HomeServiceImpl()
+    let service: LoginService
+    let homeService: HomeService
+
+    init(service: LoginService, homeService: HomeService) {
+        self.service = service
+        self.homeService = homeService
+    }
 
     func loginValid(isUsernameValid: Bool, isPasswordValid: Bool) -> Bool {
         isUsernameValid && isPasswordValid
