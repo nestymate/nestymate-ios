@@ -20,6 +20,8 @@ final class LoginCoordinator: Hashable {
     private var id: UUID
     private var output: Output?
     private var page: LoginPage
+    private let loginService = LoginServiceImpl()
+    private let homeService = HomeServiceImpl()
 
     struct Output {
         var goToMainScreen: () -> Void
@@ -60,7 +62,9 @@ final class LoginCoordinator: Hashable {
 
 private extension LoginCoordinator {
     func loginView() -> some View {
+        let viewModel = LoginViewModel(useCase: LoginUseCaseImpl(service: loginService, homeService: homeService))
         let loginView = LoginView(
+            viewModel: viewModel,
             output:
             .init(
                 goToMainScreen: {
@@ -98,7 +102,8 @@ private extension LoginCoordinator {
     }
 
     func createHome() -> some View {
-        return CreateHomeView(output: CreateHomeView.Output(goToMainScreen: {
+        let viewModel = CreateHomeViewModel(useCase: CreateHomeUseCaseImpl(service: homeService))
+        return CreateHomeView(viewModel: viewModel, output: CreateHomeView.Output(goToMainScreen: {
             self.push(
                 LoginCoordinator(
                     navigationPath: self.$navigationPath,
@@ -109,7 +114,8 @@ private extension LoginCoordinator {
     }
 
     func signUpView() -> some View {
-        return SignUpView(output: SignUpView.Output(goToMainScreen: {
+        let viewModel = SignUpViewModel(useCase: SignUpUseCaseImpl(service: loginService))
+        return SignUpView(viewModel: viewModel, output: SignUpView.Output(goToMainScreen: {
             self.push(
                 LoginCoordinator(
                     navigationPath: self.$navigationPath,

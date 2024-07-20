@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct SignUpView: View {
-    @ObservedObject var viewModel: SignUpViewModel = .init()
+    @ObservedObject var viewModel: SignUpViewModel
     struct Output {
         var goToMainScreen: () -> Void
     }
@@ -22,9 +22,19 @@ struct SignUpView: View {
             ScrollView {
                 VStack {
                     Text("Sign up").font(FontManager.title)
-                    SingleTextField(fieldModel: $viewModel.email)
+                    SingleTextField(fieldModel: $viewModel.name)
                         .onSubmit {
-                            _ = viewModel.email.onSubmitError()
+                            _ = viewModel.name.onSubmitError()
+                        }
+                    SingleTextField(fieldModel: $viewModel.surname)
+                        .onSubmit {
+                            _ = viewModel.surname.onSubmitError()
+                        }
+                    DatePickerUIView(title: "Please select your birthday", fieldModel: $viewModel.birthdate)
+                    SelectionPickerView(options: viewModel.genderOptions, fieldModel: $viewModel.gender)
+                    SingleTextField(fieldModel: $viewModel.username)
+                        .onSubmit {
+                            _ = viewModel.username.onSubmitError()
                         }
                     PasswordTextField(fieldModel: $viewModel.password).onSubmit {
                         _ = viewModel.password.onSubmitError()
@@ -33,7 +43,10 @@ struct SignUpView: View {
                         .onSubmit {
                             _ = viewModel.repeatPassword.onSubmitError()
                         }
-                    ActionButton(title: "Sign up") {
+                    ActionButton(
+                        title: "Sign up",
+                        shouldEnableButton: viewModel.shouldEnableButton
+                    ) {
                         viewModel.signUp {
                             self.output.goToMainScreen()
                         }
@@ -42,10 +55,15 @@ struct SignUpView: View {
                 }
             }
             .background(ColorManager.backgroundColour)
+            .alert(item: $viewModel.error) { error in
+                error.alert
+            }
         }
     }
 }
 
 #Preview {
-    SignUpView(output: SignUpView.Output(goToMainScreen: {}))
+    SignUpView(viewModel: SignUpViewModel(
+        useCase: SignUpUseCaseImpl(service: LoginServiceImpl())),
+    output: SignUpView.Output(goToMainScreen: {}))
 }

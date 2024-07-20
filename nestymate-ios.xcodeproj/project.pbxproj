@@ -32,6 +32,10 @@
 		012815992C484128001FFA2D /* Error.swift in Sources */ = {isa = PBXBuildFile; fileRef = 012815982C484128001FFA2D /* Error.swift */; };
 		0128159B2C485470001FFA2D /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0128159A2C485470001FFA2D /* Reachability.swift */; };
 		0128159D2C485607001FFA2D /* APIResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0128159C2C485607001FFA2D /* APIResponse.swift */; };
+		0128159F2C4AE380001FFA2D /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0128159E2C4AE37F001FFA2D /* User.swift */; };
+		012815A32C4AE753001FFA2D /* SelectionPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 012815A22C4AE753001FFA2D /* SelectionPickerView.swift */; };
+		012815A52C4C605E001FFA2D /* DatePickerUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 012815A42C4C605E001FFA2D /* DatePickerUIView.swift */; };
+		012815A72C4D98B3001FFA2D /* UtilMethods.swift in Sources */ = {isa = PBXBuildFile; fileRef = 012815A62C4D98B3001FFA2D /* UtilMethods.swift */; };
 		013504792BD7D9950000C859 /* ActionButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 013504782BD7D9950000C859 /* ActionButton.swift */; };
 		0135047B2BD7DBE20000C859 /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = 0135047A2BD7DBE20000C859 /* Localizable.xcstrings */; };
 		0135047D2BD8F95E0000C859 /* NestymateTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0135047C2BD8F95E0000C859 /* NestymateTests.swift */; };
@@ -100,6 +104,10 @@
 		012815982C484128001FFA2D /* Error.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Error.swift; sourceTree = "<group>"; };
 		0128159A2C485470001FFA2D /* Reachability.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reachability.swift; sourceTree = "<group>"; };
 		0128159C2C485607001FFA2D /* APIResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIResponse.swift; sourceTree = "<group>"; };
+		0128159E2C4AE37F001FFA2D /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		012815A22C4AE753001FFA2D /* SelectionPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectionPickerView.swift; sourceTree = "<group>"; };
+		012815A42C4C605E001FFA2D /* DatePickerUIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatePickerUIView.swift; sourceTree = "<group>"; };
+		012815A62C4D98B3001FFA2D /* UtilMethods.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UtilMethods.swift; sourceTree = "<group>"; };
 		013504782BD7D9950000C859 /* ActionButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionButton.swift; sourceTree = "<group>"; };
 		0135047A2BD7DBE20000C859 /* Localizable.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = Localizable.xcstrings; sourceTree = "<group>"; };
 		0135047C2BD8F95E0000C859 /* NestymateTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NestymateTests.swift; sourceTree = "<group>"; };
@@ -204,6 +212,7 @@
 				012815902C413539001FFA2D /* FieldModel.swift */,
 				012815922C4135A2001FFA2D /* FieldType.swift */,
 				0128159C2C485607001FFA2D /* APIResponse.swift */,
+				0128159E2C4AE37F001FFA2D /* User.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -224,6 +233,8 @@
 				01A6062F2C3FCBDD00B7622E /* Textfields */,
 				013504782BD7D9950000C859 /* ActionButton.swift */,
 				01A606222C3F207500B7622E /* ActivityIndicatorIView.swift */,
+				012815A22C4AE753001FFA2D /* SelectionPickerView.swift */,
+				012815A42C4C605E001FFA2D /* DatePickerUIView.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -333,6 +344,7 @@
 				012815942C4830B8001FFA2D /* APICalls.swift */,
 				012815982C484128001FFA2D /* Error.swift */,
 				0128159A2C485470001FFA2D /* Reachability.swift */,
+				012815A62C4D98B3001FFA2D /* UtilMethods.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -495,6 +507,7 @@
 			files = (
 				012815932C4135A2001FFA2D /* FieldType.swift in Sources */,
 				0106B6282BFA5E920024AFCB /* Login.swift in Sources */,
+				012815A52C4C605E001FFA2D /* DatePickerUIView.swift in Sources */,
 				01A6062D2C3FCB9E00B7622E /* PasswordTextField.swift in Sources */,
 				013504852BD900460000C859 /* PaddingManager.swift in Sources */,
 				01A606252C3F259300B7622E /* View+Extenstion.swift in Sources */,
@@ -513,6 +526,7 @@
 				012815992C484128001FFA2D /* Error.swift in Sources */,
 				01A606232C3F207500B7622E /* ActivityIndicatorIView.swift in Sources */,
 				0128159D2C485607001FFA2D /* APIResponse.swift in Sources */,
+				0128159F2C4AE380001FFA2D /* User.swift in Sources */,
 				01A6061D2C3EBFAD00B7622E /* ProfileViewModel.swift in Sources */,
 				018A04752BD114660051A3A4 /* LoginView.swift in Sources */,
 				0106B60F2BE18A5E0024AFCB /* LoginService.swift in Sources */,
@@ -522,10 +536,12 @@
 				0106B6222BFA5D910024AFCB /* CreateHomeViewModel.swift in Sources */,
 				0106B62C2BFA746C0024AFCB /* Home.swift in Sources */,
 				0106B6242BFA5DE00024AFCB /* CreateHomeUseCase.swift in Sources */,
+				012815A32C4AE753001FFA2D /* SelectionPickerView.swift in Sources */,
 				0106B6092BE185B40024AFCB /* ExpensesView.swift in Sources */,
 				0106B6262BFA5E530024AFCB /* HomeService.swift in Sources */,
 				0106B61D2BE811E60024AFCB /* MainView.swift in Sources */,
 				01B6DF992BD6A1D500E2983E /* FontManager.swift in Sources */,
+				012815A72C4D98B3001FFA2D /* UtilMethods.swift in Sources */,
 				0106B6162BE191B50024AFCB /* LoginUseCase.swift in Sources */,
 				01A606332C4017A900B7622E /* String+Extension.swift in Sources */,
 				0106B6192BE195F10024AFCB /* LoginCoordinator.swift in Sources */,

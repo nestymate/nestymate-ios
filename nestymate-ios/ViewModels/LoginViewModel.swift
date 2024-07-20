@@ -9,11 +9,19 @@ import Foundation
 import SwiftUI
 
 class LoginViewModel: ObservableObject {
-    let useCase: LoginUseCase = LoginUseCaseImpl()
+    let useCase: LoginUseCase
     @Published public var username: FieldModel = .init(value: "test123", fieldType: .username)
     @Published public var password: FieldModel = .init(value: "test321", fieldType: .password)
     @Published public var shouldShow: Bool?
     @Published var error: Error?
+
+    var shouldEnableButton: Bool {
+        !username.value.isEmpty && !password.value.isEmpty
+    }
+
+    init(useCase: LoginUseCase) {
+        self.useCase = useCase
+    }
 
     @MainActor public func login(completionHandler: @escaping (Home?) -> Void) {
         if useCase.loginValid(isUsernameValid: username.onValidate(), isPasswordValid: password.onValidate()) {

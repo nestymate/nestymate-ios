@@ -15,13 +15,14 @@ struct SingleTextField: View {
             TextField(
                 "",
                 text: fieldModel.value,
-                prompt: Text(fieldModel.fieldType.wrappedValue.placeHolder).foregroundColor(.gray)
+                prompt: Text(fieldModel.fieldType.wrappedValue.placeHolder)
+                    .foregroundColor(ColorManager.separatorColour)
             )
             .textInputAutocapitalization(.never)
             .disableAutocorrection(true)
             Divider()
                 .frame(height: 1)
-                .background(ColorManager.seperatorColour)
+                .background(ColorManager.separatorColour)
 
             if let error = fieldModel.error.wrappedValue {
                 HStack {
@@ -39,5 +40,5 @@ struct SingleTextField: View {
 }
 
 #Preview {
-    SingleTextField(fieldModel: .constant(FieldModel(value: "", fieldType: .email)))
+    SingleTextField(fieldModel: .constant(FieldModel(value: "", fieldType: .name)))
 }

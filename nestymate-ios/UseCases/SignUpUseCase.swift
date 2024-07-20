@@ -9,18 +9,21 @@ import Foundation
 import SwiftUI
 
 protocol SignUpUseCase {
-    func signUpValid(isEmailValid: Bool, isPasswordValid: Bool, isRepeatPasswordValid: Bool) -> Bool
-    func signUp(completionHandler: @escaping () -> Void)
+    func isSignupValid(user: User) -> Bool
+    func signUp(user: User, completionHandler: @escaping (Error?) -> Void)
 }
 
 class SignUpUseCaseImpl: SignUpUseCase {
-    func signUpValid(isEmailValid: Bool, isPasswordValid: Bool, isRepeatPasswordValid: Bool) -> Bool {
-        isEmailValid && isPasswordValid && isRepeatPasswordValid
+    let service: LoginService
+    init(service: LoginService) {
+        self.service = service
     }
 
-    let service: LoginService = LoginServiceImpl()
-    func signUp(completionHandler: @escaping () -> Void) {
-        // add service here
-        completionHandler()
+    func isSignupValid(user: User) -> Bool {
+        user.isValid && user.isPasswordsTheSame
+    }
+
+    func signUp(user: User, completionHandler: @escaping (Error?) -> Void) {
+        service.signup(user: user, completionHandler: completionHandler)
     }
 }

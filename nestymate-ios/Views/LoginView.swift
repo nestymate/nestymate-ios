@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct LoginView: View {
-    @ObservedObject var viewModel: LoginViewModel = .init()
+    @ObservedObject var viewModel: LoginViewModel
     struct Output {
         var goToMainScreen: () -> Void
         var goToCreateHome: () -> Void
@@ -30,7 +30,10 @@ struct LoginView: View {
                     _ = viewModel.password.onSubmitError()
                 }
 
-                ActionButton(title: "login") {
+                ActionButton(
+                    title: "login",
+                    shouldEnableButton: viewModel.shouldEnableButton
+                ) {
                     viewModel.login { home in
                         home == nil ? self.output.goToCreateHome() : self.output.goToMainScreen()
                     }
@@ -59,5 +62,11 @@ struct LoginView: View {
 }
 
 #Preview {
-    LoginView(viewModel: .init(), output: LoginView.Output(goToMainScreen: {}, goToCreateHome: {}, goToSignUp: {}))
+    LoginView(viewModel: .init(
+        useCase: LoginUseCaseImpl(
+            service: LoginServiceImpl(),
+            homeService: HomeServiceImpl()
+        )),
+    output: LoginView.Output(goToMainScreen: {},
+                             goToCreateHome: {}, goToSignUp: {}))
 }

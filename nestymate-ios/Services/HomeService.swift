@@ -24,13 +24,13 @@ class HomeServiceImpl: HomeService {
             guard let data = apiResponse.data,
                   let response = try? JSONDecoder().decode(Home.self, from: data)
             else {
-                return completionHandler(nil, .badServerResponse)
+                if apiResponse.statusCode == 400 {
+                   return completionHandler(nil, nil)
+                } else {
+                    return completionHandler(nil, .badServerResponse)
+                }
             }
-            if apiResponse.statusCode == 400 {
-                completionHandler(nil, nil)
-            } else {
-                completionHandler(response, apiResponse.error)
-            }
+           return completionHandler(response, apiResponse.error)
         }
     }
 

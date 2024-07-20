@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct CreateHomeView: View {
-    @ObservedObject var viewModel: CreateHomeViewModel = .init()
+    @ObservedObject var viewModel: CreateHomeViewModel
     struct Output {
         var goToMainScreen: () -> Void
     }
@@ -34,7 +34,10 @@ struct CreateHomeView: View {
                         .onSubmit {
                             _ = viewModel.address.onSubmitError()
                         }
-                    ActionButton(title: "Create") {
+                    ActionButton(
+                        title: "Create",
+                        shouldEnableButton: viewModel.shouldEnableButton
+                    ) {
                         viewModel.createHome {
                             self.output.goToMainScreen()
                         }
@@ -51,5 +54,7 @@ struct CreateHomeView: View {
 }
 
 #Preview {
-    CreateHomeView(output: CreateHomeView.Output(goToMainScreen: {}))
+    CreateHomeView(viewModel: CreateHomeViewModel(
+        useCase: CreateHomeUseCaseImpl(service: HomeServiceImpl())),
+    output: CreateHomeView.Output(goToMainScreen: {}))
 }

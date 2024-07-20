@@ -13,7 +13,7 @@ enum ColorManager {
     public static let buttonTextColour: Color = .black
     public static let buttonBackgroundColour: Color = .bezColour
     public static let backgroundColour: Color = .backgroundColour
-    public static let seperatorColour: Color = .lightGrey
+    public static let separatorColour: Color = .lightGrey
     public static let linkColour: Color = .normalBlue
     public static let mainColor: Color = .black
     public static let secondaryColor: Color = .bezColour

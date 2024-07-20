@@ -15,7 +15,7 @@ struct ProfileView: View {
 
     var output: Output
     var body: some View {
-        ActionButton(title: "Logout") {
+        ActionButton(title: "Logout", shouldEnableButton: true) {
             viewModel.logout {
                 self.output.goToLogin()
             }

@@ -9,12 +9,19 @@ import Foundation
 import SwiftUI
 
 class CreateHomeViewModel: ObservableObject {
-    let useCase: CreateHomeUseCase = CreateHomeUseCaseImpl()
+    let useCase: CreateHomeUseCase
     @Published public var name: FieldModel = .init(value: "", fieldType: .name)
     @Published public var description: FieldModel = .init(value: "", fieldType: .description)
     @Published public var address: FieldModel = .init(value: "", fieldType: .address)
     @Published public var shouldShowLoader: Bool?
     @Published var error: Error?
+    var shouldEnableButton: Bool {
+        !name.value.isEmpty && !description.value.isEmpty && !address.value.isEmpty
+    }
+
+    init(useCase: CreateHomeUseCase) {
+        self.useCase = useCase
+    }
 
     public func createHome(completionHandler: @escaping () -> Void) {
         if useCase.createValid(
