@@ -6,13 +6,26 @@
 //
 
 import SwiftUI
-
 struct ExpensesView: View {
+    @ObservedObject var viewModel: ExpensesViewModel = .init()
+    struct Output {
+        var goToMyHome: () -> Void
+    }
+    var output: Output
     var body: some View {
-        Text("Show Expenses")
+        VStack {
+            Button(action: {
+                self.output.goToMyHome()
+            }, label: {
+                Text("My Home")
+            })
+            List(viewModel.expenses) {
+                Text($0.name)
+            }
+        }
     }
 }
 
 #Preview {
-    ExpensesView()
+    ExpensesView(output: ExpensesView.Output.init(goToMyHome: {}))
 }

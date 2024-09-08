@@ -8,7 +8,7 @@ import Foundation
 
 protocol CreateHomeUseCase {
     func createValid(isNameValid: Bool, isDescriptionValid: Bool, isAddressValid: Bool) -> Bool
-    func createHome(name: String, description: String, address: String, completionHandler: @escaping (Error?) -> Void)
+    func createHome(home: Home, completionHandler: @escaping (Error?) -> Void)
 }
 
 class CreateHomeUseCaseImpl: CreateHomeUseCase {
@@ -22,7 +22,7 @@ class CreateHomeUseCaseImpl: CreateHomeUseCase {
         return isNameValid && isDescriptionValid && isAddressValid
     }
 
-    func createHome(name: String, description: String, address: String, completionHandler: @escaping (Error?) -> Void) {
-        service.createHome(name: name, description: description, address: address, completionHandler: completionHandler)
+    func createHome(home: Home, completionHandler: @escaping (Error?) -> Void) {
+        service.createHome(home: home, completionHandler: completionHandler)
     }
 }

@@ -14,6 +14,12 @@
     "An error occurred, please try again" : {
 
     },
+    "Categories" : {
+
+    },
+    "Edit Home" : {
+
+    },
     "Expenses" : {
       "localizations" : {
         "el" : {
@@ -40,6 +46,9 @@
           }
         }
       }
+    },
+    "My Home" : {
+
     },
     "New Home" : {
       "localizations" : {
@@ -92,6 +101,7 @@
       }
     },
     "Show Expenses" : {
+      "extractionState" : "stale",
       "localizations" : {
         "el" : {
           "stringUnit" : {

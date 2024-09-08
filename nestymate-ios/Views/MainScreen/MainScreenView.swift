@@ -11,15 +11,21 @@ struct MainScreenView: View {
     var viewModel: MainScreenViewModel = .init()
     @EnvironmentObject var appCoordinator: AppCoordinator
     struct Output {}
-
     var output: Output
     var body: some View {
         TabView {
-            ExpensesView()
+            ExpensesCoordinator(
+                navigationPath: $appCoordinator.path,
+                output: .init(
+                    goToMainScreen: {
+                        print("Go to main screen (MainTabView)")
+                    }
+                ),
+                page: .expenses
+            ).view()
                 .tabItem {
                     Label("Expenses", systemImage: "list.dash")
                 }
-
             HomeScreenCoordinator(
                 navigationPath: $appCoordinator.path,
                 output: .init(
