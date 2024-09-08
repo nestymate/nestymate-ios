@@ -58,6 +58,15 @@
 		01A606332C4017A900B7622E /* String+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01A606322C4017A900B7622E /* String+Extension.swift */; };
 		01B6DF992BD6A1D500E2983E /* FontManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01B6DF982BD6A1D500E2983E /* FontManager.swift */; };
 		01B6DF9E2BD6A3D900E2983E /* ColorManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01B6DF9D2BD6A3D900E2983E /* ColorManager.swift */; };
+		01D488122C95DC910024A7F2 /* Expense.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01D488112C95DC910024A7F2 /* Expense.swift */; };
+		01D488142C95DCCC0024A7F2 /* ExpensesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01D488132C95DCCC0024A7F2 /* ExpensesViewModel.swift */; };
+		01D488182C95F5840024A7F2 /* MyHomeUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01D488172C95F5840024A7F2 /* MyHomeUseCase.swift */; };
+		01D7922C2C8D985D00EDA9D2 /* MyHomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01D7922B2C8D985D00EDA9D2 /* MyHomeView.swift */; };
+		01D7922E2C8D9AFD00EDA9D2 /* ExpensesCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01D7922D2C8D9AFD00EDA9D2 /* ExpensesCoordinator.swift */; };
+		01D792302C8D9F5300EDA9D2 /* MyHomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01D7922F2C8D9F5200EDA9D2 /* MyHomeViewModel.swift */; };
+		01D792322C8DA4F700EDA9D2 /* EditHomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01D792312C8DA4F700EDA9D2 /* EditHomeView.swift */; };
+		01D792342C8DA52D00EDA9D2 /* CategoriesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01D792332C8DA52D00EDA9D2 /* CategoriesView.swift */; };
+		01D792362C8DA66200EDA9D2 /* EditHomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01D792352C8DA66200EDA9D2 /* EditHomeViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -133,6 +142,15 @@
 		01A606322C4017A900B7622E /* String+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extension.swift"; sourceTree = "<group>"; };
 		01B6DF982BD6A1D500E2983E /* FontManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FontManager.swift; sourceTree = "<group>"; };
 		01B6DF9D2BD6A3D900E2983E /* ColorManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorManager.swift; sourceTree = "<group>"; };
+		01D488112C95DC910024A7F2 /* Expense.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Expense.swift; sourceTree = "<group>"; };
+		01D488132C95DCCC0024A7F2 /* ExpensesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpensesViewModel.swift; sourceTree = "<group>"; };
+		01D488172C95F5840024A7F2 /* MyHomeUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyHomeUseCase.swift; sourceTree = "<group>"; };
+		01D7922B2C8D985D00EDA9D2 /* MyHomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyHomeView.swift; sourceTree = "<group>"; };
+		01D7922D2C8D9AFD00EDA9D2 /* ExpensesCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpensesCoordinator.swift; sourceTree = "<group>"; };
+		01D7922F2C8D9F5200EDA9D2 /* MyHomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyHomeViewModel.swift; sourceTree = "<group>"; };
+		01D792312C8DA4F700EDA9D2 /* EditHomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditHomeView.swift; sourceTree = "<group>"; };
+		01D792332C8DA52D00EDA9D2 /* CategoriesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoriesView.swift; sourceTree = "<group>"; };
+		01D792352C8DA66200EDA9D2 /* EditHomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditHomeViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -178,6 +196,9 @@
 				0106B62D2BFA78B50024AFCB /* MainScreenViewModel.swift */,
 				01A6061C2C3EBFAD00B7622E /* ProfileViewModel.swift */,
 				01A606282C3FC5ED00B7622E /* SignUpViewModel.swift */,
+				01D7922F2C8D9F5200EDA9D2 /* MyHomeViewModel.swift */,
+				01D792352C8DA66200EDA9D2 /* EditHomeViewModel.swift */,
+				01D488132C95DCCC0024A7F2 /* ExpensesViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -190,6 +211,7 @@
 				0106B62F2BFA79450024AFCB /* MainScreenUseCase.swift */,
 				01A6061E2C3EC01400B7622E /* ProfileUseCase.swift */,
 				01A6062A2C3FC62D00B7622E /* SignUpUseCase.swift */,
+				01D488172C95F5840024A7F2 /* MyHomeUseCase.swift */,
 			);
 			path = UseCases;
 			sourceTree = "<group>";
@@ -213,6 +235,7 @@
 				012815922C4135A2001FFA2D /* FieldType.swift */,
 				0128159C2C485607001FFA2D /* APIResponse.swift */,
 				0128159E2C4AE37F001FFA2D /* User.swift */,
+				01D488112C95DC910024A7F2 /* Expense.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -223,6 +246,7 @@
 				0106B6182BE195F10024AFCB /* LoginCoordinator.swift */,
 				0106B61A2BE811B30024AFCB /* AppCoordinator.swift */,
 				01A606202C3EC86200B7622E /* HomeScreenCoordinator.swift */,
+				01D7922D2C8D9AFD00EDA9D2 /* ExpensesCoordinator.swift */,
 			);
 			path = Coordinators;
 			sourceTree = "<group>";
@@ -242,6 +266,7 @@
 		018A04732BD114330051A3A4 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				01D7922A2C8D983C00EDA9D2 /* Home */,
 				018A04742BD114660051A3A4 /* LoginView.swift */,
 				0106B60A2BE185B90024AFCB /* MainScreen */,
 				0106B61C2BE811E60024AFCB /* MainView.swift */,
@@ -347,6 +372,16 @@
 				012815A62C4D98B3001FFA2D /* UtilMethods.swift */,
 			);
 			path = Utils;
+			sourceTree = "<group>";
+		};
+		01D7922A2C8D983C00EDA9D2 /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				01D7922B2C8D985D00EDA9D2 /* MyHomeView.swift */,
+				01D792312C8DA4F700EDA9D2 /* EditHomeView.swift */,
+				01D792332C8DA52D00EDA9D2 /* CategoriesView.swift */,
+			);
+			path = Home;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -510,10 +545,12 @@
 				012815A52C4C605E001FFA2D /* DatePickerUIView.swift in Sources */,
 				01A6062D2C3FCB9E00B7622E /* PasswordTextField.swift in Sources */,
 				013504852BD900460000C859 /* PaddingManager.swift in Sources */,
+				01D488142C95DCCC0024A7F2 /* ExpensesViewModel.swift in Sources */,
 				01A606252C3F259300B7622E /* View+Extenstion.swift in Sources */,
 				011165D82BD69D7700817935 /* Nestymate.swift in Sources */,
 				0128159B2C485470001FFA2D /* Reachability.swift in Sources */,
 				0106B6072BE1859F0024AFCB /* ProfileView.swift in Sources */,
+				01D792342C8DA52D00EDA9D2 /* CategoriesView.swift in Sources */,
 				013504872BD90FDB0000C859 /* SingleTextField.swift in Sources */,
 				0106B62E2BFA78B50024AFCB /* MainScreenViewModel.swift in Sources */,
 				0106B61B2BE811B30024AFCB /* AppCoordinator.swift in Sources */,
@@ -524,9 +561,11 @@
 				0106B6052BE1851B0024AFCB /* MainScreenView.swift in Sources */,
 				0106B6202BFA5CC30024AFCB /* CreateHomeView.swift in Sources */,
 				012815992C484128001FFA2D /* Error.swift in Sources */,
+				01D7922C2C8D985D00EDA9D2 /* MyHomeView.swift in Sources */,
 				01A606232C3F207500B7622E /* ActivityIndicatorIView.swift in Sources */,
 				0128159D2C485607001FFA2D /* APIResponse.swift in Sources */,
 				0128159F2C4AE380001FFA2D /* User.swift in Sources */,
+				01D488122C95DC910024A7F2 /* Expense.swift in Sources */,
 				01A6061D2C3EBFAD00B7622E /* ProfileViewModel.swift in Sources */,
 				018A04752BD114660051A3A4 /* LoginView.swift in Sources */,
 				0106B60F2BE18A5E0024AFCB /* LoginService.swift in Sources */,
@@ -534,6 +573,7 @@
 				0106B6142BE191640024AFCB /* LoginViewModel.swift in Sources */,
 				01A606292C3FC5ED00B7622E /* SignUpViewModel.swift in Sources */,
 				0106B6222BFA5D910024AFCB /* CreateHomeViewModel.swift in Sources */,
+				01D7922E2C8D9AFD00EDA9D2 /* ExpensesCoordinator.swift in Sources */,
 				0106B62C2BFA746C0024AFCB /* Home.swift in Sources */,
 				0106B6242BFA5DE00024AFCB /* CreateHomeUseCase.swift in Sources */,
 				012815A32C4AE753001FFA2D /* SelectionPickerView.swift in Sources */,
@@ -542,12 +582,16 @@
 				0106B61D2BE811E60024AFCB /* MainView.swift in Sources */,
 				01B6DF992BD6A1D500E2983E /* FontManager.swift in Sources */,
 				012815A72C4D98B3001FFA2D /* UtilMethods.swift in Sources */,
+				01D792362C8DA66200EDA9D2 /* EditHomeViewModel.swift in Sources */,
 				0106B6162BE191B50024AFCB /* LoginUseCase.swift in Sources */,
 				01A606332C4017A900B7622E /* String+Extension.swift in Sources */,
 				0106B6192BE195F10024AFCB /* LoginCoordinator.swift in Sources */,
+				01D488182C95F5840024A7F2 /* MyHomeUseCase.swift in Sources */,
 				0106B6302BFA79450024AFCB /* MainScreenUseCase.swift in Sources */,
+				01D792302C8D9F5300EDA9D2 /* MyHomeViewModel.swift in Sources */,
 				013504792BD7D9950000C859 /* ActionButton.swift in Sources */,
 				0106B62A2BFA610B0024AFCB /* KeychainHelper.swift in Sources */,
+				01D792322C8DA4F700EDA9D2 /* EditHomeView.swift in Sources */,
 				01A606212C3EC86200B7622E /* HomeScreenCoordinator.swift in Sources */,
 				01A6062B2C3FC62D00B7622E /* SignUpUseCase.swift in Sources */,
 			);
