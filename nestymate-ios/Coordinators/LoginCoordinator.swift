@@ -12,6 +12,7 @@ enum LoginPage {
     case login
     case mainScreen
     case createHome
+    case myHome
     case signup
 }
 
@@ -45,6 +46,8 @@ final class LoginCoordinator: Hashable {
             createHome()
         case .signup:
             signUpView()
+        case .myHome:
+            myHomeView()
         }
     }
 
@@ -124,8 +127,15 @@ private extension LoginCoordinator {
             )
         }))
     }
-
-    func popLast() {
+    // FIXME: MOVE this to another coordinator 
+    func myHomeView() -> some View {
+        let viewModel = MyHomeViewModel()
+        return MyHomeView(viewModel: viewModel, output: MyHomeView.Output(goBack: {
+            self.goBack()
+        })
+        )
+    }
+    func goBack() {
         navigationPath.removeLast()
     }
 

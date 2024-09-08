@@ -37,6 +37,16 @@ class APICalls {
             completionHandler(apiResponse)
         }
     }
+    func put(
+        url: URL,
+        requestData: Data? = nil,
+        authentication: Bool = true,
+        completionHandler: @escaping (APIResponse) -> Void
+    ) {
+        genericCall(url, requestData, "PUT", authentication) { apiResponse in
+            completionHandler(apiResponse)
+        }
+    }
 
     private func genericCall(
         _ url: URL,

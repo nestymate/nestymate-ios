@@ -30,10 +30,8 @@ class CreateHomeViewModel: ObservableObject {
             isAddressValid: address.onValidate()
         ) {
             shouldShowLoader = true
-            useCase.createHome(name: name.value,
-                               description: description.value,
-                               address: address.value)
-            { [weak self] error in
+            let home = Home(reference: "", name: name.value, description: description.value, address: address.value)
+            useCase.createHome(home: home) { [weak self] error in
                 self?.shouldShowLoader = false
                 self?.error = error
                 completionHandler()
