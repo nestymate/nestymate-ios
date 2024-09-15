@@ -16,6 +16,7 @@ enum LoginPage {
     case createExpense(Expense?)
     case myHome
     case signup
+    case inviteUser
 }
 
 final class LoginCoordinator: Hashable {
@@ -54,6 +55,8 @@ final class LoginCoordinator: Hashable {
             createCategoryView()
         case let .createExpense(expense):
             createExpenseView(expense: expense)
+        case .inviteUser:
+            inviteUserView()
         }
     }
 
@@ -169,6 +172,14 @@ private extension LoginCoordinator {
     func createExpenseView(expense: Expense?) -> some View {
         let viewModel = CreateOrEditExpenseViewModel(expense: expense)
         return CreateOrEditExpenseView(viewModel: viewModel, output: CreateOrEditExpenseView.Output(goBack: {
+            self.goBack()
+        }))
+    }
+
+    // FIXME: MOVE this to another coordinator
+    func inviteUserView() -> some View {
+        let viewModel = InviteUserViewModel()
+        return InviteUserView(viewModel: viewModel, output: InviteUserView.Output(goBack: {
             self.goBack()
         }))
     }

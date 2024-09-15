@@ -17,18 +17,18 @@ final class HomeScreenCoordinator: Hashable {
     private var id: UUID
     private var output: Output?
     private var page: HomeScreenPage
-
+    
     struct Output {
         var goToMainScreen: () -> Void
     }
-
+    
     init(navigationPath: Binding<NavigationPath>, output: Output? = nil, page: HomeScreenPage) {
         _navigationPath = navigationPath
         id = UUID()
         self.output = output
         self.page = page
     }
-
+    
     @ViewBuilder
     func view() -> some View {
         switch page {
@@ -36,11 +36,11 @@ final class HomeScreenCoordinator: Hashable {
             profile()
         }
     }
-
+    
     func hash(into hasher: inout Hasher) {
         hasher.combine(id)
     }
-
+    
     static func == (
         lhs: HomeScreenCoordinator,
         rhs: HomeScreenCoordinator
@@ -58,9 +58,15 @@ private extension HomeScreenCoordinator {
                     page: .login
                 )
             )
-        }))
+        }, goToInviteUser: {
+            self.push(
+                LoginCoordinator(
+                    navigationPath: self.$navigationPath,
+                    page: .inviteUser
+                )
+            ) }))
     }
-
+    
     func push<V>(_ value: V) where V: Hashable {
         navigationPath.append(value)
     }

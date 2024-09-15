@@ -22,6 +22,7 @@ enum FieldType: FieldValidatorProtocol {
     case gender
     case birthday
     case amount
+    case email
 
     var placeHolder: String {
         switch self {
@@ -45,6 +46,8 @@ enum FieldType: FieldValidatorProtocol {
             return "Birthday"
         case .amount:
             return "Amount"
+        case .email:
+            return "Email"
         }
     }
 
@@ -70,6 +73,8 @@ enum FieldType: FieldValidatorProtocol {
             return value.isEmpty ? "Birthday field can not be empty" : nil
         case .amount:
             return value.isEmpty ? "Amount field can not be empty" : nil
+        case .email:
+            return value.isEmpty ? "Email field can not be empty" : nil
         }
     }
 

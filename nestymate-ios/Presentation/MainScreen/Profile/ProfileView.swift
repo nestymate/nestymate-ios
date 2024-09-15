@@ -11,18 +11,27 @@ struct ProfileView: View {
     var viewModel: ProfileViewModel = .init()
     struct Output {
         var goToLogin: () -> Void
+        var goToInviteUser: () -> Void
     }
 
     var output: Output
     var body: some View {
-        ActionButton(title: "Logout", shouldEnableButton: true) {
-            viewModel.logout {
-                self.output.goToLogin()
+        VStack {
+            ActionButton(title: "Logout", shouldEnableButton: true) {
+                viewModel.logout {
+                    self.output.goToLogin()
+                }
+            }
+
+            ActionButton(title: "Invite User", shouldEnableButton: true) {
+                viewModel.logout {
+                    self.output.goToInviteUser()
+                }
             }
         }
     }
 }
 
 #Preview {
-    ProfileView(output: ProfileView.Output(goToLogin: {}))
+    ProfileView(output: ProfileView.Output(goToLogin: {}, goToInviteUser: {}))
 }

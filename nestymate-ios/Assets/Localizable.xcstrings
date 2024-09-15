@@ -36,6 +36,9 @@
         }
       }
     },
+    "Invite User" : {
+
+    },
     "login" : {
       "extractionState" : "manual",
       "localizations" : {
