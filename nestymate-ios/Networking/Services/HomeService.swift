@@ -26,12 +26,12 @@ class HomeServiceImpl: HomeService {
                   let response = try? JSONDecoder().decode(Home.self, from: data)
             else {
                 if apiResponse.statusCode == 400 {
-                   return completionHandler(nil, nil)
+                    return completionHandler(nil, nil)
                 } else {
                     return completionHandler(nil, .badServerResponse)
                 }
             }
-           return completionHandler(response, apiResponse.error)
+            return completionHandler(response, apiResponse.error)
         }
     }
 
@@ -41,6 +41,7 @@ class HomeServiceImpl: HomeService {
             completionHandler(apiResponse.error)
         }
     }
+
     func editHome(home: Home, completionHandler: @escaping (Error?) -> Void) {
         let data = try? JSONEncoder().encode(home)
         let putURL = url.appending(path: home.reference)

@@ -6,11 +6,13 @@
 //
 
 import SwiftUI
+
 struct ExpensesView: View {
     @ObservedObject var viewModel: ExpensesViewModel = .init()
     struct Output {
         var goToMyHome: () -> Void
     }
+
     var output: Output
     var body: some View {
         VStack {
@@ -27,5 +29,5 @@ struct ExpensesView: View {
 }
 
 #Preview {
-    ExpensesView(output: ExpensesView.Output.init(goToMyHome: {}))
+    ExpensesView(output: ExpensesView.Output(goToMyHome: {}))
 }

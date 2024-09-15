@@ -19,10 +19,10 @@ class EditHomeViewModel: ObservableObject {
     public func getHome() {
         shouldShowLoader = true
         useCase.getHome { [weak self] home, error in
-            guard let self   else { return }
+            guard let self else { return }
             self.shouldShowLoader = false
             self.error = error
-            guard let home  else { return }
+            guard let home else { return }
             self.home = home
             self.name = .init(value: home.name, fieldType: .name)
             self.description = .init(value: home.description, fieldType: .description)
