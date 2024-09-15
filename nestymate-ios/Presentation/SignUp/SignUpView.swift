@@ -11,6 +11,7 @@ struct SignUpView: View {
     @ObservedObject var viewModel: SignUpViewModel
     struct Output {
         var goToMainScreen: () -> Void
+        var goToCreateHome: () -> Void
     }
 
     var output: Output
@@ -47,8 +48,8 @@ struct SignUpView: View {
                         title: "Sign up",
                         shouldEnableButton: viewModel.shouldEnableButton
                     ) {
-                        viewModel.signUp {
-                            self.output.goToMainScreen()
+                        viewModel.signUp { home in
+                            home == nil ? self.output.goToCreateHome() : self.output.goToMainScreen()
                         }
                     }
                     Spacer()
@@ -63,7 +64,10 @@ struct SignUpView: View {
 }
 
 #Preview {
-    SignUpView(viewModel: SignUpViewModel(
-        useCase: SignUpUseCaseImpl(service: LoginServiceImpl())),
-    output: SignUpView.Output(goToMainScreen: {}))
+    let useCase = SignUpUseCaseImpl(
+        service: LoginServiceImpl(),
+        homeService: HomeServiceImpl()
+    )
+    return SignUpView(viewModel: SignUpViewModel(useCase: useCase),
+                      output: SignUpView.Output(goToMainScreen: {}, goToCreateHome: {}))
 }
