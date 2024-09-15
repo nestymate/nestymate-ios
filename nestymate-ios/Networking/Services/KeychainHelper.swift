@@ -44,7 +44,7 @@ final class KeychainHelper {
         var result: AnyObject?
         SecItemCopyMatching(query, &result)
 
-        guard let res = result as? Data, let str = String(data: res, encoding: .utf8) else { return "" }
+        guard let res = result as? Data, let str = String(data: res, encoding: .utf8) else { return nil }
         return str
     }
 

@@ -16,6 +16,6 @@ final class AppCoordinator: ObservableObject {
 
     @ViewBuilder
     func view() -> some View {
-        MainView()
+        MainView(viewModel: MainViewModel())
     }
 }

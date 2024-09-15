@@ -25,7 +25,7 @@ class LoginServiceImpl: LoginService {
             else {
                 return completionHandler(.badServerResponse)
             }
-            print(response.token)
+            print("We received toke -------", response.token)
             let helper = KeychainHelper()
             helper.save(Data(response.token.utf8))
             completionHandler(apiResponse.error)

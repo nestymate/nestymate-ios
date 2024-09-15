@@ -9,6 +9,7 @@ import SwiftUI
 
 struct MainView: View {
     @EnvironmentObject var appCoordinator: AppCoordinator
+    @ObservedObject var viewModel: MainViewModel
 
     var body: some View {
         Group {
@@ -19,12 +20,12 @@ struct MainView: View {
                         print("Go to main screen (MainTabView)")
                     }
                 ),
-                page: .login
+                page: viewModel.shouldShowLogin
             ).view()
         }
     }
 }
 
 #Preview {
-    MainView()
+    MainView(viewModel: MainViewModel())
 }
