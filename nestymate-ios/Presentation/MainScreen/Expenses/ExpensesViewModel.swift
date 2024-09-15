@@ -8,10 +8,31 @@
 import Foundation
 
 class ExpensesViewModel: ObservableObject {
-    public var expenses = [
-        Expense(name: "expense 1"),
-        Expense(name: "expense 2"),
-        Expense(name: "expense 3"),
-        Expense(name: "expense 4")
-    ]
+    let useCase: ExpenseUseCase = ExpenseUseCaseImpl()
+    @Published public var shouldShowLoader: Bool?
+    @Published var error: Error?
+    private var expenses: [Expense]?
+
+    public func getExpenses(completionHandler: @escaping ([Expense]?) -> Void) {
+        shouldShowLoader = true
+        useCase.getExpenses { [weak self] expenses, error in
+            guard let self else { return }
+            self.shouldShowLoader = false
+            self.error = error
+            self.expenses = expenses
+            completionHandler(expenses)
+        }
+    }
+
+    public func delete(at offset: IndexSet) {
+        let index = offset[offset.startIndex]
+        shouldShowLoader = true
+        guard let expenseToBeDelete = expenses?[index] else { return }
+        useCase.deleteExpense(expense: expenseToBeDelete) { [weak self] error in
+            guard let self else { return }
+            self.shouldShowLoader = false
+            self.error = error
+            expenses?.remove(atOffsets: offset)
+        }
+    }
 }

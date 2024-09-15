@@ -49,6 +49,17 @@ class APICalls {
         }
     }
 
+    func delete(
+        url: URL,
+        requestData: Data? = nil,
+        authentication: Bool = true,
+        completionHandler: @escaping (APIResponse) -> Void
+    ) {
+        genericCall(url, requestData, "DELETE", authentication) { apiResponse in
+            completionHandler(apiResponse)
+        }
+    }
+
     private func genericCall(
         _ url: URL,
         _ requestData: Data? = nil,
