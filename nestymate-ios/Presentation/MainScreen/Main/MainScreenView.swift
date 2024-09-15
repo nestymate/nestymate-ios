@@ -39,7 +39,33 @@ struct MainScreenView: View {
                     Label("Profile", systemImage: "square.and.pencil")
                 }
         }
+        .onOpenURL { incomingURL in
+            print("App was opened via URL: \(incomingURL)")
+            handleIncomingURL(incomingURL)
+        }
         .navigationBarBackButtonHidden()
+    }
+    //nestymateapp://invite?reference=home123
+    private func handleIncomingURL(_ url: URL) {
+        guard url.scheme == "nestymateapp" else {
+            return
+        }
+        guard let components = URLComponents(url: url, resolvingAgainstBaseURL: true) else {
+            print("Invalid URL")
+            return
+        }
+        
+        guard let action = components.host, action == "invite" else {
+            print("Unknown URL, we can't handle this one!")
+            return
+        }
+        
+        guard let reference = components.queryItems?.first(where: { $0.name == "reference" })?.value else {
+            print("Recipe name not found")
+            return
+        }
+        
+        print(reference)
     }
 }
 
