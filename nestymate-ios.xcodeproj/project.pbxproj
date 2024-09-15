@@ -43,6 +43,8 @@
 		013504832BD8FA730000C859 /* NestymateUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0135047F2BD8F96B0000C859 /* NestymateUITestsLaunchTests.swift */; };
 		013504852BD900460000C859 /* PaddingManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 013504842BD900460000C859 /* PaddingManager.swift */; };
 		013504872BD90FDB0000C859 /* SingleTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 013504862BD90FDB0000C859 /* SingleTextField.swift */; };
+		0153EB4C2C9740B50033D970 /* InviteUserView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0153EB4B2C9740B40033D970 /* InviteUserView.swift */; };
+		0153EB4E2C9740C00033D970 /* InviteUserViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0153EB4D2C9740C00033D970 /* InviteUserViewModel.swift */; };
 		018A04752BD114660051A3A4 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 018A04742BD114660051A3A4 /* LoginView.swift */; };
 		01A1B4FF2BD10D920053BE3A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 01A1B4FE2BD10D920053BE3A /* Assets.xcassets */; };
 		01A1B5022BD10D920053BE3A /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 01A1B5012BD10D920053BE3A /* Preview Assets.xcassets */; };
@@ -135,6 +137,8 @@
 		0135047F2BD8F96B0000C859 /* NestymateUITestsLaunchTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NestymateUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		013504842BD900460000C859 /* PaddingManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaddingManager.swift; sourceTree = "<group>"; };
 		013504862BD90FDB0000C859 /* SingleTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleTextField.swift; sourceTree = "<group>"; };
+		0153EB4B2C9740B40033D970 /* InviteUserView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InviteUserView.swift; sourceTree = "<group>"; };
+		0153EB4D2C9740C00033D970 /* InviteUserViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InviteUserViewModel.swift; sourceTree = "<group>"; };
 		018A04742BD114660051A3A4 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		01A1B4F72BD10D8D0053BE3A /* nestymate-ios.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "nestymate-ios.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		01A1B4FE2BD10D920053BE3A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -203,6 +207,7 @@
 		0106B60A2BE185B90024AFCB /* MainScreen */ = {
 			isa = PBXGroup;
 			children = (
+				0153EB4A2C9740A30033D970 /* InviteUser */,
 				01D488212C96DDA00024A7F2 /* Main */,
 				01D488202C96DD7E0024A7F2 /* Profile */,
 				01D4881F2C96DD630024A7F2 /* Expenses */,
@@ -257,6 +262,15 @@
 				012815A42C4C605E001FFA2D /* DatePickerUIView.swift */,
 			);
 			path = Components;
+			sourceTree = "<group>";
+		};
+		0153EB4A2C9740A30033D970 /* InviteUser */ = {
+			isa = PBXGroup;
+			children = (
+				0153EB4B2C9740B40033D970 /* InviteUserView.swift */,
+				0153EB4D2C9740C00033D970 /* InviteUserViewModel.swift */,
+			);
+			path = InviteUser;
 			sourceTree = "<group>";
 		};
 		018A04732BD114330051A3A4 /* Presentation */ = {
@@ -685,6 +699,7 @@
 				01A6062D2C3FCB9E00B7622E /* PasswordTextField.swift in Sources */,
 				013504852BD900460000C859 /* PaddingManager.swift in Sources */,
 				01D488142C95DCCC0024A7F2 /* ExpensesViewModel.swift in Sources */,
+				0153EB4C2C9740B50033D970 /* InviteUserView.swift in Sources */,
 				01A606252C3F259300B7622E /* View+Extenstion.swift in Sources */,
 				011165D82BD69D7700817935 /* Nestymate.swift in Sources */,
 				0128159B2C485470001FFA2D /* Reachability.swift in Sources */,
@@ -717,6 +732,7 @@
 				01A606292C3FC5ED00B7622E /* SignUpViewModel.swift in Sources */,
 				0106B6222BFA5D910024AFCB /* CreateHomeViewModel.swift in Sources */,
 				01D7922E2C8D9AFD00EDA9D2 /* ExpensesCoordinator.swift in Sources */,
+				0153EB4E2C9740C00033D970 /* InviteUserViewModel.swift in Sources */,
 				0106B62C2BFA746C0024AFCB /* Home.swift in Sources */,
 				0106B6242BFA5DE00024AFCB /* CreateHomeUseCase.swift in Sources */,
 				012815A32C4AE753001FFA2D /* SelectionPickerView.swift in Sources */,
