@@ -67,6 +67,11 @@
 		01D4882F2C96F21D0024A7F2 /* CategoryUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01D4882E2C96F21D0024A7F2 /* CategoryUseCase.swift */; };
 		01D488322C96F7ED0024A7F2 /* CreateCategoryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01D488312C96F7ED0024A7F2 /* CreateCategoryViewModel.swift */; };
 		01D488342C96F7FE0024A7F2 /* CreateCategoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01D488332C96F7FE0024A7F2 /* CreateCategoryView.swift */; };
+		01D488362C9718460024A7F2 /* ExpenseUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01D488352C9718460024A7F2 /* ExpenseUseCase.swift */; };
+		01D488382C9718DC0024A7F2 /* ExpenseService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01D488372C9718DC0024A7F2 /* ExpenseService.swift */; };
+		01D4883B2C9721B00024A7F2 /* CreateOrEditExpenseViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01D4883A2C9721B00024A7F2 /* CreateOrEditExpenseViewModel.swift */; };
+		01D4883D2C9721BB0024A7F2 /* CreateOrEditExpenseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01D4883C2C9721BB0024A7F2 /* CreateOrEditExpenseView.swift */; };
+		01D4883F2C9736700024A7F2 /* CreateOrEditExpenseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01D4883E2C9736700024A7F2 /* CreateOrEditExpenseView.swift */; };
 		01D7922C2C8D985D00EDA9D2 /* MyHomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01D7922B2C8D985D00EDA9D2 /* MyHomeView.swift */; };
 		01D7922E2C8D9AFD00EDA9D2 /* ExpensesCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01D7922D2C8D9AFD00EDA9D2 /* ExpensesCoordinator.swift */; };
 		01D792302C8D9F5300EDA9D2 /* MyHomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01D7922F2C8D9F5200EDA9D2 /* MyHomeViewModel.swift */; };
@@ -157,6 +162,11 @@
 		01D4882E2C96F21D0024A7F2 /* CategoryUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryUseCase.swift; sourceTree = "<group>"; };
 		01D488312C96F7ED0024A7F2 /* CreateCategoryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateCategoryViewModel.swift; sourceTree = "<group>"; };
 		01D488332C96F7FE0024A7F2 /* CreateCategoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateCategoryView.swift; sourceTree = "<group>"; };
+		01D488352C9718460024A7F2 /* ExpenseUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpenseUseCase.swift; sourceTree = "<group>"; };
+		01D488372C9718DC0024A7F2 /* ExpenseService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpenseService.swift; sourceTree = "<group>"; };
+		01D4883A2C9721B00024A7F2 /* CreateOrEditExpenseViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateOrEditExpenseViewModel.swift; sourceTree = "<group>"; };
+		01D4883C2C9721BB0024A7F2 /* CreateOrEditExpenseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateOrEditExpenseView.swift; sourceTree = "<group>"; };
+		01D4883E2C9736700024A7F2 /* CreateOrEditExpenseView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateOrEditExpenseView.swift; sourceTree = "<group>"; };
 		01D7922B2C8D985D00EDA9D2 /* MyHomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyHomeView.swift; sourceTree = "<group>"; };
 		01D7922D2C8D9AFD00EDA9D2 /* ExpensesCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpensesCoordinator.swift; sourceTree = "<group>"; };
 		01D7922F2C8D9F5200EDA9D2 /* MyHomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyHomeViewModel.swift; sourceTree = "<group>"; };
@@ -206,6 +216,7 @@
 				0106B60E2BE18A5E0024AFCB /* LoginService.swift */,
 				0106B6252BFA5E530024AFCB /* HomeService.swift */,
 				0106B6292BFA610B0024AFCB /* KeychainHelper.swift */,
+				01D488372C9718DC0024A7F2 /* ExpenseService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -396,8 +407,10 @@
 		01D4881F2C96DD630024A7F2 /* Expenses */ = {
 			isa = PBXGroup;
 			children = (
+				01D488392C9721A30024A7F2 /* createOrEditExpense */,
 				0106B6082BE185B40024AFCB /* ExpensesView.swift */,
 				01D488132C95DCCC0024A7F2 /* ExpensesViewModel.swift */,
+				01D488352C9718460024A7F2 /* ExpenseUseCase.swift */,
 			);
 			path = Expenses;
 			sourceTree = "<group>";
@@ -486,6 +499,16 @@
 				01D488332C96F7FE0024A7F2 /* CreateCategoryView.swift */,
 			);
 			path = CreateCategory;
+			sourceTree = "<group>";
+		};
+		01D488392C9721A30024A7F2 /* createOrEditExpense */ = {
+			isa = PBXGroup;
+			children = (
+				01D4883E2C9736700024A7F2 /* CreateOrEditExpenseView.swift */,
+				01D4883A2C9721B00024A7F2 /* CreateOrEditExpenseViewModel.swift */,
+				01D4883C2C9721BB0024A7F2 /* CreateOrEditExpenseView.swift */,
+			);
+			path = createOrEditExpense;
 			sourceTree = "<group>";
 		};
 		01D7922A2C8D983C00EDA9D2 /* Home */ = {
@@ -679,6 +702,7 @@
 				0106B6052BE1851B0024AFCB /* MainScreenView.swift in Sources */,
 				0106B6202BFA5CC30024AFCB /* CreateHomeView.swift in Sources */,
 				012815992C484128001FFA2D /* Error.swift in Sources */,
+				01D4883D2C9721BB0024A7F2 /* CreateOrEditExpenseView.swift in Sources */,
 				01D7922C2C8D985D00EDA9D2 /* MyHomeView.swift in Sources */,
 				01A606232C3F207500B7622E /* ActivityIndicatorIView.swift in Sources */,
 				0128159D2C485607001FFA2D /* APIResponse.swift in Sources */,
@@ -701,7 +725,10 @@
 				0106B61D2BE811E60024AFCB /* MainView.swift in Sources */,
 				01B6DF992BD6A1D500E2983E /* FontManager.swift in Sources */,
 				012815A72C4D98B3001FFA2D /* UtilMethods.swift in Sources */,
+				01D4883B2C9721B00024A7F2 /* CreateOrEditExpenseViewModel.swift in Sources */,
 				01D792362C8DA66200EDA9D2 /* EditHomeViewModel.swift in Sources */,
+				01D4883F2C9736700024A7F2 /* CreateOrEditExpenseView.swift in Sources */,
+				01D488382C9718DC0024A7F2 /* ExpenseService.swift in Sources */,
 				0106B6162BE191B50024AFCB /* LoginUseCase.swift in Sources */,
 				01D488322C96F7ED0024A7F2 /* CreateCategoryViewModel.swift in Sources */,
 				01A606332C4017A900B7622E /* String+Extension.swift in Sources */,
@@ -714,6 +741,7 @@
 				01D792322C8DA4F700EDA9D2 /* EditHomeView.swift in Sources */,
 				01A606212C3EC86200B7622E /* HomeScreenCoordinator.swift in Sources */,
 				01A6062B2C3FC62D00B7622E /* SignUpUseCase.swift in Sources */,
+				01D488362C9718460024A7F2 /* ExpenseUseCase.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

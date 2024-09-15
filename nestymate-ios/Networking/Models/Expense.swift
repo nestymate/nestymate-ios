@@ -7,7 +7,8 @@
 
 import Foundation
 
-public struct Expense: Identifiable {
-    public let id = UUID()
-    public let name: String
+public struct Expense: Encodable, Decodable {
+    public let title: String?
+    public let description: String
+    public let amount: Double
 }

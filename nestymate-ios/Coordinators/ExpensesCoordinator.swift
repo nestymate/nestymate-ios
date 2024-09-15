@@ -64,6 +64,20 @@ private extension ExpensesCoordinator {
                     page: .myHome
                 )
             )
+        }, goToCreateExpense: {
+            self.push(
+                LoginCoordinator(
+                    navigationPath: self.$navigationPath,
+                    page: .createExpense(nil)
+                )
+            )
+        }, goToEditExpense: { expense in
+            self.push(
+                LoginCoordinator(
+                    navigationPath: self.$navigationPath,
+                    page: .createExpense(expense)
+                )
+            )
         }))
     }
 
