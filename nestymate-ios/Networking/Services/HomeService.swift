@@ -9,6 +9,7 @@ import Combine
 import Foundation
 
 protocol HomeService {
+    func inviteUserToHome(email: String, completionHandler: @escaping (Error?) -> Void)
     func createHome(home: Home, completionHandler: @escaping (Error?) -> Void)
     func editHome(home: Home, completionHandler: @escaping (Error?) -> Void)
     func getHome(completionHandler: @escaping (Home?, Error?) -> Void)
@@ -46,6 +47,13 @@ class HomeServiceImpl: HomeService {
         let data = try? JSONEncoder().encode(home)
         let putURL = url.appending(path: home.reference)
         apiCall.put(url: putURL, requestData: data) { apiResponse in
+            completionHandler(apiResponse.error)
+        }
+    }
+
+    func inviteUserToHome(email: String, completionHandler: @escaping (Error?) -> Void) {
+        let data = try? JSONEncoder().encode(email)
+        apiCall.post(url: url, requestData: data) { apiResponse in
             completionHandler(apiResponse.error)
         }
     }
