@@ -37,6 +37,7 @@ class APICalls {
             completionHandler(apiResponse)
         }
     }
+
     func put(
         url: URL,
         requestData: Data? = nil,

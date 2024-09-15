@@ -96,7 +96,7 @@
 		0106B6182BE195F10024AFCB /* LoginCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginCoordinator.swift; sourceTree = "<group>"; };
 		0106B61A2BE811B30024AFCB /* AppCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCoordinator.swift; sourceTree = "<group>"; };
 		0106B61C2BE811E60024AFCB /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
-		0106B61E2BFA5BA20024AFCB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		0106B61E2BFA5BA20024AFCB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0106B61F2BFA5CC30024AFCB /* CreateHomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateHomeView.swift; sourceTree = "<group>"; };
 		0106B6212BFA5D910024AFCB /* CreateHomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateHomeViewModel.swift; sourceTree = "<group>"; };
 		0106B6232BFA5DE00024AFCB /* CreateHomeUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateHomeUseCase.swift; sourceTree = "<group>"; };
@@ -181,39 +181,11 @@
 		0106B60A2BE185B90024AFCB /* MainScreen */ = {
 			isa = PBXGroup;
 			children = (
-				0106B6082BE185B40024AFCB /* ExpensesView.swift */,
-				0106B6042BE1851B0024AFCB /* MainScreenView.swift */,
-				0106B6062BE1859F0024AFCB /* ProfileView.swift */,
+				01D488212C96DDA00024A7F2 /* Main */,
+				01D488202C96DD7E0024A7F2 /* Profile */,
+				01D4881F2C96DD630024A7F2 /* Expenses */,
 			);
 			path = MainScreen;
-			sourceTree = "<group>";
-		};
-		0106B60B2BE18A310024AFCB /* ViewModels */ = {
-			isa = PBXGroup;
-			children = (
-				0106B6132BE191640024AFCB /* LoginViewModel.swift */,
-				0106B6212BFA5D910024AFCB /* CreateHomeViewModel.swift */,
-				0106B62D2BFA78B50024AFCB /* MainScreenViewModel.swift */,
-				01A6061C2C3EBFAD00B7622E /* ProfileViewModel.swift */,
-				01A606282C3FC5ED00B7622E /* SignUpViewModel.swift */,
-				01D7922F2C8D9F5200EDA9D2 /* MyHomeViewModel.swift */,
-				01D792352C8DA66200EDA9D2 /* EditHomeViewModel.swift */,
-				01D488132C95DCCC0024A7F2 /* ExpensesViewModel.swift */,
-			);
-			path = ViewModels;
-			sourceTree = "<group>";
-		};
-		0106B60C2BE18A3D0024AFCB /* UseCases */ = {
-			isa = PBXGroup;
-			children = (
-				0106B6152BE191B50024AFCB /* LoginUseCase.swift */,
-				0106B6232BFA5DE00024AFCB /* CreateHomeUseCase.swift */,
-				0106B62F2BFA79450024AFCB /* MainScreenUseCase.swift */,
-				01A6061E2C3EC01400B7622E /* ProfileUseCase.swift */,
-				01A6062A2C3FC62D00B7622E /* SignUpUseCase.swift */,
-				01D488172C95F5840024A7F2 /* MyHomeUseCase.swift */,
-			);
-			path = UseCases;
 			sourceTree = "<group>";
 		};
 		0106B60D2BE18A4C0024AFCB /* Services */ = {
@@ -263,23 +235,21 @@
 			path = Components;
 			sourceTree = "<group>";
 		};
-		018A04732BD114330051A3A4 /* Views */ = {
+		018A04732BD114330051A3A4 /* Presentation */ = {
 			isa = PBXGroup;
 			children = (
+				01D488252C96DE490024A7F2 /* CreateHome */,
+				01D488222C96DDE00024A7F2 /* SignUp */,
+				01D4881E2C96DD470024A7F2 /* Login */,
 				01D7922A2C8D983C00EDA9D2 /* Home */,
-				018A04742BD114660051A3A4 /* LoginView.swift */,
 				0106B60A2BE185B90024AFCB /* MainScreen */,
-				0106B61C2BE811E60024AFCB /* MainView.swift */,
-				0106B61F2BFA5CC30024AFCB /* CreateHomeView.swift */,
-				01A606262C3FC41E00B7622E /* SignUpView.swift */,
 			);
-			path = Views;
+			path = Presentation;
 			sourceTree = "<group>";
 		};
 		01A1B4EE2BD10D8C0053BE3A = {
 			isa = PBXGroup;
 			children = (
-				0135047A2BD7DBE20000C859 /* Localizable.xcstrings */,
 				01A1B4F92BD10D8D0053BE3A /* nestymate-ios */,
 				01A1B50A2BD10D930053BE3A /* nestymate-iosTests */,
 				01A1B5142BD10D930053BE3A /* nestymate-iosUITests */,
@@ -300,18 +270,13 @@
 		01A1B4F92BD10D8D0053BE3A /* nestymate-ios */ = {
 			isa = PBXGroup;
 			children = (
-				0106B61E2BFA5BA20024AFCB /* Info.plist */,
-				0106B6172BE195DC0024AFCB /* Coordinators */,
-				0106B6122BE191310024AFCB /* Models */,
-				0106B60D2BE18A4C0024AFCB /* Services */,
-				0106B60C2BE18A3D0024AFCB /* UseCases */,
-				0106B60B2BE18A310024AFCB /* ViewModels */,
 				011165D72BD69D7700817935 /* Nestymate.swift */,
-				01A6062E2C3FCBBF00B7622E /* Extensions */,
-				013504772BD7D9800000C859 /* Components */,
-				01B6DF9C2BD6A3C400E2983E /* Utils */,
-				018A04732BD114330051A3A4 /* Views */,
-				01A1B4FE2BD10D920053BE3A /* Assets.xcassets */,
+				0106B61E2BFA5BA20024AFCB /* Info.plist */,
+				01D488262C96DE860024A7F2 /* Assets */,
+				01D488232C96DE080024A7F2 /* Common */,
+				0106B6172BE195DC0024AFCB /* Coordinators */,
+				01D488242C96DE2E0024A7F2 /* Networking */,
+				018A04732BD114330051A3A4 /* Presentation */,
 				01A1B5002BD10D920053BE3A /* Preview Content */,
 			);
 			path = "nestymate-ios";
@@ -374,12 +339,127 @@
 			path = Utils;
 			sourceTree = "<group>";
 		};
+		01D488192C96DCDF0024A7F2 /* MyHome */ = {
+			isa = PBXGroup;
+			children = (
+				01D488172C95F5840024A7F2 /* MyHomeUseCase.swift */,
+				01D7922B2C8D985D00EDA9D2 /* MyHomeView.swift */,
+				01D7922F2C8D9F5200EDA9D2 /* MyHomeViewModel.swift */,
+			);
+			path = MyHome;
+			sourceTree = "<group>";
+		};
+		01D4881A2C96DD070024A7F2 /* EditHome */ = {
+			isa = PBXGroup;
+			children = (
+				01D792352C8DA66200EDA9D2 /* EditHomeViewModel.swift */,
+				01D792312C8DA4F700EDA9D2 /* EditHomeView.swift */,
+			);
+			path = EditHome;
+			sourceTree = "<group>";
+		};
+		01D4881D2C96DD310024A7F2 /* Categories */ = {
+			isa = PBXGroup;
+			children = (
+				01D792332C8DA52D00EDA9D2 /* CategoriesView.swift */,
+			);
+			path = Categories;
+			sourceTree = "<group>";
+		};
+		01D4881E2C96DD470024A7F2 /* Login */ = {
+			isa = PBXGroup;
+			children = (
+				0106B6152BE191B50024AFCB /* LoginUseCase.swift */,
+				018A04742BD114660051A3A4 /* LoginView.swift */,
+				0106B6132BE191640024AFCB /* LoginViewModel.swift */,
+			);
+			path = Login;
+			sourceTree = "<group>";
+		};
+		01D4881F2C96DD630024A7F2 /* Expenses */ = {
+			isa = PBXGroup;
+			children = (
+				0106B6082BE185B40024AFCB /* ExpensesView.swift */,
+				01D488132C95DCCC0024A7F2 /* ExpensesViewModel.swift */,
+			);
+			path = Expenses;
+			sourceTree = "<group>";
+		};
+		01D488202C96DD7E0024A7F2 /* Profile */ = {
+			isa = PBXGroup;
+			children = (
+				01A6061E2C3EC01400B7622E /* ProfileUseCase.swift */,
+				0106B6062BE1859F0024AFCB /* ProfileView.swift */,
+				01A6061C2C3EBFAD00B7622E /* ProfileViewModel.swift */,
+			);
+			path = Profile;
+			sourceTree = "<group>";
+		};
+		01D488212C96DDA00024A7F2 /* Main */ = {
+			isa = PBXGroup;
+			children = (
+				0106B62F2BFA79450024AFCB /* MainScreenUseCase.swift */,
+				0106B62D2BFA78B50024AFCB /* MainScreenViewModel.swift */,
+				0106B6042BE1851B0024AFCB /* MainScreenView.swift */,
+				0106B61C2BE811E60024AFCB /* MainView.swift */,
+			);
+			path = Main;
+			sourceTree = "<group>";
+		};
+		01D488222C96DDE00024A7F2 /* SignUp */ = {
+			isa = PBXGroup;
+			children = (
+				01A6062A2C3FC62D00B7622E /* SignUpUseCase.swift */,
+				01A606262C3FC41E00B7622E /* SignUpView.swift */,
+				01A606282C3FC5ED00B7622E /* SignUpViewModel.swift */,
+			);
+			path = SignUp;
+			sourceTree = "<group>";
+		};
+		01D488232C96DE080024A7F2 /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				013504772BD7D9800000C859 /* Components */,
+				01B6DF9C2BD6A3C400E2983E /* Utils */,
+				01A6062E2C3FCBBF00B7622E /* Extensions */,
+			);
+			path = Common;
+			sourceTree = "<group>";
+		};
+		01D488242C96DE2E0024A7F2 /* Networking */ = {
+			isa = PBXGroup;
+			children = (
+				0106B6122BE191310024AFCB /* Models */,
+				0106B60D2BE18A4C0024AFCB /* Services */,
+			);
+			path = Networking;
+			sourceTree = "<group>";
+		};
+		01D488252C96DE490024A7F2 /* CreateHome */ = {
+			isa = PBXGroup;
+			children = (
+				0106B61F2BFA5CC30024AFCB /* CreateHomeView.swift */,
+				0106B6212BFA5D910024AFCB /* CreateHomeViewModel.swift */,
+				0106B6232BFA5DE00024AFCB /* CreateHomeUseCase.swift */,
+			);
+			path = CreateHome;
+			sourceTree = "<group>";
+		};
+		01D488262C96DE860024A7F2 /* Assets */ = {
+			isa = PBXGroup;
+			children = (
+				0135047A2BD7DBE20000C859 /* Localizable.xcstrings */,
+				01A1B4FE2BD10D920053BE3A /* Assets.xcassets */,
+			);
+			path = Assets;
+			sourceTree = "<group>";
+		};
 		01D7922A2C8D983C00EDA9D2 /* Home */ = {
 			isa = PBXGroup;
 			children = (
-				01D7922B2C8D985D00EDA9D2 /* MyHomeView.swift */,
-				01D792312C8DA4F700EDA9D2 /* EditHomeView.swift */,
-				01D792332C8DA52D00EDA9D2 /* CategoriesView.swift */,
+				01D488192C96DCDF0024A7F2 /* MyHome */,
+				01D4881A2C96DD070024A7F2 /* EditHome */,
+				01D4881D2C96DD310024A7F2 /* Categories */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -682,7 +762,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 17.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
@@ -739,7 +819,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 17.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;

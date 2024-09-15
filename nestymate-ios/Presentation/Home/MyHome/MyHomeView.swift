@@ -13,6 +13,7 @@ struct MyHomeView: View {
     struct Output {
         var goBack: () -> Void
     }
+
     var output: Output
     var body: some View {
         VStack {

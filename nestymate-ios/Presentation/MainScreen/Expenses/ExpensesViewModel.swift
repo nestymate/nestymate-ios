@@ -6,6 +6,7 @@
 //
 
 import Foundation
+
 class ExpensesViewModel: ObservableObject {
     public var expenses = [
         Expense(name: "expense 1"),

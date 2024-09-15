@@ -127,14 +127,15 @@ private extension LoginCoordinator {
             )
         }))
     }
-    // FIXME: MOVE this to another coordinator 
+
+    // FIXME: MOVE this to another coordinator
     func myHomeView() -> some View {
         let viewModel = MyHomeViewModel()
         return MyHomeView(viewModel: viewModel, output: MyHomeView.Output(goBack: {
             self.goBack()
-        })
-        )
+        }))
     }
+
     func goBack() {
         navigationPath.removeLast()
     }
