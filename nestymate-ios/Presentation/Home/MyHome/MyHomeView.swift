@@ -12,6 +12,7 @@ struct MyHomeView: View {
     @State private var tab = 0
     struct Output {
         var goBack: () -> Void
+        var createCategory: () -> Void
     }
 
     var output: Output
@@ -22,6 +23,7 @@ struct MyHomeView: View {
                     Text($0.name).tag($0.id)
                 }
             }
+            .padding()
             .pickerStyle(.segmented)
             .colorMultiply(ColorManager.buttonBackgroundColour)
             .onAppear {
@@ -32,13 +34,16 @@ struct MyHomeView: View {
                     output.goBack()
                 }))
             } else {
-                CategoriesView()
+                CategoriesView(output: CategoriesView.Output(createCategory: {
+                    output.createCategory()
+                }))
             }
         }
         .background(ColorManager.backgroundColour)
+        .hiddenNavigationBarStyle()
     }
 }
 
 #Preview {
-    MyHomeView(output: MyHomeView.Output(goBack: {}))
+    MyHomeView(output: MyHomeView.Output(goBack: {}, createCategory: {}))
 }
