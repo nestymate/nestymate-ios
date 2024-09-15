@@ -12,6 +12,7 @@ struct EditHomeView: View {
     struct Output {
         var goBack: () -> Void
     }
+
     var output: Output
     @State private var viewDidLoad = false
     var body: some View {

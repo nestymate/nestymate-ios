@@ -21,12 +21,14 @@ final class ExpensesCoordinator: Hashable {
     struct Output {
         var goToMainScreen: () -> Void
     }
+
     init(navigationPath: Binding<NavigationPath>, output: Output? = nil, page: ExpensesPage) {
         _navigationPath = navigationPath
         id = UUID()
         self.output = output
         self.page = page
     }
+
     @ViewBuilder
     func view() -> some View {
         switch page {
@@ -36,9 +38,11 @@ final class ExpensesCoordinator: Hashable {
             expensesView()
         }
     }
+
     func hash(into hasher: inout Hasher) {
         hasher.combine(id)
     }
+
     static func == (
         lhs: ExpensesCoordinator,
         rhs: ExpensesCoordinator
@@ -51,6 +55,7 @@ private extension ExpensesCoordinator {
     func mainScreenView() -> some View {
         return MainScreenView(output: .init())
     }
+
     func expensesView() -> some View {
         return ExpensesView(output: ExpensesView.Output(goToMyHome: {
             self.push(
@@ -61,6 +66,7 @@ private extension ExpensesCoordinator {
             )
         }))
     }
+
     func push<V>(_ value: V) where V: Hashable {
         navigationPath.append(value)
     }

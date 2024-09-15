@@ -19,6 +19,7 @@ class MyHomeUseCaseImpl: MyHomeUseCase {
     init(homeService: HomeService) {
         self.homeService = homeService
     }
+
     func createValid(isNameValid: Bool, isDescriptionValid: Bool, isAddressValid: Bool) -> Bool {
         return isNameValid && isDescriptionValid && isAddressValid
     }
