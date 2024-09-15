@@ -7,6 +7,13 @@
 
 import SwiftUI
 
+private struct HiddenNavigationBar: ViewModifier {
+    func body(content: Content) -> some View {
+        content
+            .navigationBarTitle("", displayMode: .inline)
+    }
+}
+
 extension View {
     /// Hide or show the view based on a boolean value.
     ///
@@ -31,5 +38,9 @@ extension View {
         } else {
             self
         }
+    }
+
+    func hiddenNavigationBarStyle() -> some View {
+        modifier(HiddenNavigationBar())
     }
 }
