@@ -117,12 +117,20 @@ private extension LoginCoordinator {
     }
 
     func signUpView() -> some View {
-        let viewModel = SignUpViewModel(useCase: SignUpUseCaseImpl(service: loginService))
+        let useCase = SignUpUseCaseImpl(service: loginService, homeService: homeService)
+        let viewModel = SignUpViewModel(useCase: useCase)
         return SignUpView(viewModel: viewModel, output: SignUpView.Output(goToMainScreen: {
             self.push(
                 LoginCoordinator(
                     navigationPath: self.$navigationPath,
                     page: .mainScreen
+                )
+            )
+        }, goToCreateHome: {
+            self.push(
+                LoginCoordinator(
+                    navigationPath: self.$navigationPath,
+                    page: .createHome
                 )
             )
         }))

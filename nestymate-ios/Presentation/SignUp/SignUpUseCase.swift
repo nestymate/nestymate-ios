@@ -11,12 +11,16 @@ import SwiftUI
 protocol SignUpUseCase {
     func isSignupValid(user: User) -> Bool
     func signUp(user: User, completionHandler: @escaping (Error?) -> Void)
+    func checkHomeForUser(completionHandler: @escaping (Home?, Error?) -> Void)
 }
 
 class SignUpUseCaseImpl: SignUpUseCase {
     let service: LoginService
-    init(service: LoginService) {
+    let homeService: HomeService
+
+    init(service: LoginService, homeService: HomeService) {
         self.service = service
+        self.homeService = homeService
     }
 
     func isSignupValid(user: User) -> Bool {
@@ -25,5 +29,9 @@ class SignUpUseCaseImpl: SignUpUseCase {
 
     func signUp(user: User, completionHandler: @escaping (Error?) -> Void) {
         service.signup(user: user, completionHandler: completionHandler)
+    }
+
+    func checkHomeForUser(completionHandler: @escaping (Home?, Error?) -> Void) {
+        homeService.getHome(completionHandler: completionHandler)
     }
 }

@@ -42,7 +42,7 @@ class SignUpViewModel: ObservableObject {
         self.useCase = useCase
     }
 
-    public func signUp(completionHandler: @escaping () -> Void) {
+    public func signUp(completionHandler: @escaping (Home?) -> Void) {
         let formatter = DateFormatter()
         formatter.dateFormat = "yyyy-MM-dd"
         let user = User(
@@ -58,11 +58,14 @@ class SignUpViewModel: ObservableObject {
         print("isPasswordsTheSame", user.isPasswordsTheSame)
         if useCase.isSignupValid(user: user) {
             shouldShowLoader = true
-            useCase.signUp(user: user) { [weak self] apiError in
-                self?.shouldShowLoader = false
-                self?.error = apiError
-                if apiError == nil {
-                    completionHandler()
+            useCase.signUp(user: user) { [weak self] errorLogin in
+                self?.useCase.checkHomeForUser { [weak self] home, errorCheckHome in
+                    self?.shouldShowLoader = false
+                    let apiError = errorLogin ?? errorCheckHome ?? nil
+                    self?.error = apiError
+                    if apiError == nil {
+                        completionHandler(home)
+                    }
                 }
             }
         } else {
