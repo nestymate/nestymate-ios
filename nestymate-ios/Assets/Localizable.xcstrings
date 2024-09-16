@@ -23,9 +23,6 @@
     "Create Category" : {
 
     },
-    "Edit Home" : {
-
-    },
     "Expenses" : {
       "localizations" : {
         "el" : {
@@ -60,6 +57,7 @@
 
     },
     "New Home" : {
+      "extractionState" : "stale",
       "localizations" : {
         "el" : {
           "stringUnit" : {

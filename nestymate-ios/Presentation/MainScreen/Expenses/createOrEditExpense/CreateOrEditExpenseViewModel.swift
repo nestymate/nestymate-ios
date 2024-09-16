@@ -9,6 +9,7 @@ import Foundation
 
 class CreateOrEditExpenseViewModel: ObservableObject {
     private let useCase: ExpenseUseCase = ExpenseUseCaseImpl()
+    private let logoutService = LogoutService()
     @Published var title: FieldModel = .init(value: "", fieldType: .name)
     @Published var description: FieldModel = .init(value: "", fieldType: .description)
     @Published var amount: FieldModel = .init(value: "", fieldType: .amount)
@@ -37,7 +38,7 @@ class CreateOrEditExpenseViewModel: ObservableObject {
         amount = .init(value: String(expense.amount), fieldType: .amount)
     }
 
-    func createOrUpdateExpense(completionHandler: @escaping () -> Void) {
+    func createOrUpdateExpense(completionHandler: @escaping (Bool?) -> Void) {
         if useCase.createValid(
             isTitleValid: title.onValidate(),
             isDescriptionValid: description.onValidate(),
@@ -51,23 +52,23 @@ class CreateOrEditExpenseViewModel: ObservableObject {
                 amount: amountInDouble
             )
             if isEdit {
-                useCase.editExpense(expense: expense) { [weak self] error in
+                useCase.editExpense(expense: expense) { [weak self] error, statusCode in
                     self?.shouldShowLoader = false
                     self?.error = error
-                    completionHandler()
+                    completionHandler(self?.logoutService.shouldLogout(statusCode: statusCode))
                 }
             } else {
-                useCase.createExpense(expense: expense) { [weak self] error in
+                useCase.createExpense(expense: expense) { [weak self] error, statusCode in
                     self?.shouldShowLoader = false
                     self?.error = error
-                    completionHandler()
+                    completionHandler(self?.logoutService.shouldLogout(statusCode: statusCode))
                 }
             }
         }
     }
 
     private func setupTitles() {
-        buttonTitle = isEdit ? "Save" : "Update"
+        buttonTitle = isEdit ? "Update" : "Save"
         pageTitle = isEdit ? "Edit Expense" : "Create Expense"
     }
 }
