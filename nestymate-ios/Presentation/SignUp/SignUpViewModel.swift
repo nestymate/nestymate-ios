@@ -59,7 +59,7 @@ class SignUpViewModel: ObservableObject {
         if useCase.isSignupValid(user: user) {
             shouldShowLoader = true
             useCase.signUp(user: user) { [weak self] errorLogin in
-                self?.useCase.checkHomeForUser { [weak self] home, errorCheckHome in
+                self?.useCase.checkHomeForUser { [weak self] home, errorCheckHome, _ in
                     self?.shouldShowLoader = false
                     let apiError = errorLogin ?? errorCheckHome ?? nil
                     self?.error = apiError

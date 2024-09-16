@@ -114,14 +114,16 @@ private extension LoginCoordinator {
     }
 
     func createHome() -> some View {
-        let viewModel = CreateHomeViewModel(useCase: CreateHomeUseCaseImpl(service: homeService))
-        return CreateHomeView(viewModel: viewModel, output: CreateHomeView.Output(goToMainScreen: {
+        let viewModel = CreateOrEditHomeViewModel(useCase: HomeUseCaseImpl(homeService: homeService), isEdit: false)
+        return CreateOrEditHomeView(viewModel: viewModel, output: CreateOrEditHomeView.Output(goToMainScreen: {
             self.push(
                 LoginCoordinator(
                     navigationPath: self.$navigationPath,
                     page: .mainScreen
                 )
             )
+        }, logout: {
+            self.logout()
         }))
     }
 
@@ -157,6 +159,8 @@ private extension LoginCoordinator {
                     page: .createCategory
                 )
             )
+        }, logout: {
+            self.logout()
         }))
     }
 
@@ -173,6 +177,8 @@ private extension LoginCoordinator {
         let viewModel = CreateOrEditExpenseViewModel(expense: expense)
         return CreateOrEditExpenseView(viewModel: viewModel, output: CreateOrEditExpenseView.Output(goBack: {
             self.goBack()
+        }, logout: {
+            self.logout()
         }))
     }
 
@@ -181,7 +187,18 @@ private extension LoginCoordinator {
         let viewModel = InviteUserViewModel()
         return InviteUserView(viewModel: viewModel, output: InviteUserView.Output(goBack: {
             self.goBack()
+        }, logout: {
+            self.logout()
         }))
+    }
+
+    func logout() {
+        push(
+            LoginCoordinator(
+                navigationPath: $navigationPath,
+                page: .login
+            )
+        )
     }
 
     func goBack() {

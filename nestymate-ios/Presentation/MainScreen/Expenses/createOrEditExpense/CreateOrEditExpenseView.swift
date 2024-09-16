@@ -13,6 +13,7 @@ struct CreateOrEditExpenseView: View {
     @State private var viewDidLoad = false
     struct Output {
         var goBack: () -> Void
+        var logout: () -> Void
     }
 
     var output: Output
@@ -40,7 +41,9 @@ struct CreateOrEditExpenseView: View {
                         title: viewModel.buttonTitle,
                         shouldEnableButton: viewModel.shouldEnableButton
                     ) {
-                        viewModel.createOrUpdateExpense {
+                        viewModel.createOrUpdateExpense { shouldLogout in
+                            guard let shouldLogout, !shouldLogout
+                            else { return self.output.logout() }
                             self.output.goBack()
                         }
                     }
@@ -57,7 +60,8 @@ struct CreateOrEditExpenseView: View {
 }
 
 #Preview {
-    CreateHomeView(viewModel: CreateHomeViewModel(
-        useCase: CreateHomeUseCaseImpl(service: HomeServiceImpl())),
-    output: CreateHomeView.Output(goToMainScreen: {}))
+    CreateOrEditHomeView(viewModel: CreateOrEditHomeViewModel(
+        useCase: HomeUseCaseImpl(homeService: HomeServiceImpl()), isEdit: true
+    ),
+    output: CreateOrEditHomeView.Output(goToMainScreen: {}, logout: {}))
 }

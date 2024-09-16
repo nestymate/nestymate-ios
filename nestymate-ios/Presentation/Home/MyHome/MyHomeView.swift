@@ -13,6 +13,7 @@ struct MyHomeView: View {
     struct Output {
         var goBack: () -> Void
         var createCategory: () -> Void
+        var logout: () -> Void
     }
 
     var output: Output
@@ -30,9 +31,17 @@ struct MyHomeView: View {
                 UISegmentedControl.appearance().tintColor = ColorManager.backgroundColourUIKit
             }
             if tab == 0 {
-                EditHomeView(output: EditHomeView.Output(goBack: {
-                    output.goBack()
-                }))
+                let viewModel = CreateOrEditHomeViewModel(
+                    useCase: HomeUseCaseImpl(
+                        homeService: HomeServiceImpl()),
+                        isEdit: true
+                )
+                CreateOrEditHomeView(
+                    viewModel: viewModel,
+                    output: CreateOrEditHomeView.Output(
+                        goToMainScreen: { output.goBack() },
+                        logout: { output.logout() }
+                    ))
             } else {
                 CategoriesView(output: CategoriesView.Output(createCategory: {
                     output.createCategory()
@@ -45,5 +54,5 @@ struct MyHomeView: View {
 }
 
 #Preview {
-    MyHomeView(output: MyHomeView.Output(goBack: {}, createCategory: {}))
+    MyHomeView(output: MyHomeView.Output(goBack: {}, createCategory: {}, logout: {}))
 }

@@ -1,5 +1,5 @@
 //
-//  CreateHomeView.swift
+//  CreateOrEditHomeView.swift
 //  nestymate-ios
 //
 //  Created by Selini Kyriazidou on 19/5/24.
@@ -7,10 +7,12 @@
 
 import SwiftUI
 
-struct CreateHomeView: View {
-    @ObservedObject var viewModel: CreateHomeViewModel
+struct CreateOrEditHomeView: View {
+    @ObservedObject var viewModel: CreateOrEditHomeViewModel
+    @State private var viewDidLoad = false
     struct Output {
         var goToMainScreen: () -> Void
+        var logout: () -> Void
     }
 
     var output: Output
@@ -21,7 +23,7 @@ struct CreateHomeView: View {
         )) {
             ScrollView {
                 VStack {
-                    Text("New Home").font(FontManager.title)
+                    Text(viewModel.pageTitle).font(FontManager.title)
                     SingleTextField(fieldModel: $viewModel.name)
                         .onSubmit {
                             _ = viewModel.name.onSubmitError()
@@ -35,10 +37,11 @@ struct CreateHomeView: View {
                             _ = viewModel.address.onSubmitError()
                         }
                     ActionButton(
-                        title: "Create",
+                        title: viewModel.buttonTitle,
                         shouldEnableButton: viewModel.shouldEnableButton
                     ) {
-                        viewModel.createHome {
+                        viewModel.createHome { shouldLogout in
+                            guard let shouldLogout, !shouldLogout else { return self.output.logout() }
                             self.output.goToMainScreen()
                         }
                     }
@@ -49,12 +52,19 @@ struct CreateHomeView: View {
             .alert(item: $viewModel.error) { error in
                 error.alert
             }
+            .onAppear {
+                if viewDidLoad == false && viewModel.isEdit {
+                    viewDidLoad = true
+                    viewModel.getHome()
+                }
+            }
         }
     }
 }
 
 #Preview {
-    CreateHomeView(viewModel: CreateHomeViewModel(
-        useCase: CreateHomeUseCaseImpl(service: HomeServiceImpl())),
-    output: CreateHomeView.Output(goToMainScreen: {}))
+    CreateOrEditHomeView(viewModel: CreateOrEditHomeViewModel(
+        useCase: HomeUseCaseImpl(homeService: HomeServiceImpl()), isEdit: true
+    ),
+    output: CreateOrEditHomeView.Output(goToMainScreen: {}, logout: {}))
 }

@@ -78,6 +78,13 @@ private extension ExpensesCoordinator {
                     page: .createExpense(expense)
                 )
             )
+        }, logout: {
+            self.push(
+                LoginCoordinator(
+                    navigationPath: self.$navigationPath,
+                    page: .login
+                )
+            )
         }))
     }
 
