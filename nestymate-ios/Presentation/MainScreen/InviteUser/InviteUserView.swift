@@ -11,6 +11,7 @@ struct InviteUserView: View {
     @ObservedObject var viewModel: InviteUserViewModel
     struct Output {
         var goBack: () -> Void
+        var logout: () -> Void
     }
 
     var output: Output
@@ -25,7 +26,8 @@ struct InviteUserView: View {
                 title: "Invite",
                 shouldEnableButton: viewModel.shouldEnableButton
             ) {
-                viewModel.inviteUser {
+                viewModel.inviteUser { shouldLogout in
+                    guard let shouldLogout, !shouldLogout else { return self.output.logout() }
                     self.output.goBack()
                 }
             }
@@ -36,5 +38,8 @@ struct InviteUserView: View {
 }
 
 #Preview {
-    InviteUserView(viewModel: InviteUserViewModel(), output: InviteUserView.Output(goBack: {}))
+    InviteUserView(
+        viewModel: InviteUserViewModel(),
+        output: InviteUserView.Output(goBack: {}, logout: {})
+    )
 }

@@ -27,7 +27,7 @@ class LoginViewModel: ObservableObject {
         if useCase.loginValid(isUsernameValid: username.onValidate(), isPasswordValid: password.onValidate()) {
             shouldShow = true
             useCase.login(username: username.value, password: password.value) { [weak self] errorLogin in
-                self?.useCase.checkHomeForUser { [weak self] home, errorCheckHome in
+                self?.useCase.checkHomeForUser { [weak self] home, errorCheckHome, _ in
                     self?.shouldShow = false
                     let apiError = errorLogin ?? errorCheckHome ?? nil
                     self?.error = apiError

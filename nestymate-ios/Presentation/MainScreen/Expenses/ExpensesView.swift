@@ -15,6 +15,7 @@ struct ExpensesView: View {
         var goToMyHome: () -> Void
         var goToCreateExpense: () -> Void
         var goToEditExpense: (Expense?) -> Void
+        var logout: () -> Void
     }
 
     var output: Output
@@ -49,7 +50,8 @@ struct ExpensesView: View {
             .padding()
         }
         .onAppear {
-            viewModel.getExpenses { expenses in
+            viewModel.getExpenses { expenses, shouldLogout in
+                guard !shouldLogout else { return self.output.logout() }
                 guard let expenses else { return self.expenses = [] }
                 self.expenses = expenses
             }
@@ -61,7 +63,8 @@ struct ExpensesView: View {
     ExpensesView(output: ExpensesView.Output(
         goToMyHome: {},
         goToCreateExpense: {},
-        goToEditExpense: { _ in }
+        goToEditExpense: { _ in },
+        logout: {}
     )
     )
 }
