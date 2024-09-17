@@ -13,5 +13,12 @@ struct Menu: Hashable {
 }
 
 class MyHomeViewModel: ObservableObject {
+    let homeUseCase:HomeUseCase
+    let categoryUseCase:CategoryUseCase
     let categories = [Menu(name: "My Home", id: 0), Menu(name: "Categories", id: 1)]
+    
+    init(homeUseCase: HomeUseCase, categoryUseCase: CategoryUseCase) {
+        self.homeUseCase = homeUseCase
+        self.categoryUseCase = categoryUseCase
+    }
 }

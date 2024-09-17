@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct MyHomeView: View {
-    @ObservedObject var viewModel: MyHomeViewModel = .init()
+    @ObservedObject var viewModel: MyHomeViewModel
     @State private var tab = 0
     struct Output {
         var goBack: () -> Void
@@ -30,20 +30,23 @@ struct MyHomeView: View {
             .onAppear {
                 UISegmentedControl.appearance().tintColor = ColorManager.backgroundColourUIKit
             }
+            
             if tab == 0 {
                 let viewModel = CreateOrEditHomeViewModel(
-                    useCase: HomeUseCaseImpl(
-                        homeService: HomeServiceImpl()),
-                        isEdit: true
+                    useCase: viewModel.homeUseCase ,
+                    isEdit: true
                 )
                 CreateOrEditHomeView(
                     viewModel: viewModel,
                     output: CreateOrEditHomeView.Output(
                         goToMainScreen: { output.goBack() },
                         logout: { output.logout() }
-                    ))
+                    )
+                )
             } else {
-                CategoriesView(output: CategoriesView.Output(createCategory: {
+                CategoriesView(
+                    viewModel: CategoryViewModel(useCase: viewModel.categoryUseCase),
+                    output: CategoriesView.Output(createCategory: {
                     output.createCategory()
                 }))
             }
@@ -54,5 +57,8 @@ struct MyHomeView: View {
 }
 
 #Preview {
-    MyHomeView(output: MyHomeView.Output(goBack: {}, createCategory: {}, logout: {}))
+    MyHomeView(viewModel: MyHomeViewModel(
+        homeUseCase: HomeUseCaseImpl(homeService: HomeServiceImpl()),
+        categoryUseCase: CategoryUseCaseImpl()),
+               output: MyHomeView.Output(goBack: {}, createCategory: {}, logout: {}))
 }

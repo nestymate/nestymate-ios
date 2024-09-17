@@ -39,7 +39,7 @@ struct InviteUserView: View {
 
 #Preview {
     InviteUserView(
-        viewModel: InviteUserViewModel(),
+        viewModel: InviteUserViewModel(useCase: HomeUseCaseImpl(homeService: HomeServiceImpl())),
         output: InviteUserView.Output(goBack: {}, logout: {})
     )
 }

@@ -15,6 +15,10 @@ enum ExpensesPage {
 
 final class ExpensesCoordinator: Hashable {
     @Binding var navigationPath: NavigationPath
+    private let expenseService = ExpenseServiceImpl()
+    private let logoutService = LogoutService()
+    private let expenseUseCase: ExpenseUseCase
+    private let mainScreenUseCase: MainScreenUseCase
     private var id: UUID
     private var output: Output?
     private var page: ExpensesPage
@@ -27,6 +31,8 @@ final class ExpensesCoordinator: Hashable {
         id = UUID()
         self.output = output
         self.page = page
+        expenseUseCase = ExpenseUseCaseImpl(service: expenseService)
+        mainScreenUseCase = MainScreenUseCaseImpl()
     }
 
     @ViewBuilder
@@ -53,11 +59,12 @@ final class ExpensesCoordinator: Hashable {
 
 private extension ExpensesCoordinator {
     func mainScreenView() -> some View {
-        return MainScreenView(output: .init())
+        return MainScreenView(viewModel: MainScreenViewModel(useCase: mainScreenUseCase), output: .init())
     }
 
     func expensesView() -> some View {
-        return ExpensesView(output: ExpensesView.Output(goToMyHome: {
+        let viewModel = ExpensesViewModel(useCase: expenseUseCase, logoutService: logoutService)
+        return ExpensesView(viewModel: viewModel, output: ExpensesView.Output(goToMyHome: {
             self.push(
                 LoginCoordinator(
                     navigationPath: self.$navigationPath,

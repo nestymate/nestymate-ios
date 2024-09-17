@@ -16,10 +16,14 @@ protocol ExpenseUseCase {
 }
 
 class ExpenseUseCaseImpl: ExpenseUseCase {
-    let service: ExpenseService = ExpenseServiceImpl()
+    let service: ExpenseService?
+
+    init(service: ExpenseService?) {
+        self.service = service
+    }
 
     func getExpenses(completionHandler: @escaping ([Expense]?, Error?, Int?) -> Void) {
-        service.getExpenses(completionHandler: completionHandler)
+        service?.getExpenses(completionHandler: completionHandler)
     }
 
     func createValid(isTitleValid: Bool, isDescriptionValid: Bool, isAmountValid: Bool) -> Bool {
@@ -27,14 +31,14 @@ class ExpenseUseCaseImpl: ExpenseUseCase {
     }
 
     func createExpense(expense: Expense, completionHandler: @escaping (Error?, Int?) -> Void) {
-        service.createExpense(expense: expense, completionHandler: completionHandler)
+        service?.createExpense(expense: expense, completionHandler: completionHandler)
     }
 
     func editExpense(expense: Expense, completionHandler: @escaping (Error?, Int?) -> Void) {
-        service.editExpense(expense: expense, completionHandler: completionHandler)
+        service?.editExpense(expense: expense, completionHandler: completionHandler)
     }
 
     func deleteExpense(expense: Expense, completionHandler: @escaping (Error?, Int?) -> Void) {
-        service.deleteExpense(expense: expense, completionHandler: completionHandler)
+        service?.deleteExpense(expense: expense, completionHandler: completionHandler)
     }
 }

@@ -8,10 +8,14 @@
 import Foundation
 
 class CategoryViewModel: ObservableObject {
-    let useCase: CategoryUseCase = CategoryUseCaseImpl()
+    let useCase: CategoryUseCase
     @Published public var shouldShowLoader: Bool?
     @Published var error: Error?
     private var categories: [Category]?
+
+    init(useCase: CategoryUseCase) {
+        self.useCase = useCase
+    }
 
     public func getCategories(completionHandler: @escaping ([Category]) -> Void) {
         shouldShowLoader = true

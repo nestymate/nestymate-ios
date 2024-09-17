@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct ExpensesView: View {
-    @ObservedObject var viewModel: ExpensesViewModel = .init()
+    @ObservedObject var viewModel: ExpensesViewModel
     @State private var expenses: [Expense] = []
     @State private var viewDidLoad = false
     struct Output {
@@ -60,11 +60,14 @@ struct ExpensesView: View {
 }
 
 #Preview {
-    ExpensesView(output: ExpensesView.Output(
+    ExpensesView(viewModel: ExpensesViewModel(
+        useCase: ExpenseUseCaseImpl(service: ExpenseServiceImpl()),
+        logoutService: LogoutService()
+    ),
+    output: ExpensesView.Output(
         goToMyHome: {},
         goToCreateExpense: {},
         goToEditExpense: { _ in },
         logout: {}
-    )
-    )
+    ))
 }

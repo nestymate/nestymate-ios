@@ -8,11 +8,16 @@
 import Foundation
 
 class ExpensesViewModel: ObservableObject {
-    let useCase: ExpenseUseCase = ExpenseUseCaseImpl()
-    @Published public var shouldShowLoader: Bool?
+    private let useCase: ExpenseUseCase
+    private let logoutService: LogoutService
+    @Published var shouldShowLoader: Bool?
     @Published var error: Error?
     private var expenses: [Expense]?
-    private let logoutService = LogoutService()
+
+    init(useCase: ExpenseUseCase, logoutService: LogoutService) {
+        self.useCase = useCase
+        self.logoutService = logoutService
+    }
 
     public func getExpenses(completionHandler: @escaping ([Expense]?, Bool) -> Void) {
         shouldShowLoader = true
