@@ -44,6 +44,7 @@ struct MainScreenView: View {
             handleIncomingURL(incomingURL)
         }
         .navigationBarBackButtonHidden()
+        .background(ColorManager.backgroundColour)
     }
 
     // nestymateapp://invite?reference=home123

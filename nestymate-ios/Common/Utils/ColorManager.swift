@@ -15,7 +15,7 @@ enum ColorManager {
     public static let backgroundColour: Color = .backgroundColour
     public static let separatorColour: Color = .lightGrey
     public static let linkColour: Color = .normalBlue
-    public static let mainColor: Color = .black
+    public static let mainColor: Color = .mainColour
     public static let secondaryColor: Color = .bezColour
     public static let errorColor: Color = .accentColor
     public static let backgroundColourUIKit: UIColor = .backgroundColour
