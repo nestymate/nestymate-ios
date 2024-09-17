@@ -21,11 +21,18 @@ enum LoginPage {
 
 final class LoginCoordinator: Hashable {
     @Binding var navigationPath: NavigationPath
+    private let loginService = LoginServiceImpl()
+    private let homeService = HomeServiceImpl()
+    private let expenseService = ExpenseServiceImpl()
+    private let logoutService = LogoutService()
+    private let expenseUseCase: ExpenseUseCase
+    private let homeUseCase: HomeUseCase
+    private let signUpUseCase: SignUpUseCase
+    private let mainScreenUseCase: MainScreenUseCase
+    private let categoryUseCase: CategoryUseCase
     private var id: UUID
     private var output: Output?
     private var page: LoginPage
-    private let loginService = LoginServiceImpl()
-    private let homeService = HomeServiceImpl()
 
     struct Output {
         var goToMainScreen: () -> Void
@@ -36,6 +43,12 @@ final class LoginCoordinator: Hashable {
         id = UUID()
         self.output = output
         self.page = page
+
+        expenseUseCase = ExpenseUseCaseImpl(service: expenseService)
+        homeUseCase = HomeUseCaseImpl(homeService: homeService)
+        signUpUseCase = SignUpUseCaseImpl(service: loginService, homeService: homeService)
+        mainScreenUseCase = MainScreenUseCaseImpl()
+        categoryUseCase = CategoryUseCaseImpl()
     }
 
     @ViewBuilder
@@ -108,9 +121,8 @@ private extension LoginCoordinator {
     }
 
     func mainScreenView() -> some View {
-        return MainScreenView(output:
-            .init()
-        )
+        return MainScreenView(viewModel: MainScreenViewModel(useCase: mainScreenUseCase),
+                              output: MainScreenView.Output())
     }
 
     func createHome() -> some View {
@@ -128,8 +140,7 @@ private extension LoginCoordinator {
     }
 
     func signUpView() -> some View {
-        let useCase = SignUpUseCaseImpl(service: loginService, homeService: homeService)
-        let viewModel = SignUpViewModel(useCase: useCase)
+        let viewModel = SignUpViewModel(useCase: signUpUseCase)
         return SignUpView(viewModel: viewModel, output: SignUpView.Output(goToMainScreen: {
             self.push(
                 LoginCoordinator(
@@ -149,7 +160,7 @@ private extension LoginCoordinator {
 
     // FIXME: MOVE this to another coordinator
     func myHomeView() -> some View {
-        let viewModel = MyHomeViewModel()
+        let viewModel = MyHomeViewModel(homeUseCase: homeUseCase, categoryUseCase: categoryUseCase)
         return MyHomeView(viewModel: viewModel, output: MyHomeView.Output(goBack: {
             self.goBack()
         }, createCategory: {
@@ -166,7 +177,7 @@ private extension LoginCoordinator {
 
     // FIXME: MOVE this to another coordinator
     func createCategoryView() -> some View {
-        let viewModel = CreateCategoryViewModel()
+        let viewModel = CreateCategoryViewModel(useCase: categoryUseCase)
         return CreateCategoryView(viewModel: viewModel, output: CreateCategoryView.Output(goBack: {
             self.goBack()
         }))
@@ -174,7 +185,11 @@ private extension LoginCoordinator {
 
     // FIXME: MOVE this to another coordinator
     func createExpenseView(expense: Expense?) -> some View {
-        let viewModel = CreateOrEditExpenseViewModel(expense: expense)
+        let viewModel = CreateOrEditExpenseViewModel(
+            expense: expense,
+            useCase: expenseUseCase,
+            logoutService: logoutService
+        )
         return CreateOrEditExpenseView(viewModel: viewModel, output: CreateOrEditExpenseView.Output(goBack: {
             self.goBack()
         }, logout: {
@@ -184,7 +199,7 @@ private extension LoginCoordinator {
 
     // FIXME: MOVE this to another coordinator
     func inviteUserView() -> some View {
-        let viewModel = InviteUserViewModel()
+        let viewModel = InviteUserViewModel(useCase: homeUseCase)
         return InviteUserView(viewModel: viewModel, output: InviteUserView.Output(goBack: {
             self.goBack()
         }, logout: {

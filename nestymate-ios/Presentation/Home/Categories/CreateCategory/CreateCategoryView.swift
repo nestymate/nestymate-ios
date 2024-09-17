@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct CreateCategoryView: View {
-    @ObservedObject var viewModel: CreateCategoryViewModel = .init()
+    @ObservedObject var viewModel: CreateCategoryViewModel
     struct Output {
         var goBack: () -> Void
     }
@@ -33,5 +33,6 @@ struct CreateCategoryView: View {
 }
 
 #Preview {
-    CreateCategoryView(output: CreateCategoryView.Output(goBack: {}))
+    CreateCategoryView(viewModel: CreateCategoryViewModel(useCase: CategoryUseCaseImpl()),
+                       output: CreateCategoryView.Output(goBack: {}))
 }

@@ -8,8 +8,8 @@
 import Foundation
 
 class CreateOrEditExpenseViewModel: ObservableObject {
-    private let useCase: ExpenseUseCase = ExpenseUseCaseImpl()
-    private let logoutService = LogoutService()
+    private let useCase: ExpenseUseCase
+    private let logoutService: LogoutService
     @Published var title: FieldModel = .init(value: "", fieldType: .name)
     @Published var description: FieldModel = .init(value: "", fieldType: .description)
     @Published var amount: FieldModel = .init(value: "", fieldType: .amount)
@@ -20,9 +20,11 @@ class CreateOrEditExpenseViewModel: ObservableObject {
     var pageTitle: String = ""
     private var expense: Expense?
 
-    init(expense: Expense?) {
+    init(expense: Expense?, useCase: ExpenseUseCase, logoutService: LogoutService) {
         isEdit = expense != nil
         self.expense = expense
+        self.useCase = useCase
+        self.logoutService = logoutService
         setupExpense()
         setupTitles()
     }

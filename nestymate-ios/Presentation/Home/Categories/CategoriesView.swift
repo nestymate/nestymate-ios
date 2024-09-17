@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct CategoriesView: View {
-    @ObservedObject var viewModel: CategoryViewModel = .init()
+    @ObservedObject var viewModel: CategoryViewModel
     @State private var viewDidLoad = false
     @State private var categories: [Category] = []
     struct Output {
@@ -50,5 +50,6 @@ struct CategoriesView: View {
 }
 
 #Preview {
-    CategoriesView(output: CategoriesView.Output(createCategory: {}))
+    CategoriesView(viewModel: CategoryViewModel(useCase: CategoryUseCaseImpl()), 
+                   output: CategoriesView.Output(createCategory: {}))
 }

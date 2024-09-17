@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct MainScreenView: View {
-    var viewModel: MainScreenViewModel = .init()
+    var viewModel: MainScreenViewModel
     @EnvironmentObject var appCoordinator: AppCoordinator
     struct Output {}
     var output: Output
@@ -71,5 +71,5 @@ struct MainScreenView: View {
 }
 
 #Preview {
-    MainScreenView(output: MainScreenView.Output())
+    MainScreenView(viewModel: MainScreenViewModel(useCase: MainScreenUseCaseImpl()), output: MainScreenView.Output())
 }

@@ -8,5 +8,8 @@
 import Foundation
 
 class MainScreenViewModel {
-    let useCase: MainScreenUseCase = MainScreenUseCaseImpl()
+    let useCase: MainScreenUseCase
+    init(useCase: MainScreenUseCase) {
+        self.useCase = useCase
+    }
 }
