@@ -17,6 +17,7 @@ struct ProfileView: View {
     var output: Output
     var body: some View {
         VStack {
+            Spacer()
             ActionButton(title: "Logout", shouldEnableButton: true) {
                 viewModel.logout {
                     self.output.goToLogin()
@@ -28,7 +29,11 @@ struct ProfileView: View {
                     self.output.goToInviteUser()
                 }
             }
+            Spacer()
+            
         }
+        .padding()
+        .background(ColorManager.backgroundColour)
     }
 }
 

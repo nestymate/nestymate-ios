@@ -30,10 +30,10 @@ struct MyHomeView: View {
             .onAppear {
                 UISegmentedControl.appearance().tintColor = ColorManager.backgroundColourUIKit
             }
-            
+
             if tab == 0 {
                 let viewModel = CreateOrEditHomeViewModel(
-                    useCase: viewModel.homeUseCase ,
+                    useCase: viewModel.homeUseCase,
                     isEdit: true
                 )
                 CreateOrEditHomeView(
@@ -47,8 +47,9 @@ struct MyHomeView: View {
                 CategoriesView(
                     viewModel: CategoryViewModel(useCase: viewModel.categoryUseCase),
                     output: CategoriesView.Output(createCategory: {
-                    output.createCategory()
-                }))
+                        output.createCategory()
+                    })
+                )
             }
         }
         .background(ColorManager.backgroundColour)
@@ -59,6 +60,7 @@ struct MyHomeView: View {
 #Preview {
     MyHomeView(viewModel: MyHomeViewModel(
         homeUseCase: HomeUseCaseImpl(homeService: HomeServiceImpl()),
-        categoryUseCase: CategoryUseCaseImpl()),
-               output: MyHomeView.Output(goBack: {}, createCategory: {}, logout: {}))
+        categoryUseCase: CategoryUseCaseImpl()
+    ),
+    output: MyHomeView.Output(goBack: {}, createCategory: {}, logout: {}))
 }

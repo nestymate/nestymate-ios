@@ -34,7 +34,10 @@ struct CategoriesView: View {
                     Text(item.name)
                 }
                 .onDelete(perform: viewModel.delete)
+                .listRowBackground(ColorManager.backgroundColour)
+                
             }
+            .scrollContentBackground(.hidden)
             .padding()
         }
         .background(ColorManager.backgroundColour)
@@ -50,6 +53,6 @@ struct CategoriesView: View {
 }
 
 #Preview {
-    CategoriesView(viewModel: CategoryViewModel(useCase: CategoryUseCaseImpl()), 
+    CategoriesView(viewModel: CategoryViewModel(useCase: CategoryUseCaseImpl()),
                    output: CategoriesView.Output(createCategory: {}))
 }

@@ -41,14 +41,20 @@ struct ExpensesView: View {
                         Text(item.title ?? "")
                         Spacer()
                         Text(String(item.amount))
-                    }.onTapGesture {
+                    }
+                    .onTapGesture {
                         self.output.goToEditExpense(item)
                     }
                 }
                 .onDelete(perform: viewModel.delete)
+                .listRowBackground(ColorManager.backgroundColour)
+                
             }
+            .scrollContentBackground(.hidden)
+           
             .padding()
         }
+        .background(ColorManager.backgroundColour)
         .onAppear {
             viewModel.getExpenses { expenses, shouldLogout in
                 guard !shouldLogout else { return self.output.logout() }

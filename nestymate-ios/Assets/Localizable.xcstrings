@@ -12,16 +12,44 @@
       }
     },
     "An error occurred, please try again" : {
-
+      "localizations" : {
+        "el" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ενα λάθος προέκυψε"
+          }
+        }
+      }
     },
     "Categories" : {
-
+      "localizations" : {
+        "el" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Κατηγορίες"
+          }
+        }
+      }
     },
     "Create" : {
-
+      "localizations" : {
+        "el" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Δημιουργία"
+          }
+        }
+      }
     },
     "Create Category" : {
-
+      "localizations" : {
+        "el" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Δημιουργια κατηγορίας"
+          }
+        }
+      }
     },
     "Expenses" : {
       "localizations" : {
@@ -34,7 +62,14 @@
       }
     },
     "Invite User" : {
-
+      "localizations" : {
+        "el" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Πρόσκληση Φίλου"
+          }
+        }
+      }
     },
     "login" : {
       "extractionState" : "manual",
@@ -54,7 +89,14 @@
       }
     },
     "My Home" : {
-
+      "localizations" : {
+        "el" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Το σπίτι μου"
+          }
+        }
+      }
     },
     "New Home" : {
       "extractionState" : "stale",
@@ -89,13 +131,34 @@
       }
     },
     "No internet connection" : {
-
+      "localizations" : {
+        "el" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Δεν εχει σύνδεση στο internet"
+          }
+        }
+      }
     },
     "Please choose from" : {
-
+      "localizations" : {
+        "el" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Παρακαλώ επιλεξτε"
+          }
+        }
+      }
     },
     "Please select:" : {
-
+      "localizations" : {
+        "el" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Παρακαλώ επιλεξτε"
+          }
+        }
+      }
     },
     "Profile" : {
       "localizations" : {
