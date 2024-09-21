@@ -24,14 +24,14 @@ struct ExpensesView: View {
             Button(action: {
                 self.output.goToMyHome()
             }, label: {
-                Text("My Home").font(FontManager.title)
+                Text(String(localized: "my_home")).font(FontManager.title)
             })
             HStack {
                 Spacer()
                 Button {
                     self.output.goToCreateExpense()
                 } label: {
-                    Text("Create")
+                    Text(String(localized: "create"))
                 }
             }
             .padding()
@@ -48,10 +48,8 @@ struct ExpensesView: View {
                 }
                 .onDelete(perform: viewModel.delete)
                 .listRowBackground(ColorManager.backgroundColour)
-                
             }
             .scrollContentBackground(.hidden)
-           
             .padding()
         }
         .background(ColorManager.backgroundColour)

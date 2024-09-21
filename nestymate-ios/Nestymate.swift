@@ -16,7 +16,7 @@ struct Nestymate: App {
             NavigationStack(path: $appCoordinator.path) {
                 appCoordinator.view()
                     .navigationDestination(
-                        for: LoginCoordinator.self
+                        for: MainCoordinator.self
                     ) { coordinator in
                         coordinator.view()
                     }

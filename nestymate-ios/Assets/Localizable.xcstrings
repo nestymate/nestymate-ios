@@ -11,62 +11,338 @@
         }
       }
     },
-    "An error occurred, please try again" : {
+    "address" : {
       "localizations" : {
         "el" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Ενα λάθος προέκυψε"
+            "value" : "Διεύθυνση"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Address"
           }
         }
       }
     },
-    "Categories" : {
+    "amount" : {
+      "localizations" : {
+        "el" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ποσό"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Amount"
+          }
+        }
+      }
+    },
+    "birthday" : {
+      "localizations" : {
+        "el" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Γενέθλια"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Birthday"
+          }
+        }
+      }
+    },
+    "categories" : {
       "localizations" : {
         "el" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Κατηγορίες"
           }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Categories"
+          }
         }
       }
     },
-    "Create" : {
+    "create" : {
       "localizations" : {
         "el" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Δημιουργία"
           }
-        }
-      }
-    },
-    "Create Category" : {
-      "localizations" : {
-        "el" : {
+        },
+        "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Δημιουργια κατηγορίας"
+            "value" : "Create"
           }
         }
       }
     },
-    "Expenses" : {
+    "create_category" : {
       "localizations" : {
         "el" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Δαπάνες"
+            "value" : "Δημιουργία κατηγορίας"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Create Category"
           }
         }
       }
     },
-    "Invite User" : {
+    "create_expense" : {
       "localizations" : {
         "el" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Πρόσκληση Φίλου"
+            "value" : "Δημιουργία Εξόδου"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Create Expense"
+          }
+        }
+      }
+    },
+    "create_home" : {
+      "localizations" : {
+        "el" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Δημιουργία Σπιτίου"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Create Home"
+          }
+        }
+      }
+    },
+    "description" : {
+      "localizations" : {
+        "el" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Περιγραφή"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Description"
+          }
+        }
+      }
+    },
+    "edit_expense" : {
+      "localizations" : {
+        "el" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Επεξεργασία εξόδου"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Edit Expense"
+          }
+        }
+      }
+    },
+    "edit_home" : {
+      "localizations" : {
+        "el" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Επεξεργασία Σπιτίου"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Edit Home"
+          }
+        }
+      }
+    },
+    "email" : {
+      "localizations" : {
+        "el" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Email"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Email"
+          }
+        }
+      }
+    },
+    "error" : {
+      "localizations" : {
+        "el" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Παρουσιάστηκε σφάλμα, δοκιμάστε ξανά"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "An error occurred, please try again"
+          }
+        }
+      }
+    },
+    "expenses" : {
+      "localizations" : {
+        "el" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Εξοδα"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Expenses"
+          }
+        }
+      }
+    },
+    "female" : {
+      "localizations" : {
+        "el" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Γυναίκα"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Female"
+          }
+        }
+      }
+    },
+    "fieldTypeEmptDateyMessage" : {
+      "localizations" : {
+        "el" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Το πεδίο γενεθλίων δεν μπορεί να είναι ίδιο με σήμερα\n"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Birthday field can not be same as today"
+          }
+        }
+      }
+    },
+    "fieldTypeEmptyMessage" : {
+      "localizations" : {
+        "el" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Αυτό δεν μπορεί να είναι κενό\n"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "This can not be empty"
+          }
+        }
+      }
+    },
+    "fill_all_fields" : {
+      "localizations" : {
+        "el" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Παρακαλώ συμπληρώστε όλα τα πεδία\n"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Please fill all the fields"
+          }
+        }
+      }
+    },
+    "gender" : {
+      "localizations" : {
+        "el" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Γένος"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Gender"
+          }
+        }
+      }
+    },
+    "invite" : {
+      "localizations" : {
+        "el" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Πρόσκληση"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Invite"
+          }
+        }
+      }
+    },
+    "invite_user" : {
+      "localizations" : {
+        "el" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Πρόσκληση χρήστη\n"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Invite User"
           }
         }
       }
@@ -88,132 +364,327 @@
         }
       }
     },
-    "My Home" : {
+    "logout" : {
+      "localizations" : {
+        "el" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Logout"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Logout"
+          }
+        }
+      }
+    },
+    "male" : {
+      "localizations" : {
+        "el" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Αντρας"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Male"
+          }
+        }
+      }
+    },
+    "my_home" : {
       "localizations" : {
         "el" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Το σπίτι μου"
           }
-        }
-      }
-    },
-    "New Home" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "el" : {
+        },
+        "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Νέο Σπιτι"
+            "value" : "My Home"
           }
         }
       }
     },
-    "New to Nestymate?" : {
+    "name" : {
       "localizations" : {
         "el" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Δεν έχετε λογαριασμό στο Nestymate;"
+            "value" : "Ονομα"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Name"
           }
         }
       }
     },
-    "No internet" : {
-      "extractionState" : "stale",
+    "new_to_nestymate" : {
       "localizations" : {
         "el" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Δεν υπαρχει συνδεση στο διαδυκτιο"
+            "value" : "Νέος στο Nestymate;"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "New to Nestymate?"
           }
         }
       }
     },
-    "No internet connection" : {
+    "no_internet" : {
       "localizations" : {
         "el" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Δεν εχει σύνδεση στο internet"
+            "value" : "Δεν υπάρχει σύνδεση στο διαδίκτυο\n"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No internet connection"
           }
         }
       }
     },
-    "Please choose from" : {
+    "other" : {
       "localizations" : {
         "el" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Παρακαλώ επιλεξτε"
+            "value" : "Αλλο"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Other"
           }
         }
       }
     },
-    "Please select:" : {
+    "password" : {
       "localizations" : {
         "el" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Παρακαλώ επιλεξτε"
+            "value" : "Password"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Password"
           }
         }
       }
     },
-    "Profile" : {
+    "password_not_match" : {
       "localizations" : {
         "el" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Προφιλ"
+            "value" : "Ο κωδικός πρόσβασης και ο κωδικός επανάληψης δεν είναι ο ίδιος"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "The password and the repeat password are not the same"
           }
         }
       }
     },
-    "Show Expenses" : {
-      "extractionState" : "stale",
+    "password_not_valid" : {
       "localizations" : {
         "el" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Δαπανες"
+            "value" : "Στον κωδικό πρόσβασης θα πρέπει να χρησιμοποιήσετε κεφαλαία, πεζά, αριθμό και έναν ειδικό χαρακτήρα"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "In the password you should use uppercase, lowecase, number and a special character "
           }
         }
       }
     },
-    "Sign up" : {
+    "please_choose" : {
       "localizations" : {
         "el" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Εγγραφη"
+            "value" : "Please choose from"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Please choose from"
           }
         }
       }
     },
-    "Sign up here" : {
+    "please_select" : {
       "localizations" : {
         "el" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Εγγραφείτε εδώ"
+            "value" : "Επιλέξτε:\n"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Please select:"
           }
         }
       }
     },
-    "Something happen please try again" : {
-      "extractionState" : "stale",
+    "profile" : {
       "localizations" : {
         "el" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Καποιο σφαλμα συνέβη, παρακαλω προσπαθηστε αργότερα"
+            "value" : "Profile"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Profile"
           }
         }
       }
     },
-    "Username" : {
-      "extractionState" : "manual",
+    "repeat_password" : {
+      "localizations" : {
+        "el" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "κωδικός επανάληψης"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Repeat password"
+          }
+        }
+      }
+    },
+    "save" : {
+      "localizations" : {
+        "el" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Αποθήκευση"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Save"
+          }
+        }
+      }
+    },
+    "select_birthday" : {
+      "localizations" : {
+        "el" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Επιλέξτε τα γενέθλιά σας\n"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Please select your birthday"
+          }
+        }
+      }
+    },
+    "signup" : {
+      "localizations" : {
+        "el" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Εγγραφείτε"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sign up"
+          }
+        }
+      }
+    },
+    "signup_here" : {
+      "localizations" : {
+        "el" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Εγγραφείτε εδώ\n"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sign up here"
+          }
+        }
+      }
+    },
+    "surname" : {
+      "localizations" : {
+        "el" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Επώνυμο"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Surname"
+          }
+        }
+      }
+    },
+    "update" : {
+      "localizations" : {
+        "el" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ενημέρωση"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Update"
+          }
+        }
+      }
+    },
+    "username" : {
       "localizations" : {
         "el" : {
           "stringUnit" : {

@@ -12,8 +12,8 @@ struct SelectionPickerView: View {
     var fieldModel: Binding<FieldModel>
     var body: some View {
         HStack {
-            Text("Please select:")
-            Picker("Please choose from", selection: fieldModel.value) {
+            Text(String(localized: "please_select"))
+            Picker(String(localized: "please_choose"), selection: fieldModel.value) {
                 ForEach(options, id: \.self) {
                     Text($0)
                 }

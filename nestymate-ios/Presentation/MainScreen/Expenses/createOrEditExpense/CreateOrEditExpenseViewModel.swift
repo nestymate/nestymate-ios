@@ -70,7 +70,7 @@ class CreateOrEditExpenseViewModel: ObservableObject {
     }
 
     private func setupTitles() {
-        buttonTitle = isEdit ? "Update" : "Save"
-        pageTitle = isEdit ? "Edit Expense" : "Create Expense"
+        buttonTitle = isEdit ? String(localized: "update") : String(localized: "save")
+        pageTitle = isEdit ? String(localized: "edit_expense") : String(localized: "create_expense")
     }
 }

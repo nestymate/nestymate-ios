@@ -22,16 +22,11 @@ struct LoginView: View {
             set: { self.viewModel.shouldShow = $0 }
         )) {
             VStack {
-                Text("login").font(FontManager.title)
-                SingleTextField(fieldModel: $viewModel.username).onSubmit {
-                    _ = viewModel.username.onSubmitError()
-                }
-                PasswordTextField(fieldModel: $viewModel.password).onSubmit {
-                    _ = viewModel.password.onSubmitError()
-                }
-
+                Text(String(localized: "login")).font(FontManager.title)
+                SingleTextField(fieldModel: $viewModel.username)
+                PasswordTextField(fieldModel: $viewModel.password)
                 ActionButton(
-                    title: "login",
+                    title: String(localized: "login"),
                     shouldEnableButton: viewModel.shouldEnableButton
                 ) {
                     viewModel.login { home in
@@ -39,11 +34,11 @@ struct LoginView: View {
                     }
                 }
                 HStack {
-                    Text("New to Nestymate?").font(FontManager.button)
+                    Text(String(localized: "new_to_nestymate")).font(FontManager.button)
                     Button {
                         self.output.goToSignUp()
                     } label: {
-                        Text("Sign up here")
+                        Text(String(localized: "signup_here"))
                             .foregroundColor(ColorManager.linkColour)
                             .underline()
                             .font(FontManager.button)

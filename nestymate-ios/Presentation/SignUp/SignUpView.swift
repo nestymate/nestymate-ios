@@ -22,43 +22,76 @@ struct SignUpView: View {
         )) {
             ScrollView {
                 VStack {
-                    Text("Sign up").font(FontManager.title)
-                    SingleTextField(fieldModel: $viewModel.name)
-                        .onSubmit {
-                            _ = viewModel.name.onSubmitError()
-                        }
-                    SingleTextField(fieldModel: $viewModel.surname)
-                        .onSubmit {
-                            _ = viewModel.surname.onSubmitError()
-                        }
-                    DatePickerUIView(title: "Please select your birthday", fieldModel: $viewModel.birthdate)
-                    SelectionPickerView(options: viewModel.genderOptions, fieldModel: $viewModel.gender)
-                    SingleTextField(fieldModel: $viewModel.username)
-                        .onSubmit {
-                            _ = viewModel.username.onSubmitError()
-                        }
-                    PasswordTextField(fieldModel: $viewModel.password).onSubmit {
-                        _ = viewModel.password.onSubmitError()
-                    }
-                    PasswordTextField(fieldModel: $viewModel.repeatPassword)
-                        .onSubmit {
-                            _ = viewModel.repeatPassword.onSubmitError()
-                        }
-                    ActionButton(
-                        title: "Sign up",
-                        shouldEnableButton: viewModel.shouldEnableButton
-                    ) {
-                        viewModel.signUp { home in
-                            home == nil ? self.output.goToCreateHome() : self.output.goToMainScreen()
-                        }
-                    }
+                    title
+                    name
+                    surname
+                    birthday
+                    gender
+                    username
+                    password
+                    repeatPassword
+                    button
                     Spacer()
                 }
             }
+//            .onTapGesture {
+//                let keyWindow = UIApplication.shared.connectedScenes
+//                    .filter { $0.activationState == .foregroundActive }
+//                    .map { $0 as? UIWindowScene }
+//                    .compactMap { $0 }
+//                    .first?.windows
+//                    .filter { $0.isKeyWindow }.first
+//                keyWindow?.endEditing(true)
+//            }
             .background(ColorManager.backgroundColour)
             .hiddenNavigationBarStyle()
             .alert(item: $viewModel.error) { error in
                 error.alert
+            }
+        }
+    }
+}
+
+private extension SignUpView {
+    var title: some View {
+        Text(String(localized: "signup")).font(FontManager.title)
+    }
+
+    var name: some View {
+        SingleTextField(fieldModel: $viewModel.name)
+    }
+
+    var surname: some View {
+        SingleTextField(fieldModel: $viewModel.surname)
+    }
+
+    var birthday: some View {
+        DatePickerUIView(title: String(localized: "select_birthday"), fieldModel: $viewModel.birthdate)
+    }
+
+    var gender: some View {
+        SelectionPickerView(options: viewModel.genderOptions, fieldModel: $viewModel.gender)
+    }
+
+    var username: some View {
+        SingleTextField(fieldModel: $viewModel.username)
+    }
+
+    var password: some View {
+        PasswordTextField(fieldModel: $viewModel.password)
+    }
+
+    var repeatPassword: some View {
+        PasswordTextField(fieldModel: $viewModel.repeatPassword)
+    }
+
+    var button: some View {
+        ActionButton(
+            title: String(localized: "signup"),
+            shouldEnableButton: viewModel.shouldEnableButton
+        ) {
+            viewModel.signUp { home in
+                home == nil ? self.output.goToCreateHome() : self.output.goToMainScreen()
             }
         }
     }

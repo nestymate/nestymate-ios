@@ -24,6 +24,7 @@ struct PasswordTextField: View {
                             prompt: Text(fieldModel.fieldType.wrappedValue.placeHolder)
                                 .foregroundColor(ColorManager.separatorColour)
                         )
+                        .textContentType(.none)
                         .textInputAutocapitalization(.never)
                         .disableAutocorrection(true)
                         Divider()
