@@ -66,28 +66,28 @@ private extension ExpensesCoordinator {
         let viewModel = ExpensesViewModel(useCase: expenseUseCase, logoutService: logoutService)
         return ExpensesView(viewModel: viewModel, output: ExpensesView.Output(goToMyHome: {
             self.push(
-                LoginCoordinator(
+                MainCoordinator(
                     navigationPath: self.$navigationPath,
                     page: .myHome
                 )
             )
         }, goToCreateExpense: {
             self.push(
-                LoginCoordinator(
+                MainCoordinator(
                     navigationPath: self.$navigationPath,
                     page: .createExpense(nil)
                 )
             )
         }, goToEditExpense: { expense in
             self.push(
-                LoginCoordinator(
+                MainCoordinator(
                     navigationPath: self.$navigationPath,
                     page: .createExpense(expense)
                 )
             )
         }, logout: {
             self.push(
-                LoginCoordinator(
+                MainCoordinator(
                     navigationPath: self.$navigationPath,
                     page: .login
                 )

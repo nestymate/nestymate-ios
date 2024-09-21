@@ -19,7 +19,7 @@ struct CategoriesView: View {
     var body: some View {
         VStack {
             HStack(alignment: .center) {
-                Text("Categories").font(FontManager.title)
+                Text(String(localized: "categories")).font(FontManager.title)
                 Spacer()
                 Button {
                     self.output.createCategory()
@@ -35,7 +35,6 @@ struct CategoriesView: View {
                 }
                 .onDelete(perform: viewModel.delete)
                 .listRowBackground(ColorManager.backgroundColour)
-                
             }
             .scrollContentBackground(.hidden)
             .padding()

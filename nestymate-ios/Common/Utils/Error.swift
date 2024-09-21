@@ -13,13 +13,25 @@ enum Error: Identifiable {
 
     case noNetwork
     case badServerResponse
+    case fillAllValues
+    case passwordDoNotMatch
+    case passwordNotValid
+    case birthdayNotValid
 
     var alert: Alert {
         switch self {
         case .noNetwork:
-            Alert(title: Text("No internet connection"))
+            Alert(title: Text(String(localized: "no_internet")))
         case .badServerResponse:
-            Alert(title: Text("An error occurred, please try again"))
+            Alert(title: Text(String(localized: "error")))
+        case .fillAllValues:
+            Alert(title: Text(String(localized: "fill_all_fields")))
+        case .passwordDoNotMatch:
+            Alert(title: Text(String(localized: "password_not_match")))
+        case .passwordNotValid:
+            Alert(title: Text(String(localized: "password_not_valid")))
+        case .birthdayNotValid:
+            Alert(title: Text(String(localized: "fieldTypeEmptDateyMessage")))
         }
     }
 }

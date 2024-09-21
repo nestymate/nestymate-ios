@@ -17,13 +17,10 @@ struct InviteUserView: View {
     var output: Output
     var body: some View {
         VStack {
-            Text("Invite User").font(FontManager.title)
+            Text(String(localized: "invite_user")).font(FontManager.title)
             SingleTextField(fieldModel: $viewModel.email)
-                .onSubmit {
-                    _ = viewModel.email.onSubmitError()
-                }
             ActionButton(
-                title: "Invite",
+                title: String(localized: "invite"),
                 shouldEnableButton: viewModel.shouldEnableButton
             ) {
                 viewModel.inviteUser { shouldLogout in

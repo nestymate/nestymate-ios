@@ -84,7 +84,7 @@ class CreateOrEditHomeViewModel: ObservableObject {
     }
 
     private func setupTitles() {
-        buttonTitle = isEdit ? "Update" : "Save"
-        pageTitle = isEdit ? "Edit Home" : "Create Home"
+        buttonTitle = isEdit ? String(localized: "update") : String(localized: "save")
+        pageTitle = isEdit ? String(localized: "edit_home") : String(localized: "create_home")
     }
 }

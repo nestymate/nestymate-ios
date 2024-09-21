@@ -9,7 +9,7 @@ import Foundation
 import SwiftUI
 
 protocol SignUpUseCase {
-    func isSignupValid(user: User) -> Bool
+    func shouldProceedToSignUp(user: User) -> (Bool, Error?)
     func signUp(user: User, completionHandler: @escaping (Error?) -> Void)
     func checkHomeForUser(completionHandler: @escaping (Home?, Error?, Int?) -> Void)
 }
@@ -23,8 +23,17 @@ class SignUpUseCaseImpl: SignUpUseCase {
         self.homeService = homeService
     }
 
-    func isSignupValid(user: User) -> Bool {
-        user.isValid && user.isPasswordsTheSame
+    func shouldProceedToSignUp(user: User) -> (Bool, Error?) {
+        if !user.isPasswordValid {
+            return (false, .passwordNotValid)
+        } else if !user.isPasswordsTheSame {
+            return (false, .passwordDoNotMatch)
+        } else if user.birthday == DateUtils.getToday() {
+            return (false, .birthdayNotValid)
+        } else if !user.isValid {
+            return (false, .fillAllValues)
+        }
+        return (true, nil)
     }
 
     func signUp(user: User, completionHandler: @escaping (Error?) -> Void) {
