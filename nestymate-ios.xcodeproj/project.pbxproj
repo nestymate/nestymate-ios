@@ -13,7 +13,7 @@
 		0106B60F2BE18A5E0024AFCB /* LoginService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0106B60E2BE18A5E0024AFCB /* LoginService.swift */; };
 		0106B6142BE191640024AFCB /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0106B6132BE191640024AFCB /* LoginViewModel.swift */; };
 		0106B6162BE191B50024AFCB /* LoginUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0106B6152BE191B50024AFCB /* LoginUseCase.swift */; };
-		0106B6192BE195F10024AFCB /* LoginCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0106B6182BE195F10024AFCB /* LoginCoordinator.swift */; };
+		0106B6192BE195F10024AFCB /* MainCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0106B6182BE195F10024AFCB /* MainCoordinator.swift */; };
 		0106B61B2BE811B30024AFCB /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0106B61A2BE811B30024AFCB /* AppCoordinator.swift */; };
 		0106B61D2BE811E60024AFCB /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0106B61C2BE811E60024AFCB /* MainView.swift */; };
 		0106B6202BFA5CC30024AFCB /* CreateOrEditHomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0106B61F2BFA5CC30024AFCB /* CreateOrEditHomeView.swift */; };
@@ -72,12 +72,12 @@
 		01D488362C9718460024A7F2 /* ExpenseUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01D488352C9718460024A7F2 /* ExpenseUseCase.swift */; };
 		01D488382C9718DC0024A7F2 /* ExpenseService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01D488372C9718DC0024A7F2 /* ExpenseService.swift */; };
 		01D4883B2C9721B00024A7F2 /* CreateOrEditExpenseViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01D4883A2C9721B00024A7F2 /* CreateOrEditExpenseViewModel.swift */; };
-		01D4883D2C9721BB0024A7F2 /* CreateOrEditExpenseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01D4883C2C9721BB0024A7F2 /* CreateOrEditExpenseView.swift */; };
 		01D4883F2C9736700024A7F2 /* CreateOrEditExpenseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01D4883E2C9736700024A7F2 /* CreateOrEditExpenseView.swift */; };
 		01D7922C2C8D985D00EDA9D2 /* MyHomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01D7922B2C8D985D00EDA9D2 /* MyHomeView.swift */; };
 		01D7922E2C8D9AFD00EDA9D2 /* ExpensesCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01D7922D2C8D9AFD00EDA9D2 /* ExpensesCoordinator.swift */; };
 		01D792302C8D9F5300EDA9D2 /* MyHomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01D7922F2C8D9F5200EDA9D2 /* MyHomeViewModel.swift */; };
 		01D792342C8DA52D00EDA9D2 /* CategoriesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01D792332C8DA52D00EDA9D2 /* CategoriesView.swift */; };
+		01D9A75E2CA872290081A181 /* DateUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01D9A75D2CA872270081A181 /* DateUtils.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -104,7 +104,7 @@
 		0106B60E2BE18A5E0024AFCB /* LoginService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginService.swift; sourceTree = "<group>"; };
 		0106B6132BE191640024AFCB /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
 		0106B6152BE191B50024AFCB /* LoginUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginUseCase.swift; sourceTree = "<group>"; };
-		0106B6182BE195F10024AFCB /* LoginCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginCoordinator.swift; sourceTree = "<group>"; };
+		0106B6182BE195F10024AFCB /* MainCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainCoordinator.swift; sourceTree = "<group>"; };
 		0106B61A2BE811B30024AFCB /* AppCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCoordinator.swift; sourceTree = "<group>"; };
 		0106B61C2BE811E60024AFCB /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		0106B61E2BFA5BA20024AFCB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -173,6 +173,7 @@
 		01D7922D2C8D9AFD00EDA9D2 /* ExpensesCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpensesCoordinator.swift; sourceTree = "<group>"; };
 		01D7922F2C8D9F5200EDA9D2 /* MyHomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyHomeViewModel.swift; sourceTree = "<group>"; };
 		01D792332C8DA52D00EDA9D2 /* CategoriesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoriesView.swift; sourceTree = "<group>"; };
+		01D9A75D2CA872270081A181 /* DateUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateUtils.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -241,7 +242,7 @@
 		0106B6172BE195DC0024AFCB /* Coordinators */ = {
 			isa = PBXGroup;
 			children = (
-				0106B6182BE195F10024AFCB /* LoginCoordinator.swift */,
+				0106B6182BE195F10024AFCB /* MainCoordinator.swift */,
 				0106B61A2BE811B30024AFCB /* AppCoordinator.swift */,
 				01A606202C3EC86200B7622E /* HomeScreenCoordinator.swift */,
 				01D7922D2C8D9AFD00EDA9D2 /* ExpensesCoordinator.swift */,
@@ -364,6 +365,7 @@
 		01B6DF9C2BD6A3C400E2983E /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				01D9A75D2CA872270081A181 /* DateUtils.swift */,
 				01B6DF982BD6A1D500E2983E /* FontManager.swift */,
 				01B6DF9D2BD6A3D900E2983E /* ColorManager.swift */,
 				013504842BD900460000C859 /* PaddingManager.swift */,
@@ -586,7 +588,7 @@
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
 				LastSwiftUpdateCheck = 1520;
-				LastUpgradeCheck = 1520;
+				LastUpgradeCheck = 1600;
 				TargetAttributes = {
 					01A1B4F62BD10D8D0053BE3A = {
 						CreatedOnToolsVersion = 15.2;
@@ -704,7 +706,6 @@
 				0106B6052BE1851B0024AFCB /* MainScreenView.swift in Sources */,
 				0106B6202BFA5CC30024AFCB /* CreateOrEditHomeView.swift in Sources */,
 				012815992C484128001FFA2D /* Error.swift in Sources */,
-				01D4883D2C9721BB0024A7F2 /* CreateOrEditExpenseView.swift in Sources */,
 				01D7922C2C8D985D00EDA9D2 /* MyHomeView.swift in Sources */,
 				01A606232C3F207500B7622E /* ActivityIndicatorIView.swift in Sources */,
 				0128159D2C485607001FFA2D /* APIResponse.swift in Sources */,
@@ -714,6 +715,7 @@
 				01D4882B2C96F13D0024A7F2 /* CategoryViewModel.swift in Sources */,
 				018A04752BD114660051A3A4 /* LoginView.swift in Sources */,
 				0106B60F2BE18A5E0024AFCB /* LoginService.swift in Sources */,
+				01D9A75E2CA872290081A181 /* DateUtils.swift in Sources */,
 				01A606272C3FC41E00B7622E /* SignUpView.swift in Sources */,
 				0106B6142BE191640024AFCB /* LoginViewModel.swift in Sources */,
 				01A606292C3FC5ED00B7622E /* SignUpViewModel.swift in Sources */,
@@ -733,7 +735,7 @@
 				0106B6162BE191B50024AFCB /* LoginUseCase.swift in Sources */,
 				01D488322C96F7ED0024A7F2 /* CreateCategoryViewModel.swift in Sources */,
 				01A606332C4017A900B7622E /* String+Extension.swift in Sources */,
-				0106B6192BE195F10024AFCB /* LoginCoordinator.swift in Sources */,
+				0106B6192BE195F10024AFCB /* MainCoordinator.swift in Sources */,
 				01D488182C95F5840024A7F2 /* HomeUseCase.swift in Sources */,
 				0106B6302BFA79450024AFCB /* MainScreenUseCase.swift in Sources */,
 				01D792302C8D9F5300EDA9D2 /* MyHomeViewModel.swift in Sources */,
@@ -783,6 +785,7 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
@@ -846,6 +849,7 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
@@ -966,7 +970,6 @@
 		01A1B51F2BD10D930053BE3A /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
@@ -986,7 +989,6 @@
 		01A1B5202BD10D930053BE3A /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
@@ -1006,7 +1008,6 @@
 		01A1B5222BD10D930053BE3A /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 4L623JD48M;
@@ -1024,7 +1025,6 @@
 		01A1B5232BD10D930053BE3A /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 4L623JD48M;

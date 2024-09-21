@@ -1,5 +1,5 @@
 //
-//  LoginCoordinator.swift
+//  MainCoordinator.swift
 //  nestymate-ios
 //
 //  Created by Selini Kyriazidou on 1/5/24.
@@ -19,7 +19,7 @@ enum LoginPage {
     case inviteUser
 }
 
-final class LoginCoordinator: Hashable {
+final class MainCoordinator: Hashable {
     @Binding var navigationPath: NavigationPath
     private let loginService = LoginServiceImpl()
     private let homeService = HomeServiceImpl()
@@ -78,14 +78,14 @@ final class LoginCoordinator: Hashable {
     }
 
     static func == (
-        lhs: LoginCoordinator,
-        rhs: LoginCoordinator
+        lhs: MainCoordinator,
+        rhs: MainCoordinator
     ) -> Bool {
         lhs.id == rhs.id
     }
 }
 
-private extension LoginCoordinator {
+private extension MainCoordinator {
     func loginView() -> some View {
         let viewModel = LoginViewModel(useCase: LoginUseCaseImpl(service: loginService, homeService: homeService))
         let loginView = LoginView(
@@ -94,7 +94,7 @@ private extension LoginCoordinator {
             .init(
                 goToMainScreen: {
                     self.push(
-                        LoginCoordinator(
+                        MainCoordinator(
                             navigationPath: self.$navigationPath,
                             page: .mainScreen
                         )
@@ -102,14 +102,14 @@ private extension LoginCoordinator {
                 },
                 goToCreateHome: {
                     self.push(
-                        LoginCoordinator(
+                        MainCoordinator(
                             navigationPath: self.$navigationPath,
                             page: .createHome
                         )
                     )
                 }, goToSignUp: {
                     self.push(
-                        LoginCoordinator(
+                        MainCoordinator(
                             navigationPath: self.$navigationPath,
                             page: .signup
                         )
@@ -129,7 +129,7 @@ private extension LoginCoordinator {
         let viewModel = CreateOrEditHomeViewModel(useCase: HomeUseCaseImpl(homeService: homeService), isEdit: false)
         return CreateOrEditHomeView(viewModel: viewModel, output: CreateOrEditHomeView.Output(goToMainScreen: {
             self.push(
-                LoginCoordinator(
+                MainCoordinator(
                     navigationPath: self.$navigationPath,
                     page: .mainScreen
                 )
@@ -143,14 +143,14 @@ private extension LoginCoordinator {
         let viewModel = SignUpViewModel(useCase: signUpUseCase)
         return SignUpView(viewModel: viewModel, output: SignUpView.Output(goToMainScreen: {
             self.push(
-                LoginCoordinator(
+                MainCoordinator(
                     navigationPath: self.$navigationPath,
                     page: .mainScreen
                 )
             )
         }, goToCreateHome: {
             self.push(
-                LoginCoordinator(
+                MainCoordinator(
                     navigationPath: self.$navigationPath,
                     page: .createHome
                 )
@@ -158,14 +158,13 @@ private extension LoginCoordinator {
         }))
     }
 
-    // FIXME: MOVE this to another coordinator
     func myHomeView() -> some View {
         let viewModel = MyHomeViewModel(homeUseCase: homeUseCase, categoryUseCase: categoryUseCase)
         return MyHomeView(viewModel: viewModel, output: MyHomeView.Output(goBack: {
             self.goBack()
         }, createCategory: {
             self.push(
-                LoginCoordinator(
+                MainCoordinator(
                     navigationPath: self.$navigationPath,
                     page: .createCategory
                 )
@@ -175,7 +174,6 @@ private extension LoginCoordinator {
         }))
     }
 
-    // FIXME: MOVE this to another coordinator
     func createCategoryView() -> some View {
         let viewModel = CreateCategoryViewModel(useCase: categoryUseCase)
         return CreateCategoryView(viewModel: viewModel, output: CreateCategoryView.Output(goBack: {
@@ -183,7 +181,6 @@ private extension LoginCoordinator {
         }))
     }
 
-    // FIXME: MOVE this to another coordinator
     func createExpenseView(expense: Expense?) -> some View {
         let viewModel = CreateOrEditExpenseViewModel(
             expense: expense,
@@ -197,7 +194,6 @@ private extension LoginCoordinator {
         }))
     }
 
-    // FIXME: MOVE this to another coordinator
     func inviteUserView() -> some View {
         let viewModel = InviteUserViewModel(useCase: homeUseCase)
         return InviteUserView(viewModel: viewModel, output: InviteUserView.Output(goBack: {
@@ -209,7 +205,7 @@ private extension LoginCoordinator {
 
     func logout() {
         push(
-            LoginCoordinator(
+            MainCoordinator(
                 navigationPath: $navigationPath,
                 page: .login
             )

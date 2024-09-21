@@ -24,7 +24,7 @@ struct MainScreenView: View {
                 page: .expenses
             ).view()
                 .tabItem {
-                    Label("Expenses", systemImage: "list.dash")
+                    Label(String(localized: "expenses"), systemImage: "list.dash")
                 }
             HomeScreenCoordinator(
                 navigationPath: $appCoordinator.path,
@@ -36,7 +36,7 @@ struct MainScreenView: View {
                 page: .profile
             ).view()
                 .tabItem {
-                    Label("Profile", systemImage: "square.and.pencil")
+                    Label(String(localized: "profile"), systemImage: "square.and.pencil")
                 }
         }
         .onOpenURL { incomingURL in

@@ -24,22 +24,4 @@ struct FieldModel {
         error = fieldType.validate(value: value)
         return error == nil
     }
-
-    mutating func onSubmitError() -> Bool {
-        let isValid = fieldType.validate(value: value)
-        return error == isValid
-    }
-}
-
-// For date
-extension FieldModel {
-    mutating func onValidateDate() -> Bool {
-        error = fieldType.validate(value: dateValue)
-        return error == nil
-    }
-
-    mutating func onSubmitDateError() -> Bool {
-        let isValid = fieldType.validate(value: value)
-        return error == isValid
-    }
 }

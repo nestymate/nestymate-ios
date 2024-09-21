@@ -26,17 +26,9 @@ struct CreateOrEditExpenseView: View {
                 VStack {
                     Text(viewModel.pageTitle).font(FontManager.title)
                     SingleTextField(fieldModel: $viewModel.title)
-                        .onSubmit {
-                            _ = viewModel.title.onSubmitError()
-                        }
                     SingleTextField(fieldModel: $viewModel.description)
-                        .onSubmit {
-                            _ = viewModel.description.onSubmitError()
-                        }
                     SingleTextField(fieldModel: $viewModel.amount)
-                        .onSubmit {
-                            _ = viewModel.amount.onSubmitError()
-                        }
+
                     ActionButton(
                         title: viewModel.buttonTitle,
                         shouldEnableButton: viewModel.shouldEnableButton

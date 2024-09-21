@@ -16,12 +16,9 @@ struct CreateCategoryView: View {
     var output: Output
     var body: some View {
         VStack {
-            Text("Create Category").font(FontManager.title)
+            Text(String(localized: "create_category")).font(FontManager.title)
             SingleTextField(fieldModel: $viewModel.name)
-                .onSubmit {
-                    _ = viewModel.name.onSubmitError()
-                }
-            ActionButton(title: "Create", shouldEnableButton: true) {
+            ActionButton(title: String(localized: "create"), shouldEnableButton: true) {
                 viewModel.createCategory {
                     self.output.goBack()
                 }

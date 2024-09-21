@@ -25,17 +25,8 @@ struct CreateOrEditHomeView: View {
                 VStack {
                     Text(viewModel.pageTitle).font(FontManager.title)
                     SingleTextField(fieldModel: $viewModel.name)
-                        .onSubmit {
-                            _ = viewModel.name.onSubmitError()
-                        }
                     SingleTextField(fieldModel: $viewModel.description)
-                        .onSubmit {
-                            _ = viewModel.description.onSubmitError()
-                        }
                     SingleTextField(fieldModel: $viewModel.address)
-                        .onSubmit {
-                            _ = viewModel.address.onSubmitError()
-                        }
                     ActionButton(
                         title: viewModel.buttonTitle,
                         shouldEnableButton: viewModel.shouldEnableButton

@@ -53,14 +53,14 @@ private extension HomeScreenCoordinator {
     func profile() -> some View {
         return ProfileView(output: ProfileView.Output(goToLogin: {
             self.push(
-                LoginCoordinator(
+                MainCoordinator(
                     navigationPath: self.$navigationPath,
                     page: .login
                 )
             )
         }, goToInviteUser: {
             self.push(
-                LoginCoordinator(
+                MainCoordinator(
                     navigationPath: self.$navigationPath,
                     page: .inviteUser
                 )

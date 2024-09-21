@@ -27,58 +27,35 @@ enum FieldType: FieldValidatorProtocol {
     var placeHolder: String {
         switch self {
         case .username:
-            return "Username"
+            return String(localized: "username")
         case .password:
-            return "Password"
+            return String(localized: "password")
         case .name:
-            return "Name"
+            return String(localized: "name")
         case .description:
-            return "Description"
+            return String(localized: "description")
         case .address:
-            return "Address"
+            return String(localized: "address")
         case .repeatPassword:
-            return "Repeat Password"
+            return String(localized: "repeat_password")
         case .surname:
-            return "Surname"
+            return String(localized: "surname")
         case .gender:
-            return "Gender"
+            return String(localized: "gender")
         case .birthday:
-            return "Birthday"
+            return String(localized: "birthday")
         case .amount:
-            return "Amount"
+            return String(localized: "amount")
         case .email:
-            return "Email"
+            return String(localized: "email")
         }
     }
 
     func validate(value: String) -> String? {
-        switch self {
-        case .username:
-            return value.isEmpty ? "The username can not be empty" : nil
-        case .password:
-            return value.isEmpty ? "The password can not be empty" : nil
-        case .name:
-            return value.isEmpty ? "The name can not be empty" : nil
-        case .description:
-            return value.isEmpty ? "The description can not be empty" : nil
-        case .address:
-            return value.isEmpty ? "The address can not be empty" : nil
-        case .repeatPassword:
-            return value.isEmpty ? "The password can not be empty" : nil
-        case .surname:
-            return value.isEmpty ? "The surname can not be empty" : nil
-        case .gender:
-            return value.isEmpty ? "Gender field can not be empty" : nil
-        case .birthday:
-            return value.isEmpty ? "Birthday field can not be empty" : nil
-        case .amount:
-            return value.isEmpty ? "Amount field can not be empty" : nil
-        case .email:
-            return value.isEmpty ? "Email field can not be empty" : nil
-        }
+        return value.isEmpty ? String(localized: "fieldTypeEmptyMessage") : nil
     }
 
     func validate(value: Date) -> String? {
-        return value == .now ? "Birthday field can not be same as today" : nil
+        return value == .now ? String(localized: "fieldTypeEmptDateyMessage") : nil
     }
 }

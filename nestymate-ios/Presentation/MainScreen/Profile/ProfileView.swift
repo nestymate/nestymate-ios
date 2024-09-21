@@ -18,19 +18,18 @@ struct ProfileView: View {
     var body: some View {
         VStack {
             Spacer()
-            ActionButton(title: "Logout", shouldEnableButton: true) {
+            ActionButton(title: String(localized: "logout"), shouldEnableButton: true) {
                 viewModel.logout {
                     self.output.goToLogin()
                 }
             }
 
-            ActionButton(title: "Invite User", shouldEnableButton: true) {
+            ActionButton(title: String(localized: "invite_user"), shouldEnableButton: true) {
                 viewModel.logout {
                     self.output.goToInviteUser()
                 }
             }
             Spacer()
-            
         }
         .padding()
         .background(ColorManager.backgroundColour)
