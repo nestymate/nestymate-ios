@@ -45,14 +45,22 @@ class CreateOrEditHomeViewModel: ObservableObject {
         }
     }
 
-    public func createHome(completionHandler: @escaping (Bool?) -> Void) {
+    public func createOrEditHome(completionHandler: @escaping (Bool?) -> Void) {
+        if isEdit {
+            editHome(completionHandler)
+        } else {
+            createHome(completionHandler)
+        }
+    }
+
+    private func createHome(_ completionHandler: @escaping (Bool?) -> Void) {
         if useCase.createValid(
             isNameValid: name.onValidate(),
             isDescriptionValid: description.onValidate(),
             isAddressValid: address.onValidate()
         ) {
             shouldShowLoader = true
-            let home = Home(reference: "", name: name.value, description: description.value, address: address.value)
+            let home = Home(id: 0, name: name.value, description: description.value, address: address.value)
             useCase.createHome(home: home) { [weak self] error, statusCode in
                 self?.shouldShowLoader = false
                 self?.error = error
@@ -61,7 +69,7 @@ class CreateOrEditHomeViewModel: ObservableObject {
         }
     }
 
-    public func editHome(completionHandler: @escaping (Bool?) -> Void) {
+    private func editHome(_ completionHandler: @escaping (Bool?) -> Void) {
         if useCase.createValid(
             isNameValid: name.onValidate(),
             isDescriptionValid: description.onValidate(),
@@ -70,7 +78,7 @@ class CreateOrEditHomeViewModel: ObservableObject {
             shouldShowLoader = true
             guard let originalHome = home else { return }
             let home = Home(
-                reference: originalHome.reference,
+                id: originalHome.id,
                 name: name.value,
                 description: description.value,
                 address: address.value

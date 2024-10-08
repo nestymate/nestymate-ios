@@ -8,7 +8,22 @@
 import Foundation
 
 public struct Expense: Encodable, Decodable {
+    public let id: Int
     public let title: String?
     public let description: String
     public let amount: Double
+
+    init(id: Int, title: String?, description: String, amount: Double) {
+        self.id = id
+        self.title = title
+        self.description = description
+        self.amount = amount
+    }
+
+    init() {
+        id = 0
+        title = ""
+        description = ""
+        amount = 0
+    }
 }

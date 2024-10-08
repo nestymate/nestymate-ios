@@ -8,7 +8,7 @@
 import Foundation
 
 struct Home: Encodable, Decodable {
-    let reference: String
+    let id: Int
     let name: String
     let description: String
     let address: String

@@ -10,7 +10,7 @@ import SwiftUI
 
 class LoginViewModel: ObservableObject {
     let useCase: LoginUseCase
-    @Published public var username: FieldModel = .init(value: "test123", fieldType: .username)
+    @Published public var username: FieldModel = .init(value: "Kyriaz", fieldType: .username)
     @Published public var password: FieldModel = .init(value: "Sadface123!", fieldType: .password)
     @Published public var shouldShow: Bool?
     @Published var error: Error?
@@ -32,6 +32,7 @@ class LoginViewModel: ObservableObject {
                     let apiError = errorLogin ?? errorCheckHome ?? nil
                     self?.error = apiError
                     if apiError == nil {
+                        HomeUserDefaults().saveHome(with: home?.id)
                         completionHandler(home)
                     }
                 }

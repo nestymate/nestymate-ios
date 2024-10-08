@@ -12,7 +12,7 @@ enum LoginPage {
     case login
     case mainScreen
     case createHome
-    case createCategory
+    case createCategory(Category?)
     case createExpense(Expense?)
     case myHome
     case signup
@@ -24,6 +24,7 @@ final class MainCoordinator: Hashable {
     private let loginService = LoginServiceImpl()
     private let homeService = HomeServiceImpl()
     private let expenseService = ExpenseServiceImpl()
+    private let categoryService = CategoryServiceImpl()
     private let logoutService = LogoutService()
     private let expenseUseCase: ExpenseUseCase
     private let homeUseCase: HomeUseCase
@@ -48,7 +49,7 @@ final class MainCoordinator: Hashable {
         homeUseCase = HomeUseCaseImpl(homeService: homeService)
         signUpUseCase = SignUpUseCaseImpl(service: loginService, homeService: homeService)
         mainScreenUseCase = MainScreenUseCaseImpl()
-        categoryUseCase = CategoryUseCaseImpl()
+        categoryUseCase = CategoryUseCaseImpl(service: categoryService)
     }
 
     @ViewBuilder
@@ -64,8 +65,8 @@ final class MainCoordinator: Hashable {
             signUpView()
         case .myHome:
             myHomeView()
-        case .createCategory:
-            createCategoryView()
+        case let .createCategory(category):
+            createCategoryView(category: category)
         case let .createExpense(expense):
             createExpenseView(expense: expense)
         case .inviteUser:
@@ -162,11 +163,18 @@ private extension MainCoordinator {
         let viewModel = MyHomeViewModel(homeUseCase: homeUseCase, categoryUseCase: categoryUseCase)
         return MyHomeView(viewModel: viewModel, output: MyHomeView.Output(goBack: {
             self.goBack()
-        }, createCategory: {
+        }, goToCreateCategory: {
             self.push(
                 MainCoordinator(
                     navigationPath: self.$navigationPath,
-                    page: .createCategory
+                    page: .createCategory(nil)
+                )
+            )
+        }, goToEditCategory: { category in
+            self.push(
+                MainCoordinator(
+                    navigationPath: self.$navigationPath,
+                    page: .createCategory(category)
                 )
             )
         }, logout: {
@@ -174,10 +182,16 @@ private extension MainCoordinator {
         }))
     }
 
-    func createCategoryView() -> some View {
-        let viewModel = CreateCategoryViewModel(useCase: categoryUseCase)
-        return CreateCategoryView(viewModel: viewModel, output: CreateCategoryView.Output(goBack: {
+    func createCategoryView(category: Category?) -> some View {
+        let viewModel = CreateOrEditCategoryViewModel(
+            category: category,
+            useCase: categoryUseCase,
+            logoutService: logoutService
+        )
+        return CreateOrEditCategoryView(viewModel: viewModel, output: CreateOrEditCategoryView.Output(goBack: {
             self.goBack()
+        }, logout: {
+            self.logout()
         }))
     }
 
