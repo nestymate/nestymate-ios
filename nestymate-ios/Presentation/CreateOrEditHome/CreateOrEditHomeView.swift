@@ -31,7 +31,7 @@ struct CreateOrEditHomeView: View {
                         title: viewModel.buttonTitle,
                         shouldEnableButton: viewModel.shouldEnableButton
                     ) {
-                        viewModel.createHome { shouldLogout in
+                        viewModel.createOrEditHome { shouldLogout in
                             guard let shouldLogout, !shouldLogout else { return self.output.logout() }
                             self.output.goToMainScreen()
                         }

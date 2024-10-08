@@ -52,8 +52,12 @@ struct CreateOrEditExpenseView: View {
 }
 
 #Preview {
-    CreateOrEditHomeView(viewModel: CreateOrEditHomeViewModel(
-        useCase: HomeUseCaseImpl(homeService: HomeServiceImpl()), isEdit: true
+    CreateOrEditExpenseView(viewModel: CreateOrEditExpenseViewModel(
+        expense: Expense(),
+        useCase: ExpenseUseCaseImpl(
+            service: ExpenseServiceImpl()
+        ),
+        logoutService: LogoutService()
     ),
-    output: CreateOrEditHomeView.Output(goToMainScreen: {}, logout: {}))
+    output: CreateOrEditExpenseView.Output(goBack: {}, logout: {}))
 }

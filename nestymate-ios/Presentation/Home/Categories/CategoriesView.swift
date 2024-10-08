@@ -8,11 +8,12 @@
 import SwiftUI
 
 struct CategoriesView: View {
-    @ObservedObject var viewModel: CategoryViewModel
+    @ObservedObject var viewModel: CategoriesViewModel
     @State private var viewDidLoad = false
-    @State private var categories: [Category] = []
     struct Output {
-        var createCategory: () -> Void
+        var goToCreateCategory: () -> Void
+        var goToEditCategory: (Category?) -> Void
+        var logout: () -> Void
     }
 
     var output: Output
@@ -22,7 +23,7 @@ struct CategoriesView: View {
                 Text(String(localized: "categories")).font(FontManager.title)
                 Spacer()
                 Button {
-                    self.output.createCategory()
+                    self.output.goToCreateCategory()
                 } label: {
                     Image(systemName: "plus")
                 }
@@ -30,10 +31,17 @@ struct CategoriesView: View {
             .padding()
 
             List {
-                ForEach(categories) { item in
+                ForEach(viewModel.categories) { item in
                     Text(item.name)
+                        .onTapGesture {
+                            self.output.goToEditCategory(item)
+                        }
                 }
-                .onDelete(perform: viewModel.delete)
+                .onDelete(perform: { index in
+                    viewModel.delete(at: index) { shouldLogout in
+                        guard !shouldLogout else { return self.output.logout() }
+                    }
+                })
                 .listRowBackground(ColorManager.backgroundColour)
             }
             .scrollContentBackground(.hidden)
@@ -43,8 +51,8 @@ struct CategoriesView: View {
         .onAppear {
             if viewDidLoad == false {
                 viewDidLoad = true
-                viewModel.getCategories { categories in
-                    self.categories = categories
+                viewModel.getCategories { shouldLogout in
+                    guard !shouldLogout else { return self.output.logout() }
                 }
             }
         }
@@ -52,6 +60,13 @@ struct CategoriesView: View {
 }
 
 #Preview {
-    CategoriesView(viewModel: CategoryViewModel(useCase: CategoryUseCaseImpl()),
-                   output: CategoriesView.Output(createCategory: {}))
+    CategoriesView(viewModel: CategoriesViewModel(
+        useCase: CategoryUseCaseImpl(service: CategoryServiceImpl()),
+        logoutService: LogoutService()
+    ),
+    output: CategoriesView.Output(
+        goToCreateCategory: {},
+        goToEditCategory: { _ in },
+        logout: {}
+    ))
 }

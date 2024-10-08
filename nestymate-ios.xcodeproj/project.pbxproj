@@ -64,11 +64,11 @@
 		01D488142C95DCCC0024A7F2 /* ExpensesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01D488132C95DCCC0024A7F2 /* ExpensesViewModel.swift */; };
 		01D488182C95F5840024A7F2 /* HomeUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01D488172C95F5840024A7F2 /* HomeUseCase.swift */; };
 		01D488292C96E8920024A7F2 /* MainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01D488282C96E8920024A7F2 /* MainViewModel.swift */; };
-		01D4882B2C96F13D0024A7F2 /* CategoryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01D4882A2C96F13D0024A7F2 /* CategoryViewModel.swift */; };
+		01D4882B2C96F13D0024A7F2 /* CategoriesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01D4882A2C96F13D0024A7F2 /* CategoriesViewModel.swift */; };
 		01D4882D2C96F1B70024A7F2 /* Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01D4882C2C96F1B70024A7F2 /* Category.swift */; };
 		01D4882F2C96F21D0024A7F2 /* CategoryUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01D4882E2C96F21D0024A7F2 /* CategoryUseCase.swift */; };
-		01D488322C96F7ED0024A7F2 /* CreateCategoryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01D488312C96F7ED0024A7F2 /* CreateCategoryViewModel.swift */; };
-		01D488342C96F7FE0024A7F2 /* CreateCategoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01D488332C96F7FE0024A7F2 /* CreateCategoryView.swift */; };
+		01D488322C96F7ED0024A7F2 /* CreateOrEditCategoryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01D488312C96F7ED0024A7F2 /* CreateOrEditCategoryViewModel.swift */; };
+		01D488342C96F7FE0024A7F2 /* CreateOrEditCategoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01D488332C96F7FE0024A7F2 /* CreateOrEditCategoryView.swift */; };
 		01D488362C9718460024A7F2 /* ExpenseUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01D488352C9718460024A7F2 /* ExpenseUseCase.swift */; };
 		01D488382C9718DC0024A7F2 /* ExpenseService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01D488372C9718DC0024A7F2 /* ExpenseService.swift */; };
 		01D4883B2C9721B00024A7F2 /* CreateOrEditExpenseViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01D4883A2C9721B00024A7F2 /* CreateOrEditExpenseViewModel.swift */; };
@@ -78,6 +78,8 @@
 		01D792302C8D9F5300EDA9D2 /* MyHomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01D7922F2C8D9F5200EDA9D2 /* MyHomeViewModel.swift */; };
 		01D792342C8DA52D00EDA9D2 /* CategoriesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01D792332C8DA52D00EDA9D2 /* CategoriesView.swift */; };
 		01D9A75E2CA872290081A181 /* DateUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01D9A75D2CA872270081A181 /* DateUtils.swift */; };
+		01D9A7602CB5C2E70081A181 /* HomeUserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01D9A75F2CB5C2D60081A181 /* HomeUserDefaults.swift */; };
+		01D9A7622CBA92150081A181 /* CategoryService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01D9A7612CBA920C0081A181 /* CategoryService.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -159,11 +161,11 @@
 		01D488132C95DCCC0024A7F2 /* ExpensesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpensesViewModel.swift; sourceTree = "<group>"; };
 		01D488172C95F5840024A7F2 /* HomeUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeUseCase.swift; sourceTree = "<group>"; };
 		01D488282C96E8920024A7F2 /* MainViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewModel.swift; sourceTree = "<group>"; };
-		01D4882A2C96F13D0024A7F2 /* CategoryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryViewModel.swift; sourceTree = "<group>"; };
+		01D4882A2C96F13D0024A7F2 /* CategoriesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoriesViewModel.swift; sourceTree = "<group>"; };
 		01D4882C2C96F1B70024A7F2 /* Category.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Category.swift; sourceTree = "<group>"; };
 		01D4882E2C96F21D0024A7F2 /* CategoryUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryUseCase.swift; sourceTree = "<group>"; };
-		01D488312C96F7ED0024A7F2 /* CreateCategoryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateCategoryViewModel.swift; sourceTree = "<group>"; };
-		01D488332C96F7FE0024A7F2 /* CreateCategoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateCategoryView.swift; sourceTree = "<group>"; };
+		01D488312C96F7ED0024A7F2 /* CreateOrEditCategoryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateOrEditCategoryViewModel.swift; sourceTree = "<group>"; };
+		01D488332C96F7FE0024A7F2 /* CreateOrEditCategoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateOrEditCategoryView.swift; sourceTree = "<group>"; };
 		01D488352C9718460024A7F2 /* ExpenseUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpenseUseCase.swift; sourceTree = "<group>"; };
 		01D488372C9718DC0024A7F2 /* ExpenseService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpenseService.swift; sourceTree = "<group>"; };
 		01D4883A2C9721B00024A7F2 /* CreateOrEditExpenseViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateOrEditExpenseViewModel.swift; sourceTree = "<group>"; };
@@ -174,6 +176,8 @@
 		01D7922F2C8D9F5200EDA9D2 /* MyHomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyHomeViewModel.swift; sourceTree = "<group>"; };
 		01D792332C8DA52D00EDA9D2 /* CategoriesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoriesView.swift; sourceTree = "<group>"; };
 		01D9A75D2CA872270081A181 /* DateUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateUtils.swift; sourceTree = "<group>"; };
+		01D9A75F2CB5C2D60081A181 /* HomeUserDefaults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeUserDefaults.swift; sourceTree = "<group>"; };
+		01D9A7612CBA920C0081A181 /* CategoryService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryService.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -215,6 +219,7 @@
 		0106B60D2BE18A4C0024AFCB /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				01D9A7612CBA920C0081A181 /* CategoryService.swift */,
 				0106B60E2BE18A5E0024AFCB /* LoginService.swift */,
 				0106B6252BFA5E530024AFCB /* HomeService.swift */,
 				0106B6292BFA610B0024AFCB /* KeychainHelper.swift */,
@@ -365,6 +370,7 @@
 		01B6DF9C2BD6A3C400E2983E /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				01D9A75F2CB5C2D60081A181 /* HomeUserDefaults.swift */,
 				01D9A75D2CA872270081A181 /* DateUtils.swift */,
 				01B6DF982BD6A1D500E2983E /* FontManager.swift */,
 				01B6DF9D2BD6A3D900E2983E /* ColorManager.swift */,
@@ -390,10 +396,10 @@
 		01D4881D2C96DD310024A7F2 /* Categories */ = {
 			isa = PBXGroup;
 			children = (
-				01D488302C96F7C40024A7F2 /* CreateCategory */,
+				01D488302C96F7C40024A7F2 /* CreateOrEditCategory */,
 				01D4882E2C96F21D0024A7F2 /* CategoryUseCase.swift */,
 				01D792332C8DA52D00EDA9D2 /* CategoriesView.swift */,
-				01D4882A2C96F13D0024A7F2 /* CategoryViewModel.swift */,
+				01D4882A2C96F13D0024A7F2 /* CategoriesViewModel.swift */,
 			);
 			path = Categories;
 			sourceTree = "<group>";
@@ -495,13 +501,13 @@
 			path = Root;
 			sourceTree = "<group>";
 		};
-		01D488302C96F7C40024A7F2 /* CreateCategory */ = {
+		01D488302C96F7C40024A7F2 /* CreateOrEditCategory */ = {
 			isa = PBXGroup;
 			children = (
-				01D488312C96F7ED0024A7F2 /* CreateCategoryViewModel.swift */,
-				01D488332C96F7FE0024A7F2 /* CreateCategoryView.swift */,
+				01D488312C96F7ED0024A7F2 /* CreateOrEditCategoryViewModel.swift */,
+				01D488332C96F7FE0024A7F2 /* CreateOrEditCategoryView.swift */,
 			);
-			path = CreateCategory;
+			path = CreateOrEditCategory;
 			sourceTree = "<group>";
 		};
 		01D488392C9721A30024A7F2 /* createOrEditExpense */ = {
@@ -679,7 +685,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				01D488342C96F7FE0024A7F2 /* CreateCategoryView.swift in Sources */,
+				01D488342C96F7FE0024A7F2 /* CreateOrEditCategoryView.swift in Sources */,
 				012815932C4135A2001FFA2D /* FieldType.swift in Sources */,
 				0106B6282BFA5E920024AFCB /* Login.swift in Sources */,
 				01D4882D2C96F1B70024A7F2 /* Category.swift in Sources */,
@@ -693,8 +699,10 @@
 				011165D82BD69D7700817935 /* Nestymate.swift in Sources */,
 				0128159B2C485470001FFA2D /* Reachability.swift in Sources */,
 				0106B6072BE1859F0024AFCB /* ProfileView.swift in Sources */,
+				01D9A7602CB5C2E70081A181 /* HomeUserDefaults.swift in Sources */,
 				01D488292C96E8920024A7F2 /* MainViewModel.swift in Sources */,
 				01D792342C8DA52D00EDA9D2 /* CategoriesView.swift in Sources */,
+				01D9A7622CBA92150081A181 /* CategoryService.swift in Sources */,
 				013504872BD90FDB0000C859 /* SingleTextField.swift in Sources */,
 				0106B62E2BFA78B50024AFCB /* MainScreenViewModel.swift in Sources */,
 				0106B61B2BE811B30024AFCB /* AppCoordinator.swift in Sources */,
@@ -712,7 +720,7 @@
 				0128159F2C4AE380001FFA2D /* User.swift in Sources */,
 				01D488122C95DC910024A7F2 /* Expense.swift in Sources */,
 				01A6061D2C3EBFAD00B7622E /* ProfileViewModel.swift in Sources */,
-				01D4882B2C96F13D0024A7F2 /* CategoryViewModel.swift in Sources */,
+				01D4882B2C96F13D0024A7F2 /* CategoriesViewModel.swift in Sources */,
 				018A04752BD114660051A3A4 /* LoginView.swift in Sources */,
 				0106B60F2BE18A5E0024AFCB /* LoginService.swift in Sources */,
 				01D9A75E2CA872290081A181 /* DateUtils.swift in Sources */,
@@ -733,7 +741,7 @@
 				01D4883F2C9736700024A7F2 /* CreateOrEditExpenseView.swift in Sources */,
 				01D488382C9718DC0024A7F2 /* ExpenseService.swift in Sources */,
 				0106B6162BE191B50024AFCB /* LoginUseCase.swift in Sources */,
-				01D488322C96F7ED0024A7F2 /* CreateCategoryViewModel.swift in Sources */,
+				01D488322C96F7ED0024A7F2 /* CreateOrEditCategoryViewModel.swift in Sources */,
 				01A606332C4017A900B7622E /* String+Extension.swift in Sources */,
 				0106B6192BE195F10024AFCB /* MainCoordinator.swift in Sources */,
 				01D488182C95F5840024A7F2 /* HomeUseCase.swift in Sources */,

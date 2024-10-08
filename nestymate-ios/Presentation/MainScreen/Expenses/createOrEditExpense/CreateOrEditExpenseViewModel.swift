@@ -49,6 +49,7 @@ class CreateOrEditExpenseViewModel: ObservableObject {
             shouldShowLoader = true
             let amountInDouble = Double(amount.value) ?? 0.0
             let expense = Expense(
+                id: expense?.id ?? 0,
                 title: title.value,
                 description: description.value,
                 amount: amountInDouble

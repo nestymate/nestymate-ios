@@ -16,13 +16,20 @@ protocol ExpenseService {
 }
 
 class ExpenseServiceImpl: ExpenseService {
-    let url = URL(string: "http://192.168.1.10/api/v1/expense")!
+    var baseUrl: URL
     var cancellable = Set<AnyCancellable>()
     let helper = KeychainHelper()
     var apiCall = APICalls()
+    var homeUserDefaults = HomeUserDefaults()
+
+    init() {
+        baseUrl = URL(string: "http://192.168.1.10/api/v1/home")!
+            .appendingPathComponent(homeUserDefaults.getHomeId())
+            .appendingPathComponent("expense")
+    }
 
     func getExpenses(completionHandler: @escaping ([Expense]?, Error?, Int?) -> Void) {
-        apiCall.get(url: url, requestData: nil) { apiResponse in
+        apiCall.get(url: baseUrl, requestData: nil) { apiResponse in
             do {
                 guard let data = apiResponse.data
                 else { return completionHandler(nil, .badServerResponse, apiResponse.statusCode) }
@@ -36,14 +43,14 @@ class ExpenseServiceImpl: ExpenseService {
 
     func createExpense(expense: Expense, completionHandler: @escaping (Error?, Int?) -> Void) {
         let data = try? JSONEncoder().encode(expense)
-        apiCall.post(url: url, requestData: data) { apiResponse in
+        apiCall.post(url: baseUrl, requestData: data) { apiResponse in
             completionHandler(apiResponse.error, apiResponse.statusCode)
         }
     }
 
     func editExpense(expense: Expense, completionHandler: @escaping (Error?, Int?) -> Void) {
         let data = try? JSONEncoder().encode(expense)
-        let putURL = url.appending(path: expense.title ?? "")
+        let putURL = baseUrl.appending(path: "\(expense.id)")
         apiCall.put(url: putURL, requestData: data) { apiResponse in
             completionHandler(apiResponse.error, apiResponse.statusCode)
         }
@@ -51,7 +58,7 @@ class ExpenseServiceImpl: ExpenseService {
 
     func deleteExpense(expense: Expense, completionHandler: @escaping (Error?, Int?) -> Void) {
         let data = try? JSONEncoder().encode(expense)
-        let putURL = url.appending(path: expense.title ?? "")
+        let putURL = baseUrl.appending(path: "\(expense.id)")
         apiCall.delete(url: putURL, requestData: data) { apiResponse in
             completionHandler(apiResponse.error, apiResponse.statusCode)
         }
