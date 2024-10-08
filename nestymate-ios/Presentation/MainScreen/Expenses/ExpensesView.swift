@@ -9,7 +9,6 @@ import SwiftUI
 
 struct ExpensesView: View {
     @ObservedObject var viewModel: ExpensesViewModel
-    @State private var expenses: [Expense] = []
     @State private var viewDidLoad = false
     struct Output {
         var goToMyHome: () -> Void
@@ -36,7 +35,7 @@ struct ExpensesView: View {
             }
             .padding()
             List {
-                ForEach(expenses, id: \.title) { item in
+                ForEach(viewModel.expenses, id: \.title) { item in
                     HStack {
                         Text(item.title ?? "")
                         Spacer()
@@ -46,7 +45,11 @@ struct ExpensesView: View {
                         self.output.goToEditExpense(item)
                     }
                 }
-                .onDelete(perform: viewModel.delete)
+                .onDelete(perform: { index in
+                    viewModel.delete(at: index) { shouldLogout in
+                        guard !shouldLogout else { return self.output.logout() }
+                    }
+                })
                 .listRowBackground(ColorManager.backgroundColour)
             }
             .scrollContentBackground(.hidden)
@@ -54,10 +57,8 @@ struct ExpensesView: View {
         }
         .background(ColorManager.backgroundColour)
         .onAppear {
-            viewModel.getExpenses { expenses, shouldLogout in
+            viewModel.getExpenses { shouldLogout in
                 guard !shouldLogout else { return self.output.logout() }
-                guard let expenses else { return self.expenses = [] }
-                self.expenses = expenses
             }
         }
     }

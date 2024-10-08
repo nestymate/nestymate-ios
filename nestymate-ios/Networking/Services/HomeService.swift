@@ -22,7 +22,7 @@ class HomeServiceImpl: HomeService {
     var apiCall = APICalls()
 
     func getHome(completionHandler: @escaping (Home?, Error?, Int?) -> Void) {
-        apiCall.get(url: url, requestData: nil) { apiResponse in
+        apiCall.get(url: url.appendingPathComponent("active"), requestData: nil) { apiResponse in
             guard let data = apiResponse.data,
                   let response = try? JSONDecoder().decode(Home.self, from: data)
             else {
@@ -45,7 +45,7 @@ class HomeServiceImpl: HomeService {
 
     func editHome(home: Home, completionHandler: @escaping (Error?, Int?) -> Void) {
         let data = try? JSONEncoder().encode(home)
-        let putURL = url.appending(path: home.reference)
+        let putURL = url.appending(path: "\(home.id)")
         apiCall.put(url: putURL, requestData: data) { apiResponse in
             completionHandler(apiResponse.error, apiResponse.statusCode)
         }
