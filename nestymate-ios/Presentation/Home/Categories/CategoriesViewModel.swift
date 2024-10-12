@@ -10,7 +10,6 @@ import Foundation
 class CategoriesViewModel: ObservableObject {
     @Published public var shouldShowLoader: Bool?
     @Published var error: Error?
-    @Published var categories: [Category] = []
     private let useCase: CategoryUseCase
     private let logoutService: LogoutService
 
@@ -19,21 +18,18 @@ class CategoriesViewModel: ObservableObject {
         self.logoutService = logoutService
     }
 
-    public func getCategories(completionHandler: @escaping (Bool) -> Void) {
+    public func getCategories(completionHandler: @escaping ([Category]?, Bool) -> Void) {
         shouldShowLoader = true
-        useCase.getCategories { [weak self] _, error, statusCode in
+        useCase.getCategories { [weak self] categories, error, statusCode in
             guard let self else { return }
             self.shouldShowLoader = false
             self.error = error
-            self.categories = categories
-            completionHandler(logoutService.shouldLogout(statusCode: statusCode))
+            completionHandler(categories, logoutService.shouldLogout(statusCode: statusCode))
         }
     }
 
-    public func delete(at offset: IndexSet, completionHandler: @escaping (Bool) -> Void) {
-        let index = offset[offset.startIndex]
+    public func delete(categoryToBeDelete: Category, completionHandler: @escaping ([Category]?, Bool) -> Void) {
         shouldShowLoader = true
-        let categoryToBeDelete = categories[index]
         useCase.deleteCategory(category: categoryToBeDelete) { [weak self] error, _ in
             guard let self else { return }
             self.shouldShowLoader = false
