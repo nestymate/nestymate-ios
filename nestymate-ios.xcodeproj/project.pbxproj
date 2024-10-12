@@ -73,7 +73,6 @@
 		01D488382C9718DC0024A7F2 /* ExpenseService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01D488372C9718DC0024A7F2 /* ExpenseService.swift */; };
 		01D4883B2C9721B00024A7F2 /* CreateOrEditExpenseViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01D4883A2C9721B00024A7F2 /* CreateOrEditExpenseViewModel.swift */; };
 		01D4883D2C9721BB0024A7F2 /* CreateOrEditExpenseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01D4883C2C9721BB0024A7F2 /* CreateOrEditExpenseView.swift */; };
-		01D4883F2C9736700024A7F2 /* CreateOrEditExpenseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01D4883E2C9736700024A7F2 /* CreateOrEditExpenseView.swift */; };
 		01D7922C2C8D985D00EDA9D2 /* MyHomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01D7922B2C8D985D00EDA9D2 /* MyHomeView.swift */; };
 		01D7922E2C8D9AFD00EDA9D2 /* ExpensesCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01D7922D2C8D9AFD00EDA9D2 /* ExpensesCoordinator.swift */; };
 		01D792302C8D9F5300EDA9D2 /* MyHomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01D7922F2C8D9F5200EDA9D2 /* MyHomeViewModel.swift */; };
@@ -728,7 +727,6 @@
 				01B6DF992BD6A1D500E2983E /* FontManager.swift in Sources */,
 				012815A72C4D98B3001FFA2D /* UtilMethods.swift in Sources */,
 				01D4883B2C9721B00024A7F2 /* CreateOrEditExpenseViewModel.swift in Sources */,
-				01D4883F2C9736700024A7F2 /* CreateOrEditExpenseView.swift in Sources */,
 				01D488382C9718DC0024A7F2 /* ExpenseService.swift in Sources */,
 				0106B6162BE191B50024AFCB /* LoginUseCase.swift in Sources */,
 				01D488322C96F7ED0024A7F2 /* CreateCategoryViewModel.swift in Sources */,
