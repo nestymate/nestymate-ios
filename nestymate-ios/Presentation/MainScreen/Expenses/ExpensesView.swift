@@ -23,7 +23,10 @@ struct ExpensesView: View {
             Button(action: {
                 self.output.goToMyHome()
             }, label: {
-                Text(String(localized: "my_home")).font(FontManager.title)
+                HStack {
+                    Text(String(localized: "my_home")).font(FontManager.title)
+                    Image(systemName: "slider.vertical.3")
+                }
             })
             HStack {
                 Spacer()
