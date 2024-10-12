@@ -9,7 +9,7 @@ import SwiftUI
 
 struct CategoriesView: View {
     @ObservedObject var viewModel: CategoriesViewModel
-    @State private var viewDidLoad = false
+    @State private var categories: [Category] = []
     struct Output {
         var goToCreateCategory: () -> Void
         var goToEditCategory: (Category?) -> Void
@@ -31,15 +31,16 @@ struct CategoriesView: View {
             .padding()
 
             List {
-                ForEach(viewModel.categories) { item in
+                ForEach(categories) { item in
                     Text(item.name)
                         .onTapGesture {
                             self.output.goToEditCategory(item)
                         }
                 }
-                .onDelete(perform: { index in
-                    viewModel.delete(at: index) { shouldLogout in
-                        guard !shouldLogout else { return self.output.logout() }
+                .onDelete(perform: { offset in
+                    let index = offset[offset.startIndex]
+                    viewModel.delete(categoryToBeDelete: categories[index]) { categories, shouldLogout in
+                        handleExpenses(categories, shouldLogout)
                     }
                 })
                 .listRowBackground(ColorManager.backgroundColour)
@@ -49,13 +50,17 @@ struct CategoriesView: View {
         }
         .background(ColorManager.backgroundColour)
         .onAppear {
-            if viewDidLoad == false {
-                viewDidLoad = true
-                viewModel.getCategories { shouldLogout in
-                    guard !shouldLogout else { return self.output.logout() }
-                }
+            viewModel.getCategories { categories, shouldLogout in
+                handleExpenses(categories, shouldLogout)
             }
         }
+    }
+}
+
+private extension CategoriesView {
+    func handleExpenses(_ categories: [Category]?, _ shouldLogout: Bool) {
+        guard !shouldLogout else { return output.logout() }
+        self.categories = categories ?? []
     }
 }
 

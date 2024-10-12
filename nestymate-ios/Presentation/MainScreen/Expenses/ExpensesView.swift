@@ -9,7 +9,7 @@ import SwiftUI
 
 struct ExpensesView: View {
     @ObservedObject var viewModel: ExpensesViewModel
-    @State private var viewDidLoad = false
+    @State private var expenses: [Expense] = []
     struct Output {
         var goToMyHome: () -> Void
         var goToCreateExpense: () -> Void
@@ -38,7 +38,7 @@ struct ExpensesView: View {
             }
             .padding()
             List {
-                ForEach(viewModel.expenses, id: \.title) { item in
+                ForEach(expenses, id: \.title) { item in
                     HStack {
                         Text(item.title ?? "")
                         Spacer()
@@ -48,9 +48,10 @@ struct ExpensesView: View {
                         self.output.goToEditExpense(item)
                     }
                 }
-                .onDelete(perform: { index in
-                    viewModel.delete(at: index) { shouldLogout in
-                        guard !shouldLogout else { return self.output.logout() }
+                .onDelete(perform: { offset in
+                    let index = offset[offset.startIndex]
+                    viewModel.delete(expenseToBeDelete: expenses[index]) { expenses, shouldLogout in
+                        handleExpenses(expenses, shouldLogout)
                     }
                 })
                 .listRowBackground(ColorManager.backgroundColour)
@@ -60,10 +61,17 @@ struct ExpensesView: View {
         }
         .background(ColorManager.backgroundColour)
         .onAppear {
-            viewModel.getExpenses { shouldLogout in
-                guard !shouldLogout else { return self.output.logout() }
+            viewModel.getExpenses { expenses, shouldLogout in
+                handleExpenses(expenses, shouldLogout)
             }
         }
+    }
+}
+
+private extension ExpensesView {
+    func handleExpenses(_ expenses: [Expense]?, _ shouldLogout: Bool) {
+        guard !shouldLogout else { return output.logout() }
+        self.expenses = expenses ?? []
     }
 }
 
