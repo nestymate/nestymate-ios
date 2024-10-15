@@ -11,6 +11,7 @@ import SwiftUI
 struct CreateOrEditExpenseView: View {
     @ObservedObject var viewModel: CreateOrEditExpenseViewModel
     @State private var viewDidLoad = false
+    @State private var selectedCategory: Int?
     struct Output {
         var goBack: () -> Void
         var logout: () -> Void
@@ -25,6 +26,7 @@ struct CreateOrEditExpenseView: View {
             ScrollView {
                 VStack {
                     Text(viewModel.pageTitle).font(FontManager.title)
+                    categoryPicker
                     SingleTextField(fieldModel: $viewModel.title)
                     SingleTextField(fieldModel: $viewModel.description)
                     SingleTextField(fieldModel: $viewModel.amount)
@@ -33,7 +35,7 @@ struct CreateOrEditExpenseView: View {
                         title: viewModel.buttonTitle,
                         shouldEnableButton: viewModel.shouldEnableButton
                     ) {
-                        viewModel.createOrUpdateExpense { shouldLogout in
+                        viewModel.createOrUpdateExpense(expenseCategoryId: selectedCategory) { shouldLogout in
                             guard let shouldLogout, !shouldLogout
                             else { return self.output.logout() }
                             self.output.goBack()
@@ -47,6 +49,22 @@ struct CreateOrEditExpenseView: View {
             .alert(item: $viewModel.error) { error in
                 error.alert
             }
+            .onAppear {
+                viewModel.getCategories { selectedCategory, shouldLogout in
+                    self.selectedCategory = selectedCategory
+                    guard !shouldLogout else { return output.logout() }
+                }
+            }
+        }
+    }
+}
+
+extension CreateOrEditExpenseView {
+    var categoryPicker: some View {
+        Picker(viewModel.categoryTitle, selection: $selectedCategory) {
+            ForEach(viewModel.categories, id: \.self) { category in
+                Text(category.name).tag(category.id)
+            }
         }
     }
 }
@@ -56,7 +74,7 @@ struct CreateOrEditExpenseView: View {
         expense: Expense(),
         useCase: ExpenseUseCaseImpl(
             service: ExpenseServiceImpl()
-        ),
+        ), categoryUseCase: CategoryUseCaseImpl(service: CategoryServiceImpl()),
         logoutService: LogoutService()
     ),
     output: CreateOrEditExpenseView.Output(goBack: {}, logout: {}))

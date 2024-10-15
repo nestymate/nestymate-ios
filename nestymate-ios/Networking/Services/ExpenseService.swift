@@ -10,7 +10,7 @@ import Foundation
 
 protocol ExpenseService {
     func getExpenses(completionHandler: @escaping ([Expense]?, Error?, Int?) -> Void)
-    func createExpense(expense: Expense, completionHandler: @escaping (Error?, Int?) -> Void)
+    func createExpense(expenseCategoryId: Int, expense: Expense, completionHandler: @escaping (Error?, Int?) -> Void)
     func editExpense(expense: Expense, completionHandler: @escaping (Error?, Int?) -> Void)
     func deleteExpense(expense: Expense, completionHandler: @escaping (Error?, Int?) -> Void)
 }
@@ -41,9 +41,11 @@ class ExpenseServiceImpl: ExpenseService {
         }
     }
 
-    func createExpense(expense: Expense, completionHandler: @escaping (Error?, Int?) -> Void) {
+    func createExpense(expenseCategoryId: Int, expense: Expense, completionHandler: @escaping (Error?, Int?) -> Void) {
         let data = try? JSONEncoder().encode(expense)
-        apiCall.post(url: baseUrl, requestData: data) { apiResponse in
+        let createURL = baseUrl.appending(path: "\(expenseCategoryId)")
+            .appendingPathComponent("expense")
+        apiCall.post(url: createURL, requestData: data) { apiResponse in
             completionHandler(apiResponse.error, apiResponse.statusCode)
         }
     }

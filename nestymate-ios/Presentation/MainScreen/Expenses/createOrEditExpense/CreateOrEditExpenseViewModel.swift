@@ -9,7 +9,10 @@ import Foundation
 
 class CreateOrEditExpenseViewModel: ObservableObject {
     private let useCase: ExpenseUseCase
+    private let categoryUseCase: CategoryUseCase
     private let logoutService: LogoutService
+    var categoryTitle = String(localized: "category")
+    @Published var categories: [Category] = []
     @Published var title: FieldModel = .init(value: "", fieldType: .name)
     @Published var description: FieldModel = .init(value: "", fieldType: .description)
     @Published var amount: FieldModel = .init(value: "", fieldType: .amount)
@@ -20,10 +23,16 @@ class CreateOrEditExpenseViewModel: ObservableObject {
     var pageTitle: String = ""
     private var expense: Expense?
 
-    init(expense: Expense?, useCase: ExpenseUseCase, logoutService: LogoutService) {
+    init(
+        expense: Expense?,
+        useCase: ExpenseUseCase,
+        categoryUseCase: CategoryUseCase,
+        logoutService: LogoutService
+    ) {
         isEdit = expense != nil
         self.expense = expense
         self.useCase = useCase
+        self.categoryUseCase = categoryUseCase
         self.logoutService = logoutService
         setupExpense()
         setupTitles()
@@ -40,11 +49,28 @@ class CreateOrEditExpenseViewModel: ObservableObject {
         amount = .init(value: String(expense.amount), fieldType: .amount)
     }
 
-    func createOrUpdateExpense(completionHandler: @escaping (Bool?) -> Void) {
+    public func getCategories(completionHandler: @escaping (Int?, Bool) -> Void) {
+        shouldShowLoader = true
+        categoryUseCase.getCategories { [weak self] categories, error, statusCode in
+            guard let self else { return }
+            self.categories = categories ?? []
+            self.shouldShowLoader = false
+            self.error = error
+            if isEdit {
+                // get correct here
+                completionHandler(5, logoutService.shouldLogout(statusCode: statusCode))
+            } else {
+                completionHandler(nil, logoutService.shouldLogout(statusCode: statusCode))
+            }
+        }
+    }
+
+    func createOrUpdateExpense(expenseCategoryId: Int?, completionHandler: @escaping (Bool?) -> Void) {
         if useCase.createValid(
             isTitleValid: title.onValidate(),
             isDescriptionValid: description.onValidate(),
-            isAmountValid: amount.onValidate()
+            isAmountValid: amount.onValidate(),
+            hasSelectedCategory: expenseCategoryId != nil
         ) {
             shouldShowLoader = true
             let amountInDouble = Double(amount.value) ?? 0.0
@@ -54,6 +80,7 @@ class CreateOrEditExpenseViewModel: ObservableObject {
                 description: description.value,
                 amount: amountInDouble
             )
+            let expenseCategoryId = expenseCategoryId ?? 0
             if isEdit {
                 useCase.editExpense(expense: expense) { [weak self] error, statusCode in
                     self?.shouldShowLoader = false
@@ -61,7 +88,10 @@ class CreateOrEditExpenseViewModel: ObservableObject {
                     completionHandler(self?.logoutService.shouldLogout(statusCode: statusCode))
                 }
             } else {
-                useCase.createExpense(expense: expense) { [weak self] error, statusCode in
+                useCase.createExpense(
+                    expenseCategoryId: expenseCategoryId,
+                    expense: expense
+                ) { [weak self] error, statusCode in
                     self?.shouldShowLoader = false
                     self?.error = error
                     completionHandler(self?.logoutService.shouldLogout(statusCode: statusCode))

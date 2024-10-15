@@ -75,6 +75,22 @@
         }
       }
     },
+    "category" : {
+      "localizations" : {
+        "el" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Κατηγορία"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Category"
+          }
+        }
+      }
+    },
     "create" : {
       "localizations" : {
         "el" : {
@@ -158,6 +174,12 @@
     "edit_category" : {
       "extractionState" : "manual",
       "localizations" : {
+        "el" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Επεξεργασία κατηγορίας"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
