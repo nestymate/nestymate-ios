@@ -45,7 +45,7 @@ class CreateOrEditHomeViewModel: ObservableObject {
         }
     }
 
-    public func createOrEditHome(completionHandler: @escaping (Bool?) -> Void) {
+    public func createOrEditHome(completionHandler: @escaping (Bool) -> Void) {
         if isEdit {
             editHome(completionHandler)
         } else {
@@ -53,7 +53,7 @@ class CreateOrEditHomeViewModel: ObservableObject {
         }
     }
 
-    private func createHome(_ completionHandler: @escaping (Bool?) -> Void) {
+    private func createHome(_ completionHandler: @escaping (Bool) -> Void) {
         if useCase.createValid(
             isNameValid: name.onValidate(),
             isDescriptionValid: description.onValidate(),
@@ -64,12 +64,12 @@ class CreateOrEditHomeViewModel: ObservableObject {
             useCase.createHome(home: home) { [weak self] error, statusCode in
                 self?.shouldShowLoader = false
                 self?.error = error
-                completionHandler(self?.logoutService.shouldLogout(statusCode: statusCode))
+                completionHandler(self?.logoutService.shouldLogout(statusCode: statusCode) ?? false)
             }
         }
     }
 
-    private func editHome(_ completionHandler: @escaping (Bool?) -> Void) {
+    private func editHome(_ completionHandler: @escaping (Bool) -> Void) {
         if useCase.createValid(
             isNameValid: name.onValidate(),
             isDescriptionValid: description.onValidate(),
@@ -86,7 +86,7 @@ class CreateOrEditHomeViewModel: ObservableObject {
             useCase.editHome(home: home) { [weak self] error, statusCode in
                 self?.shouldShowLoader = false
                 self?.error = error
-                completionHandler(self?.logoutService.shouldLogout(statusCode: statusCode))
+                completionHandler(self?.logoutService.shouldLogout(statusCode: statusCode) ?? false)
             }
         }
     }
