@@ -21,7 +21,7 @@ struct CreateOrEditCategoryView: View {
             SingleTextField(fieldModel: $viewModel.name)
             SingleTextField(fieldModel: $viewModel.description)
             ActionButton(title: viewModel.buttonTitle, shouldEnableButton: true) {
-                viewModel.createOrUpdateExpense { shouldLogout in
+                viewModel.createOrUpdateCategory { shouldLogout in
                     guard let shouldLogout, !shouldLogout
                     else { return self.output.logout() }
                     self.output.goBack()

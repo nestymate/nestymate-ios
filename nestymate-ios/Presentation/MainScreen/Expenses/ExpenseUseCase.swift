@@ -9,10 +9,14 @@ import Foundation
 
 protocol ExpenseUseCase {
     func getExpenses(completionHandler: @escaping ([Expense]?, Error?, Int?) -> Void)
-    func createExpense(expense: Expense, completionHandler: @escaping (Error?, Int?) -> Void)
+    func createExpense(expenseCategoryId: Int, expense: Expense, completionHandler: @escaping (Error?, Int?) -> Void)
     func editExpense(expense: Expense, completionHandler: @escaping (Error?, Int?) -> Void)
     func deleteExpense(expense: Expense, completionHandler: @escaping (Error?, Int?) -> Void)
-    func createValid(isTitleValid: Bool, isDescriptionValid: Bool, isAmountValid: Bool) -> Bool
+    func createValid(
+        isTitleValid: Bool,
+        isDescriptionValid: Bool,
+        isAmountValid: Bool,
+        hasSelectedCategory: Bool) -> Bool
 }
 
 class ExpenseUseCaseImpl: ExpenseUseCase {
@@ -26,12 +30,21 @@ class ExpenseUseCaseImpl: ExpenseUseCase {
         service?.getExpenses(completionHandler: completionHandler)
     }
 
-    func createValid(isTitleValid: Bool, isDescriptionValid: Bool, isAmountValid: Bool) -> Bool {
-        return isTitleValid && isDescriptionValid && isAmountValid
+    func createValid(
+        isTitleValid: Bool,
+        isDescriptionValid: Bool,
+        isAmountValid: Bool,
+        hasSelectedCategory: Bool
+    ) -> Bool {
+        return isTitleValid && isDescriptionValid && isAmountValid && hasSelectedCategory
     }
 
-    func createExpense(expense: Expense, completionHandler: @escaping (Error?, Int?) -> Void) {
-        service?.createExpense(expense: expense, completionHandler: completionHandler)
+    func createExpense(expenseCategoryId: Int, expense: Expense, completionHandler: @escaping (Error?, Int?) -> Void) {
+        service?.createExpense(
+            expenseCategoryId: expenseCategoryId,
+            expense: expense,
+            completionHandler: completionHandler
+        )
     }
 
     func editExpense(expense: Expense, completionHandler: @escaping (Error?, Int?) -> Void) {

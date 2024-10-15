@@ -38,7 +38,7 @@ class CreateOrEditCategoryViewModel: ObservableObject {
         description = .init(value: category.description, fieldType: .description)
     }
 
-    func createOrUpdateExpense(completionHandler: @escaping (Bool?) -> Void) {
+    func createOrUpdateCategory(completionHandler: @escaping (Bool?) -> Void) {
         if useCase.createValid(
             isNameValid: name.onValidate(),
             isDescriptionValid: description.onValidate()

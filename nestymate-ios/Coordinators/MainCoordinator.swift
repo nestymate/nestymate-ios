@@ -199,6 +199,7 @@ private extension MainCoordinator {
         let viewModel = CreateOrEditExpenseViewModel(
             expense: expense,
             useCase: expenseUseCase,
+            categoryUseCase: categoryUseCase,
             logoutService: logoutService
         )
         return CreateOrEditExpenseView(viewModel: viewModel, output: CreateOrEditExpenseView.Output(goBack: {
