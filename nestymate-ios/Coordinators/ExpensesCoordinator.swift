@@ -78,11 +78,11 @@ private extension ExpensesCoordinator {
                     page: .createExpense(nil)
                 )
             )
-        }, goToEditExpense: { expense in
+        }, goToEditExpense: { expenseId in
             self.push(
                 MainCoordinator(
                     navigationPath: self.$navigationPath,
-                    page: .createExpense(expense)
+                    page: .createExpense(expenseId)
                 )
             )
         }, logout: {

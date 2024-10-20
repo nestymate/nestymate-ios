@@ -13,7 +13,7 @@ enum LoginPage {
     case mainScreen
     case createHome
     case createCategory(Category?)
-    case createExpense(Expense?)
+    case createExpense(Int?)
     case myHome
     case signup
     case inviteUser
@@ -67,8 +67,8 @@ final class MainCoordinator: Hashable {
             myHomeView()
         case let .createCategory(category):
             createCategoryView(category: category)
-        case let .createExpense(expense):
-            createExpenseView(expense: expense)
+        case let .createExpense(expenseId):
+            createExpenseView(expenseId: expenseId)
         case .inviteUser:
             inviteUserView()
         }
@@ -195,9 +195,9 @@ private extension MainCoordinator {
         }))
     }
 
-    func createExpenseView(expense: Expense?) -> some View {
+    func createExpenseView(expenseId: Int?) -> some View {
         let viewModel = CreateOrEditExpenseViewModel(
-            expense: expense,
+            expenseId: expenseId,
             useCase: expenseUseCase,
             categoryUseCase: categoryUseCase,
             logoutService: logoutService

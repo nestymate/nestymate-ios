@@ -9,6 +9,7 @@ import Foundation
 
 protocol ExpenseUseCase {
     func getExpenses(completionHandler: @escaping ([Expense]?, Error?, Int?) -> Void)
+    func getExpense(expenseId: Int, completionHandler: @escaping (Expense?, Error?, Int?) -> Void)
     func createExpense(expenseCategoryId: Int, expense: Expense, completionHandler: @escaping (Error?, Int?) -> Void)
     func editExpense(expense: Expense, completionHandler: @escaping (Error?, Int?) -> Void)
     func deleteExpense(expense: Expense, completionHandler: @escaping (Error?, Int?) -> Void)
@@ -16,7 +17,8 @@ protocol ExpenseUseCase {
         isTitleValid: Bool,
         isDescriptionValid: Bool,
         isAmountValid: Bool,
-        hasSelectedCategory: Bool) -> Bool
+        hasSelectedCategory: Bool
+    ) -> Bool
 }
 
 class ExpenseUseCaseImpl: ExpenseUseCase {
@@ -28,6 +30,10 @@ class ExpenseUseCaseImpl: ExpenseUseCase {
 
     func getExpenses(completionHandler: @escaping ([Expense]?, Error?, Int?) -> Void) {
         service?.getExpenses(completionHandler: completionHandler)
+    }
+
+    func getExpense(expenseId: Int, completionHandler: @escaping (Expense?, Error?, Int?) -> Void) {
+        service?.getExpense(expenseId: expenseId, completionHandler: completionHandler)
     }
 
     func createValid(
@@ -55,3 +61,4 @@ class ExpenseUseCaseImpl: ExpenseUseCase {
         service?.deleteExpense(expense: expense, completionHandler: completionHandler)
     }
 }
+x

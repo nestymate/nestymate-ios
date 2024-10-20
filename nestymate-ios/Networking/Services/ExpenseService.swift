@@ -10,6 +10,7 @@ import Foundation
 
 protocol ExpenseService {
     func getExpenses(completionHandler: @escaping ([Expense]?, Error?, Int?) -> Void)
+    func getExpense(expenseId: Int, completionHandler: @escaping (Expense?, Error?, Int?) -> Void)
     func createExpense(expenseCategoryId: Int, expense: Expense, completionHandler: @escaping (Error?, Int?) -> Void)
     func editExpense(expense: Expense, completionHandler: @escaping (Error?, Int?) -> Void)
     func deleteExpense(expense: Expense, completionHandler: @escaping (Error?, Int?) -> Void)
@@ -34,6 +35,20 @@ class ExpenseServiceImpl: ExpenseService {
                 guard let data = apiResponse.data
                 else { return completionHandler(nil, .badServerResponse, apiResponse.statusCode) }
                 let response = try JSONDecoder().decode([Expense].self, from: data)
+                return completionHandler(response, apiResponse.error, apiResponse.statusCode)
+            } catch {
+                return completionHandler(nil, .badServerResponse, apiResponse.statusCode)
+            }
+        }
+    }
+
+    func getExpense(expenseId: Int, completionHandler: @escaping (Expense?, Error?, Int?) -> Void) {
+        let singleGetURL = baseUrl.appending(path: "\(expenseId)")
+        apiCall.get(url: singleGetURL, requestData: nil) { apiResponse in
+            do {
+                guard let data = apiResponse.data
+                else { return completionHandler(nil, .badServerResponse, apiResponse.statusCode) }
+                let response = try JSONDecoder().decode(Expense.self, from: data)
                 return completionHandler(response, apiResponse.error, apiResponse.statusCode)
             } catch {
                 return completionHandler(nil, .badServerResponse, apiResponse.statusCode)

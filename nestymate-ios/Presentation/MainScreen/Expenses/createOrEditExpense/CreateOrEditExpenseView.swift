@@ -71,7 +71,7 @@ extension CreateOrEditExpenseView {
 
 #Preview {
     CreateOrEditExpenseView(viewModel: CreateOrEditExpenseViewModel(
-        expense: Expense(),
+        expenseId: 0,
         useCase: ExpenseUseCaseImpl(
             service: ExpenseServiceImpl()
         ), categoryUseCase: CategoryUseCaseImpl(service: CategoryServiceImpl()),

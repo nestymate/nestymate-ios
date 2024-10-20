@@ -13,7 +13,7 @@ struct ExpensesView: View {
     struct Output {
         var goToMyHome: () -> Void
         var goToCreateExpense: () -> Void
-        var goToEditExpense: (Expense?) -> Void
+        var goToEditExpense: (Int?) -> Void
         var logout: () -> Void
     }
 
@@ -45,7 +45,7 @@ struct ExpensesView: View {
                         Text(String(item.amount))
                     }
                     .onTapGesture {
-                        self.output.goToEditExpense(item)
+                        self.output.goToEditExpense(item.id)
                     }
                 }
                 .onDelete(perform: { offset in
