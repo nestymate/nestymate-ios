@@ -21,20 +21,19 @@ class CreateOrEditExpenseViewModel: ObservableObject {
     @Published var error: Error?
     var buttonTitle: String = ""
     var pageTitle: String = ""
-    private var expense: Expense?
+    private var expenseId: Int?
 
     init(
-        expense: Expense?,
+        expenseId: Int?,
         useCase: ExpenseUseCase,
         categoryUseCase: CategoryUseCase,
         logoutService: LogoutService
     ) {
-        isEdit = expense != nil
-        self.expense = expense
+        isEdit = expenseId != nil
+        self.expenseId = expenseId
         self.useCase = useCase
         self.categoryUseCase = categoryUseCase
         self.logoutService = logoutService
-        setupExpense()
         setupTitles()
     }
 
@@ -42,8 +41,8 @@ class CreateOrEditExpenseViewModel: ObservableObject {
         !title.value.isEmpty && !description.value.isEmpty && !amount.value.isEmpty
     }
 
-    func setupExpense() {
-        guard isEdit, let expense else { return }
+    func setup(expense: Expense?) {
+        guard let expense else { return }
         title = .init(value: expense.title ?? "''", fieldType: .name)
         description = .init(value: expense.description, fieldType: .description)
         amount = .init(value: String(expense.amount), fieldType: .amount)
@@ -56,9 +55,12 @@ class CreateOrEditExpenseViewModel: ObservableObject {
             self.categories = categories ?? []
             self.shouldShowLoader = false
             self.error = error
-            if isEdit {
-                // get correct here
-                completionHandler(5, logoutService.shouldLogout(statusCode: statusCode))
+            if isEdit, let expenseId {
+                useCase.getExpense(expenseId: expenseId) { expense, error, statusCode in
+                    self.setup(expense: expense)
+                    self.error = error
+                    completionHandler(expense?.categoryId, self.logoutService.shouldLogout(statusCode: statusCode))
+                }
             } else {
                 completionHandler(nil, logoutService.shouldLogout(statusCode: statusCode))
             }
@@ -75,10 +77,11 @@ class CreateOrEditExpenseViewModel: ObservableObject {
             shouldShowLoader = true
             let amountInDouble = Double(amount.value) ?? 0.0
             let expense = Expense(
-                id: expense?.id ?? 0,
+                id: expenseId ?? 0,
                 title: title.value,
                 description: description.value,
-                amount: amountInDouble
+                amount: amountInDouble,
+                categoryId: expenseCategoryId ?? 0
             )
             let expenseCategoryId = expenseCategoryId ?? 0
             if isEdit {
