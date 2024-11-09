@@ -61,4 +61,3 @@ class ExpenseUseCaseImpl: ExpenseUseCase {
         service?.deleteExpense(expense: expense, completionHandler: completionHandler)
     }
 }
-x
