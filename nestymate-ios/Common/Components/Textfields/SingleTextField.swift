@@ -10,6 +10,17 @@ import SwiftUI
 struct SingleTextField: View {
     var fieldModel: Binding<FieldModel>
 
+    var keyboardType: UIKeyboardType {
+        switch fieldModel.fieldType.wrappedValue {
+        case .amount:
+            .numberPad
+        case .email:
+            .emailAddress
+        default:
+            .default
+        }
+    }
+
     var body: some View {
         VStack {
             TextField(
@@ -20,6 +31,7 @@ struct SingleTextField: View {
             )
             .textInputAutocapitalization(.never)
             .disableAutocorrection(true)
+            .keyboardType(keyboardType)
             Divider()
                 .frame(height: 1)
                 .background(ColorManager.separatorColour)
