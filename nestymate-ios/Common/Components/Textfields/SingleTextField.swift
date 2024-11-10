@@ -8,9 +8,9 @@
 import SwiftUI
 
 struct SingleTextField: View {
-    var fieldModel: Binding<FieldModel>
+    private var fieldModel: Binding<FieldModel>
 
-    var keyboardType: UIKeyboardType {
+    private var keyboardType: UIKeyboardType {
         switch fieldModel.fieldType.wrappedValue {
         case .amount:
             .numberPad
@@ -19,6 +19,10 @@ struct SingleTextField: View {
         default:
             .default
         }
+    }
+
+    public init(fieldModel: Binding<FieldModel>) {
+        self.fieldModel = fieldModel
     }
 
     var body: some View {
