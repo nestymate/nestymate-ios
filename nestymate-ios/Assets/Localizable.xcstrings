@@ -171,6 +171,9 @@
         }
       }
     },
+    "Done" : {
+
+    },
     "edit_category" : {
       "extractionState" : "manual",
       "localizations" : {
