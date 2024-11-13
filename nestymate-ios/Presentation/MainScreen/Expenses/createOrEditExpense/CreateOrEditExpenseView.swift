@@ -12,7 +12,6 @@ struct CreateOrEditExpenseView: View {
     @ObservedObject var viewModel: CreateOrEditExpenseViewModel
     @State private var viewDidLoad = false
     @State private var selectedCategory: Int?
-    @FocusState private var focusItem: Bool
     struct Output {
         var goBack: () -> Void
         var logout: () -> Void
@@ -31,7 +30,6 @@ struct CreateOrEditExpenseView: View {
                     SingleTextField(fieldModel: $viewModel.title)
                     SingleTextField(fieldModel: $viewModel.description)
                     SingleTextField(fieldModel: $viewModel.amount)
-                        .focused($focusItem)
 
                     ActionButton(
                         title: viewModel.buttonTitle,
@@ -45,9 +43,6 @@ struct CreateOrEditExpenseView: View {
                     }
                     Spacer()
                 }
-            }
-            .onTapGesture {
-                focusItem = false
             }
             .hiddenNavigationBarStyle()
             .background(ColorManager.backgroundColour)
