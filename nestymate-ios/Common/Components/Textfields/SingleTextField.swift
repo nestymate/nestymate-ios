@@ -9,6 +9,7 @@ import SwiftUI
 
 struct SingleTextField: View {
     private var fieldModel: Binding<FieldModel>
+    @FocusState private var isInputActive: FieldType?
 
     private var keyboardType: UIKeyboardType {
         switch fieldModel.fieldType.wrappedValue {
@@ -35,7 +36,21 @@ struct SingleTextField: View {
             )
             .textInputAutocapitalization(.never)
             .disableAutocorrection(true)
+            .focused($isInputActive, equals: fieldModel.fieldType.wrappedValue)
             .keyboardType(keyboardType)
+            .toolbar {
+                ToolbarItemGroup(placement: .keyboard) {
+                    if $isInputActive.wrappedValue == .amount {
+                        Spacer()
+
+                        Button("Done") {
+                            isInputActive = nil
+                        }
+                    } else {
+                        EmptyView()
+                    }
+                }
+            }
             Divider()
                 .frame(height: 1)
                 .background(ColorManager.separatorColour)
