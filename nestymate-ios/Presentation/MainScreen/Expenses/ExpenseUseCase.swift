@@ -18,7 +18,7 @@ protocol ExpenseUseCase {
         isDescriptionValid: Bool,
         isAmountValid: Bool,
         hasSelectedCategory: Bool
-    ) -> Bool
+    ) -> (Bool, Error?)
 }
 
 class ExpenseUseCaseImpl: ExpenseUseCase {
@@ -41,8 +41,11 @@ class ExpenseUseCaseImpl: ExpenseUseCase {
         isDescriptionValid: Bool,
         isAmountValid: Bool,
         hasSelectedCategory: Bool
-    ) -> Bool {
-        isTitleValid && isDescriptionValid && isAmountValid && hasSelectedCategory
+    ) -> (Bool, Error?) {
+        if !isTitleValid || !isDescriptionValid || !isAmountValid || !hasSelectedCategory {
+            return (false, .fillAllValues)
+        }
+        return (true, nil)
     }
 
     func createExpense(expenseCategoryId: Int, expense: Expense, completionHandler: @escaping (Error?, Int?) -> Void) {

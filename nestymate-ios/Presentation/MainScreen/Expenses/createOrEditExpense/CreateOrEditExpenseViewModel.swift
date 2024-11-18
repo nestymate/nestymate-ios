@@ -52,15 +52,28 @@ class CreateOrEditExpenseViewModel: ObservableObject {
         shouldShowLoader = true
         categoryUseCase.getCategories { [weak self] categories, error, statusCode in
             guard let self else { return }
-            self.categories = categories ?? []
-            shouldShowLoader = false
-            self.error = error
-            if isEdit, let expenseId {
-                useCase.getExpense(expenseId: expenseId) { expense, error, statusCode in
-                    self.setup(expense: expense)
-                    self.error = error
-                    completionHandler(expense?.categoryId, self.logoutService.shouldLogout(statusCode: statusCode))
-                }
+            handleResponse(categories, error, statusCode, completionHandler)
+        }
+    }
+
+    private func handleResponse(
+        _ categories: [Category]?,
+        _ error: Error?,
+        _ statusCode: Int?,
+        _ completionHandler: @escaping (Int?, Bool) -> Void
+    ) {
+        self.categories = categories ?? []
+        shouldShowLoader = false
+        self.error = error
+        if isEdit, let expenseId {
+            useCase.getExpense(expenseId: expenseId) { expense, error, statusCode in
+                self.setup(expense: expense)
+                self.error = error
+                completionHandler(expense?.categoryId, self.logoutService.shouldLogout(statusCode: statusCode))
+            }
+        } else {
+            if self.categories.count > 0 {
+                completionHandler(self.categories[0].id, logoutService.shouldLogout(statusCode: statusCode))
             } else {
                 completionHandler(nil, logoutService.shouldLogout(statusCode: statusCode))
             }
@@ -68,12 +81,14 @@ class CreateOrEditExpenseViewModel: ObservableObject {
     }
 
     func createOrUpdateExpense(expenseCategoryId: Int?, completionHandler: @escaping (Bool?) -> Void) {
-        if useCase.createValid(
+        let (shouldProceed, categoryError) = useCase.createValid(
             isTitleValid: title.onValidate(),
             isDescriptionValid: description.onValidate(),
             isAmountValid: amount.onValidate(),
             hasSelectedCategory: expenseCategoryId != nil
-        ) {
+        )
+
+        if shouldProceed {
             shouldShowLoader = true
             let amountInDouble = Double(amount.value) ?? 0.0
             let expense = Expense(
@@ -100,6 +115,8 @@ class CreateOrEditExpenseViewModel: ObservableObject {
                     completionHandler(self?.logoutService.shouldLogout(statusCode: statusCode))
                 }
             }
+        } else {
+            error = categoryError
         }
     }
 
