@@ -29,6 +29,7 @@ final class HomeScreenCoordinator: Hashable {
         self.page = page
     }
 
+    @MainActor
     @ViewBuilder
     func view() -> some View {
         switch page {
@@ -50,8 +51,8 @@ final class HomeScreenCoordinator: Hashable {
 }
 
 private extension HomeScreenCoordinator {
-    func profile() -> some View {
-        return ProfileView(output: ProfileView.Output(goToLogin: {
+    @MainActor func profile() -> some View {
+        ProfileView(output: ProfileView.Output(goToLogin: {
             self.push(
                 MainCoordinator(
                     navigationPath: self.$navigationPath,
@@ -68,7 +69,7 @@ private extension HomeScreenCoordinator {
         }))
     }
 
-    func push<V>(_ value: V) where V: Hashable {
+    func push(_ value: some Hashable) {
         navigationPath.append(value)
     }
 }

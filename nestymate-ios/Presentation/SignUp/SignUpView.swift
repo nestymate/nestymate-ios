@@ -17,8 +17,8 @@ struct SignUpView: View {
     var output: Output
     var body: some View {
         ActivityIndicatorIView(isShowing: Binding<Bool>(
-            get: { self.viewModel.shouldShowLoader ?? false },
-            set: { self.viewModel.shouldShowLoader = $0 }
+            get: { viewModel.shouldShowLoader ?? false },
+            set: { viewModel.shouldShowLoader = $0 }
         )) {
             ScrollView {
                 VStack {

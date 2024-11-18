@@ -22,7 +22,7 @@ class CategoriesViewModel: ObservableObject {
         shouldShowLoader = true
         useCase.getCategories { [weak self] categories, error, statusCode in
             guard let self else { return }
-            self.shouldShowLoader = false
+            shouldShowLoader = false
             self.error = error
             completionHandler(categories, logoutService.shouldLogout(statusCode: statusCode))
         }
@@ -32,7 +32,7 @@ class CategoriesViewModel: ObservableObject {
         shouldShowLoader = true
         useCase.deleteCategory(category: categoryToBeDelete) { [weak self] error, _ in
             guard let self else { return }
-            self.shouldShowLoader = false
+            shouldShowLoader = false
             self.error = error
             getCategories(completionHandler: completionHandler)
         }

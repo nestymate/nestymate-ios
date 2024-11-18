@@ -42,7 +42,7 @@ class ExpenseUseCaseImpl: ExpenseUseCase {
         isAmountValid: Bool,
         hasSelectedCategory: Bool
     ) -> Bool {
-        return isTitleValid && isDescriptionValid && isAmountValid && hasSelectedCategory
+        isTitleValid && isDescriptionValid && isAmountValid && hasSelectedCategory
     }
 
     func createExpense(expenseCategoryId: Int, expense: Expense, completionHandler: @escaping (Error?, Int?) -> Void) {

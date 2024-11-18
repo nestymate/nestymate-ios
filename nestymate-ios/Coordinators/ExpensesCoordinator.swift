@@ -35,6 +35,7 @@ final class ExpensesCoordinator: Hashable {
         mainScreenUseCase = MainScreenUseCaseImpl()
     }
 
+    @MainActor
     @ViewBuilder
     func view() -> some View {
         switch page {
@@ -58,11 +59,11 @@ final class ExpensesCoordinator: Hashable {
 }
 
 private extension ExpensesCoordinator {
-    func mainScreenView() -> some View {
-        return MainScreenView(viewModel: MainScreenViewModel(useCase: mainScreenUseCase), output: .init())
+    @MainActor func mainScreenView() -> some View {
+        MainScreenView(viewModel: MainScreenViewModel(useCase: mainScreenUseCase), output: .init())
     }
 
-    func expensesView() -> some View {
+    @MainActor func expensesView() -> some View {
         let viewModel = ExpensesViewModel(useCase: expenseUseCase, logoutService: logoutService)
         return ExpensesView(viewModel: viewModel, output: ExpensesView.Output(goToMyHome: {
             self.push(
@@ -95,7 +96,7 @@ private extension ExpensesCoordinator {
         }))
     }
 
-    func push<V>(_ value: V) where V: Hashable {
+    func push(_ value: some Hashable) {
         navigationPath.append(value)
     }
 }

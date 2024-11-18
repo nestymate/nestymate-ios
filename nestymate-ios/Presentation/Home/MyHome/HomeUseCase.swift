@@ -23,7 +23,7 @@ class HomeUseCaseImpl: HomeUseCase {
     }
 
     func createValid(isNameValid: Bool, isDescriptionValid: Bool, isAddressValid: Bool) -> Bool {
-        return isNameValid && isDescriptionValid && isAddressValid
+        isNameValid && isDescriptionValid && isAddressValid
     }
 
     func getHome(completionHandler: @escaping (Home?, Error?, Int?) -> Void) {

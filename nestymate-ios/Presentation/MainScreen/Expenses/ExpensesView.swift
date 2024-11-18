@@ -21,7 +21,7 @@ struct ExpensesView: View {
     var body: some View {
         VStack {
             Button(action: {
-                self.output.goToMyHome()
+                output.goToMyHome()
             }, label: {
                 HStack {
                     Text(String(localized: "my_home")).font(FontManager.title)
@@ -31,7 +31,7 @@ struct ExpensesView: View {
             HStack {
                 Spacer()
                 Button {
-                    self.output.goToCreateExpense()
+                    output.goToCreateExpense()
                 } label: {
                     Text(String(localized: "create"))
                 }
@@ -45,7 +45,7 @@ struct ExpensesView: View {
                         Text(String(item.amount))
                     }
                     .onTapGesture {
-                        self.output.goToEditExpense(item.id)
+                        output.goToEditExpense(item.id)
                     }
                 }
                 .onDelete(perform: { offset in

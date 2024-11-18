@@ -14,9 +14,9 @@ struct ActivityIndicatorIView<Content>: View where Content: View {
     var body: some View {
         GeometryReader { _ in
             ZStack(alignment: .center) {
-                self.content()
-                    .disabled(self.isShowing)
-                    .blur(radius: self.isShowing ? 3 : 0)
+                content()
+                    .disabled(isShowing)
+                    .blur(radius: isShowing ? 3 : 0)
 
                 ProgressView()
                     .progressViewStyle(CircularProgressViewStyle(tint: ColorManager.mainColor))

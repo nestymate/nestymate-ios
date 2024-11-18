@@ -27,35 +27,35 @@ enum FieldType: FieldValidatorProtocol {
     var placeHolder: String {
         switch self {
         case .username:
-            return String(localized: "username")
+            String(localized: "username")
         case .password:
-            return String(localized: "password")
+            String(localized: "password")
         case .name:
-            return String(localized: "name")
+            String(localized: "name")
         case .description:
-            return String(localized: "description")
+            String(localized: "description")
         case .address:
-            return String(localized: "address")
+            String(localized: "address")
         case .repeatPassword:
-            return String(localized: "repeat_password")
+            String(localized: "repeat_password")
         case .surname:
-            return String(localized: "surname")
+            String(localized: "surname")
         case .gender:
-            return String(localized: "gender")
+            String(localized: "gender")
         case .birthday:
-            return String(localized: "birthday")
+            String(localized: "birthday")
         case .amount:
-            return String(localized: "amount")
+            String(localized: "amount")
         case .email:
-            return String(localized: "email")
+            String(localized: "email")
         }
     }
 
     func validate(value: String) -> String? {
-        return value.isEmpty ? String(localized: "fieldTypeEmptyMessage") : nil
+        value.isEmpty ? String(localized: "fieldTypeEmptyMessage") : nil
     }
 
     func validate(value: Date) -> String? {
-        return value == .now ? String(localized: "fieldTypeEmptDateyMessage") : nil
+        value == .now ? String(localized: "fieldTypeEmptDateyMessage") : nil
     }
 }

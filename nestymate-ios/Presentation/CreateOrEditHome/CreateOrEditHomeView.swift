@@ -18,8 +18,8 @@ struct CreateOrEditHomeView: View {
     var output: Output
     var body: some View {
         ActivityIndicatorIView(isShowing: Binding<Bool>(
-            get: { self.viewModel.shouldShowLoader ?? false },
-            set: { self.viewModel.shouldShowLoader = $0 }
+            get: { viewModel.shouldShowLoader ?? false },
+            set: { viewModel.shouldShowLoader = $0 }
         )) {
             ScrollView {
                 VStack {
@@ -32,8 +32,8 @@ struct CreateOrEditHomeView: View {
                         shouldEnableButton: viewModel.shouldEnableButton
                     ) {
                         viewModel.createOrEditHome { shouldLogout in
-                            guard !shouldLogout else { return self.output.logout() }
-                            self.output.goToMainScreen()
+                            guard !shouldLogout else { return output.logout() }
+                            output.goToMainScreen()
                         }
                     }
                     Spacer()
@@ -44,7 +44,7 @@ struct CreateOrEditHomeView: View {
                 error.alert
             }
             .onAppear {
-                if viewDidLoad == false && viewModel.isEdit {
+                if viewDidLoad == false, viewModel.isEdit {
                     viewDidLoad = true
                     viewModel.getHome()
                 }

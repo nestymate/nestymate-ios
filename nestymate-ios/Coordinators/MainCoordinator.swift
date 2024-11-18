@@ -53,6 +53,7 @@ final class MainCoordinator: Hashable {
     }
 
     @ViewBuilder
+    @MainActor
     func view() -> some View {
         switch page {
         case .login:
@@ -87,7 +88,7 @@ final class MainCoordinator: Hashable {
 }
 
 private extension MainCoordinator {
-    func loginView() -> some View {
+    @MainActor func loginView() -> some View {
         let viewModel = LoginViewModel(useCase: LoginUseCaseImpl(service: loginService, homeService: homeService))
         let loginView = LoginView(
             viewModel: viewModel,
@@ -121,12 +122,12 @@ private extension MainCoordinator {
         return loginView
     }
 
-    func mainScreenView() -> some View {
-        return MainScreenView(viewModel: MainScreenViewModel(useCase: mainScreenUseCase),
-                              output: MainScreenView.Output())
+    @MainActor func mainScreenView() -> some View {
+        MainScreenView(viewModel: MainScreenViewModel(useCase: mainScreenUseCase),
+                       output: MainScreenView.Output())
     }
 
-    func createHome() -> some View {
+    @MainActor func createHome() -> some View {
         let viewModel = CreateOrEditHomeViewModel(useCase: HomeUseCaseImpl(homeService: homeService), isEdit: false)
         return CreateOrEditHomeView(viewModel: viewModel, output: CreateOrEditHomeView.Output(goToMainScreen: {
             self.push(
@@ -140,7 +141,7 @@ private extension MainCoordinator {
         }))
     }
 
-    func signUpView() -> some View {
+    @MainActor func signUpView() -> some View {
         let viewModel = SignUpViewModel(useCase: signUpUseCase)
         return SignUpView(viewModel: viewModel, output: SignUpView.Output(goToMainScreen: {
             self.push(
@@ -159,7 +160,7 @@ private extension MainCoordinator {
         }))
     }
 
-    func myHomeView() -> some View {
+    @MainActor func myHomeView() -> some View {
         let viewModel = MyHomeViewModel(homeUseCase: homeUseCase, categoryUseCase: categoryUseCase)
         return MyHomeView(viewModel: viewModel, output: MyHomeView.Output(goBack: {
             self.goBack()
@@ -182,7 +183,7 @@ private extension MainCoordinator {
         }))
     }
 
-    func createCategoryView(category: Category?) -> some View {
+    @MainActor func createCategoryView(category: Category?) -> some View {
         let viewModel = CreateOrEditCategoryViewModel(
             category: category,
             useCase: categoryUseCase,
@@ -195,7 +196,7 @@ private extension MainCoordinator {
         }))
     }
 
-    func createExpenseView(expenseId: Int?) -> some View {
+    @MainActor func createExpenseView(expenseId: Int?) -> some View {
         let viewModel = CreateOrEditExpenseViewModel(
             expenseId: expenseId,
             useCase: expenseUseCase,
@@ -209,7 +210,7 @@ private extension MainCoordinator {
         }))
     }
 
-    func inviteUserView() -> some View {
+    @MainActor func inviteUserView() -> some View {
         let viewModel = InviteUserViewModel(useCase: homeUseCase)
         return InviteUserView(viewModel: viewModel, output: InviteUserView.Output(goBack: {
             self.goBack()
@@ -231,7 +232,7 @@ private extension MainCoordinator {
         navigationPath.removeLast()
     }
 
-    func push<V>(_ value: V) where V: Hashable {
+    func push(_ value: some Hashable) {
         navigationPath.append(value)
     }
 }
