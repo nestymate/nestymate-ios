@@ -560,6 +560,23 @@
         }
       }
     },
+    "password_useraname_not_correcr" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "el" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "O κωδικός και το όνομα χρήστη δεν είναι σωστά."
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "The username and password are not correct."
+          }
+        }
+      }
+    },
     "please_choose" : {
       "localizations" : {
         "el" : {

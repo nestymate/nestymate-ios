@@ -17,6 +17,7 @@ enum Error: Identifiable {
     case passwordDoNotMatch
     case passwordNotValid
     case birthdayNotValid
+    case passwordAndUserNameDidNotMatch
 
     var alert: Alert {
         switch self {
@@ -32,6 +33,8 @@ enum Error: Identifiable {
             Alert(title: Text(String(localized: "password_not_valid")))
         case .birthdayNotValid:
             Alert(title: Text(String(localized: "fieldTypeEmptDateyMessage")))
+        case .passwordAndUserNameDidNotMatch:
+            Alert(title: Text(String(localized: "password_useraname_not_correcr")))
         }
     }
 }
