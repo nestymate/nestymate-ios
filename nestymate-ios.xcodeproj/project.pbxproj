@@ -60,6 +60,7 @@
 		01A606332C4017A900B7622E /* String+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01A606322C4017A900B7622E /* String+Extension.swift */; };
 		01B6DF992BD6A1D500E2983E /* FontManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01B6DF982BD6A1D500E2983E /* FontManager.swift */; };
 		01B6DF9E2BD6A3D900E2983E /* ColorManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01B6DF9D2BD6A3D900E2983E /* ColorManager.swift */; };
+		01C8AC512CEE6D5E00D74BF8 /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = 01C8AC502CEE6D5E00D74BF8 /* .swiftlint.yml */; };
 		01D488122C95DC910024A7F2 /* Expense.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01D488112C95DC910024A7F2 /* Expense.swift */; };
 		01D488142C95DCCC0024A7F2 /* ExpensesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01D488132C95DCCC0024A7F2 /* ExpensesViewModel.swift */; };
 		01D488182C95F5840024A7F2 /* HomeUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01D488172C95F5840024A7F2 /* HomeUseCase.swift */; };
@@ -157,6 +158,8 @@
 		01A606322C4017A900B7622E /* String+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extension.swift"; sourceTree = "<group>"; };
 		01B6DF982BD6A1D500E2983E /* FontManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FontManager.swift; sourceTree = "<group>"; };
 		01B6DF9D2BD6A3D900E2983E /* ColorManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorManager.swift; sourceTree = "<group>"; };
+		01C8AC4F2CEE6B6300D74BF8 /* .swiftformat */ = {isa = PBXFileReference; lastKnownFileType = text; path = .swiftformat; sourceTree = "<group>"; };
+		01C8AC502CEE6D5E00D74BF8 /* .swiftlint.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = "<group>"; };
 		01D488112C95DC910024A7F2 /* Expense.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Expense.swift; sourceTree = "<group>"; };
 		01D488132C95DCCC0024A7F2 /* ExpensesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpensesViewModel.swift; sourceTree = "<group>"; };
 		01D488172C95F5840024A7F2 /* HomeUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeUseCase.swift; sourceTree = "<group>"; };
@@ -291,6 +294,8 @@
 		01A1B4EE2BD10D8C0053BE3A = {
 			isa = PBXGroup;
 			children = (
+				01C8AC4F2CEE6B6300D74BF8 /* .swiftformat */,
+				01C8AC502CEE6D5E00D74BF8 /* .swiftlint.yml */,
 				01A1B4F92BD10D8D0053BE3A /* nestymate-ios */,
 				01A1B50A2BD10D930053BE3A /* nestymate-iosTests */,
 				01A1B5142BD10D930053BE3A /* nestymate-iosUITests */,
@@ -534,10 +539,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 01A1B51B2BD10D930053BE3A /* Build configuration list for PBXNativeTarget "nestymate-ios" */;
 			buildPhases = (
+				01C8AC4D2CEBC07D00D74BF8 /* ShellScript */,
 				01A1B4F32BD10D8D0053BE3A /* Sources */,
 				01A1B4F42BD10D8D0053BE3A /* Frameworks */,
 				01A1B4F52BD10D8D0053BE3A /* Resources */,
-				01B6DF9B2BD6A2CA00E2983E /* ShellScript */,
+				01C8AC4E2CEE69DF00D74BF8 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -635,6 +641,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				01C8AC512CEE6D5E00D74BF8 /* .swiftlint.yml in Resources */,
 				01A1B5022BD10D920053BE3A /* Preview Assets.xcassets in Resources */,
 				01A1B4FF2BD10D920053BE3A /* Assets.xcassets in Resources */,
 				0135047B2BD7DBE20000C859 /* Localizable.xcstrings in Resources */,
@@ -658,7 +665,7 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		01B6DF9B2BD6A2CA00E2983E /* ShellScript */ = {
+		01C8AC4D2CEBC07D00D74BF8 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
 			alwaysOutOfDate = 1;
 			buildActionMask = 2147483647;
@@ -674,7 +681,25 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "export PATH=\"$PATH:/opt/homebrew/bin\"\nif which swiftlint > /dev/null; then\n  swiftlint\nelse\n  echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
+			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\ncd BuildTools\nSDKROOT=(xcrun --sdk macosx --show-sdk-path )\n#swift package update #Uncomment this line temporarily to update the version used to the latest matching your BuildTools/Package.swift file\nswift run -c release swiftformat \"$SRCROOT\"\n";
+		};
+		01C8AC4E2CEE69DF00D74BF8 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "if command -v swiftlint >/dev/null 2>&1\nthen\n    swiftlint\nelse\n    echo \"warning: `swiftlint` command not found - See https://github.com/realm/SwiftLint#installation for installation instructions.\"\nfi\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -824,7 +849,7 @@
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
-				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu17;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -888,7 +913,7 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu17;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
@@ -935,7 +960,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "gr.selini.nestymate-ios";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
-				SWIFT_VERSION = 5.0;
+				SWIFT_VERSION = 6.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -968,7 +993,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "gr.selini.nestymate-ios";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
-				SWIFT_VERSION = 5.0;
+				SWIFT_VERSION = 6.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;

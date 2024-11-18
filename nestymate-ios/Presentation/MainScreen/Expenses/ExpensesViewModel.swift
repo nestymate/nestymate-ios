@@ -22,7 +22,7 @@ class ExpensesViewModel: ObservableObject {
         shouldShowLoader = true
         useCase.getExpenses { [weak self] expenses, error, statusCode in
             guard let self else { return }
-            self.shouldShowLoader = false
+            shouldShowLoader = false
             self.error = error
             completionHandler(expenses, logoutService.shouldLogout(statusCode: statusCode))
         }
@@ -32,7 +32,7 @@ class ExpensesViewModel: ObservableObject {
         shouldShowLoader = true
         useCase.deleteExpense(expense: expenseToBeDelete) { [weak self] error, _ in
             guard let self else { return }
-            self.shouldShowLoader = false
+            shouldShowLoader = false
             self.error = error
             getExpenses(completionHandler: completionHandler)
         }

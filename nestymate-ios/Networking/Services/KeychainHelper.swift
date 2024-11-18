@@ -11,7 +11,7 @@ import Security
 final class KeychainHelper {
     let service = "com.nestymate.LoginService"
     let account = "nestymate"
-    static let standard = KeychainHelper()
+    @MainActor static let standard = KeychainHelper()
 
     func save(_ data: Data) {
         // Create query

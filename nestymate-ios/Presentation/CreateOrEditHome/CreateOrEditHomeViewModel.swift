@@ -35,13 +35,13 @@ class CreateOrEditHomeViewModel: ObservableObject {
         shouldShowLoader = true
         useCase.getHome { [weak self] home, error, _ in
             guard let self else { return }
-            self.shouldShowLoader = false
+            shouldShowLoader = false
             self.error = error
             guard let home else { return }
             self.home = home
-            self.name = .init(value: home.name, fieldType: .name)
-            self.description = .init(value: home.description, fieldType: .description)
-            self.address = .init(value: home.address, fieldType: .address)
+            name = .init(value: home.name, fieldType: .name)
+            description = .init(value: home.description, fieldType: .description)
+            address = .init(value: home.address, fieldType: .address)
         }
     }
 

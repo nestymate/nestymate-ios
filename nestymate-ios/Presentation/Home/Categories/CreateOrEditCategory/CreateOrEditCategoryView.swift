@@ -23,8 +23,8 @@ struct CreateOrEditCategoryView: View {
             ActionButton(title: viewModel.buttonTitle, shouldEnableButton: true) {
                 viewModel.createOrUpdateCategory { shouldLogout in
                     guard let shouldLogout, !shouldLogout
-                    else { return self.output.logout() }
-                    self.output.goBack()
+                    else { return output.logout() }
+                    output.goBack()
                 }
             }
             Spacer()

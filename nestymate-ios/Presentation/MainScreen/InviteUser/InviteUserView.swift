@@ -24,8 +24,8 @@ struct InviteUserView: View {
                 shouldEnableButton: viewModel.shouldEnableButton
             ) {
                 viewModel.inviteUser { shouldLogout in
-                    guard let shouldLogout, !shouldLogout else { return self.output.logout() }
-                    self.output.goBack()
+                    guard let shouldLogout, !shouldLogout else { return output.logout() }
+                    output.goBack()
                 }
             }
             Spacer()

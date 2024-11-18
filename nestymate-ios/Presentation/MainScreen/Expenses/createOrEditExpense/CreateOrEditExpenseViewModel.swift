@@ -53,7 +53,7 @@ class CreateOrEditExpenseViewModel: ObservableObject {
         categoryUseCase.getCategories { [weak self] categories, error, statusCode in
             guard let self else { return }
             self.categories = categories ?? []
-            self.shouldShowLoader = false
+            shouldShowLoader = false
             self.error = error
             if isEdit, let expenseId {
                 useCase.getExpense(expenseId: expenseId) { expense, error, statusCode in

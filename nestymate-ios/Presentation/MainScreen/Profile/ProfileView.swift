@@ -20,13 +20,13 @@ struct ProfileView: View {
             Spacer()
             ActionButton(title: String(localized: "logout"), shouldEnableButton: true) {
                 viewModel.logout {
-                    self.output.goToLogin()
+                    output.goToLogin()
                 }
             }
 
             ActionButton(title: String(localized: "invite_user"), shouldEnableButton: true) {
                 viewModel.logout {
-                    self.output.goToInviteUser()
+                    output.goToInviteUser()
                 }
             }
             Spacer()

@@ -52,8 +52,8 @@ struct MyHomeView: View {
                 CategoriesView(
                     viewModel: viewModel,
                     output: CategoriesView.Output(
-                        goToCreateCategory: self.output.goToCreateCategory,
-                        goToEditCategory: self.output.goToEditCategory,
+                        goToCreateCategory: output.goToCreateCategory,
+                        goToEditCategory: output.goToEditCategory,
                         logout: { output.logout() }
                     )
                 )

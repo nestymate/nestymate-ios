@@ -23,7 +23,7 @@ struct CategoriesView: View {
                 Text(String(localized: "categories")).font(FontManager.title)
                 Spacer()
                 Button {
-                    self.output.goToCreateCategory()
+                    output.goToCreateCategory()
                 } label: {
                     Image(systemName: "plus")
                 }
@@ -34,7 +34,7 @@ struct CategoriesView: View {
                 ForEach(categories) { item in
                     Text(item.name)
                         .onTapGesture {
-                            self.output.goToEditCategory(item)
+                            output.goToEditCategory(item)
                         }
                 }
                 .onDelete(perform: { offset in
