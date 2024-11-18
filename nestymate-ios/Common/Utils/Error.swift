@@ -9,7 +9,7 @@ import Foundation
 import SwiftUI
 
 enum Error: Identifiable {
-    var id: Self { return self }
+    var id: Self { self }
 
     case noNetwork
     case badServerResponse

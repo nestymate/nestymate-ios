@@ -18,8 +18,8 @@ struct LoginView: View {
     var output: Output
     var body: some View {
         ActivityIndicatorIView(isShowing: Binding<Bool>(
-            get: { self.viewModel.shouldShow ?? false },
-            set: { self.viewModel.shouldShow = $0 }
+            get: { viewModel.shouldShow ?? false },
+            set: { viewModel.shouldShow = $0 }
         )) {
             VStack {
                 Text(String(localized: "login")).font(FontManager.title)
@@ -30,13 +30,13 @@ struct LoginView: View {
                     shouldEnableButton: viewModel.shouldEnableButton
                 ) {
                     viewModel.login { home in
-                        home == nil ? self.output.goToCreateHome() : self.output.goToMainScreen()
+                        home == nil ? output.goToCreateHome() : output.goToMainScreen()
                     }
                 }
                 HStack {
                     Text(String(localized: "new_to_nestymate")).font(FontManager.button)
                     Button {
-                        self.output.goToSignUp()
+                        output.goToSignUp()
                     } label: {
                         Text(String(localized: "signup_here"))
                             .foregroundColor(ColorManager.linkColour)

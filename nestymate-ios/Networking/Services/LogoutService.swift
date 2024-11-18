@@ -9,6 +9,6 @@ import Foundation
 
 class LogoutService {
     func shouldLogout(statusCode: Int?) -> Bool {
-        return statusCode == 403
+        statusCode == 403
     }
 }

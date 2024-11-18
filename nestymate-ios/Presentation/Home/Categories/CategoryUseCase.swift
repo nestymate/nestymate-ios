@@ -27,7 +27,7 @@ class CategoryUseCaseImpl: CategoryUseCase {
     }
 
     func createValid(isNameValid: Bool, isDescriptionValid: Bool) -> Bool {
-        return isNameValid && isDescriptionValid
+        isNameValid && isDescriptionValid
     }
 
     func createCategory(category: Category, completionHandler: @escaping (Error?, Int?) -> Void) {

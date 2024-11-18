@@ -20,8 +20,8 @@ struct CreateOrEditExpenseView: View {
     var output: Output
     var body: some View {
         ActivityIndicatorIView(isShowing: Binding<Bool>(
-            get: { self.viewModel.shouldShowLoader ?? false },
-            set: { self.viewModel.shouldShowLoader = $0 }
+            get: { viewModel.shouldShowLoader ?? false },
+            set: { viewModel.shouldShowLoader = $0 }
         )) {
             ScrollView {
                 VStack {
@@ -37,8 +37,8 @@ struct CreateOrEditExpenseView: View {
                     ) {
                         viewModel.createOrUpdateExpense(expenseCategoryId: selectedCategory) { shouldLogout in
                             guard let shouldLogout, !shouldLogout
-                            else { return self.output.logout() }
-                            self.output.goBack()
+                            else { return output.logout() }
+                            output.goBack()
                         }
                     }
                     Spacer()
