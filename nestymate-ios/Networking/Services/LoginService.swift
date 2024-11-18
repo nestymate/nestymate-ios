@@ -20,15 +20,23 @@ class LoginServiceImpl: LoginService {
         let url: URL = mainUrl.appending(path: "login")
         let data = try? JSONEncoder().encode(Login(username: username, password: password)) // "test123" "test321"
         apiCall.post(url: url, requestData: data, authentication: false) { apiResponse in
-            guard let data = apiResponse.data,
-                  let response = try? JSONDecoder().decode(Response.self, from: data)
-            else {
+            if apiResponse.statusCode == 200 {
+                guard let data = apiResponse.data,
+                      let response = try? JSONDecoder().decode(Response.self, from: data)
+                else {
+                    return completionHandler(.badServerResponse)
+                }
+
+                print("We received token -------", response.token)
+                let helper = KeychainHelper()
+                helper.save(Data(response.token.utf8))
+                completionHandler(apiResponse.error)
+
+            } else if apiResponse.statusCode == 401 {
+                return completionHandler(.passwordAndUserNameDidNotMatch)
+            } else {
                 return completionHandler(.badServerResponse)
             }
-            print("We received toke -------", response.token)
-            let helper = KeychainHelper()
-            helper.save(Data(response.token.utf8))
-            completionHandler(apiResponse.error)
         }
     }
 
