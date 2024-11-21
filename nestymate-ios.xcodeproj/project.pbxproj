@@ -61,6 +61,8 @@
 		01B6DF992BD6A1D500E2983E /* FontManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01B6DF982BD6A1D500E2983E /* FontManager.swift */; };
 		01B6DF9E2BD6A3D900E2983E /* ColorManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01B6DF9D2BD6A3D900E2983E /* ColorManager.swift */; };
 		01C8AC512CEE6D5E00D74BF8 /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = 01C8AC502CEE6D5E00D74BF8 /* .swiftlint.yml */; };
+		01C8AC552CEFE48100D74BF8 /* LoginServiceMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01C8AC532CEFE37E00D74BF8 /* LoginServiceMock.swift */; };
+		01C8AC572CEFE4FF00D74BF8 /* HomeServiceMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01C8AC562CEFE4F400D74BF8 /* HomeServiceMock.swift */; };
 		01D488122C95DC910024A7F2 /* Expense.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01D488112C95DC910024A7F2 /* Expense.swift */; };
 		01D488142C95DCCC0024A7F2 /* ExpensesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01D488132C95DCCC0024A7F2 /* ExpensesViewModel.swift */; };
 		01D488182C95F5840024A7F2 /* HomeUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01D488172C95F5840024A7F2 /* HomeUseCase.swift */; };
@@ -160,6 +162,8 @@
 		01B6DF9D2BD6A3D900E2983E /* ColorManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorManager.swift; sourceTree = "<group>"; };
 		01C8AC4F2CEE6B6300D74BF8 /* .swiftformat */ = {isa = PBXFileReference; lastKnownFileType = text; path = .swiftformat; sourceTree = "<group>"; };
 		01C8AC502CEE6D5E00D74BF8 /* .swiftlint.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = "<group>"; };
+		01C8AC532CEFE37E00D74BF8 /* LoginServiceMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginServiceMock.swift; sourceTree = "<group>"; };
+		01C8AC562CEFE4F400D74BF8 /* HomeServiceMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeServiceMock.swift; sourceTree = "<group>"; };
 		01D488112C95DC910024A7F2 /* Expense.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Expense.swift; sourceTree = "<group>"; };
 		01D488132C95DCCC0024A7F2 /* ExpensesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpensesViewModel.swift; sourceTree = "<group>"; };
 		01D488172C95F5840024A7F2 /* HomeUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeUseCase.swift; sourceTree = "<group>"; };
@@ -221,6 +225,7 @@
 		0106B60D2BE18A4C0024AFCB /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				01C8AC522CEFE37100D74BF8 /* MockServices */,
 				01D9A7612CBA920C0081A181 /* CategoryService.swift */,
 				0106B60E2BE18A5E0024AFCB /* LoginService.swift */,
 				0106B6252BFA5E530024AFCB /* HomeService.swift */,
@@ -385,6 +390,15 @@
 				012815A62C4D98B3001FFA2D /* UtilMethods.swift */,
 			);
 			path = Utils;
+			sourceTree = "<group>";
+		};
+		01C8AC522CEFE37100D74BF8 /* MockServices */ = {
+			isa = PBXGroup;
+			children = (
+				01C8AC562CEFE4F400D74BF8 /* HomeServiceMock.swift */,
+				01C8AC532CEFE37E00D74BF8 /* LoginServiceMock.swift */,
+			);
+			path = MockServices;
 			sourceTree = "<group>";
 		};
 		01D488192C96DCDF0024A7F2 /* MyHome */ = {
@@ -745,11 +759,13 @@
 				01A6061D2C3EBFAD00B7622E /* ProfileViewModel.swift in Sources */,
 				01D4882B2C96F13D0024A7F2 /* CategoriesViewModel.swift in Sources */,
 				018A04752BD114660051A3A4 /* LoginView.swift in Sources */,
+				01C8AC552CEFE48100D74BF8 /* LoginServiceMock.swift in Sources */,
 				0106B60F2BE18A5E0024AFCB /* LoginService.swift in Sources */,
 				01D9A75E2CA872290081A181 /* DateUtils.swift in Sources */,
 				01A606272C3FC41E00B7622E /* SignUpView.swift in Sources */,
 				0106B6142BE191640024AFCB /* LoginViewModel.swift in Sources */,
 				01A606292C3FC5ED00B7622E /* SignUpViewModel.swift in Sources */,
+				01C8AC572CEFE4FF00D74BF8 /* HomeServiceMock.swift in Sources */,
 				0106B6222BFA5D910024AFCB /* CreateOrEditHomeViewModel.swift in Sources */,
 				01D7922E2C8D9AFD00EDA9D2 /* ExpensesCoordinator.swift in Sources */,
 				0153EB4E2C9740C00033D970 /* InviteUserViewModel.swift in Sources */,
