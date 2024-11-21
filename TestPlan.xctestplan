@@ -1,0 +1,24 @@
+{
+  "configurations" : [
+    {
+      "id" : "BCFA7759-06ED-445D-9966-2D2B0ABA3387",
+      "name" : "Configuration 1",
+      "options" : {
+
+      }
+    }
+  ],
+  "defaultOptions" : {
+    "testTimeoutsEnabled" : true
+  },
+  "testTargets" : [
+    {
+      "target" : {
+        "containerPath" : "container:nestymate-ios.xcodeproj",
+        "identifier" : "01A1B5062BD10D930053BE3A",
+        "name" : "nestymate-iosTests"
+      }
+    }
+  ],
+  "version" : 1
+}

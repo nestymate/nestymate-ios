@@ -37,9 +37,7 @@
 		012815A72C4D98B3001FFA2D /* UtilMethods.swift in Sources */ = {isa = PBXBuildFile; fileRef = 012815A62C4D98B3001FFA2D /* UtilMethods.swift */; };
 		013504792BD7D9950000C859 /* ActionButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 013504782BD7D9950000C859 /* ActionButton.swift */; };
 		0135047B2BD7DBE20000C859 /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = 0135047A2BD7DBE20000C859 /* Localizable.xcstrings */; };
-		0135047D2BD8F95E0000C859 /* NestymateTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0135047C2BD8F95E0000C859 /* NestymateTests.swift */; };
-		013504822BD8FA6E0000C859 /* NestymateUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0135047E2BD8F96B0000C859 /* NestymateUITests.swift */; };
-		013504832BD8FA730000C859 /* NestymateUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0135047F2BD8F96B0000C859 /* NestymateUITestsLaunchTests.swift */; };
+		0135047D2BD8F95E0000C859 /* LoginTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0135047C2BD8F95E0000C859 /* LoginTests.swift */; };
 		013504852BD900460000C859 /* PaddingManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 013504842BD900460000C859 /* PaddingManager.swift */; };
 		013504872BD90FDB0000C859 /* SingleTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 013504862BD90FDB0000C859 /* SingleTextField.swift */; };
 		0153EB4C2C9740B50033D970 /* InviteUserView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0153EB4B2C9740B40033D970 /* InviteUserView.swift */; };
@@ -61,6 +59,11 @@
 		01B6DF992BD6A1D500E2983E /* FontManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01B6DF982BD6A1D500E2983E /* FontManager.swift */; };
 		01B6DF9E2BD6A3D900E2983E /* ColorManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01B6DF9D2BD6A3D900E2983E /* ColorManager.swift */; };
 		01C8AC512CEE6D5E00D74BF8 /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = 01C8AC502CEE6D5E00D74BF8 /* .swiftlint.yml */; };
+		01C8AC552CEFE48100D74BF8 /* LoginServiceMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01C8AC532CEFE37E00D74BF8 /* LoginServiceMock.swift */; };
+		01C8AC572CEFE4FF00D74BF8 /* HomeServiceMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01C8AC562CEFE4F400D74BF8 /* HomeServiceMock.swift */; };
+		01C8AC5D2CFB7E4000D74BF8 /* HomeServiceFailedMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01C8AC5B2CFB7E4000D74BF8 /* HomeServiceFailedMock.swift */; };
+		01C8AC5E2CFB7E4000D74BF8 /* LoginServiceFailedMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01C8AC5C2CFB7E4000D74BF8 /* LoginServiceFailedMock.swift */; };
+		01C8AC642CFCBEE200D74BF8 /* TestPlan.xctestplan in Resources */ = {isa = PBXBuildFile; fileRef = 01C8AC632CFCBEE200D74BF8 /* TestPlan.xctestplan */; };
 		01D488122C95DC910024A7F2 /* Expense.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01D488112C95DC910024A7F2 /* Expense.swift */; };
 		01D488142C95DCCC0024A7F2 /* ExpensesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01D488132C95DCCC0024A7F2 /* ExpensesViewModel.swift */; };
 		01D488182C95F5840024A7F2 /* HomeUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01D488172C95F5840024A7F2 /* HomeUseCase.swift */; };
@@ -85,13 +88,6 @@
 
 /* Begin PBXContainerItemProxy section */
 		01A1B5082BD10D930053BE3A /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 01A1B4EF2BD10D8C0053BE3A /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 01A1B4F62BD10D8D0053BE3A;
-			remoteInfo = "nestymate-ios";
-		};
-		01A1B5122BD10D930053BE3A /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 01A1B4EF2BD10D8C0053BE3A /* Project object */;
 			proxyType = 1;
@@ -132,9 +128,7 @@
 		012815A62C4D98B3001FFA2D /* UtilMethods.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UtilMethods.swift; sourceTree = "<group>"; };
 		013504782BD7D9950000C859 /* ActionButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionButton.swift; sourceTree = "<group>"; };
 		0135047A2BD7DBE20000C859 /* Localizable.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = Localizable.xcstrings; sourceTree = "<group>"; };
-		0135047C2BD8F95E0000C859 /* NestymateTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NestymateTests.swift; sourceTree = "<group>"; };
-		0135047E2BD8F96B0000C859 /* NestymateUITests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NestymateUITests.swift; sourceTree = "<group>"; };
-		0135047F2BD8F96B0000C859 /* NestymateUITestsLaunchTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NestymateUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		0135047C2BD8F95E0000C859 /* LoginTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginTests.swift; sourceTree = "<group>"; };
 		013504842BD900460000C859 /* PaddingManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaddingManager.swift; sourceTree = "<group>"; };
 		013504862BD90FDB0000C859 /* SingleTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleTextField.swift; sourceTree = "<group>"; };
 		0153EB4B2C9740B40033D970 /* InviteUserView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InviteUserView.swift; sourceTree = "<group>"; };
@@ -145,7 +139,6 @@
 		01A1B4FE2BD10D920053BE3A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		01A1B5012BD10D920053BE3A /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		01A1B5072BD10D930053BE3A /* nestymate-iosTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "nestymate-iosTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
-		01A1B5112BD10D930053BE3A /* nestymate-iosUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "nestymate-iosUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		01A6061C2C3EBFAD00B7622E /* ProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewModel.swift; sourceTree = "<group>"; };
 		01A6061E2C3EC01400B7622E /* ProfileUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileUseCase.swift; sourceTree = "<group>"; };
 		01A606202C3EC86200B7622E /* HomeScreenCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeScreenCoordinator.swift; sourceTree = "<group>"; };
@@ -160,6 +153,11 @@
 		01B6DF9D2BD6A3D900E2983E /* ColorManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorManager.swift; sourceTree = "<group>"; };
 		01C8AC4F2CEE6B6300D74BF8 /* .swiftformat */ = {isa = PBXFileReference; lastKnownFileType = text; path = .swiftformat; sourceTree = "<group>"; };
 		01C8AC502CEE6D5E00D74BF8 /* .swiftlint.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = "<group>"; };
+		01C8AC532CEFE37E00D74BF8 /* LoginServiceMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginServiceMock.swift; sourceTree = "<group>"; };
+		01C8AC562CEFE4F400D74BF8 /* HomeServiceMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeServiceMock.swift; sourceTree = "<group>"; };
+		01C8AC5B2CFB7E4000D74BF8 /* HomeServiceFailedMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeServiceFailedMock.swift; sourceTree = "<group>"; };
+		01C8AC5C2CFB7E4000D74BF8 /* LoginServiceFailedMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginServiceFailedMock.swift; sourceTree = "<group>"; };
+		01C8AC632CFCBEE200D74BF8 /* TestPlan.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = TestPlan.xctestplan; sourceTree = "<group>"; };
 		01D488112C95DC910024A7F2 /* Expense.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Expense.swift; sourceTree = "<group>"; };
 		01D488132C95DCCC0024A7F2 /* ExpensesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpensesViewModel.swift; sourceTree = "<group>"; };
 		01D488172C95F5840024A7F2 /* HomeUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeUseCase.swift; sourceTree = "<group>"; };
@@ -197,13 +195,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		01A1B50E2BD10D930053BE3A /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -221,6 +212,7 @@
 		0106B60D2BE18A4C0024AFCB /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				01C8AC522CEFE37100D74BF8 /* MockServices */,
 				01D9A7612CBA920C0081A181 /* CategoryService.swift */,
 				0106B60E2BE18A5E0024AFCB /* LoginService.swift */,
 				0106B6252BFA5E530024AFCB /* HomeService.swift */,
@@ -294,11 +286,11 @@
 		01A1B4EE2BD10D8C0053BE3A = {
 			isa = PBXGroup;
 			children = (
+				01C8AC632CFCBEE200D74BF8 /* TestPlan.xctestplan */,
 				01C8AC4F2CEE6B6300D74BF8 /* .swiftformat */,
 				01C8AC502CEE6D5E00D74BF8 /* .swiftlint.yml */,
 				01A1B4F92BD10D8D0053BE3A /* nestymate-ios */,
 				01A1B50A2BD10D930053BE3A /* nestymate-iosTests */,
-				01A1B5142BD10D930053BE3A /* nestymate-iosUITests */,
 				01A1B4F82BD10D8D0053BE3A /* Products */,
 			);
 			sourceTree = "<group>";
@@ -308,7 +300,6 @@
 			children = (
 				01A1B4F72BD10D8D0053BE3A /* nestymate-ios.app */,
 				01A1B5072BD10D930053BE3A /* nestymate-iosTests.xctest */,
-				01A1B5112BD10D930053BE3A /* nestymate-iosUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -339,18 +330,9 @@
 		01A1B50A2BD10D930053BE3A /* nestymate-iosTests */ = {
 			isa = PBXGroup;
 			children = (
-				0135047C2BD8F95E0000C859 /* NestymateTests.swift */,
+				0135047C2BD8F95E0000C859 /* LoginTests.swift */,
 			);
 			path = "nestymate-iosTests";
-			sourceTree = "<group>";
-		};
-		01A1B5142BD10D930053BE3A /* nestymate-iosUITests */ = {
-			isa = PBXGroup;
-			children = (
-				0135047E2BD8F96B0000C859 /* NestymateUITests.swift */,
-				0135047F2BD8F96B0000C859 /* NestymateUITestsLaunchTests.swift */,
-			);
-			path = "nestymate-iosUITests";
 			sourceTree = "<group>";
 		};
 		01A6062E2C3FCBBF00B7622E /* Extensions */ = {
@@ -385,6 +367,25 @@
 				012815A62C4D98B3001FFA2D /* UtilMethods.swift */,
 			);
 			path = Utils;
+			sourceTree = "<group>";
+		};
+		01C8AC522CEFE37100D74BF8 /* MockServices */ = {
+			isa = PBXGroup;
+			children = (
+				01C8AC582CFB7E2000D74BF8 /* FailedServices */,
+				01C8AC562CEFE4F400D74BF8 /* HomeServiceMock.swift */,
+				01C8AC532CEFE37E00D74BF8 /* LoginServiceMock.swift */,
+			);
+			path = MockServices;
+			sourceTree = "<group>";
+		};
+		01C8AC582CFB7E2000D74BF8 /* FailedServices */ = {
+			isa = PBXGroup;
+			children = (
+				01C8AC5B2CFB7E4000D74BF8 /* HomeServiceFailedMock.swift */,
+				01C8AC5C2CFB7E4000D74BF8 /* LoginServiceFailedMock.swift */,
+			);
+			path = FailedServices;
 			sourceTree = "<group>";
 		};
 		01D488192C96DCDF0024A7F2 /* MyHome */ = {
@@ -572,24 +573,6 @@
 			productReference = 01A1B5072BD10D930053BE3A /* nestymate-iosTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		01A1B5102BD10D930053BE3A /* nestymate-iosUITests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 01A1B5212BD10D930053BE3A /* Build configuration list for PBXNativeTarget "nestymate-iosUITests" */;
-			buildPhases = (
-				01A1B50D2BD10D930053BE3A /* Sources */,
-				01A1B50E2BD10D930053BE3A /* Frameworks */,
-				01A1B50F2BD10D930053BE3A /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				01A1B5132BD10D930053BE3A /* PBXTargetDependency */,
-			);
-			name = "nestymate-iosUITests";
-			productName = "nestymate-iosUITests";
-			productReference = 01A1B5112BD10D930053BE3A /* nestymate-iosUITests.xctest */;
-			productType = "com.apple.product-type.bundle.ui-testing";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -604,10 +587,6 @@
 						CreatedOnToolsVersion = 15.2;
 					};
 					01A1B5062BD10D930053BE3A = {
-						CreatedOnToolsVersion = 15.2;
-						TestTargetID = 01A1B4F62BD10D8D0053BE3A;
-					};
-					01A1B5102BD10D930053BE3A = {
 						CreatedOnToolsVersion = 15.2;
 						TestTargetID = 01A1B4F62BD10D8D0053BE3A;
 					};
@@ -631,7 +610,6 @@
 			targets = (
 				01A1B4F62BD10D8D0053BE3A /* nestymate-ios */,
 				01A1B5062BD10D930053BE3A /* nestymate-iosTests */,
-				01A1B5102BD10D930053BE3A /* nestymate-iosUITests */,
 			);
 		};
 /* End PBXProject section */
@@ -644,18 +622,12 @@
 				01C8AC512CEE6D5E00D74BF8 /* .swiftlint.yml in Resources */,
 				01A1B5022BD10D920053BE3A /* Preview Assets.xcassets in Resources */,
 				01A1B4FF2BD10D920053BE3A /* Assets.xcassets in Resources */,
+				01C8AC642CFCBEE200D74BF8 /* TestPlan.xctestplan in Resources */,
 				0135047B2BD7DBE20000C859 /* Localizable.xcstrings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		01A1B5052BD10D930053BE3A /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		01A1B50F2BD10D930053BE3A /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -728,6 +700,8 @@
 				01D9A7622CBA92150081A181 /* CategoryService.swift in Sources */,
 				013504872BD90FDB0000C859 /* SingleTextField.swift in Sources */,
 				0106B62E2BFA78B50024AFCB /* MainScreenViewModel.swift in Sources */,
+				01C8AC5D2CFB7E4000D74BF8 /* HomeServiceFailedMock.swift in Sources */,
+				01C8AC5E2CFB7E4000D74BF8 /* LoginServiceFailedMock.swift in Sources */,
 				0106B61B2BE811B30024AFCB /* AppCoordinator.swift in Sources */,
 				012815952C4830B8001FFA2D /* APICalls.swift in Sources */,
 				012815912C413539001FFA2D /* FieldModel.swift in Sources */,
@@ -745,11 +719,13 @@
 				01A6061D2C3EBFAD00B7622E /* ProfileViewModel.swift in Sources */,
 				01D4882B2C96F13D0024A7F2 /* CategoriesViewModel.swift in Sources */,
 				018A04752BD114660051A3A4 /* LoginView.swift in Sources */,
+				01C8AC552CEFE48100D74BF8 /* LoginServiceMock.swift in Sources */,
 				0106B60F2BE18A5E0024AFCB /* LoginService.swift in Sources */,
 				01D9A75E2CA872290081A181 /* DateUtils.swift in Sources */,
 				01A606272C3FC41E00B7622E /* SignUpView.swift in Sources */,
 				0106B6142BE191640024AFCB /* LoginViewModel.swift in Sources */,
 				01A606292C3FC5ED00B7622E /* SignUpViewModel.swift in Sources */,
+				01C8AC572CEFE4FF00D74BF8 /* HomeServiceMock.swift in Sources */,
 				0106B6222BFA5D910024AFCB /* CreateOrEditHomeViewModel.swift in Sources */,
 				01D7922E2C8D9AFD00EDA9D2 /* ExpensesCoordinator.swift in Sources */,
 				0153EB4E2C9740C00033D970 /* InviteUserViewModel.swift in Sources */,
@@ -782,16 +758,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0135047D2BD8F95E0000C859 /* NestymateTests.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		01A1B50D2BD10D930053BE3A /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				013504832BD8FA730000C859 /* NestymateUITestsLaunchTests.swift in Sources */,
-				013504822BD8FA6E0000C859 /* NestymateUITests.swift in Sources */,
+				0135047D2BD8F95E0000C859 /* LoginTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -802,11 +769,6 @@
 			isa = PBXTargetDependency;
 			target = 01A1B4F62BD10D8D0053BE3A /* nestymate-ios */;
 			targetProxy = 01A1B5082BD10D930053BE3A /* PBXContainerItemProxy */;
-		};
-		01A1B5132BD10D930053BE3A /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 01A1B4F62BD10D8D0053BE3A /* nestymate-ios */;
-			targetProxy = 01A1B5122BD10D930053BE3A /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -1036,40 +998,6 @@
 			};
 			name = Release;
 		};
-		01A1B5222BD10D930053BE3A /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 4L623JD48M;
-				GENERATE_INFOPLIST_FILE = YES;
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "gr.selini.nestymate-iosUITests";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_EMIT_LOC_STRINGS = NO;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = "nestymate-ios";
-			};
-			name = Debug;
-		};
-		01A1B5232BD10D930053BE3A /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 4L623JD48M;
-				GENERATE_INFOPLIST_FILE = YES;
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "gr.selini.nestymate-iosUITests";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_EMIT_LOC_STRINGS = NO;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = "nestymate-ios";
-			};
-			name = Release;
-		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -1096,15 +1024,6 @@
 			buildConfigurations = (
 				01A1B51F2BD10D930053BE3A /* Debug */,
 				01A1B5202BD10D930053BE3A /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		01A1B5212BD10D930053BE3A /* Build configuration list for PBXNativeTarget "nestymate-iosUITests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				01A1B5222BD10D930053BE3A /* Debug */,
-				01A1B5232BD10D930053BE3A /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
