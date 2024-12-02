@@ -653,7 +653,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\ncd BuildTools\nSDKROOT=(xcrun --sdk macosx --show-sdk-path )\n#swift package update #Uncomment this line temporarily to update the version used to the latest matching your BuildTools/Package.swift file\nswift run -c release swiftformat \"$SRCROOT\"\n";
+			shellScript = "if [ \"$CI\" != \"true\" ]; then\n  echo \"Running script in CI environment\"\ncd BuildTools\nSDKROOT=(xcrun --sdk macosx --show-sdk-path )\n#swift package update #Uncomment this line temporarily to update the version used to the latest matching your BuildTools/Package.swift file\nswift run -c release swiftformat \"$SRCROOT\"\nelse\n  echo \"Skipping Run Script Phase in CI\"\nfi\n";
 		};
 		01C8AC4E2CEE69DF00D74BF8 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
