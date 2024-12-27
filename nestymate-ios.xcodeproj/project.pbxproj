@@ -44,6 +44,8 @@
 		0153EB4E2C9740C00033D970 /* InviteUserViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0153EB4D2C9740C00033D970 /* InviteUserViewModel.swift */; };
 		0153EB502C98BB330033D970 /* LogoutService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0153EB4F2C98BB330033D970 /* LogoutService.swift */; };
 		018A04752BD114660051A3A4 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 018A04742BD114660051A3A4 /* LoginView.swift */; };
+		0192BB402D1ECC74005A0CD7 /* SignUpTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0192BB3F2D1ECC69005A0CD7 /* SignUpTests.swift */; };
+		0192BB432D1ED603005A0CD7 /* SignUpTestsData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0192BB422D1ED602005A0CD7 /* SignUpTestsData.swift */; };
 		01A1B4FF2BD10D920053BE3A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 01A1B4FE2BD10D920053BE3A /* Assets.xcassets */; };
 		01A1B5022BD10D920053BE3A /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 01A1B5012BD10D920053BE3A /* Preview Assets.xcassets */; };
 		01A6061D2C3EBFAD00B7622E /* ProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01A6061C2C3EBFAD00B7622E /* ProfileViewModel.swift */; };
@@ -135,6 +137,8 @@
 		0153EB4D2C9740C00033D970 /* InviteUserViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InviteUserViewModel.swift; sourceTree = "<group>"; };
 		0153EB4F2C98BB330033D970 /* LogoutService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogoutService.swift; sourceTree = "<group>"; };
 		018A04742BD114660051A3A4 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
+		0192BB3F2D1ECC69005A0CD7 /* SignUpTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpTests.swift; sourceTree = "<group>"; };
+		0192BB422D1ED602005A0CD7 /* SignUpTestsData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpTestsData.swift; sourceTree = "<group>"; };
 		01A1B4F72BD10D8D0053BE3A /* nestymate-ios.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "nestymate-ios.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		01A1B4FE2BD10D920053BE3A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		01A1B5012BD10D920053BE3A /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
@@ -283,6 +287,14 @@
 			path = Presentation;
 			sourceTree = "<group>";
 		};
+		0192BB412D1ED5F7005A0CD7 /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				0192BB422D1ED602005A0CD7 /* SignUpTestsData.swift */,
+			);
+			path = Data;
+			sourceTree = "<group>";
+		};
 		01A1B4EE2BD10D8C0053BE3A = {
 			isa = PBXGroup;
 			children = (
@@ -330,6 +342,8 @@
 		01A1B50A2BD10D930053BE3A /* nestymate-iosTests */ = {
 			isa = PBXGroup;
 			children = (
+				0192BB412D1ED5F7005A0CD7 /* Data */,
+				0192BB3F2D1ECC69005A0CD7 /* SignUpTests.swift */,
 				0135047C2BD8F95E0000C859 /* LoginTests.swift */,
 			);
 			path = "nestymate-iosTests";
@@ -759,6 +773,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				0135047D2BD8F95E0000C859 /* LoginTests.swift in Sources */,
+				0192BB432D1ED603005A0CD7 /* SignUpTestsData.swift in Sources */,
+				0192BB402D1ECC74005A0CD7 /* SignUpTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
