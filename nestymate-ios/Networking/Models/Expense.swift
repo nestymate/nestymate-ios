@@ -12,9 +12,9 @@ public struct Expense: Encodable, Decodable {
     public let title: String?
     public let description: String
     public let amount: Double
-    public let categoryId: Int
+    public let categoryId: Int?
 
-    init(id: Int, title: String?, description: String, amount: Double, categoryId: Int) {
+    init(id: Int, title: String?, description: String, amount: Double, categoryId: Int?) {
         self.id = id
         self.title = title
         self.description = description
