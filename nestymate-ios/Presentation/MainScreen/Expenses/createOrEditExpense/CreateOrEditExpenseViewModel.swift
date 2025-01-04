@@ -84,8 +84,7 @@ class CreateOrEditExpenseViewModel: ObservableObject {
         let (shouldProceed, categoryError) = useCase.createValid(
             isTitleValid: title.onValidate(),
             isDescriptionValid: description.onValidate(),
-            isAmountValid: amount.onValidate(),
-            hasSelectedCategory: expenseCategoryId != nil
+            isAmountValid: amount.onValidate()
         )
 
         if shouldProceed {
@@ -96,7 +95,7 @@ class CreateOrEditExpenseViewModel: ObservableObject {
                 title: title.value,
                 description: description.value,
                 amount: amountInDouble,
-                categoryId: expenseCategoryId ?? 0
+                categoryId: expenseCategoryId
             )
             let expenseCategoryId = expenseCategoryId ?? 0
             if isEdit {
@@ -107,7 +106,6 @@ class CreateOrEditExpenseViewModel: ObservableObject {
                 }
             } else {
                 useCase.createExpense(
-                    expenseCategoryId: expenseCategoryId,
                     expense: expense
                 ) { [weak self] error, statusCode in
                     self?.shouldShowLoader = false
