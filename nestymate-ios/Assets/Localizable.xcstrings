@@ -11,6 +11,23 @@
         }
       }
     },
+    "about" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "el" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Πληροφορίες"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "About"
+          }
+        }
+      }
+    },
     "address" : {
       "localizations" : {
         "el" : {
@@ -172,7 +189,14 @@
       }
     },
     "Done" : {
-
+      "localizations" : {
+        "el" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Done"
+          }
+        }
+      }
     },
     "edit_category" : {
       "extractionState" : "manual",
