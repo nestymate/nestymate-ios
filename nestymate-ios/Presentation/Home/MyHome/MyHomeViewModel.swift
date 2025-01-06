@@ -15,7 +15,8 @@ struct Menu: Hashable {
 class MyHomeViewModel: ObservableObject {
     let homeUseCase: HomeUseCase
     let categoryUseCase: CategoryUseCase
-    let categories = [Menu(name: String(localized: "my_home"), id: 0),
+    let title = String(localized: "my_home")
+    let categories = [Menu(name: String(localized: "about"), id: 0),
                       Menu(name: String(localized: "categories"), id: 1)]
 
     init(homeUseCase: HomeUseCase, categoryUseCase: CategoryUseCase) {
