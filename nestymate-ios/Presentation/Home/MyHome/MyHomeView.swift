@@ -59,6 +59,7 @@ struct MyHomeView: View {
                 )
             }
         }
+        .navigationBarTitle(viewModel.title, displayMode: .inline)
         .background(ColorManager.backgroundColour)
         .hiddenNavigationBarStyle()
     }
