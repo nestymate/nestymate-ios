@@ -5,9 +5,8 @@
 //  Created by Selini Kyriazidou on 27/12/24.
 //
 
-import Testing
-
 @testable import nestymate_ios
+import Testing
 
 class SignUpTests {
     private var useCase: SignUpUseCase {
