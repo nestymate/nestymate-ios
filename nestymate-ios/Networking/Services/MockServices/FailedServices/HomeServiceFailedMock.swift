@@ -21,6 +21,6 @@ final class HomeServiceFailedMock: HomeService {
     }
 
     func getHome(completionHandler: @escaping (Home?, Error?, Int?) -> Void) {
-        completionHandler(nil, nil, 500)
+        completionHandler(nil, .badServerResponse, 500)
     }
 }
