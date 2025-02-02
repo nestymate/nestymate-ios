@@ -86,6 +86,7 @@
 		01D9A75E2CA872290081A181 /* DateUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01D9A75D2CA872270081A181 /* DateUtils.swift */; };
 		01D9A7602CB5C2E70081A181 /* HomeUserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01D9A75F2CB5C2D60081A181 /* HomeUserDefaults.swift */; };
 		01D9A7622CBA92150081A181 /* CategoryService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01D9A7612CBA920C0081A181 /* CategoryService.swift */; };
+		01F1CB212D50025C006276C5 /* ProfileTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01F1CB202D500251006276C5 /* ProfileTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -182,6 +183,7 @@
 		01D9A75D2CA872270081A181 /* DateUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateUtils.swift; sourceTree = "<group>"; };
 		01D9A75F2CB5C2D60081A181 /* HomeUserDefaults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeUserDefaults.swift; sourceTree = "<group>"; };
 		01D9A7612CBA920C0081A181 /* CategoryService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryService.swift; sourceTree = "<group>"; };
+		01F1CB202D500251006276C5 /* ProfileTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -345,6 +347,7 @@
 				0192BB412D1ED5F7005A0CD7 /* Data */,
 				0192BB3F2D1ECC69005A0CD7 /* SignUpTests.swift */,
 				0135047C2BD8F95E0000C859 /* LoginTests.swift */,
+				01F1CB202D500251006276C5 /* ProfileTests.swift */,
 			);
 			path = "nestymate-iosTests";
 			sourceTree = "<group>";
@@ -773,6 +776,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				0135047D2BD8F95E0000C859 /* LoginTests.swift in Sources */,
+				01F1CB212D50025C006276C5 /* ProfileTests.swift in Sources */,
 				0192BB432D1ED603005A0CD7 /* SignUpTestsData.swift in Sources */,
 				0192BB402D1ECC74005A0CD7 /* SignUpTests.swift in Sources */,
 			);
