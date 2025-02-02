@@ -9,47 +9,48 @@ import Testing
 
 @testable import nestymate_ios
 
-var viewModel: LoginViewModel {
-    LoginViewModel(
-        useCase: LoginUseCaseImpl(
-            service: LoginServiceMock(),
-            homeService: HomeServiceMock(hasHome: true)
-        )
-    )
-}
-
-var viewModelNotHome: LoginViewModel {
-    LoginViewModel(
-        useCase: LoginUseCaseImpl(
-            service: LoginServiceMock(),
-            homeService: HomeServiceMock(hasHome: false)
-        )
-    )
-}
-
-var viewModelFailed: LoginViewModel {
-    LoginViewModel(
-        useCase: LoginUseCaseImpl(
-            service: LoginServiceFailedMock(),
-            homeService: HomeServiceFailedMock()
-        )
-    )
-}
-
-@MainActor @Test func successfullLoginHasHome() {
-    viewModel.login { home in
-        #expect(home != nil)
+class LoginTests {
+    private var useCase: LoginUseCase {
+        LoginUseCaseImpl(service: LoginServiceMock(), homeService: HomeServiceMock(hasHome: true))
     }
-}
 
-@MainActor @Test func successfullLoginHasNotHaveHome() {
-    viewModelNotHome.login { home in
-        #expect(home == nil)
+    private var useCaseNotHome: LoginUseCase {
+        LoginUseCaseImpl(service: LoginServiceMock(), homeService: HomeServiceMock(hasHome: false))
     }
-}
 
-@MainActor @Test func unsuccessfullLogin() {
-    viewModelFailed.login { home in
-        #expect(home == nil)
+    private var useCaseFailed: LoginUseCase {
+        LoginUseCaseImpl(service: LoginServiceFailedMock(), homeService: HomeServiceFailedMock())
+    }
+
+    @MainActor @Test func loginValid() {
+        #expect(useCase.loginValid(isUsernameValid: true, isPasswordValid: true))
+    }
+
+    @MainActor @Test func loginNotValid() {
+        #expect(!useCase.loginValid(isUsernameValid: false, isPasswordValid: true))
+    }
+
+    @MainActor @Test func successfulLoginHasHome() {
+        useCase.login(username: "selini", password: "Sadface123!") { error in
+            #expect(error == nil)
+        }
+    }
+
+    @MainActor @Test func unsuccessfulLogin() {
+        useCaseFailed.login(username: "", password: "") { error in
+            #expect(error != nil)
+        }
+    }
+
+    @MainActor @Test func successfulCheckHomeForUser() {
+        useCase.checkHomeForUser { home, _, _ in
+            #expect(home != nil)
+        }
+    }
+
+    @MainActor @Test func unsuccessfulCheckHomeForUser() {
+        useCaseFailed.checkHomeForUser { _, error, _ in
+            #expect(error != nil)
+        }
     }
 }

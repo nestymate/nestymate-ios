@@ -9,15 +9,15 @@ import Testing
 
 @testable import nestymate_ios
 
-var useCase: SignUpUseCase {
-    SignUpUseCaseImpl(service: LoginServiceMock(), homeService: HomeServiceMock(hasHome: true))
-}
-
-var useCaseFailed: SignUpUseCase {
-    SignUpUseCaseImpl(service: LoginServiceFailedMock(), homeService: HomeServiceFailedMock())
-}
-
 class SignUpTests {
+    private var useCase: SignUpUseCase {
+        SignUpUseCaseImpl(service: LoginServiceMock(), homeService: HomeServiceMock(hasHome: true))
+    }
+
+    private var useCaseFailed: SignUpUseCase {
+        SignUpUseCaseImpl(service: LoginServiceFailedMock(), homeService: HomeServiceFailedMock())
+    }
+
     @Test func shouldProceedToSignUpCorrectUser() {
         let result = useCase.shouldProceedToSignUp(user: SignUpTestsData.correctUser)
         #expect(result.0)
