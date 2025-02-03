@@ -87,6 +87,8 @@
 		01D9A7602CB5C2E70081A181 /* HomeUserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01D9A75F2CB5C2D60081A181 /* HomeUserDefaults.swift */; };
 		01D9A7622CBA92150081A181 /* CategoryService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01D9A7612CBA920C0081A181 /* CategoryService.swift */; };
 		01F1CB212D50025C006276C5 /* ProfileTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01F1CB202D500251006276C5 /* ProfileTests.swift */; };
+		01F1CB232D513B4F006276C5 /* CreateHomeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01F1CB222D513B3D006276C5 /* CreateHomeTests.swift */; };
+		01F1CB252D513D85006276C5 /* HomeTestsData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01F1CB242D513D7D006276C5 /* HomeTestsData.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -184,6 +186,8 @@
 		01D9A75F2CB5C2D60081A181 /* HomeUserDefaults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeUserDefaults.swift; sourceTree = "<group>"; };
 		01D9A7612CBA920C0081A181 /* CategoryService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryService.swift; sourceTree = "<group>"; };
 		01F1CB202D500251006276C5 /* ProfileTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileTests.swift; sourceTree = "<group>"; };
+		01F1CB222D513B3D006276C5 /* CreateHomeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateHomeTests.swift; sourceTree = "<group>"; };
+		01F1CB242D513D7D006276C5 /* HomeTestsData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeTestsData.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -292,6 +296,7 @@
 		0192BB412D1ED5F7005A0CD7 /* Data */ = {
 			isa = PBXGroup;
 			children = (
+				01F1CB242D513D7D006276C5 /* HomeTestsData.swift */,
 				0192BB422D1ED602005A0CD7 /* SignUpTestsData.swift */,
 			);
 			path = Data;
@@ -348,6 +353,7 @@
 				0192BB3F2D1ECC69005A0CD7 /* SignUpTests.swift */,
 				0135047C2BD8F95E0000C859 /* LoginTests.swift */,
 				01F1CB202D500251006276C5 /* ProfileTests.swift */,
+				01F1CB222D513B3D006276C5 /* CreateHomeTests.swift */,
 			);
 			path = "nestymate-iosTests";
 			sourceTree = "<group>";
@@ -777,8 +783,10 @@
 			files = (
 				0135047D2BD8F95E0000C859 /* LoginTests.swift in Sources */,
 				01F1CB212D50025C006276C5 /* ProfileTests.swift in Sources */,
+				01F1CB252D513D85006276C5 /* HomeTestsData.swift in Sources */,
 				0192BB432D1ED603005A0CD7 /* SignUpTestsData.swift in Sources */,
 				0192BB402D1ECC74005A0CD7 /* SignUpTests.swift in Sources */,
+				01F1CB232D513B4F006276C5 /* CreateHomeTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
