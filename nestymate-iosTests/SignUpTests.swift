@@ -50,6 +50,13 @@ class SignUpTests {
         #expect(error == .birthdayNotValid)
     }
 
+    @Test func shouldProceedToSignUpUserIsInvalid() {
+        let result = useCase.shouldProceedToSignUp(user: SignUpTestsData.emptyNameUser)
+        #expect(!result.0)
+        let error: Error? = result.1
+        #expect(error == .fillAllValues)
+    }
+
     @Test func successfulSignUp() {
         useCase.signUp(user: SignUpTestsData.correctUser) { error in
             #expect(error == nil)

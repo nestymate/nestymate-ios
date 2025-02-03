@@ -17,6 +17,16 @@ class SignUpTestsData {
         birthday: "",
         gender: ""
     )
+
+    static let emptyNameUser = User(
+        username: "",
+        password: "Sadface123!",
+        repeatPassword: "Sadface123!",
+        name: "Seli", surname: "Kyriaz",
+        birthday: "1992-12-27",
+        gender: "other"
+    )
+
     static let correctUser = User(
         username: "Selini",
         password: "Sadface123!",
