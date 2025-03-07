@@ -43,6 +43,10 @@
 		0153EB4C2C9740B50033D970 /* InviteUserView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0153EB4B2C9740B40033D970 /* InviteUserView.swift */; };
 		0153EB4E2C9740C00033D970 /* InviteUserViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0153EB4D2C9740C00033D970 /* InviteUserViewModel.swift */; };
 		0153EB502C98BB330033D970 /* LogoutService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0153EB4F2C98BB330033D970 /* LogoutService.swift */; };
+		01740D302D7ACAF600C0D26F /* CategoriesTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01740D2F2D7ACAEF00C0D26F /* CategoriesTests.swift */; };
+		01740D322D7ACBD000C0D26F /* CategoryServiceMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01740D312D7ACBCE00C0D26F /* CategoryServiceMock.swift */; };
+		01740D342D7ACBDF00C0D26F /* CategoryServiceFailedMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01740D332D7ACBDE00C0D26F /* CategoryServiceFailedMock.swift */; };
+		01740D362D7ACEA900C0D26F /* CategoryTestData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01740D352D7ACEA100C0D26F /* CategoryTestData.swift */; };
 		018A04752BD114660051A3A4 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 018A04742BD114660051A3A4 /* LoginView.swift */; };
 		0192BB402D1ECC74005A0CD7 /* SignUpTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0192BB3F2D1ECC69005A0CD7 /* SignUpTests.swift */; };
 		0192BB432D1ED603005A0CD7 /* SignUpTestsData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0192BB422D1ED602005A0CD7 /* SignUpTestsData.swift */; };
@@ -139,6 +143,10 @@
 		0153EB4B2C9740B40033D970 /* InviteUserView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InviteUserView.swift; sourceTree = "<group>"; };
 		0153EB4D2C9740C00033D970 /* InviteUserViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InviteUserViewModel.swift; sourceTree = "<group>"; };
 		0153EB4F2C98BB330033D970 /* LogoutService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogoutService.swift; sourceTree = "<group>"; };
+		01740D2F2D7ACAEF00C0D26F /* CategoriesTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoriesTests.swift; sourceTree = "<group>"; };
+		01740D312D7ACBCE00C0D26F /* CategoryServiceMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryServiceMock.swift; sourceTree = "<group>"; };
+		01740D332D7ACBDE00C0D26F /* CategoryServiceFailedMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryServiceFailedMock.swift; sourceTree = "<group>"; };
+		01740D352D7ACEA100C0D26F /* CategoryTestData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryTestData.swift; sourceTree = "<group>"; };
 		018A04742BD114660051A3A4 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		0192BB3F2D1ECC69005A0CD7 /* SignUpTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpTests.swift; sourceTree = "<group>"; };
 		0192BB422D1ED602005A0CD7 /* SignUpTestsData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpTestsData.swift; sourceTree = "<group>"; };
@@ -296,6 +304,7 @@
 		0192BB412D1ED5F7005A0CD7 /* Data */ = {
 			isa = PBXGroup;
 			children = (
+				01740D352D7ACEA100C0D26F /* CategoryTestData.swift */,
 				01F1CB242D513D7D006276C5 /* HomeTestsData.swift */,
 				0192BB422D1ED602005A0CD7 /* SignUpTestsData.swift */,
 			);
@@ -354,6 +363,7 @@
 				0135047C2BD8F95E0000C859 /* LoginTests.swift */,
 				01F1CB202D500251006276C5 /* ProfileTests.swift */,
 				01F1CB222D513B3D006276C5 /* CreateHomeTests.swift */,
+				01740D2F2D7ACAEF00C0D26F /* CategoriesTests.swift */,
 			);
 			path = "nestymate-iosTests";
 			sourceTree = "<group>";
@@ -398,6 +408,7 @@
 				01C8AC582CFB7E2000D74BF8 /* FailedServices */,
 				01C8AC562CEFE4F400D74BF8 /* HomeServiceMock.swift */,
 				01C8AC532CEFE37E00D74BF8 /* LoginServiceMock.swift */,
+				01740D312D7ACBCE00C0D26F /* CategoryServiceMock.swift */,
 			);
 			path = MockServices;
 			sourceTree = "<group>";
@@ -405,6 +416,7 @@
 		01C8AC582CFB7E2000D74BF8 /* FailedServices */ = {
 			isa = PBXGroup;
 			children = (
+				01740D332D7ACBDE00C0D26F /* CategoryServiceFailedMock.swift */,
 				01C8AC5B2CFB7E4000D74BF8 /* HomeServiceFailedMock.swift */,
 				01C8AC5C2CFB7E4000D74BF8 /* LoginServiceFailedMock.swift */,
 			);
@@ -768,7 +780,9 @@
 				0106B6192BE195F10024AFCB /* MainCoordinator.swift in Sources */,
 				01D488182C95F5840024A7F2 /* HomeUseCase.swift in Sources */,
 				0106B6302BFA79450024AFCB /* MainScreenUseCase.swift in Sources */,
+				01740D342D7ACBDF00C0D26F /* CategoryServiceFailedMock.swift in Sources */,
 				01D792302C8D9F5300EDA9D2 /* MyHomeViewModel.swift in Sources */,
+				01740D322D7ACBD000C0D26F /* CategoryServiceMock.swift in Sources */,
 				013504792BD7D9950000C859 /* ActionButton.swift in Sources */,
 				0106B62A2BFA610B0024AFCB /* KeychainHelper.swift in Sources */,
 				01A606212C3EC86200B7622E /* HomeScreenCoordinator.swift in Sources */,
@@ -781,6 +795,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				01740D302D7ACAF600C0D26F /* CategoriesTests.swift in Sources */,
+				01740D362D7ACEA900C0D26F /* CategoryTestData.swift in Sources */,
 				0135047D2BD8F95E0000C859 /* LoginTests.swift in Sources */,
 				01F1CB212D50025C006276C5 /* ProfileTests.swift in Sources */,
 				01F1CB252D513D85006276C5 /* HomeTestsData.swift in Sources */,
