@@ -8,7 +8,7 @@
 import Foundation
 import SwiftUI
 
-class SignUpViewModel: ObservableObject {
+final class SignUpViewModel: ObservableObject {
     @Published var username: FieldModel = .init(value: "", fieldType: .username)
     @Published var name: FieldModel = .init(value: "", fieldType: .name)
     @Published var surname: FieldModel = .init(value: "", fieldType: .surname)
@@ -37,7 +37,8 @@ class SignUpViewModel: ObservableObject {
 }
 
 extension SignUpViewModel {
-    func signUp(completionHandler: @escaping (Home?) -> Void) {
+    @MainActor
+    func signUp() async throws -> Home? {
         let formatter = DateFormatter()
         formatter.dateFormat = DateUtils.backendFormat
         let user = User(
@@ -52,18 +53,17 @@ extension SignUpViewModel {
         let (shouldProceed, signUpError) = useCase.shouldProceedToSignUp(user: user)
         if shouldProceed {
             shouldShowLoader = true
-            useCase.signUp(user: user) { [weak self] errorLogin in
-                self?.useCase.checkHomeForUser { [weak self] home, errorCheckHome, _ in
-                    self?.shouldShowLoader = false
-                    let apiError = errorLogin ?? errorCheckHome ?? nil
-                    self?.error = apiError
-                    if apiError == nil {
-                        completionHandler(home)
-                    }
-                }
+            let errorSignUp = try await useCase.signUp(user: user)
+            let checkHomeResponse = try await useCase.checkHomeForUser()
+            shouldShowLoader = false
+            let apiError = errorSignUp ?? checkHomeResponse.error ?? nil
+            error = apiError
+            if apiError == nil {
+                return checkHomeResponse.home
             }
         } else {
             error = signUpError
         }
+        return nil
     }
 }

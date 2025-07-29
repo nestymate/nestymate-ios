@@ -21,10 +21,13 @@ struct CreateOrEditCategoryView: View {
             SingleTextField(fieldModel: $viewModel.name)
             SingleTextField(fieldModel: $viewModel.description)
             ActionButton(title: viewModel.buttonTitle, shouldEnableButton: true) {
-                viewModel.createOrUpdateCategory { shouldLogout in
-                    guard let shouldLogout, !shouldLogout
-                    else { return output.logout() }
-                    output.goBack()
+                Task {
+                    let shouldLogout = try await viewModel.createOrUpdateCategory()
+                    if !shouldLogout {
+                        output.goBack()
+                    } else {
+                        output.logout()
+                    }
                 }
             }
             Spacer()

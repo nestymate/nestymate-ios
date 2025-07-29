@@ -25,51 +25,43 @@ class CreateHomeTests {
         ))
     }
 
-    @Test func successfulGetHome() {
-        useCase.getHome { _, error, _ in
-            #expect(error == nil)
-        }
+    @Test func successfulGetHome() async {
+        let response = try? await useCase.getHome()
+        #expect(response?.error == nil)
     }
 
-    @Test func unsuccessfulGetHome() {
-        useCaseFailed.getHome { _, error, _ in
-            #expect(error != nil)
-        }
+    @Test func unsuccessfulGetHome() async {
+        let response = try? await useCaseFailed.getHome()
+        #expect(response?.error != nil)
     }
 
-    @Test func successfulEditHome() {
-        useCase.editHome(home: HomeTestsData.home) { error, _ in
-            #expect(error == nil)
-        }
+    @Test func successfulEditHome() async {
+        let response = try? await useCase.editHome(home: HomeTestsData.home)
+        #expect(response?.error == nil)
     }
 
-    @Test func unSuccessfulEditHome() {
-        useCaseFailed.editHome(home: HomeTestsData.home) { error, _ in
-            #expect(error != nil)
-        }
+    @Test func unSuccessfulEditHome() async {
+        let response = try? await useCaseFailed.editHome(home: HomeTestsData.home)
+        #expect(response?.error != nil)
     }
 
-    @Test func successfulCreateHome() {
-        useCase.createHome(home: HomeTestsData.home) { error, _ in
-            #expect(error == nil)
-        }
+    @Test func successfulCreateHome() async {
+        let response = try? await useCase.createHome(home: HomeTestsData.home)
+        #expect(response?.error == nil)
     }
 
-    @Test func unSuccessfulCreateHome() {
-        useCaseFailed.createHome(home: HomeTestsData.home) { error, _ in
-            #expect(error != nil)
-        }
+    @Test func unSuccessfulCreateHome() async {
+        let response = try? await useCaseFailed.createHome(home: HomeTestsData.home)
+        #expect(response?.error != nil)
     }
 
-    @Test func successfulInviteUserToHome() {
-        useCase.inviteUserToHome(email: "test") { error, _ in
-            #expect(error == nil)
-        }
+    @Test func successfulInviteUserToHome() async {
+        let response = try? await useCase.inviteUserToHome(email: "test")
+        #expect(response?.error == nil)
     }
 
-    @Test func unSuccessfulInviteUserToHome() {
-        useCaseFailed.inviteUserToHome(email: "test") { error, _ in
-            #expect(error != nil)
-        }
+    @Test func unSuccessfulInviteUserToHome() async {
+        let response = try? await useCaseFailed.inviteUserToHome(email: "test")
+        #expect(response?.error != nil)
     }
 }

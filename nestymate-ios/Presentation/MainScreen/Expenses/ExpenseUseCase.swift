@@ -7,12 +7,12 @@
 
 import Foundation
 
-protocol ExpenseUseCase {
-    func getExpenses(completionHandler: @escaping ([Expense]?, Error?, Int?) -> Void)
-    func getExpense(expenseId: Int, completionHandler: @escaping (Expense?, Error?, Int?) -> Void)
-    func createExpense(expense: Expense, completionHandler: @escaping (Error?, Int?) -> Void)
-    func editExpense(expense: Expense, completionHandler: @escaping (Error?, Int?) -> Void)
-    func deleteExpense(expense: Expense, completionHandler: @escaping (Error?, Int?) -> Void)
+protocol ExpenseUseCase: Sendable {
+    func getExpenses() async throws -> ExpensesResponse
+    func getExpense(expenseId: Int) async throws -> ExpenseResponse
+    func createExpense(expense: Expense) async throws -> GenericResponse
+    func editExpense(expense: Expense) async throws -> GenericResponse
+    func deleteExpense(expense: Expense) async throws -> GenericResponse
     func createValid(
         isTitleValid: Bool,
         isDescriptionValid: Bool,
@@ -20,22 +20,22 @@ protocol ExpenseUseCase {
     ) -> (Bool, Error?)
 }
 
-class ExpenseUseCaseImpl: ExpenseUseCase {
-    let service: ExpenseService?
+final class ExpenseUseCaseImpl: ExpenseUseCase {
+    let service: ExpenseService
 
-    init(service: ExpenseService?) {
+    init(service: ExpenseService) {
         self.service = service
     }
 
-    func getExpenses(completionHandler: @escaping ([Expense]?, Error?, Int?) -> Void) {
-        service?.getExpenses(completionHandler: completionHandler)
+    func getExpenses() async throws -> ExpensesResponse {
+        try await service.getExpenses()
     }
 
-    func getExpense(expenseId: Int, completionHandler: @escaping (Expense?, Error?, Int?) -> Void) {
-        service?.getExpense(expenseId: expenseId, completionHandler: completionHandler)
+    func getExpense(expenseId: Int) async throws -> ExpenseResponse {
+        try await service.getExpense(expenseId: expenseId)
     }
 
-    func createValid(
+    nonisolated func createValid(
         isTitleValid: Bool,
         isDescriptionValid: Bool,
         isAmountValid: Bool
@@ -46,18 +46,15 @@ class ExpenseUseCaseImpl: ExpenseUseCase {
         return (true, nil)
     }
 
-    func createExpense(expense: Expense, completionHandler: @escaping (Error?, Int?) -> Void) {
-        service?.createExpense(
-            expense: expense,
-            completionHandler: completionHandler
-        )
+    func createExpense(expense: Expense) async throws -> GenericResponse {
+        try await service.createExpense(expense: expense)
     }
 
-    func editExpense(expense: Expense, completionHandler: @escaping (Error?, Int?) -> Void) {
-        service?.editExpense(expense: expense, completionHandler: completionHandler)
+    func editExpense(expense: Expense) async throws -> GenericResponse {
+        try await service.editExpense(expense: expense)
     }
 
-    func deleteExpense(expense: Expense, completionHandler: @escaping (Error?, Int?) -> Void) {
-        service?.deleteExpense(expense: expense, completionHandler: completionHandler)
+    func deleteExpense(expense: Expense) async throws -> GenericResponse {
+        try await service.deleteExpense(expense: expense)
     }
 }

@@ -14,23 +14,23 @@ final class HomeServiceMock: HomeService {
         self.hasHome = hasHome
     }
 
-    func inviteUserToHome(email _: String, completionHandler: @escaping (Error?, Int?) -> Void) {
-        completionHandler(nil, 200)
-    }
-
-    func createHome(home _: Home, completionHandler: @escaping (Error?, Int?) -> Void) {
-        completionHandler(nil, 200)
-    }
-
-    func editHome(home _: Home, completionHandler: @escaping (Error?, Int?) -> Void) {
-        completionHandler(nil, 200)
-    }
-
-    func getHome(completionHandler: @escaping (Home?, Error?, Int?) -> Void) {
+    func getHome() async throws -> HomeResponse {
         if hasHome {
-            completionHandler(Home(id: 0, name: "", description: "", address: ""), nil, 200)
+            HomeResponse(home: Home(id: 0, name: "", description: "", address: ""), error: nil, statusCode: 200)
         } else {
-            completionHandler(nil, nil, 200)
+            HomeResponse(home: nil, error: nil, statusCode: 200)
         }
+    }
+
+    func createHome(home _: Home) async throws -> GenericResponse {
+        GenericResponse(error: nil, statusCode: 200)
+    }
+
+    func editHome(home _: Home) async throws -> GenericResponse {
+        GenericResponse(error: nil, statusCode: 200)
+    }
+
+    func inviteUserToHome(email _: String) async throws -> GenericResponse {
+        GenericResponse(error: nil, statusCode: 200)
     }
 }

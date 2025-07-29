@@ -29,8 +29,13 @@ struct LoginView: View {
                     title: String(localized: "login"),
                     shouldEnableButton: viewModel.shouldEnableButton
                 ) {
-                    viewModel.login { home in
-                        home == nil ? output.goToCreateHome() : output.goToMainScreen()
+                    Task {
+                        let home = try await viewModel.login()
+                        if home != nil {
+                            output.goToMainScreen()
+                        } else {
+                            output.goToCreateHome()
+                        }
                     }
                 }
                 HStack {

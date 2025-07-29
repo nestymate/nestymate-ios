@@ -31,7 +31,8 @@ struct CreateOrEditHomeView: View {
                         title: viewModel.buttonTitle,
                         shouldEnableButton: viewModel.shouldEnableButton
                     ) {
-                        viewModel.createOrEditHome { shouldLogout in
+                        Task {
+                            let shouldLogout = try await viewModel.createOrEditHome()
                             guard !shouldLogout else { return output.logout() }
                             output.goToMainScreen()
                         }
@@ -46,7 +47,9 @@ struct CreateOrEditHomeView: View {
             .onAppear {
                 if viewDidLoad == false, viewModel.isEdit {
                     viewDidLoad = true
-                    viewModel.getHome()
+                    Task {
+                        await viewModel.getHome()
+                    }
                 }
             }
         }

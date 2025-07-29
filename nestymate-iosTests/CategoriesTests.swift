@@ -21,51 +21,43 @@ class CategoriesTests {
         #expect(useCase.createValid(isNameValid: true, isDescriptionValid: true))
     }
 
-    @Test func successfulGetCategories() {
-        useCase.getCategories { _, error, _ in
-            #expect(error == nil)
-        }
+    @Test func successfulGetCategories() async {
+        let response = try? await useCase.getCategories()
+        #expect(response?.categories != nil)
     }
 
-    @Test func unsuccessfulGetCategories() {
-        useCaseFailed.getCategories { _, error, _ in
-            #expect(error != nil)
-        }
+    @Test func unsuccessfulGetCategories() async {
+        let response = try? await useCaseFailed.getCategories()
+        #expect(response?.categories == nil)
     }
 
-    @Test func successfulEditCategory() {
-        useCase.editCategory(category: CategoryTestData.category) { error, _ in
-            #expect(error == nil)
-        }
+    @Test func successfulEditCategory() async {
+        let response = try? await useCase.editCategory(category: CategoryTestData.category)
+        #expect(response?.error == nil)
     }
 
-    @Test func unSuccessfulEditCategory() {
-        useCaseFailed.editCategory(category: CategoryTestData.category) { error, _ in
-            #expect(error != nil)
-        }
+    @Test func unSuccessfulEditCategory() async {
+        let response = try? await useCaseFailed.editCategory(category: CategoryTestData.category)
+        #expect(response?.error != nil)
     }
 
-    @Test func successfulCreateCategory() {
-        useCase.createCategory(category: CategoryTestData.category) { error, _ in
-            #expect(error == nil)
-        }
+    @Test func successfulCreateCategory() async {
+        let response = try? await useCase.createCategory(category: CategoryTestData.category)
+        #expect(response?.error == nil)
     }
 
-    @Test func unSuccessfulCreateCategory() {
-        useCaseFailed.createCategory(category: CategoryTestData.category) { error, _ in
-            #expect(error != nil)
-        }
+    @Test func unSuccessfulCreateCategory() async {
+        let response = try? await useCaseFailed.createCategory(category: CategoryTestData.category)
+        #expect(response?.error != nil)
     }
 
-    @Test func successfulDeleteCategory() {
-        useCase.deleteCategory(category: CategoryTestData.category) { error, _ in
-            #expect(error == nil)
-        }
+    @Test func successfulDeleteCategory() async {
+        let response = try? await useCase.deleteCategory(category: CategoryTestData.category)
+        #expect(response?.error == nil)
     }
 
-    @Test func unSuccessfulDeleteCategory() {
-        useCaseFailed.deleteCategory(category: CategoryTestData.category) { error, _ in
-            #expect(error != nil)
-        }
+    @Test func unSuccessfulDeleteCategory() async {
+        let response = try? await useCaseFailed.deleteCategory(category: CategoryTestData.category)
+        #expect(response?.error != nil)
     }
 }

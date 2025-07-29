@@ -8,103 +8,69 @@
 import Combine
 import Foundation
 
-class APICalls {
-    var cancellable = Set<AnyCancellable>()
+final class APICalls: Sendable {
     let helper = KeychainHelper()
-
-    public init() {
-        cancellable = Set<AnyCancellable>()
-    }
 
     func post(
         url: URL,
         requestData: Data? = nil,
-        authentication: Bool = true,
-        completionHandler: @escaping (APIResponse) -> Void
-    ) {
-        genericCall(url, requestData, "POST", authentication) { apiResponse in
-            completionHandler(apiResponse)
-        }
+        authentication: Bool = true
+    ) async throws -> APIResponse {
+        await genericCall(url, requestData, "POST", authentication)
     }
 
-    func get(
-        url: URL,
-        requestData: Data?,
-        authentication: Bool = true,
-        completionHandler: @escaping (APIResponse) -> Void
-    ) {
-        genericCall(url, requestData, "GET", authentication) { apiResponse in
-            completionHandler(apiResponse)
-        }
+    func get(url: URL, requestData: Data?, authentication: Bool = true) async throws -> APIResponse {
+        await genericCall(url, requestData, "GET", authentication)
     }
 
     func put(
         url: URL,
         requestData: Data? = nil,
-        authentication: Bool = true,
-        completionHandler: @escaping (APIResponse) -> Void
-    ) {
-        genericCall(url, requestData, "PUT", authentication) { apiResponse in
-            completionHandler(apiResponse)
-        }
+        authentication: Bool = true
+    ) async throws -> APIResponse {
+        await genericCall(url, requestData, "PUT", authentication)
     }
 
     func delete(
         url: URL,
         requestData: Data? = nil,
-        authentication: Bool = true,
-        completionHandler: @escaping (APIResponse) -> Void
-    ) {
-        genericCall(url, requestData, "DELETE", authentication) { apiResponse in
-            completionHandler(apiResponse)
-        }
+        authentication: Bool = true
+    ) async throws -> APIResponse {
+        await genericCall(url, requestData, "DELETE", authentication)
     }
 
     private func genericCall(
         _ url: URL,
         _ requestData: Data? = nil,
         _ method: String,
-        _ authentication: Bool,
-        completionHandler: @escaping (APIResponse) -> Void
-    ) {
+        _ authentication: Bool
+    ) async -> APIResponse {
         guard Reachability.isConnectedToNetwork() else {
-            return completionHandler(APIResponse(nil, nil, .noNetwork))
+            return APIResponse(nil, nil, .noNetwork)
         }
+
         var request = URLRequest(url: url)
-        request.setValue(
-            "application/json",
-            forHTTPHeaderField: "Content-Type"
-        )
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
         request.httpMethod = method
         request.httpBody = requestData
-        let session = URLSession.shared
+
         if let token: String = helper.read(), authentication {
             request.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
         }
-        session.dataTaskPublisher(for: request)
-            .tryMap { element -> (APIResponse) in
-                guard let response = element.response as? HTTPURLResponse
-                else {
-                    return APIResponse(element.data, 500, .badServerResponse)
-                }
-                return APIResponse(element.data, response.statusCode, nil)
+
+        do {
+            let (data, response) = try await URLSession.shared.data(for: request)
+
+            guard let httpResponse = response as? HTTPURLResponse else {
+                return APIResponse(data, 500, .badServerResponse)
             }
-            .receive(on: DispatchQueue.main)
-            .eraseToAnyPublisher()
-            .sink(
-                receiveCompletion: { status in
-                    switch status {
-                    case .finished: return
-                    case let .failure(error):
-                        print("Receiver error \(error)")
-                    }
-                },
-                // receive the data
-                receiveValue: { apiResponse in
-                    print("----Api Call-----------", "\(method) \(url) \(apiResponse.statusCode ?? 0)")
-                    completionHandler(apiResponse)
-                }
-            )
-            .store(in: &cancellable)
+
+            print("----Api Call-----------", "\(method) \(url) \(httpResponse.statusCode)")
+            return APIResponse(data, httpResponse.statusCode, nil)
+
+        } catch {
+            print("Receiver error \(error)")
+            return APIResponse(nil, nil, .badServerResponse)
+        }
     }
 }

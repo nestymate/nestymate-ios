@@ -21,10 +21,10 @@ enum LoginPage {
 
 final class MainCoordinator: Hashable {
     @Binding var navigationPath: NavigationPath
-    private let loginService = LoginServiceImpl()
-    private let homeService = HomeServiceImpl()
-    private let expenseService = ExpenseServiceImpl()
-    private let categoryService = CategoryServiceImpl()
+    private let loginService: LoginServiceImpl
+    private let homeService: HomeServiceImpl
+    private let expenseService: ExpenseServiceImpl
+    private let categoryService: CategoryServiceImpl
     private let logoutService = LogoutService()
     private let expenseUseCase: ExpenseUseCase
     private let homeUseCase: HomeUseCase
@@ -39,11 +39,17 @@ final class MainCoordinator: Hashable {
         var goToMainScreen: () -> Void
     }
 
+    @MainActor
     init(navigationPath: Binding<NavigationPath>, output: Output? = nil, page: LoginPage) {
         _navigationPath = navigationPath
         id = UUID()
         self.output = output
         self.page = page
+
+        loginService = LoginServiceImpl()
+        homeService = HomeServiceImpl()
+        expenseService = ExpenseServiceImpl()
+        categoryService = CategoryServiceImpl()
 
         expenseUseCase = ExpenseUseCaseImpl(service: expenseService)
         homeUseCase = HomeUseCaseImpl(homeService: homeService)
@@ -79,7 +85,7 @@ final class MainCoordinator: Hashable {
         hasher.combine(id)
     }
 
-    static func == (
+    nonisolated static func == (
         lhs: MainCoordinator,
         rhs: MainCoordinator
     ) -> Bool {
@@ -219,6 +225,7 @@ private extension MainCoordinator {
         }))
     }
 
+    @MainActor
     func logout() {
         push(
             MainCoordinator(

@@ -8,74 +8,79 @@
 import Combine
 import Foundation
 
-protocol ExpenseService {
-    func getExpenses(completionHandler: @escaping ([Expense]?, Error?, Int?) -> Void)
-    func getExpense(expenseId: Int, completionHandler: @escaping (Expense?, Error?, Int?) -> Void)
-    func createExpense(expense: Expense, completionHandler: @escaping (Error?, Int?) -> Void)
-    func editExpense(expense: Expense, completionHandler: @escaping (Error?, Int?) -> Void)
-    func deleteExpense(expense: Expense, completionHandler: @escaping (Error?, Int?) -> Void)
+protocol ExpenseService: Sendable {
+    func getExpenses() async throws -> ExpensesResponse
+    func getExpense(expenseId: Int) async throws -> ExpenseResponse
+    func createExpense(expense: Expense) async throws -> GenericResponse
+    func editExpense(expense: Expense) async throws -> GenericResponse
+    func deleteExpense(expense: Expense) async throws -> GenericResponse
 }
 
-class ExpenseServiceImpl: ExpenseService {
-    var baseUrl: URL
-    var cancellable = Set<AnyCancellable>()
-    let helper = KeychainHelper()
-    var apiCall = APICalls()
-    var homeUserDefaults = HomeUserDefaults()
+final class ExpenseServiceImpl: ExpenseService {
+    let baseUrl: URL
+    let helper: KeychainHelper
+    let apiCall: APICalls
+    let homeUserDefaults: HomeUserDefaults
 
     init() {
+        homeUserDefaults = HomeUserDefaults()
         baseUrl = URL(string: "http://192.168.1.10/api/v1/home")!
             .appendingPathComponent(homeUserDefaults.getHomeId())
             .appendingPathComponent("expense")
+        apiCall = APICalls()
+        helper = KeychainHelper()
     }
 
-    func getExpenses(completionHandler: @escaping ([Expense]?, Error?, Int?) -> Void) {
-        apiCall.get(url: baseUrl, requestData: nil) { apiResponse in
-            do {
-                guard let data = apiResponse.data
-                else { return completionHandler(nil, .badServerResponse, apiResponse.statusCode) }
-                let response = try JSONDecoder().decode([Expense].self, from: data)
-                return completionHandler(response, apiResponse.error, apiResponse.statusCode)
-            } catch {
-                return completionHandler(nil, .badServerResponse, apiResponse.statusCode)
-            }
+    func getExpenses() async throws -> ExpensesResponse {
+        let apiResponse = try await apiCall.get(url: baseUrl, requestData: nil)
+        do {
+            guard let data = apiResponse.data
+            else { return ExpensesResponse(
+                expenses: nil,
+                error: .badServerResponse,
+                statusCode: apiResponse.statusCode
+            ) }
+            let response = try JSONDecoder().decode([Expense].self, from: data)
+            return ExpensesResponse(
+                expenses: response,
+                error: apiResponse.error,
+                statusCode: apiResponse.statusCode
+            )
+        } catch {
+            return ExpensesResponse(expenses: nil, error: .badServerResponse, statusCode: apiResponse.statusCode)
         }
     }
 
-    func getExpense(expenseId: Int, completionHandler: @escaping (Expense?, Error?, Int?) -> Void) {
+    func getExpense(expenseId: Int) async throws -> ExpenseResponse {
         let singleGetURL = baseUrl.appending(path: "\(expenseId)")
-        apiCall.get(url: singleGetURL, requestData: nil) { apiResponse in
-            do {
-                guard let data = apiResponse.data
-                else { return completionHandler(nil, .badServerResponse, apiResponse.statusCode) }
-                let response = try JSONDecoder().decode(Expense.self, from: data)
-                return completionHandler(response, apiResponse.error, apiResponse.statusCode)
-            } catch {
-                return completionHandler(nil, .badServerResponse, apiResponse.statusCode)
-            }
+        let apiResponse = try await apiCall.get(url: singleGetURL, requestData: nil)
+        do {
+            guard let data = apiResponse.data
+            else { return ExpenseResponse(expense: nil, error: .badServerResponse, statusCode: apiResponse.statusCode) }
+            let response = try JSONDecoder().decode(Expense.self, from: data)
+            return ExpenseResponse(expense: response, error: apiResponse.error, statusCode: apiResponse.statusCode)
+        } catch {
+            return ExpenseResponse(expense: nil, error: .badServerResponse, statusCode: apiResponse.statusCode)
         }
     }
 
-    func createExpense(expense: Expense, completionHandler: @escaping (Error?, Int?) -> Void) {
+    func createExpense(expense: Expense) async throws -> GenericResponse {
         let data = try? JSONEncoder().encode(expense)
-        apiCall.post(url: baseUrl, requestData: data) { apiResponse in
-            completionHandler(apiResponse.error, apiResponse.statusCode)
-        }
+        let apiResponse = try await apiCall.post(url: baseUrl, requestData: data)
+        return GenericResponse(error: apiResponse.error, statusCode: apiResponse.statusCode)
     }
 
-    func editExpense(expense: Expense, completionHandler: @escaping (Error?, Int?) -> Void) {
+    func editExpense(expense: Expense) async throws -> GenericResponse {
         let data = try? JSONEncoder().encode(expense)
         let putURL = baseUrl.appending(path: "\(expense.id)")
-        apiCall.put(url: putURL, requestData: data) { apiResponse in
-            completionHandler(apiResponse.error, apiResponse.statusCode)
-        }
+        let apiResponse = try await apiCall.put(url: putURL, requestData: data)
+        return GenericResponse(error: apiResponse.error, statusCode: apiResponse.statusCode)
     }
 
-    func deleteExpense(expense: Expense, completionHandler: @escaping (Error?, Int?) -> Void) {
+    func deleteExpense(expense: Expense) async throws -> GenericResponse {
         let data = try? JSONEncoder().encode(expense)
         let putURL = baseUrl.appending(path: "\(expense.id)")
-        apiCall.delete(url: putURL, requestData: data) { apiResponse in
-            completionHandler(apiResponse.error, apiResponse.statusCode)
-        }
+        let apiResponse = try await apiCall.delete(url: putURL, requestData: data)
+        return GenericResponse(error: apiResponse.error, statusCode: apiResponse.statusCode)
     }
 }

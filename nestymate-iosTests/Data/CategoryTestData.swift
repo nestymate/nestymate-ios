@@ -7,6 +7,6 @@
 
 @testable import nestymate_ios
 
-class CategoryTestData {
+enum CategoryTestData {
     static let category = Category(id: 123, code: "", name: "test category", description: "")
 }

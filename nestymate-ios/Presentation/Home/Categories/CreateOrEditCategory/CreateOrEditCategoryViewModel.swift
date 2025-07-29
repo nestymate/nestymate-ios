@@ -7,7 +7,7 @@
 
 import Foundation
 
-class CreateOrEditCategoryViewModel: ObservableObject {
+final class CreateOrEditCategoryViewModel: ObservableObject {
     private let useCase: CategoryUseCase
     private let logoutService: LogoutService
     @Published public var name: FieldModel = .init(value: "", fieldType: .name)
@@ -38,7 +38,8 @@ class CreateOrEditCategoryViewModel: ObservableObject {
         description = .init(value: category.description, fieldType: .description)
     }
 
-    func createOrUpdateCategory(completionHandler: @escaping (Bool?) -> Void) {
+    @MainActor
+    func createOrUpdateCategory() async throws -> Bool {
         if useCase.createValid(
             isNameValid: name.onValidate(),
             isDescriptionValid: description.onValidate()
@@ -51,19 +52,19 @@ class CreateOrEditCategoryViewModel: ObservableObject {
                 description: description.value
             )
             if isEdit {
-                useCase.editCategory(category: category) { [weak self] error, statusCode in
-                    self?.shouldShowLoader = false
-                    self?.error = error
-                    completionHandler(self?.logoutService.shouldLogout(statusCode: statusCode))
-                }
+                let response = try await useCase.editCategory(category: category)
+                shouldShowLoader = false
+                error = response.error
+                return logoutService.shouldLogout(statusCode: response.statusCode)
+
             } else {
-                useCase.createCategory(category: category) { [weak self] error, statusCode in
-                    self?.shouldShowLoader = false
-                    self?.error = error
-                    completionHandler(self?.logoutService.shouldLogout(statusCode: statusCode))
-                }
+                let response = try await useCase.createCategory(category: category)
+                shouldShowLoader = false
+                error = response.error
+                return logoutService.shouldLogout(statusCode: response.statusCode)
             }
         }
+        return false
     }
 
     private func setupTitles() {

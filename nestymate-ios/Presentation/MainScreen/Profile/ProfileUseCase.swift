@@ -7,11 +7,11 @@
 
 import Foundation
 
-protocol ProfileUseCase {
+protocol ProfileUseCase: Sendable {
     func logout(completionHandler: @escaping () -> Void)
 }
 
-class ProfileUseCaseImpl: ProfileUseCase {
+final class ProfileUseCaseImpl: ProfileUseCase {
     func logout(completionHandler: @escaping () -> Void) {
         let helper = KeychainHelper()
         helper.delete()

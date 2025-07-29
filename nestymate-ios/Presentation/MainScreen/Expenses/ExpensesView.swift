@@ -50,8 +50,9 @@ struct ExpensesView: View {
                 }
                 .onDelete(perform: { offset in
                     let index = offset[offset.startIndex]
-                    viewModel.delete(expenseToBeDelete: expenses[index]) { expenses, shouldLogout in
-                        handleExpenses(expenses, shouldLogout)
+                    Task {
+                        let response = try await viewModel.delete(expenseToBeDelete: expenses[index])
+                        handleExpenses(response.expenses, response.shouldLogout)
                     }
                 })
                 .listRowBackground(ColorManager.backgroundColour)
@@ -61,8 +62,9 @@ struct ExpensesView: View {
         }
         .background(ColorManager.backgroundColour)
         .onAppear {
-            viewModel.getExpenses { expenses, shouldLogout in
-                handleExpenses(expenses, shouldLogout)
+            Task {
+                let response = try await viewModel.getExpenses()
+                handleExpenses(response.expenses, response.shouldLogout)
             }
         }
     }
