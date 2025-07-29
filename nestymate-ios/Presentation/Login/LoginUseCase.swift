@@ -7,13 +7,13 @@
 
 import Foundation
 
-protocol LoginUseCase {
+protocol LoginUseCase: Sendable {
     func loginValid(isUsernameValid: Bool, isPasswordValid: Bool) -> Bool
-    func login(username: String, password: String, completionHandler: @escaping (Error?) -> Void)
-    func checkHomeForUser(completionHandler: @escaping (Home?, Error?, Int?) -> Void)
+    func login(username: String, password: String) async throws -> Error?
+    func checkHomeForUser() async throws -> HomeResponse
 }
 
-class LoginUseCaseImpl: LoginUseCase {
+final class LoginUseCaseImpl: LoginUseCase {
     let service: LoginService
     let homeService: HomeService
 
@@ -26,11 +26,13 @@ class LoginUseCaseImpl: LoginUseCase {
         isUsernameValid && isPasswordValid
     }
 
-    func login(username: String, password: String, completionHandler: @escaping (Error?) -> Void) {
-        service.login(username: username, password: password, completionHandler: completionHandler)
+    @MainActor
+    func login(username: String, password: String) async throws -> Error? {
+        try await service.login(username: username, password: password)
     }
 
-    func checkHomeForUser(completionHandler: @escaping (Home?, Error?, Int?) -> Void) {
-        homeService.getHome(completionHandler: completionHandler)
+    @MainActor
+    func checkHomeForUser() async throws -> HomeResponse {
+        try await homeService.getHome()
     }
 }

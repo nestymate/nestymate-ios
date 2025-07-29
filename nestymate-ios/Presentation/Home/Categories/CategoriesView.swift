@@ -39,8 +39,9 @@ struct CategoriesView: View {
                 }
                 .onDelete(perform: { offset in
                     let index = offset[offset.startIndex]
-                    viewModel.delete(categoryToBeDelete: categories[index]) { categories, shouldLogout in
-                        handleExpenses(categories, shouldLogout)
+                    Task {
+                        let response = try await viewModel.delete(categoryToBeDelete: categories[index])
+                        handleExpenses(response.categories, response.shouldLogout)
                     }
                 })
                 .listRowBackground(ColorManager.backgroundColour)
@@ -50,8 +51,9 @@ struct CategoriesView: View {
         }
         .background(ColorManager.backgroundColour)
         .onAppear {
-            viewModel.getCategories { categories, shouldLogout in
-                handleExpenses(categories, shouldLogout)
+            Task {
+                let response = try await viewModel.getCategories()
+                handleExpenses(response.categories, response.shouldLogout)
             }
         }
     }

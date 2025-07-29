@@ -29,27 +29,23 @@ class LoginTests {
         #expect(!useCase.loginValid(isUsernameValid: false, isPasswordValid: true))
     }
 
-    @MainActor @Test func successfulLoginHasHome() {
-        useCase.login(username: "selini", password: "Sadface123!") { error in
-            #expect(error == nil)
-        }
+    @MainActor @Test func successfulLoginHasHome() async {
+        let response = try? await useCase.login(username: "selini", password: "Sadface123!")
+        #expect(response == nil)
     }
 
-    @MainActor @Test func unsuccessfulLogin() {
-        useCaseFailed.login(username: "", password: "") { error in
-            #expect(error != nil)
-        }
+    @MainActor @Test func unsuccessfulLogin() async {
+        let response = try? await useCaseFailed.login(username: "", password: "")
+        #expect(response != nil)
     }
 
-    @MainActor @Test func successfulCheckHomeForUser() {
-        useCase.checkHomeForUser { home, _, _ in
-            #expect(home != nil)
-        }
+    @MainActor @Test func successfulCheckHomeForUser() async {
+        let response = try? await useCase.checkHomeForUser()
+        #expect(response?.home != nil)
     }
 
-    @MainActor @Test func unsuccessfulCheckHomeForUser() {
-        useCaseFailed.checkHomeForUser { _, error, _ in
-            #expect(error != nil)
-        }
+    @MainActor @Test func unsuccessfulCheckHomeForUser() async {
+        let response = try? await useCaseFailed.checkHomeForUser()
+        #expect(response?.error != nil)
     }
 }

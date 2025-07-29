@@ -8,7 +8,7 @@
 import Foundation
 import SwiftUI
 
-class InviteUserViewModel: ObservableObject {
+final class InviteUserViewModel: ObservableObject {
     private let useCase: HomeUseCase
     private let logoutService = LogoutService()
     @Published public var email: FieldModel = .init(value: "", fieldType: .email)
@@ -23,12 +23,12 @@ class InviteUserViewModel: ObservableObject {
         !email.value.isEmpty
     }
 
-    public func inviteUser(completionHandler: @escaping (Bool?) -> Void) {
+    @MainActor
+    public func inviteUser() async throws -> Bool {
         shouldShowLoader = true
-        useCase.inviteUserToHome(email: email.value) { [weak self] error, statusCode in
-            self?.shouldShowLoader = false
-            self?.error = error
-            completionHandler(self?.logoutService.shouldLogout(statusCode: statusCode))
-        }
+        let response = try await useCase.inviteUserToHome(email: email.value)
+        shouldShowLoader = false
+        error = response.error
+        return logoutService.shouldLogout(statusCode: response.statusCode)
     }
 }

@@ -8,7 +8,7 @@
 import Foundation
 import SwiftUI
 
-class CreateOrEditHomeViewModel: ObservableObject {
+final class CreateOrEditHomeViewModel: ObservableObject {
     private let useCase: HomeUseCase
     private let logoutService = LogoutService()
     @Published public var name: FieldModel = .init(value: "", fieldType: .name)
@@ -31,13 +31,13 @@ class CreateOrEditHomeViewModel: ObservableObject {
         setupTitles()
     }
 
-    public func getHome() {
+    @MainActor
+    public func getHome() async {
         shouldShowLoader = true
-        useCase.getHome { [weak self] home, error, _ in
-            guard let self else { return }
-            shouldShowLoader = false
-            self.error = error
-            guard let home else { return }
+        let response = try? await useCase.getHome()
+        shouldShowLoader = false
+        error = response?.error
+        if let home = response?.home {
             self.home = home
             name = .init(value: home.name, fieldType: .name)
             description = .init(value: home.description, fieldType: .description)
@@ -45,15 +45,17 @@ class CreateOrEditHomeViewModel: ObservableObject {
         }
     }
 
-    public func createOrEditHome(completionHandler: @escaping (Bool) -> Void) {
+    @MainActor
+    public func createOrEditHome() async throws -> Bool {
         if isEdit {
-            editHome(completionHandler)
+            try await editHome()
         } else {
-            createHome(completionHandler)
+            try await createHome()
         }
     }
 
-    private func createHome(_ completionHandler: @escaping (Bool) -> Void) {
+    @MainActor
+    private func createHome() async throws -> Bool {
         if useCase.createValid(
             isNameValid: name.onValidate(),
             isDescriptionValid: description.onValidate(),
@@ -61,34 +63,35 @@ class CreateOrEditHomeViewModel: ObservableObject {
         ) {
             shouldShowLoader = true
             let home = Home(id: 0, name: name.value, description: description.value, address: address.value)
-            useCase.createHome(home: home) { [weak self] error, statusCode in
-                self?.shouldShowLoader = false
-                self?.error = error
-                completionHandler(self?.logoutService.shouldLogout(statusCode: statusCode) ?? false)
-            }
+            let response = try await useCase.createHome(home: home)
+            shouldShowLoader = false
+            error = response.error
+            return logoutService.shouldLogout(statusCode: response.statusCode)
         }
+        return false
     }
 
-    private func editHome(_ completionHandler: @escaping (Bool) -> Void) {
+    @MainActor
+    private func editHome() async throws -> Bool {
         if useCase.createValid(
             isNameValid: name.onValidate(),
             isDescriptionValid: description.onValidate(),
             isAddressValid: address.onValidate()
         ) {
             shouldShowLoader = true
-            guard let originalHome = home else { return }
+            guard let originalHome = home else { return false }
             let home = Home(
                 id: originalHome.id,
                 name: name.value,
                 description: description.value,
                 address: address.value
             )
-            useCase.editHome(home: home) { [weak self] error, statusCode in
-                self?.shouldShowLoader = false
-                self?.error = error
-                completionHandler(self?.logoutService.shouldLogout(statusCode: statusCode) ?? false)
-            }
+            let response = try await useCase.editHome(home: home)
+            shouldShowLoader = false
+            error = error
+            return logoutService.shouldLogout(statusCode: response.statusCode)
         }
+        return false
     }
 
     private func setupTitles() {

@@ -8,53 +8,53 @@
 import Combine
 import Foundation
 
-protocol HomeService {
-    func inviteUserToHome(email: String, completionHandler: @escaping (Error?, Int?) -> Void)
-    func createHome(home: Home, completionHandler: @escaping (Error?, Int?) -> Void)
-    func editHome(home: Home, completionHandler: @escaping (Error?, Int?) -> Void)
-    func getHome(completionHandler: @escaping (Home?, Error?, Int?) -> Void)
+protocol HomeService: Sendable {
+    func getHome() async throws -> HomeResponse
+    func createHome(home: Home) async throws -> GenericResponse
+    func editHome(home: Home) async throws -> GenericResponse
+    func inviteUserToHome(email: String) async throws -> GenericResponse
 }
 
-class HomeServiceImpl: HomeService {
+final class HomeServiceImpl: HomeService {
     let url = URL(string: "http://192.168.1.10/api/v1/home")!
-    var cancellable = Set<AnyCancellable>()
-    let helper = KeychainHelper()
-    var apiCall = APICalls()
+    let helper: KeychainHelper
+    let apiCall: APICalls
 
-    func getHome(completionHandler: @escaping (Home?, Error?, Int?) -> Void) {
-        apiCall.get(url: url.appendingPathComponent("active"), requestData: nil) { apiResponse in
-            guard let data = apiResponse.data,
-                  let response = try? JSONDecoder().decode(Home.self, from: data)
-            else {
-                if apiResponse.statusCode == 400 {
-                    return completionHandler(nil, nil, apiResponse.statusCode)
-                } else {
-                    return completionHandler(nil, .badServerResponse, apiResponse.statusCode)
-                }
+    init() {
+        apiCall = APICalls()
+        helper = KeychainHelper()
+    }
+
+    func getHome() async throws -> HomeResponse {
+        let apiResponse = try await apiCall.get(url: url.appendingPathComponent("active"), requestData: nil)
+        guard let data = apiResponse.data,
+              let response = try? JSONDecoder().decode(Home.self, from: data)
+        else {
+            if apiResponse.statusCode == 400 {
+                return HomeResponse(home: nil, error: nil, statusCode: apiResponse.statusCode)
+            } else {
+                return HomeResponse(home: nil, error: .badServerResponse, statusCode: apiResponse.statusCode)
             }
-            return completionHandler(response, apiResponse.error, apiResponse.statusCode)
         }
+        return HomeResponse(home: response, error: apiResponse.error, statusCode: apiResponse.statusCode)
     }
 
-    func createHome(home: Home, completionHandler: @escaping (Error?, Int?) -> Void) {
+    func createHome(home: Home) async throws -> GenericResponse {
         let data = try? JSONEncoder().encode(home)
-        apiCall.post(url: url, requestData: data) { apiResponse in
-            completionHandler(apiResponse.error, apiResponse.statusCode)
-        }
+        let apiResponse = try await apiCall.post(url: url, requestData: data)
+        return GenericResponse(error: apiResponse.error, statusCode: apiResponse.statusCode)
     }
 
-    func editHome(home: Home, completionHandler: @escaping (Error?, Int?) -> Void) {
+    func editHome(home: Home) async throws -> GenericResponse {
         let data = try? JSONEncoder().encode(home)
         let putURL = url.appending(path: "\(home.id)")
-        apiCall.put(url: putURL, requestData: data) { apiResponse in
-            completionHandler(apiResponse.error, apiResponse.statusCode)
-        }
+        let apiResponse = try await apiCall.put(url: putURL, requestData: data)
+        return GenericResponse(error: apiResponse.error, statusCode: apiResponse.statusCode)
     }
 
-    func inviteUserToHome(email: String, completionHandler: @escaping (Error?, Int?) -> Void) {
+    func inviteUserToHome(email: String) async throws -> GenericResponse {
         let data = try? JSONEncoder().encode(email)
-        apiCall.post(url: url, requestData: data) { apiResponse in
-            completionHandler(apiResponse.error, apiResponse.statusCode)
-        }
+        let apiResponse = try await apiCall.post(url: url, requestData: data)
+        return GenericResponse(error: apiResponse.error, statusCode: apiResponse.statusCode)
     }
 }

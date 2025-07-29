@@ -9,4 +9,4 @@ import Foundation
 
 protocol MainScreenUseCase {}
 
-class MainScreenUseCaseImpl: MainScreenUseCase {}
+final class MainScreenUseCaseImpl: MainScreenUseCase {}

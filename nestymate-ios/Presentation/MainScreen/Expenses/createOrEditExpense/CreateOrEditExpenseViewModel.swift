@@ -7,7 +7,7 @@
 
 import Foundation
 
-class CreateOrEditExpenseViewModel: ObservableObject {
+final class CreateOrEditExpenseViewModel: ObservableObject {
     private let useCase: ExpenseUseCase
     private let categoryUseCase: CategoryUseCase
     private let logoutService: LogoutService
@@ -48,39 +48,29 @@ class CreateOrEditExpenseViewModel: ObservableObject {
         amount = .init(value: String(expense.amount), fieldType: .amount)
     }
 
-    public func getCategories(completionHandler: @escaping (Int?, Bool) -> Void) {
+    @MainActor
+    public func getCategories() async throws -> (Int?, Bool) {
         shouldShowLoader = true
-        categoryUseCase.getCategories { [weak self] categories, error, statusCode in
-            guard let self else { return }
-            handleResponse(categories, error, statusCode, completionHandler)
-        }
-    }
-
-    private func handleResponse(
-        _ categories: [Category]?,
-        _ error: Error?,
-        _ statusCode: Int?,
-        _ completionHandler: @escaping (Int?, Bool) -> Void
-    ) {
-        self.categories = categories ?? []
+        let response = try await categoryUseCase.getCategories()
+        categories = categories
         shouldShowLoader = false
-        self.error = error
+        error = error
         if isEdit, let expenseId {
-            useCase.getExpense(expenseId: expenseId) { expense, error, statusCode in
-                self.setup(expense: expense)
-                self.error = error
-                completionHandler(expense?.categoryId, self.logoutService.shouldLogout(statusCode: statusCode))
-            }
+            let response = try await useCase.getExpense(expenseId: expenseId)
+            setup(expense: response.expense)
+            error = error
+            return (response.expense?.categoryId, logoutService.shouldLogout(statusCode: response.statusCode))
         } else {
-            if self.categories.count > 0 {
-                completionHandler(self.categories[0].id, logoutService.shouldLogout(statusCode: statusCode))
+            if categories.count > 0 {
+                return (categories[0].id, logoutService.shouldLogout(statusCode: response.statusCode))
             } else {
-                completionHandler(nil, logoutService.shouldLogout(statusCode: statusCode))
+                return (nil, logoutService.shouldLogout(statusCode: response.statusCode))
             }
         }
     }
 
-    func createOrUpdateExpense(expenseCategoryId: Int?, completionHandler: @escaping (Bool?) -> Void) {
+    @MainActor
+    func createOrUpdateExpense(expenseCategoryId: Int?) async throws -> Bool {
         let (shouldProceed, categoryError) = useCase.createValid(
             isTitleValid: title.onValidate(),
             isDescriptionValid: description.onValidate(),
@@ -97,25 +87,21 @@ class CreateOrEditExpenseViewModel: ObservableObject {
                 amount: amountInDouble,
                 categoryId: expenseCategoryId
             )
-            let expenseCategoryId = expenseCategoryId ?? 0
             if isEdit {
-                useCase.editExpense(expense: expense) { [weak self] error, statusCode in
-                    self?.shouldShowLoader = false
-                    self?.error = error
-                    completionHandler(self?.logoutService.shouldLogout(statusCode: statusCode))
-                }
+                let response = try await useCase.editExpense(expense: expense)
+                shouldShowLoader = false
+                error = response.error
+                return logoutService.shouldLogout(statusCode: response.statusCode)
             } else {
-                useCase.createExpense(
-                    expense: expense
-                ) { [weak self] error, statusCode in
-                    self?.shouldShowLoader = false
-                    self?.error = error
-                    completionHandler(self?.logoutService.shouldLogout(statusCode: statusCode))
-                }
+                let response = try await useCase.createExpense(expense: expense)
+                shouldShowLoader = false
+                error = response.error
+                return logoutService.shouldLogout(statusCode: response.statusCode)
             }
         } else {
             error = categoryError
         }
+        return false
     }
 
     private func setupTitles() {

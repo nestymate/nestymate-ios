@@ -7,6 +7,6 @@
 
 @testable import nestymate_ios
 
-class HomeTestsData {
+enum HomeTestsData {
     static let home = Home(id: 0, name: "test", description: "home", address: "unkon 1")
 }

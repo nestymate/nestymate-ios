@@ -8,7 +8,7 @@
 import Foundation
 import SwiftUI
 
-enum Error: Identifiable {
+enum Error: Identifiable, Sendable {
     var id: Self { self }
 
     case noNetwork

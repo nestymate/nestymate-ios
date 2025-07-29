@@ -57,29 +57,25 @@ class SignUpTests {
         #expect(error == .fillAllValues)
     }
 
-    @Test func successfulSignUp() {
-        useCase.signUp(user: SignUpTestsData.correctUser) { error in
-            #expect(error == nil)
-        }
+    @Test func successfulSignUp() async {
+        let response = try? await useCase.signUp(user: SignUpTestsData.correctUser)
+        #expect(response == nil)
     }
 
-    @Test func unsuccessfulSignUp() {
-        useCaseFailed.signUp(user: SignUpTestsData.correctUser) { error in
-            #expect(error != nil)
-        }
+    @Test func unsuccessfulSignUp() async {
+        let response = try? await useCaseFailed.signUp(user: SignUpTestsData.correctUser)
+        #expect(response != nil)
     }
 
-    @Test func checkHomeForUserSuccessfully() {
-        useCase.checkHomeForUser { home, error, _ in
-            #expect(home != nil)
-            #expect(error == nil)
-        }
+    @Test func checkHomeForUserSuccessfully() async {
+        let response = try? await useCase.checkHomeForUser()
+        #expect(response?.home != nil)
+        #expect(response?.error == nil)
     }
 
-    @Test func checkHomeForUserUnsuccessfully() {
-        useCaseFailed.checkHomeForUser { home, _, error in
-            #expect(home == nil)
-            #expect(error != nil)
-        }
+    @Test func checkHomeForUserUnsuccessfully() async {
+        let response = try? await useCaseFailed.checkHomeForUser()
+        #expect(response?.home == nil)
+        #expect(response?.error != nil)
     }
 }

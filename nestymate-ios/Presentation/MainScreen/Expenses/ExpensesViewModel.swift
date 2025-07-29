@@ -7,7 +7,7 @@
 
 import Foundation
 
-class ExpensesViewModel: ObservableObject {
+final class ExpensesViewModel: ObservableObject {
     private let useCase: ExpenseUseCase
     private let logoutService: LogoutService
     @Published var shouldShowLoader: Bool?
@@ -18,23 +18,25 @@ class ExpensesViewModel: ObservableObject {
         self.logoutService = logoutService
     }
 
-    public func getExpenses(completionHandler: @escaping ([Expense]?, Bool) -> Void) {
+    @MainActor
+    public func getExpenses() async throws -> ExpensesResponse {
         shouldShowLoader = true
-        useCase.getExpenses { [weak self] expenses, error, statusCode in
-            guard let self else { return }
-            shouldShowLoader = false
-            self.error = error
-            completionHandler(expenses, logoutService.shouldLogout(statusCode: statusCode))
-        }
+        let apiResponse = try? await useCase.getExpenses()
+        shouldShowLoader = false
+        return ExpensesResponse(
+            expenses: apiResponse?.expenses,
+            error: apiResponse?.error,
+            statusCode: apiResponse?.statusCode,
+            shouldLogout: logoutService.shouldLogout(statusCode: apiResponse?.statusCode)
+        )
     }
 
-    public func delete(expenseToBeDelete: Expense, completionHandler: @escaping ([Expense]?, Bool) -> Void) {
+    @MainActor
+    public func delete(expenseToBeDelete: Expense) async throws -> ExpensesResponse {
         shouldShowLoader = true
-        useCase.deleteExpense(expense: expenseToBeDelete) { [weak self] error, _ in
-            guard let self else { return }
-            shouldShowLoader = false
-            self.error = error
-            getExpenses(completionHandler: completionHandler)
-        }
+        let response = try? await useCase.deleteExpense(expense: expenseToBeDelete)
+        shouldShowLoader = false
+        error = response?.error
+        return try await getExpenses()
     }
 }

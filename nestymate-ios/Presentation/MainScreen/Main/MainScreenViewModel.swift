@@ -7,7 +7,7 @@
 
 import Foundation
 
-class MainScreenViewModel {
+final class MainScreenViewModel {
     let useCase: MainScreenUseCase
     init(useCase: MainScreenUseCase) {
         self.useCase = useCase

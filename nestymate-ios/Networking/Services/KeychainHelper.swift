@@ -8,7 +8,7 @@
 import Foundation
 import Security
 
-final class KeychainHelper {
+final class KeychainHelper: Sendable {
     let service = "com.nestymate.LoginService"
     let account = "nestymate"
     @MainActor static let standard = KeychainHelper()

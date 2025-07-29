@@ -8,51 +8,55 @@
 import Combine
 import Foundation
 
-protocol LoginService {
-    func login(username: String, password: String, completionHandler: @escaping (Error?) -> Void)
-    func signup(user: User, completionHandler: @escaping (Error?) -> Void)
+protocol LoginService: Sendable {
+    func login(username: String, password: String) async throws -> (Error?)
+    func signup(user: User) async throws -> (Error?)
 }
 
-class LoginServiceImpl: LoginService {
+final class LoginServiceImpl: LoginService {
     let mainUrl = URL(string: "http://192.168.1.10/auth")!
-    var apiCall = APICalls()
-    func login(username: String, password: String, completionHandler: @escaping (Error?) -> Void) {
-        let url: URL = mainUrl.appending(path: "login")
-        let data = try? JSONEncoder().encode(Login(username: username, password: password)) // "test123" "test321"
-        apiCall.post(url: url, requestData: data, authentication: false) { apiResponse in
-            if apiResponse.statusCode == 200 {
-                guard let data = apiResponse.data,
-                      let response = try? JSONDecoder().decode(Response.self, from: data)
-                else {
-                    return completionHandler(.badServerResponse)
-                }
+    let apiCall: APICalls
 
-                print("We received token -------", response.token)
-                let helper = KeychainHelper()
-                helper.save(Data(response.token.utf8))
-                completionHandler(apiResponse.error)
-
-            } else if apiResponse.statusCode == 401 {
-                return completionHandler(.passwordAndUserNameDidNotMatch)
-            } else {
-                return completionHandler(.badServerResponse)
-            }
-        }
+    init() {
+        apiCall = APICalls()
     }
 
-    func signup(user: User, completionHandler: @escaping (Error?) -> Void) {
-        let url: URL = mainUrl.appending(path: "signup")
-        let data = try? JSONEncoder().encode(user)
-        apiCall.post(url: url, requestData: data, authentication: false) { apiResponse in
+    @MainActor
+    func login(username: String, password: String) async throws -> (Error?) {
+        let url: URL = mainUrl.appending(path: "login")
+        let data = try? JSONEncoder().encode(Login(username: username, password: password)) // "test123" "test321"
+        let apiResponse = try await apiCall.post(url: url, requestData: data, authentication: false)
+        if apiResponse.statusCode == 200 {
             guard let data = apiResponse.data,
                   let response = try? JSONDecoder().decode(Response.self, from: data)
             else {
-                return completionHandler(.badServerResponse)
+                return .badServerResponse
             }
-            print(response.token)
+
+            print("We received token -------", response.token)
             let helper = KeychainHelper()
             helper.save(Data(response.token.utf8))
-            completionHandler(apiResponse.error)
+            return apiResponse.error
+
+        } else if apiResponse.statusCode == 401 {
+            return .passwordAndUserNameDidNotMatch
+        } else {
+            return .badServerResponse
         }
+    }
+
+    func signup(user: User) async throws -> (Error?) {
+        let url: URL = mainUrl.appending(path: "signup")
+        let data = try? JSONEncoder().encode(user)
+        let apiResponse = try await apiCall.post(url: url, requestData: data, authentication: false)
+        guard let data = apiResponse.data,
+              let response = try? JSONDecoder().decode(Response.self, from: data)
+        else {
+            return .badServerResponse
+        }
+        print(response.token)
+        let helper = KeychainHelper()
+        helper.save(Data(response.token.utf8))
+        return apiResponse.error
     }
 }

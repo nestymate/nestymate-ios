@@ -7,7 +7,7 @@
 
 import Foundation
 
-class LogoutService {
+final class LogoutService: Sendable {
     func shouldLogout(statusCode: Int?) -> Bool {
         statusCode == 403
     }

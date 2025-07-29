@@ -35,10 +35,15 @@ struct CreateOrEditExpenseView: View {
                         title: viewModel.buttonTitle,
                         shouldEnableButton: viewModel.shouldEnableButton
                     ) {
-                        viewModel.createOrUpdateExpense(expenseCategoryId: selectedCategory) { shouldLogout in
-                            guard let shouldLogout, !shouldLogout
-                            else { return output.logout() }
-                            output.goBack()
+                        Task {
+                            let shouldLogout = try await viewModel.createOrUpdateExpense(
+                                expenseCategoryId: selectedCategory
+                            )
+                            if !shouldLogout {
+                                output.goBack()
+                            } else {
+                                output.logout()
+                            }
                         }
                     }
                     Spacer()
@@ -50,9 +55,10 @@ struct CreateOrEditExpenseView: View {
                 error.alert
             }
             .onAppear {
-                viewModel.getCategories { selectedCategory, shouldLogout in
-                    self.selectedCategory = selectedCategory
-                    guard !shouldLogout else { return output.logout() }
+                Task {
+                    let categoriesResponse = try await viewModel.getCategories()
+                    selectedCategory = categoriesResponse.0
+                    guard !categoriesResponse.1 else { return output.logout() }
                 }
             }
         }

@@ -71,6 +71,10 @@
 		01740D322D7ACBD000C0D26F /* CategoryServiceMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01740D312D7ACBCE00C0D26F /* CategoryServiceMock.swift */; };
 		01740D342D7ACBDF00C0D26F /* CategoryServiceFailedMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01740D332D7ACBDE00C0D26F /* CategoryServiceFailedMock.swift */; };
 		01740D362D7ACEA900C0D26F /* CategoryTestData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01740D352D7ACEA100C0D26F /* CategoryTestData.swift */; };
+		017CFD142E39FE13004DA242 /* CategoriesResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 017CFD132E39FE07004DA242 /* CategoriesResponse.swift */; };
+		017CFD172E39FF06004DA242 /* GenericResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 017CFD162E39FF02004DA242 /* GenericResponse.swift */; };
+		017CFD192E3A02A3004DA242 /* HomeResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 017CFD182E3A029E004DA242 /* HomeResponse.swift */; };
+		017CFD1B2E3A1C24004DA242 /* ExpensesResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 017CFD1A2E3A1C19004DA242 /* ExpensesResponse.swift */; };
 		018A04752BD114660051A3A4 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 018A04742BD114660051A3A4 /* LoginView.swift */; };
 		018DE0FB2D7F071A006D3105 /* SwiftFormat in Frameworks */ = {isa = PBXBuildFile; productRef = 018DE0FA2D7F071A006D3105 /* SwiftFormat */; };
 		0192BB402D1ECC74005A0CD7 /* SignUpTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0192BB3F2D1ECC69005A0CD7 /* SignUpTests.swift */; };
@@ -177,6 +181,10 @@
 		01740D312D7ACBCE00C0D26F /* CategoryServiceMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryServiceMock.swift; sourceTree = "<group>"; };
 		01740D332D7ACBDE00C0D26F /* CategoryServiceFailedMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryServiceFailedMock.swift; sourceTree = "<group>"; };
 		01740D352D7ACEA100C0D26F /* CategoryTestData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryTestData.swift; sourceTree = "<group>"; };
+		017CFD132E39FE07004DA242 /* CategoriesResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoriesResponse.swift; sourceTree = "<group>"; };
+		017CFD162E39FF02004DA242 /* GenericResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenericResponse.swift; sourceTree = "<group>"; };
+		017CFD182E3A029E004DA242 /* HomeResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeResponse.swift; sourceTree = "<group>"; };
+		017CFD1A2E3A1C19004DA242 /* ExpensesResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpensesResponse.swift; sourceTree = "<group>"; };
 		018A04742BD114660051A3A4 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		0192BB3F2D1ECC69005A0CD7 /* SignUpTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpTests.swift; sourceTree = "<group>"; };
 		0192BB422D1ED602005A0CD7 /* SignUpTestsData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpTestsData.swift; sourceTree = "<group>"; };
@@ -304,6 +312,7 @@
 		0106B6122BE191310024AFCB /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				017CFD152E39FE17004DA242 /* Responses */,
 				0106B6272BFA5E920024AFCB /* Login.swift */,
 				0106B62B2BFA746C0024AFCB /* Home.swift */,
 				012815902C413539001FFA2D /* FieldModel.swift */,
@@ -346,6 +355,17 @@
 				0153EB4D2C9740C00033D970 /* InviteUserViewModel.swift */,
 			);
 			path = InviteUser;
+			sourceTree = "<group>";
+		};
+		017CFD152E39FE17004DA242 /* Responses */ = {
+			isa = PBXGroup;
+			children = (
+				017CFD1A2E3A1C19004DA242 /* ExpensesResponse.swift */,
+				017CFD182E3A029E004DA242 /* HomeResponse.swift */,
+				017CFD162E39FF02004DA242 /* GenericResponse.swift */,
+				017CFD132E39FE07004DA242 /* CategoriesResponse.swift */,
+			);
+			path = Responses;
 			sourceTree = "<group>";
 		};
 		018A04732BD114330051A3A4 /* Presentation */ = {
@@ -787,6 +807,7 @@
 				01D488342C96F7FE0024A7F2 /* CreateOrEditCategoryView.swift in Sources */,
 				012815932C4135A2001FFA2D /* FieldType.swift in Sources */,
 				0106B6282BFA5E920024AFCB /* Login.swift in Sources */,
+				017CFD1B2E3A1C24004DA242 /* ExpensesResponse.swift in Sources */,
 				01D4882D2C96F1B70024A7F2 /* Category.swift in Sources */,
 				012815A52C4C605E001FFA2D /* DatePickerUIView.swift in Sources */,
 				0153EB502C98BB330033D970 /* LogoutService.swift in Sources */,
@@ -800,6 +821,7 @@
 				0128159B2C485470001FFA2D /* Reachability.swift in Sources */,
 				0106B6072BE1859F0024AFCB /* ProfileView.swift in Sources */,
 				01D9A7602CB5C2E70081A181 /* HomeUserDefaults.swift in Sources */,
+				017CFD142E39FE13004DA242 /* CategoriesResponse.swift in Sources */,
 				01D488292C96E8920024A7F2 /* MainViewModel.swift in Sources */,
 				01D792342C8DA52D00EDA9D2 /* CategoriesView.swift in Sources */,
 				01D9A7622CBA92150081A181 /* CategoryService.swift in Sources */,
@@ -845,10 +867,12 @@
 				01D4883B2C9721B00024A7F2 /* CreateOrEditExpenseViewModel.swift in Sources */,
 				01D4883F2C9736700024A7F2 /* CreateOrEditExpenseView.swift in Sources */,
 				01D488382C9718DC0024A7F2 /* ExpenseService.swift in Sources */,
+				017CFD172E39FF06004DA242 /* GenericResponse.swift in Sources */,
 				0106B6162BE191B50024AFCB /* LoginUseCase.swift in Sources */,
 				01D488322C96F7ED0024A7F2 /* CreateOrEditCategoryViewModel.swift in Sources */,
 				01A606332C4017A900B7622E /* String+Extension.swift in Sources */,
 				0106B6192BE195F10024AFCB /* MainCoordinator.swift in Sources */,
+				017CFD192E3A02A3004DA242 /* HomeResponse.swift in Sources */,
 				01D488182C95F5840024A7F2 /* HomeUseCase.swift in Sources */,
 				0106B6302BFA79450024AFCB /* MainScreenUseCase.swift in Sources */,
 				01740D342D7ACBDF00C0D26F /* CategoryServiceFailedMock.swift in Sources */,

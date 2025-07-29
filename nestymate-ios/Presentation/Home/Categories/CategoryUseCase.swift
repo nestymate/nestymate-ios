@@ -7,38 +7,38 @@
 
 import Foundation
 
-protocol CategoryUseCase {
-    func getCategories(completionHandler: @escaping ([Category]?, Error?, Int?) -> Void)
-    func createCategory(category: Category, completionHandler: @escaping (Error?, Int?) -> Void)
-    func editCategory(category: Category, completionHandler: @escaping (Error?, Int?) -> Void)
-    func deleteCategory(category: Category, completionHandler: @escaping (Error?, Int?) -> Void)
+protocol CategoryUseCase: Sendable {
+    func getCategories() async throws -> CategoriesResponse
+    func createCategory(category: Category) async throws -> GenericResponse
+    func editCategory(category: Category) async throws -> GenericResponse
+    func deleteCategory(category: Category) async throws -> GenericResponse
     func createValid(isNameValid: Bool, isDescriptionValid: Bool) -> Bool
 }
 
-class CategoryUseCaseImpl: CategoryUseCase {
-    let service: CategoryService?
+final class CategoryUseCaseImpl: CategoryUseCase {
+    let service: CategoryService
 
-    init(service: CategoryService?) {
+    init(service: CategoryService) {
         self.service = service
     }
 
-    func getCategories(completionHandler: @escaping ([Category]?, Error?, Int?) -> Void) {
-        service?.getCategories(completionHandler: completionHandler)
+    func getCategories() async throws -> CategoriesResponse {
+        try await service.getCategories()
     }
 
-    func createValid(isNameValid: Bool, isDescriptionValid: Bool) -> Bool {
+    nonisolated func createValid(isNameValid: Bool, isDescriptionValid: Bool) -> Bool {
         isNameValid && isDescriptionValid
     }
 
-    func createCategory(category: Category, completionHandler: @escaping (Error?, Int?) -> Void) {
-        service?.createCategory(category: category, completionHandler: completionHandler)
+    func createCategory(category: Category) async throws -> GenericResponse {
+        try await service.createCategory(category: category)
     }
 
-    func editCategory(category: Category, completionHandler: @escaping (Error?, Int?) -> Void) {
-        service?.editCategory(category: category, completionHandler: completionHandler)
+    func editCategory(category: Category) async throws -> GenericResponse {
+        try await service.editCategory(category: category)
     }
 
-    func deleteCategory(category: Category, completionHandler: @escaping (Error?, Int?) -> Void) {
-        service?.deleteCategory(category: category, completionHandler: completionHandler)
+    func deleteCategory(category: Category) async throws -> GenericResponse {
+        try await service.deleteCategory(category: category)
     }
 }
