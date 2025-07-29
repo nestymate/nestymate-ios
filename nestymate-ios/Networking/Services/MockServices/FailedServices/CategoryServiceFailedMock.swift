@@ -6,19 +6,19 @@
 //
 
 final class CategoryServiceFailedMock: CategoryService {
-    func getCategories(completionHandler: @escaping ([Category]?, Error?, Int?) -> Void) {
-        completionHandler(nil, .badServerResponse, 500)
+    func getCategories() async throws -> CategoriesResponse {
+        CategoriesResponse(categories: nil, statusCode: 500, shouldLogout: false)
     }
 
-    func createCategory(category _: Category, completionHandler: @escaping (Error?, Int?) -> Void) {
-        completionHandler(.badServerResponse, 500)
+    func createCategory(category _: Category) async throws -> GenericResponse {
+        GenericResponse(error: .badServerResponse, statusCode: 500)
     }
 
-    func editCategory(category _: Category, completionHandler: @escaping (Error?, Int?) -> Void) {
-        completionHandler(.badServerResponse, 500)
+    func editCategory(category _: Category) async throws -> GenericResponse {
+        GenericResponse(error: .badServerResponse, statusCode: 500)
     }
 
-    func deleteCategory(category _: Category, completionHandler: @escaping (Error?, Int?) -> Void) {
-        completionHandler(.badServerResponse, 500)
+    func deleteCategory(category _: Category) async throws -> GenericResponse {
+        GenericResponse(error: .badServerResponse, statusCode: 500)
     }
 }

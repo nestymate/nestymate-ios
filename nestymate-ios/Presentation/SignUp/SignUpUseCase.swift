@@ -8,13 +8,13 @@
 import Foundation
 import SwiftUI
 
-protocol SignUpUseCase {
+protocol SignUpUseCase: Sendable {
     func shouldProceedToSignUp(user: User) -> (Bool, Error?)
-    func signUp(user: User, completionHandler: @escaping (Error?) -> Void)
-    func checkHomeForUser(completionHandler: @escaping (Home?, Error?, Int?) -> Void)
+    func signUp(user: User) async throws -> Error?
+    func checkHomeForUser() async throws -> HomeResponse
 }
 
-class SignUpUseCaseImpl: SignUpUseCase {
+final class SignUpUseCaseImpl: SignUpUseCase {
     let service: LoginService
     let homeService: HomeService
 
@@ -36,11 +36,11 @@ class SignUpUseCaseImpl: SignUpUseCase {
         return (true, nil)
     }
 
-    func signUp(user: User, completionHandler: @escaping (Error?) -> Void) {
-        service.signup(user: user, completionHandler: completionHandler)
+    func signUp(user: User) async throws -> Error? {
+        try await service.signup(user: user)
     }
 
-    func checkHomeForUser(completionHandler: @escaping (Home?, Error?, Int?) -> Void) {
-        homeService.getHome(completionHandler: completionHandler)
+    func checkHomeForUser() async throws -> HomeResponse {
+        try await homeService.getHome()
     }
 }

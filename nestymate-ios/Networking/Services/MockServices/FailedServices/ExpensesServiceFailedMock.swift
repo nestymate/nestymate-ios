@@ -6,23 +6,23 @@
 //
 
 final class ExpensesServiceFailedMock: ExpenseService {
-    func getExpenses(completionHandler: @escaping ([Expense]?, Error?, Int?) -> Void) {
-        completionHandler(nil, .badServerResponse, 500)
+    func getExpenses() async throws -> ExpensesResponse {
+        ExpensesResponse(expenses: nil, error: .badServerResponse, statusCode: 500)
     }
 
-    func getExpense(expenseId _: Int, completionHandler: @escaping (Expense?, Error?, Int?) -> Void) {
-        completionHandler(nil, .badServerResponse, 500)
+    func getExpense(expenseId _: Int) async throws -> ExpenseResponse {
+        ExpenseResponse(expense: nil, error: .badServerResponse, statusCode: 500)
     }
 
-    func createExpense(expense _: Expense, completionHandler: @escaping (Error?, Int?) -> Void) {
-        completionHandler(.badServerResponse, 500)
+    func createExpense(expense _: Expense) async throws -> GenericResponse {
+        GenericResponse(error: .badServerResponse, statusCode: 500)
     }
 
-    func editExpense(expense _: Expense, completionHandler: @escaping (Error?, Int?) -> Void) {
-        completionHandler(.badServerResponse, 500)
+    func editExpense(expense _: Expense) async throws -> GenericResponse {
+        GenericResponse(error: .badServerResponse, statusCode: 500)
     }
 
-    func deleteExpense(expense _: Expense, completionHandler: @escaping (Error?, Int?) -> Void) {
-        completionHandler(.badServerResponse, 500)
+    func deleteExpense(expense _: Expense) async throws -> GenericResponse {
+        GenericResponse(error: .badServerResponse, statusCode: 500)
     }
 }

@@ -7,7 +7,7 @@
 
 import Foundation
 
-class MainViewModel: ObservableObject {
+final class MainViewModel: ObservableObject {
     let keyChain = KeychainHelper()
     var shouldShowLogin: LoginPage {
         guard keyChain.read() != nil else { return .login }

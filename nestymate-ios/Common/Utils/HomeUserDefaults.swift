@@ -7,7 +7,7 @@
 
 import Foundation
 
-final class HomeUserDefaults {
+final class HomeUserDefaults: Sendable {
     private let homeKey = "homeId"
 
     func saveHome(with id: Int?) {

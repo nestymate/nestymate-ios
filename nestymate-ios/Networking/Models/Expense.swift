@@ -7,7 +7,7 @@
 
 import Foundation
 
-public struct Expense: Encodable, Decodable {
+public struct Expense: Encodable, Decodable, Sendable {
     public let id: Int
     public let title: String?
     public let description: String

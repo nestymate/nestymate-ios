@@ -7,7 +7,7 @@
 
 import Foundation
 
-class DateUtils {
+final class DateUtils {
     static let backendFormat = "yyyy-MM-dd"
 
     class func getToday() -> String {

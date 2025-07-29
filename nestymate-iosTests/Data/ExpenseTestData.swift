@@ -6,6 +6,6 @@
 //
 @testable import nestymate_ios
 
-class ExpenseTestData {
+enum ExpenseTestData {
     static let expense = Expense(id: 0, title: "test", description: "", amount: 12, categoryId: 0)
 }

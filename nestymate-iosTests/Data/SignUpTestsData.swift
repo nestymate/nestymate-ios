@@ -7,7 +7,7 @@
 
 @testable import nestymate_ios
 
-class SignUpTestsData {
+enum SignUpTestsData {
     static let emptyValuesUser = User(
         username: "",
         password: "",

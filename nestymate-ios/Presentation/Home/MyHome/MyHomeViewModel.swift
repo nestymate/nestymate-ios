@@ -12,7 +12,7 @@ struct Menu: Hashable {
     let id: Int
 }
 
-class MyHomeViewModel: ObservableObject {
+final class MyHomeViewModel: ObservableObject {
     let homeUseCase: HomeUseCase
     let categoryUseCase: CategoryUseCase
     let title = String(localized: "my_home")

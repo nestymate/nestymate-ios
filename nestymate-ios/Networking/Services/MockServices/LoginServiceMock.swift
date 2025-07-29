@@ -7,11 +7,11 @@
 import Foundation
 
 final class LoginServiceMock: LoginService {
-    func login(username _: String, password _: String, completionHandler: @escaping (Error?) -> Void) {
-        completionHandler(nil)
+    func login(username _: String, password _: String) async throws -> Error? {
+        nil
     }
 
-    func signup(user _: User, completionHandler: @escaping (Error?) -> Void) {
-        completionHandler(nil)
+    func signup(user _: User) async throws -> Error? {
+        nil
     }
 }

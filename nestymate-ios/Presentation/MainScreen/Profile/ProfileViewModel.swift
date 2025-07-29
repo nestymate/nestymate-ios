@@ -7,7 +7,7 @@
 
 import Foundation
 
-class ProfileViewModel {
+final class ProfileViewModel {
     let useCase: ProfileUseCase = ProfileUseCaseImpl()
     func logout(completionHandler: @escaping () -> Void) {
         useCase.logout(completionHandler: completionHandler)

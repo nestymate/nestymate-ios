@@ -8,59 +8,64 @@
 import Combine
 import Foundation
 
-protocol CategoryService {
-    func getCategories(completionHandler: @escaping ([Category]?, Error?, Int?) -> Void)
-    func createCategory(category: Category, completionHandler: @escaping (Error?, Int?) -> Void)
-    func editCategory(category: Category, completionHandler: @escaping (Error?, Int?) -> Void)
-    func deleteCategory(category: Category, completionHandler: @escaping (Error?, Int?) -> Void)
+protocol CategoryService: Sendable {
+    func getCategories() async throws -> CategoriesResponse
+    func createCategory(category: Category) async throws -> GenericResponse
+    func editCategory(category: Category) async throws -> GenericResponse
+    func deleteCategory(category: Category) async throws -> GenericResponse
 }
 
-class CategoryServiceImpl: CategoryService {
-    var baseUrl: URL
-    var cancellable = Set<AnyCancellable>()
-    let helper = KeychainHelper()
-    var apiCall = APICalls()
-    var homeUserDefaults = HomeUserDefaults()
+final class CategoryServiceImpl: CategoryService {
+    let baseUrl: URL
+    let helper: KeychainHelper
+    let apiCall: APICalls
+    let homeUserDefaults: HomeUserDefaults
 
     public init() {
+        homeUserDefaults = HomeUserDefaults()
         baseUrl = URL(string: "http://192.168.1.10/api/v1/home")!
             .appendingPathComponent(homeUserDefaults.getHomeId())
             .appendingPathComponent("expensecategory")
+        apiCall = APICalls()
+        helper = KeychainHelper()
     }
 
-    func getCategories(completionHandler: @escaping ([Category]?, Error?, Int?) -> Void) {
-        apiCall.get(url: baseUrl, requestData: nil) { apiResponse in
-            do {
-                guard let data = apiResponse.data
-                else { return completionHandler(nil, .badServerResponse, apiResponse.statusCode) }
-                let response = try JSONDecoder().decode([Category].self, from: data)
-                return completionHandler(response, apiResponse.error, apiResponse.statusCode)
-            } catch {
-                return completionHandler(nil, .badServerResponse, apiResponse.statusCode)
-            }
+    func getCategories() async throws -> CategoriesResponse {
+        let apiResponse = try await apiCall.get(url: baseUrl, requestData: nil)
+
+        guard let data = apiResponse.data else {
+            throw URLError(.badServerResponse)
+        }
+
+        do {
+            let categories = try JSONDecoder().decode([Category].self, from: data)
+            return CategoriesResponse(
+                categories: categories,
+                statusCode: apiResponse.statusCode,
+                shouldLogout: false
+            )
+        } catch {
+            throw URLError(.cannotDecodeRawData)
         }
     }
 
-    func createCategory(category: Category, completionHandler: @escaping (Error?, Int?) -> Void) {
+    func createCategory(category: Category) async throws -> GenericResponse {
         let data = try? JSONEncoder().encode(category)
-        apiCall.post(url: baseUrl, requestData: data) { apiResponse in
-            completionHandler(apiResponse.error, apiResponse.statusCode)
-        }
+        let apiResponse = try await apiCall.post(url: baseUrl, requestData: data)
+        return GenericResponse(error: apiResponse.error, statusCode: apiResponse.statusCode)
     }
 
-    func editCategory(category: Category, completionHandler: @escaping (Error?, Int?) -> Void) {
+    func editCategory(category: Category) async throws -> GenericResponse {
         let data = try? JSONEncoder().encode(category)
         let putURL = baseUrl.appending(path: "\(category.id)")
-        apiCall.put(url: putURL, requestData: data) { apiResponse in
-            completionHandler(apiResponse.error, apiResponse.statusCode)
-        }
+        let apiResponse = try await apiCall.put(url: putURL, requestData: data)
+        return GenericResponse(error: apiResponse.error, statusCode: apiResponse.statusCode)
     }
 
-    func deleteCategory(category: Category, completionHandler: @escaping (Error?, Int?) -> Void) {
+    func deleteCategory(category: Category) async throws -> GenericResponse {
         let data = try? JSONEncoder().encode(category)
         let putURL = baseUrl.appending(path: "\(category.id)")
-        apiCall.delete(url: putURL, requestData: data) { apiResponse in
-            completionHandler(apiResponse.error, apiResponse.statusCode)
-        }
+        let apiResponse = try await apiCall.delete(url: putURL, requestData: data)
+        return GenericResponse(error: apiResponse.error, statusCode: apiResponse.statusCode)
     }
 }

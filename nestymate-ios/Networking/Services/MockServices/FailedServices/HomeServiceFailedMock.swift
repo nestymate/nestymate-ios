@@ -8,19 +8,19 @@
 import Foundation
 
 final class HomeServiceFailedMock: HomeService {
-    func inviteUserToHome(email _: String, completionHandler: @escaping (Error?, Int?) -> Void) {
-        completionHandler(.badServerResponse, 500)
+    func getHome() async throws -> HomeResponse {
+        HomeResponse(home: nil, error: .badServerResponse, statusCode: 500)
     }
 
-    func createHome(home _: Home, completionHandler: @escaping (Error?, Int?) -> Void) {
-        completionHandler(.badServerResponse, 500)
+    func createHome(home _: Home) async throws -> GenericResponse {
+        GenericResponse(error: .badServerResponse, statusCode: 500)
     }
 
-    func editHome(home _: Home, completionHandler: @escaping (Error?, Int?) -> Void) {
-        completionHandler(.badServerResponse, 500)
+    func editHome(home _: Home) async throws -> GenericResponse {
+        GenericResponse(error: .badServerResponse, statusCode: 500)
     }
 
-    func getHome(completionHandler: @escaping (Home?, Error?, Int?) -> Void) {
-        completionHandler(nil, .badServerResponse, 500)
+    func inviteUserToHome(email _: String) async throws -> GenericResponse {
+        GenericResponse(error: .badServerResponse, statusCode: 500)
     }
 }

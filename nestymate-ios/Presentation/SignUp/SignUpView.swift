@@ -90,8 +90,13 @@ private extension SignUpView {
             title: String(localized: "signup"),
             shouldEnableButton: viewModel.shouldEnableButton
         ) {
-            viewModel.signUp { home in
-                home == nil ? self.output.goToCreateHome() : self.output.goToMainScreen()
+            Task {
+                let home = try await viewModel.signUp()
+                if home == nil {
+                    self.output.goToCreateHome()
+                } else {
+                    self.output.goToMainScreen()
+                }
             }
         }
     }

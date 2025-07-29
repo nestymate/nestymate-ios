@@ -7,7 +7,7 @@
 
 import Foundation
 
-class CategoriesViewModel: ObservableObject {
+final class CategoriesViewModel: ObservableObject {
     @Published public var shouldShowLoader: Bool?
     @Published var error: Error?
     private let useCase: CategoryUseCase
@@ -18,23 +18,25 @@ class CategoriesViewModel: ObservableObject {
         self.logoutService = logoutService
     }
 
-    public func getCategories(completionHandler: @escaping ([Category]?, Bool) -> Void) {
+    @MainActor
+    public func getCategories() async throws -> CategoriesResponse {
         shouldShowLoader = true
-        useCase.getCategories { [weak self] categories, error, statusCode in
-            guard let self else { return }
-            shouldShowLoader = false
-            self.error = error
-            completionHandler(categories, logoutService.shouldLogout(statusCode: statusCode))
-        }
+        let response = try await useCase.getCategories()
+        shouldShowLoader = false
+        let shouldLogout = logoutService.shouldLogout(statusCode: response.statusCode)
+        return CategoriesResponse(
+            categories: response.categories,
+            statusCode: nil,
+            shouldLogout: shouldLogout
+        )
     }
 
-    public func delete(categoryToBeDelete: Category, completionHandler: @escaping ([Category]?, Bool) -> Void) {
+    @MainActor
+    public func delete(categoryToBeDelete: Category) async throws -> CategoriesResponse {
         shouldShowLoader = true
-        useCase.deleteCategory(category: categoryToBeDelete) { [weak self] error, _ in
-            guard let self else { return }
-            shouldShowLoader = false
-            self.error = error
-            getCategories(completionHandler: completionHandler)
-        }
+        _ = try await useCase.deleteCategory(category: categoryToBeDelete)
+        shouldShowLoader = false
+        error = error
+        return try await getCategories()
     }
 }

@@ -7,38 +7,38 @@
 
 import Foundation
 
-protocol HomeUseCase {
+protocol HomeUseCase: Sendable {
     func createValid(isNameValid: Bool, isDescriptionValid: Bool, isAddressValid: Bool) -> Bool
-    func getHome(completionHandler: @escaping (Home?, Error?, Int?) -> Void)
-    func editHome(home: Home, completionHandler: @escaping (Error?, Int?) -> Void)
-    func createHome(home: Home, completionHandler: @escaping (Error?, Int?) -> Void)
-    func inviteUserToHome(email: String, completionHandler: @escaping (Error?, Int?) -> Void)
+    func getHome() async throws -> HomeResponse
+    func editHome(home: Home) async throws -> GenericResponse
+    func createHome(home: Home) async throws -> GenericResponse
+    func inviteUserToHome(email: String) async throws -> GenericResponse
 }
 
-class HomeUseCaseImpl: HomeUseCase {
+final class HomeUseCaseImpl: HomeUseCase {
     let homeService: HomeService
 
     init(homeService: HomeService) {
         self.homeService = homeService
     }
 
-    func createValid(isNameValid: Bool, isDescriptionValid: Bool, isAddressValid: Bool) -> Bool {
+    nonisolated func createValid(isNameValid: Bool, isDescriptionValid: Bool, isAddressValid: Bool) -> Bool {
         isNameValid && isDescriptionValid && isAddressValid
     }
 
-    func getHome(completionHandler: @escaping (Home?, Error?, Int?) -> Void) {
-        homeService.getHome(completionHandler: completionHandler)
+    func getHome() async throws -> HomeResponse {
+        try await homeService.getHome()
     }
 
-    func editHome(home: Home, completionHandler: @escaping (Error?, Int?) -> Void) {
-        homeService.editHome(home: home, completionHandler: completionHandler)
+    func editHome(home: Home) async throws -> GenericResponse {
+        try await homeService.editHome(home: home)
     }
 
-    func createHome(home: Home, completionHandler: @escaping (Error?, Int?) -> Void) {
-        homeService.createHome(home: home, completionHandler: completionHandler)
+    func createHome(home: Home) async throws -> GenericResponse {
+        try await homeService.createHome(home: home)
     }
 
-    func inviteUserToHome(email: String, completionHandler: @escaping (Error?, Int?) -> Void) {
-        homeService.inviteUserToHome(email: email, completionHandler: completionHandler)
+    func inviteUserToHome(email: String) async throws -> GenericResponse {
+        try await homeService.inviteUserToHome(email: email)
     }
 }
