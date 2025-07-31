@@ -7,11 +7,11 @@
 import Foundation
 
 final class LoginServiceMock: LoginService {
-    func login(username _: String, password _: String) async throws -> Error? {
+    func login(username _: String, password _: String) async throws -> HttpError? {
         nil
     }
 
-    func signup(user _: User) async throws -> Error? {
+    func signup(user _: User) async throws -> HttpError? {
         nil
     }
 }

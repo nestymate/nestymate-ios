@@ -9,8 +9,8 @@ import Combine
 import Foundation
 
 protocol LoginService: Sendable {
-    func login(username: String, password: String) async throws -> (Error?)
-    func signup(user: User) async throws -> (Error?)
+    func login(username: String, password: String) async throws -> HttpError?
+    func signup(user: User) async throws -> HttpError?
 }
 
 final class LoginServiceImpl: LoginService {
@@ -22,7 +22,7 @@ final class LoginServiceImpl: LoginService {
     }
 
     @MainActor
-    func login(username: String, password: String) async throws -> (Error?) {
+    func login(username: String, password: String) async throws -> HttpError? {
         let url: URL = mainUrl.appending(path: "login")
         let data = try? JSONEncoder().encode(Login(username: username, password: password)) // "test123" "test321"
         let apiResponse = try await apiCall.post(url: url, requestData: data, authentication: false)
@@ -45,7 +45,7 @@ final class LoginServiceImpl: LoginService {
         }
     }
 
-    func signup(user: User) async throws -> (Error?) {
+    func signup(user: User) async throws -> HttpError? {
         let url: URL = mainUrl.appending(path: "signup")
         let data = try? JSONEncoder().encode(user)
         let apiResponse = try await apiCall.post(url: url, requestData: data, authentication: false)

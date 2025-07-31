@@ -17,7 +17,7 @@ protocol ExpenseUseCase: Sendable {
         isTitleValid: Bool,
         isDescriptionValid: Bool,
         isAmountValid: Bool
-    ) -> (Bool, Error?)
+    ) -> SuccessResponse
 }
 
 final class ExpenseUseCaseImpl: ExpenseUseCase {
@@ -39,11 +39,11 @@ final class ExpenseUseCaseImpl: ExpenseUseCase {
         isTitleValid: Bool,
         isDescriptionValid: Bool,
         isAmountValid: Bool
-    ) -> (Bool, Error?) {
+    ) -> SuccessResponse {
         if !isTitleValid || !isDescriptionValid || !isAmountValid {
-            return (false, .fillAllValues)
+            return SuccessResponse(success: false, error: .fillAllValues)
         }
-        return (true, nil)
+        return SuccessResponse(success: true, error: nil)
     }
 
     func createExpense(expense: Expense) async throws -> GenericResponse {

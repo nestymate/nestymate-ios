@@ -9,8 +9,8 @@ import Foundation
 import SwiftUI
 
 protocol SignUpUseCase: Sendable {
-    func shouldProceedToSignUp(user: User) -> (Bool, Error?)
-    func signUp(user: User) async throws -> Error?
+    func shouldProceedToSignUp(user: User) -> SuccessResponse
+    func signUp(user: User) async throws -> HttpError?
     func checkHomeForUser() async throws -> HomeResponse
 }
 
@@ -23,20 +23,20 @@ final class SignUpUseCaseImpl: SignUpUseCase {
         self.homeService = homeService
     }
 
-    func shouldProceedToSignUp(user: User) -> (Bool, Error?) {
+    func shouldProceedToSignUp(user: User) -> SuccessResponse {
         if !user.isPasswordValid {
-            return (false, .passwordNotValid)
+            return SuccessResponse(success: false, error: .passwordNotValid)
         } else if !user.isPasswordsTheSame {
-            return (false, .passwordDoNotMatch)
+            return SuccessResponse(success: false, error: .passwordDoNotMatch)
         } else if user.birthday == DateUtils.getToday() {
-            return (false, .birthdayNotValid)
+            return SuccessResponse(success: false, error: .birthdayNotValid)
         } else if !user.isValid {
-            return (false, .fillAllValues)
+            return SuccessResponse(success: false, error: .fillAllValues)
         }
-        return (true, nil)
+        return SuccessResponse(success: true, error: nil)
     }
 
-    func signUp(user: User) async throws -> Error? {
+    func signUp(user: User) async throws -> HttpError? {
         try await service.signup(user: user)
     }
 

@@ -16,7 +16,7 @@ final class CreateOrEditHomeViewModel: ObservableObject {
     @Published public var address: FieldModel = .init(value: "", fieldType: .address)
     @Published public var shouldShowLoader: Bool?
     @Published var isEdit: Bool = false
-    @Published var error: Error?
+    @Published var error: HttpError?
     var buttonTitle: String = ""
     var pageTitle: String = ""
     var shouldEnableButton: Bool {
@@ -63,11 +63,14 @@ final class CreateOrEditHomeViewModel: ObservableObject {
         ) {
             shouldShowLoader = true
             let home = Home(id: 0, name: name.value, description: description.value, address: address.value)
-            let response = try await useCase.createHome(home: home)
-            shouldShowLoader = false
-            error = response.error
-            return logoutService.shouldLogout(statusCode: response.statusCode)
+            do {
+                let response = try await useCase.createHome(home: home)
+                return logoutService.shouldLogout(statusCode: response.statusCode)
+            } catch {
+                self.error = error as? HttpError
+            }
         }
+        shouldShowLoader = false
         return false
     }
 
@@ -86,11 +89,14 @@ final class CreateOrEditHomeViewModel: ObservableObject {
                 description: description.value,
                 address: address.value
             )
-            let response = try await useCase.editHome(home: home)
-            shouldShowLoader = false
-            error = error
-            return logoutService.shouldLogout(statusCode: response.statusCode)
+            do {
+                let response = try await useCase.editHome(home: home)
+                return logoutService.shouldLogout(statusCode: response.statusCode)
+            } catch {
+                self.error = error as? HttpError
+            }
         }
+        shouldShowLoader = false
         return false
     }
 
