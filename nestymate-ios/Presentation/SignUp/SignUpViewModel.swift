@@ -17,7 +17,7 @@ final class SignUpViewModel: ObservableObject {
     @Published var birthdate: FieldModel = .init(value: "", fieldType: .birthday)
     @Published var gender: FieldModel = .init(value: "", fieldType: .gender)
     @Published var shouldShowLoader: Bool?
-    @Published var error: Error?
+    @Published var error: HttpError?
 
     var shouldEnableButton: Bool {
         !username.value.isEmpty
@@ -38,7 +38,7 @@ final class SignUpViewModel: ObservableObject {
 
 extension SignUpViewModel {
     @MainActor
-    func signUp() async throws -> Home? {
+    func signUp() async throws -> LoginResponse {
         let formatter = DateFormatter()
         formatter.dateFormat = DateUtils.backendFormat
         let user = User(
@@ -50,20 +50,20 @@ extension SignUpViewModel {
             birthday: formatter.string(from: birthdate.dateValue),
             gender: gender.value
         )
-        let (shouldProceed, signUpError) = useCase.shouldProceedToSignUp(user: user)
-        if shouldProceed {
+        let result = useCase.shouldProceedToSignUp(user: user)
+        if result.success {
             shouldShowLoader = true
-            let errorSignUp = try await useCase.signUp(user: user)
-            let checkHomeResponse = try await useCase.checkHomeForUser()
-            shouldShowLoader = false
-            let apiError = errorSignUp ?? checkHomeResponse.error ?? nil
-            error = apiError
-            if apiError == nil {
-                return checkHomeResponse.home
+            do {
+                _ = try await useCase.signUp(user: user)
+                let checkHomeResponse = try await useCase.checkHomeForUser()
+                return LoginResponse(success: true, shouldShowHome: checkHomeResponse.home == nil)
+            } catch {
+                self.error = error as? HttpError
             }
         } else {
-            error = signUpError
+            error = result.error
         }
-        return nil
+        shouldShowLoader = false
+        return LoginResponse(success: false, shouldShowHome: false)
     }
 }

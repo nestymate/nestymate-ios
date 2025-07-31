@@ -18,7 +18,7 @@ final class CreateOrEditExpenseViewModel: ObservableObject {
     @Published var amount: FieldModel = .init(value: "", fieldType: .amount)
     @Published var shouldShowLoader: Bool?
     @Published var isEdit: Bool = false
-    @Published var error: Error?
+    @Published var error: HttpError?
     var buttonTitle: String = ""
     var pageTitle: String = ""
     private var expenseId: Int?
@@ -51,33 +51,36 @@ final class CreateOrEditExpenseViewModel: ObservableObject {
     @MainActor
     public func getCategories() async throws -> (Int?, Bool) {
         shouldShowLoader = true
-        let response = try await categoryUseCase.getCategories()
-        categories = categories
-        shouldShowLoader = false
-        error = error
-        if isEdit, let expenseId {
-            let response = try await useCase.getExpense(expenseId: expenseId)
-            setup(expense: response.expense)
-            error = error
-            return (response.expense?.categoryId, logoutService.shouldLogout(statusCode: response.statusCode))
-        } else {
-            if categories.count > 0 {
-                return (categories[0].id, logoutService.shouldLogout(statusCode: response.statusCode))
+        do {
+            let response = try await categoryUseCase.getCategories()
+            categories = categories
+            if isEdit, let expenseId {
+                let response = try await useCase.getExpense(expenseId: expenseId)
+                setup(expense: response.expense)
+                return (response.expense?.categoryId, logoutService.shouldLogout(statusCode: response.statusCode))
             } else {
-                return (nil, logoutService.shouldLogout(statusCode: response.statusCode))
+                if categories.count > 0 {
+                    return (categories[0].id, logoutService.shouldLogout(statusCode: response.statusCode))
+                } else {
+                    return (nil, logoutService.shouldLogout(statusCode: response.statusCode))
+                }
             }
+        } catch {
+            self.error = error as? HttpError
         }
+        shouldShowLoader = false
+        return (nil, false)
     }
 
     @MainActor
     func createOrUpdateExpense(expenseCategoryId: Int?) async throws -> Bool {
-        let (shouldProceed, categoryError) = useCase.createValid(
+        let response = useCase.createValid(
             isTitleValid: title.onValidate(),
             isDescriptionValid: description.onValidate(),
             isAmountValid: amount.onValidate()
         )
-
-        if shouldProceed {
+        
+        if response.success {
             shouldShowLoader = true
             let amountInDouble = Double(amount.value) ?? 0.0
             let expense = Expense(
@@ -87,20 +90,21 @@ final class CreateOrEditExpenseViewModel: ObservableObject {
                 amount: amountInDouble,
                 categoryId: expenseCategoryId
             )
-            if isEdit {
-                let response = try await useCase.editExpense(expense: expense)
-                shouldShowLoader = false
-                error = response.error
-                return logoutService.shouldLogout(statusCode: response.statusCode)
-            } else {
-                let response = try await useCase.createExpense(expense: expense)
-                shouldShowLoader = false
-                error = response.error
-                return logoutService.shouldLogout(statusCode: response.statusCode)
+            do {
+                if isEdit {
+                    let response = try await useCase.editExpense(expense: expense)
+                    return logoutService.shouldLogout(statusCode: response.statusCode)
+                } else {
+                    let response = try await useCase.createExpense(expense: expense)
+                    return logoutService.shouldLogout(statusCode: response.statusCode)
+                }
+            } catch {
+                self.error = error as? HttpError
             }
         } else {
-            error = categoryError
+            error = response.error
         }
+        shouldShowLoader = false
         return false
     }
 

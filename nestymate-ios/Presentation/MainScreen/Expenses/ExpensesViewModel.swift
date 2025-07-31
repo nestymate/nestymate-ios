@@ -11,7 +11,7 @@ final class ExpensesViewModel: ObservableObject {
     private let useCase: ExpenseUseCase
     private let logoutService: LogoutService
     @Published var shouldShowLoader: Bool?
-    @Published var error: Error?
+    @Published var error: HttpError?
 
     init(useCase: ExpenseUseCase, logoutService: LogoutService) {
         self.useCase = useCase

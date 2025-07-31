@@ -7,6 +7,6 @@
 
 struct HomeResponse: Sendable {
     let home: Home?
-    let error: Error?
+    let error: HttpError?
     let statusCode: Int?
 }

@@ -1,5 +1,5 @@
 //
-//  Error.swift
+//  HttpError.swift
 //  nestymate-ios
 //
 //  Created by Selini Kyriazidou on 17/7/24.
@@ -8,9 +8,8 @@
 import Foundation
 import SwiftUI
 
-enum Error: Identifiable, Sendable {
-    var id: Self { self }
-
+enum HttpError: Error, Sendable, Identifiable {
+    var id: UUID { UUID() }
     case noNetwork
     case badServerResponse
     case fillAllValues
@@ -18,6 +17,7 @@ enum Error: Identifiable, Sendable {
     case passwordNotValid
     case birthdayNotValid
     case passwordAndUserNameDidNotMatch
+    case requestFailed(error: Error)
 
     var alert: Alert {
         switch self {
@@ -35,6 +35,8 @@ enum Error: Identifiable, Sendable {
             Alert(title: Text(String(localized: "fieldTypeEmptDateyMessage")))
         case .passwordAndUserNameDidNotMatch:
             Alert(title: Text(String(localized: "password_useraname_not_correcr")))
+        case .requestFailed:
+            Alert(title: Text(String(localized: "generic_error")))
         }
     }
 }

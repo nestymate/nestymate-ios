@@ -14,7 +14,7 @@ final class CreateOrEditCategoryViewModel: ObservableObject {
     @Published public var description: FieldModel = .init(value: "", fieldType: .description)
     @Published public var shouldShowLoader: Bool?
     @Published var isEdit: Bool = false
-    @Published var error: Error?
+    @Published var error: HttpError?
     var buttonTitle: String = ""
     var pageTitle: String = ""
     private var category: Category?
@@ -51,19 +51,19 @@ final class CreateOrEditCategoryViewModel: ObservableObject {
                 name: name.value,
                 description: description.value
             )
-            if isEdit {
-                let response = try await useCase.editCategory(category: category)
-                shouldShowLoader = false
-                error = response.error
-                return logoutService.shouldLogout(statusCode: response.statusCode)
-
-            } else {
-                let response = try await useCase.createCategory(category: category)
-                shouldShowLoader = false
-                error = response.error
-                return logoutService.shouldLogout(statusCode: response.statusCode)
+            do {
+                if isEdit {
+                    let response = try await useCase.editCategory(category: category)
+                    return logoutService.shouldLogout(statusCode: response.statusCode)
+                } else {
+                    let response = try await useCase.createCategory(category: category)
+                    return logoutService.shouldLogout(statusCode: response.statusCode)
+                }
+            } catch {
+                self.error = error as? HttpError
             }
         }
+        shouldShowLoader = false
         return false
     }
 

@@ -16,11 +16,11 @@ final class APICalls: Sendable {
         requestData: Data? = nil,
         authentication: Bool = true
     ) async throws -> APIResponse {
-        await genericCall(url, requestData, "POST", authentication)
+        try await genericCall(url, requestData, "POST", authentication)
     }
 
     func get(url: URL, requestData: Data?, authentication: Bool = true) async throws -> APIResponse {
-        await genericCall(url, requestData, "GET", authentication)
+        try await genericCall(url, requestData, "GET", authentication)
     }
 
     func put(
@@ -28,7 +28,7 @@ final class APICalls: Sendable {
         requestData: Data? = nil,
         authentication: Bool = true
     ) async throws -> APIResponse {
-        await genericCall(url, requestData, "PUT", authentication)
+        try await genericCall(url, requestData, "PUT", authentication)
     }
 
     func delete(
@@ -36,7 +36,7 @@ final class APICalls: Sendable {
         requestData: Data? = nil,
         authentication: Bool = true
     ) async throws -> APIResponse {
-        await genericCall(url, requestData, "DELETE", authentication)
+        try await genericCall(url, requestData, "DELETE", authentication)
     }
 
     private func genericCall(
@@ -44,11 +44,7 @@ final class APICalls: Sendable {
         _ requestData: Data? = nil,
         _ method: String,
         _ authentication: Bool
-    ) async -> APIResponse {
-        guard Reachability.isConnectedToNetwork() else {
-            return APIResponse(nil, nil, .noNetwork)
-        }
-
+    ) async throws -> APIResponse {
         var request = URLRequest(url: url)
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
         request.httpMethod = method
@@ -60,17 +56,20 @@ final class APICalls: Sendable {
 
         do {
             let (data, response) = try await URLSession.shared.data(for: request)
-
             guard let httpResponse = response as? HTTPURLResponse else {
-                return APIResponse(data, 500, .badServerResponse)
+                throw HttpError.badServerResponse
             }
-
             print("----Api Call-----------", "\(method) \(url) \(httpResponse.statusCode)")
             return APIResponse(data, httpResponse.statusCode, nil)
-
         } catch {
             print("Receiver error \(error)")
-            return APIResponse(nil, nil, .badServerResponse)
+            guard let urlError = error as? URLError else { throw HttpError.requestFailed(error: error) }
+            switch urlError.code {
+            case .networkConnectionLost, .notConnectedToInternet:
+                throw HttpError.noNetwork
+            default:
+                throw HttpError.requestFailed(error: error)
+            }
         }
     }
 }
