@@ -6,6 +6,6 @@
 //
 
 struct GenericResponse: Sendable {
-    let error: Error?
+    let error: HttpError?
     let statusCode: Int?
 }

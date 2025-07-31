@@ -10,9 +10,9 @@ import Foundation
 struct APIResponse {
     let data: Data?
     let statusCode: Int?
-    let error: Error?
+    let error: HttpError?
 
-    public init(_ data: Data?, _ statusCode: Int?, _ error: Error?) {
+    public init(_ data: Data?, _ statusCode: Int?, _ error: HttpError?) {
         self.data = data
         self.statusCode = statusCode
         self.error = error

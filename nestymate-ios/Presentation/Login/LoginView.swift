@@ -30,8 +30,9 @@ struct LoginView: View {
                     shouldEnableButton: viewModel.shouldEnableButton
                 ) {
                     Task {
-                        let home = try await viewModel.login()
-                        if home != nil {
+                        let result = try await viewModel.login()
+                        guard result.success else { return }
+                        if !result.shouldShowHome {
                             output.goToMainScreen()
                         } else {
                             output.goToCreateHome()

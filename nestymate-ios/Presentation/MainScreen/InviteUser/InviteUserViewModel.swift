@@ -13,7 +13,7 @@ final class InviteUserViewModel: ObservableObject {
     private let logoutService = LogoutService()
     @Published public var email: FieldModel = .init(value: "", fieldType: .email)
     @Published public var shouldShowLoader: Bool?
-    @Published var error: Error?
+    @Published var error: HttpError?
 
     init(useCase: HomeUseCase) {
         self.useCase = useCase
@@ -26,9 +26,13 @@ final class InviteUserViewModel: ObservableObject {
     @MainActor
     public func inviteUser() async throws -> Bool {
         shouldShowLoader = true
-        let response = try await useCase.inviteUserToHome(email: email.value)
+        do {
+            let response = try await useCase.inviteUserToHome(email: email.value)
+            return logoutService.shouldLogout(statusCode: response.statusCode)
+        } catch {
+            self.error = error as? HttpError
+        }
         shouldShowLoader = false
-        error = response.error
-        return logoutService.shouldLogout(statusCode: response.statusCode)
+        return false
     }
 }

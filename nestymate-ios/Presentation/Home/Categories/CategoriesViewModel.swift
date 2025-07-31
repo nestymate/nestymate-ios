@@ -9,7 +9,7 @@ import Foundation
 
 final class CategoriesViewModel: ObservableObject {
     @Published public var shouldShowLoader: Bool?
-    @Published var error: Error?
+    @Published var error: HttpError?
     private let useCase: CategoryUseCase
     private let logoutService: LogoutService
 
@@ -19,24 +19,32 @@ final class CategoriesViewModel: ObservableObject {
     }
 
     @MainActor
-    public func getCategories() async throws -> CategoriesResponse {
+    public func getCategories() async throws -> CategoriesResponse? {
         shouldShowLoader = true
-        let response = try await useCase.getCategories()
+        do {
+            let response = try await useCase.getCategories()
+            return CategoriesResponse(
+                categories: response.categories,
+                statusCode: nil,
+                shouldLogout: logoutService.shouldLogout(statusCode: response.statusCode)
+            )
+        } catch {
+            self.error = error as? HttpError
+        }
         shouldShowLoader = false
-        let shouldLogout = logoutService.shouldLogout(statusCode: response.statusCode)
-        return CategoriesResponse(
-            categories: response.categories,
-            statusCode: nil,
-            shouldLogout: shouldLogout
-        )
+        return nil
     }
 
     @MainActor
-    public func delete(categoryToBeDelete: Category) async throws -> CategoriesResponse {
+    public func delete(categoryToBeDelete: Category) async throws -> CategoriesResponse? {
         shouldShowLoader = true
-        _ = try await useCase.deleteCategory(category: categoryToBeDelete)
+        do {
+            _ = try await useCase.deleteCategory(category: categoryToBeDelete)
+            return try await getCategories()
+        } catch {
+            self.error = error as? HttpError
+        }
         shouldShowLoader = false
-        error = error
-        return try await getCategories()
+        return nil
     }
 }
