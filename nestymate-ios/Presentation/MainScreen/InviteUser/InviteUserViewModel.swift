@@ -28,6 +28,7 @@ final class InviteUserViewModel: ObservableObject {
         shouldShowLoader = true
         do {
             let response = try await useCase.inviteUserToHome(email: email.value)
+            shouldShowLoader = false
             return logoutService.shouldLogout(statusCode: response.statusCode)
         } catch {
             self.error = error as? HttpError

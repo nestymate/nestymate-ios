@@ -65,6 +65,7 @@ final class CreateOrEditHomeViewModel: ObservableObject {
             let home = Home(id: 0, name: name.value, description: description.value, address: address.value)
             do {
                 let response = try await useCase.createHome(home: home)
+                shouldShowLoader = false
                 return logoutService.shouldLogout(statusCode: response.statusCode)
             } catch {
                 self.error = error as? HttpError
@@ -91,6 +92,7 @@ final class CreateOrEditHomeViewModel: ObservableObject {
             )
             do {
                 let response = try await useCase.editHome(home: home)
+                shouldShowLoader = false
                 return logoutService.shouldLogout(statusCode: response.statusCode)
             } catch {
                 self.error = error as? HttpError
