@@ -18,6 +18,7 @@ enum HttpError: Error, Sendable, Identifiable {
     case birthdayNotValid
     case passwordAndUserNameDidNotMatch
     case requestFailed(error: Error)
+    case errorToHandle(error: ErrorToHandle)
 
     var alert: Alert {
         switch self {
@@ -37,6 +38,8 @@ enum HttpError: Error, Sendable, Identifiable {
             Alert(title: Text(String(localized: "password_useraname_not_correcr")))
         case .requestFailed:
             Alert(title: Text(String(localized: "generic_error")))
+        case let .errorToHandle(error: error):
+            Alert(title: Text(error.title), message: Text(error.detail))
         }
     }
 }
