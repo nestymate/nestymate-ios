@@ -60,10 +60,22 @@ final class APICalls: Sendable {
                 throw HttpError.badServerResponse
             }
             print("----Api Call-----------", "\(method) \(url) \(httpResponse.statusCode)")
+            let statusCode = httpResponse.statusCode
+            switch statusCode {
+            case 200 ... 299:
+                break
+            case 401:
+                throw HttpError.passwordDoNotMatch
+            case 400:
+                let error = try JSONDecoder().decode(ErrorToHandle.self, from: data)
+                throw HttpError.errorToHandle(error: error)
+            default:
+                throw HttpError.badServerResponse
+            }
             return APIResponse(data, httpResponse.statusCode, nil)
         } catch {
             print("Receiver error \(error)")
-            guard let urlError = error as? URLError else { throw HttpError.requestFailed(error: error) }
+            guard let urlError = error as? URLError else { throw error }
             switch urlError.code {
             case .networkConnectionLost, .notConnectedToInternet:
                 throw HttpError.noNetwork
