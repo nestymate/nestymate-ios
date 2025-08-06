@@ -56,6 +56,7 @@ extension SignUpViewModel {
             do {
                 _ = try await useCase.signUp(user: user)
                 let checkHomeResponse = try await useCase.checkHomeForUser()
+                shouldShowLoader = false
                 return LoginResponse(success: true, shouldShowHome: checkHomeResponse.home == nil)
             } catch {
                 self.error = error as? HttpError
