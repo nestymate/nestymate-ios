@@ -23,6 +23,7 @@ final class CategoriesViewModel: ObservableObject {
         shouldShowLoader = true
         do {
             let response = try await useCase.getCategories()
+            shouldShowLoader = false
             return CategoriesResponse(
                 categories: response.categories,
                 statusCode: nil,
@@ -40,7 +41,9 @@ final class CategoriesViewModel: ObservableObject {
         shouldShowLoader = true
         do {
             _ = try await useCase.deleteCategory(category: categoryToBeDelete)
-            return try await getCategories()
+            let categories = try await getCategories()
+            shouldShowLoader = false
+            return categories
         } catch {
             self.error = error as? HttpError
         }

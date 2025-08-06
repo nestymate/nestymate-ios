@@ -54,9 +54,11 @@ final class CreateOrEditCategoryViewModel: ObservableObject {
             do {
                 if isEdit {
                     let response = try await useCase.editCategory(category: category)
+                    shouldShowLoader = false
                     return logoutService.shouldLogout(statusCode: response.statusCode)
                 } else {
                     let response = try await useCase.createCategory(category: category)
+                    shouldShowLoader = false
                     return logoutService.shouldLogout(statusCode: response.statusCode)
                 }
             } catch {

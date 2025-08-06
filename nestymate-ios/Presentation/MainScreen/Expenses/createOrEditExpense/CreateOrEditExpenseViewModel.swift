@@ -53,12 +53,14 @@ final class CreateOrEditExpenseViewModel: ObservableObject {
         shouldShowLoader = true
         do {
             let response = try await categoryUseCase.getCategories()
-            categories = categories
+            categories = response.categories ?? []
             if isEdit, let expenseId {
                 let response = try await useCase.getExpense(expenseId: expenseId)
                 setup(expense: response.expense)
+                shouldShowLoader = false
                 return (response.expense?.categoryId, logoutService.shouldLogout(statusCode: response.statusCode))
             } else {
+                shouldShowLoader = false
                 if categories.count > 0 {
                     return (categories[0].id, logoutService.shouldLogout(statusCode: response.statusCode))
                 } else {
@@ -79,7 +81,7 @@ final class CreateOrEditExpenseViewModel: ObservableObject {
             isDescriptionValid: description.onValidate(),
             isAmountValid: amount.onValidate()
         )
-        
+
         if response.success {
             shouldShowLoader = true
             let amountInDouble = Double(amount.value) ?? 0.0
@@ -93,9 +95,11 @@ final class CreateOrEditExpenseViewModel: ObservableObject {
             do {
                 if isEdit {
                     let response = try await useCase.editExpense(expense: expense)
+                    shouldShowLoader = false
                     return logoutService.shouldLogout(statusCode: response.statusCode)
                 } else {
                     let response = try await useCase.createExpense(expense: expense)
+                    shouldShowLoader = false
                     return logoutService.shouldLogout(statusCode: response.statusCode)
                 }
             } catch {
