@@ -11,10 +11,16 @@ final class CategoriesViewModel: ObservableObject {
     @Published public var shouldShowLoader: Bool?
     @Published var error: HttpError?
     private let useCase: CategoryUseCase
+    private let homeUseCase: HomeUseCase
     private let logoutService: LogoutService
 
-    init(useCase: CategoryUseCase, logoutService: LogoutService) {
+    init(
+        useCase: CategoryUseCase,
+        homeUseCase: HomeUseCase,
+        logoutService: LogoutService
+    ) {
         self.useCase = useCase
+        self.homeUseCase = homeUseCase
         self.logoutService = logoutService
     }
 
@@ -22,7 +28,9 @@ final class CategoriesViewModel: ObservableObject {
     public func getCategories() async throws -> CategoriesResponse? {
         shouldShowLoader = true
         do {
-            let response = try await useCase.getCategories()
+            let responseHome = try await homeUseCase.getHome()
+            let homeId = responseHome.home?.id ?? -1
+            let response = try await useCase.getCategories(homeId: homeId)
             shouldShowLoader = false
             return CategoriesResponse(
                 categories: response.categories,
@@ -40,7 +48,9 @@ final class CategoriesViewModel: ObservableObject {
     public func delete(categoryToBeDelete: Category) async throws -> CategoriesResponse? {
         shouldShowLoader = true
         do {
-            _ = try await useCase.deleteCategory(category: categoryToBeDelete)
+            let responseHome = try await homeUseCase.getHome()
+            let homeId = responseHome.home?.id ?? -1
+            _ = try await useCase.deleteCategory(homeId: homeId, category: categoryToBeDelete)
             let categories = try await getCategories()
             shouldShowLoader = false
             return categories

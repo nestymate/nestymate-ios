@@ -9,6 +9,7 @@
 import Testing
 
 class CategoriesTests {
+    private let homeId = HomeTestsData.home.id
     private var useCase: CategoryUseCase {
         CategoryUseCaseImpl(service: CategoryServiceMock())
     }
@@ -22,42 +23,42 @@ class CategoriesTests {
     }
 
     @Test func successfulGetCategories() async {
-        let response = try? await useCase.getCategories()
+        let response = try? await useCase.getCategories(homeId: homeId)
         #expect(response?.categories != nil)
     }
 
     @Test func unsuccessfulGetCategories() async {
-        let response = try? await useCaseFailed.getCategories()
+        let response = try? await useCaseFailed.getCategories(homeId: homeId)
         #expect(response?.categories == nil)
     }
 
     @Test func successfulEditCategory() async {
-        let response = try? await useCase.editCategory(category: CategoryTestData.category)
+        let response = try? await useCase.editCategory(homeId: homeId, category: CategoryTestData.category)
         #expect(response?.error == nil)
     }
 
     @Test func unSuccessfulEditCategory() async {
-        let response = try? await useCaseFailed.editCategory(category: CategoryTestData.category)
+        let response = try? await useCaseFailed.editCategory(homeId: homeId, category: CategoryTestData.category)
         #expect(response?.error != nil)
     }
 
     @Test func successfulCreateCategory() async {
-        let response = try? await useCase.createCategory(category: CategoryTestData.category)
+        let response = try? await useCase.createCategory(homeId: homeId, category: CategoryTestData.category)
         #expect(response?.error == nil)
     }
 
     @Test func unSuccessfulCreateCategory() async {
-        let response = try? await useCaseFailed.createCategory(category: CategoryTestData.category)
+        let response = try? await useCaseFailed.createCategory(homeId: homeId, category: CategoryTestData.category)
         #expect(response?.error != nil)
     }
 
     @Test func successfulDeleteCategory() async {
-        let response = try? await useCase.deleteCategory(category: CategoryTestData.category)
+        let response = try? await useCase.deleteCategory(homeId: homeId, category: CategoryTestData.category)
         #expect(response?.error == nil)
     }
 
     @Test func unSuccessfulDeleteCategory() async {
-        let response = try? await useCaseFailed.deleteCategory(category: CategoryTestData.category)
+        let response = try? await useCaseFailed.deleteCategory(homeId: homeId, category: CategoryTestData.category)
         #expect(response?.error != nil)
     }
 }

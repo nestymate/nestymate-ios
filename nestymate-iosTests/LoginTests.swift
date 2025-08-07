@@ -13,8 +13,12 @@ class LoginTests {
         LoginUseCaseImpl(service: LoginServiceMock(), homeService: HomeServiceMock(hasHome: true))
     }
 
-    private var useCaseNotHome: LoginUseCase {
-        LoginUseCaseImpl(service: LoginServiceMock(), homeService: HomeServiceMock(hasHome: false))
+    private var homeUseCaseWithHome: HomeUseCase {
+        HomeUseCaseImpl(homeService: HomeServiceMock(hasHome: true))
+    }
+
+    private var homeUseCaseWithoutHome: HomeUseCase {
+        HomeUseCaseImpl(homeService: HomeServiceMock(hasHome: false))
     }
 
     private var useCaseFailed: LoginUseCase {
@@ -40,12 +44,12 @@ class LoginTests {
     }
 
     @MainActor @Test func successfulCheckHomeForUser() async {
-        let response = try? await useCase.checkHomeForUser()
+        let response = try? await homeUseCaseWithHome.getHome()
         #expect(response?.home != nil)
     }
 
     @MainActor @Test func unsuccessfulCheckHomeForUser() async {
-        let response = try? await useCaseFailed.checkHomeForUser()
-        #expect(response?.error != nil)
+        let response = try? await homeUseCaseWithoutHome.getHome()
+        #expect(response?.error == nil && response?.home == nil)
     }
 }

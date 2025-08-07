@@ -8,8 +8,7 @@
 import Foundation
 import SwiftUI
 
-enum HttpError: Error, Sendable, Identifiable {
-    var id: UUID { UUID() }
+enum HttpError: Error, Sendable, Equatable, Identifiable {
     case noNetwork
     case badServerResponse
     case fillAllValues
@@ -19,12 +18,38 @@ enum HttpError: Error, Sendable, Identifiable {
     case passwordAndUserNameDidNotMatch
     case requestFailed(error: Error)
     case errorToHandle(error: ErrorToHandle)
+    case unknown
+
+    var id: String {
+        switch self {
+        case .noNetwork:
+            "noNetwork"
+        case .badServerResponse:
+            "badServerResponse"
+        case .fillAllValues:
+            "fillAllValues"
+        case .passwordDoNotMatch:
+            "passwordDoNotMatch"
+        case .passwordNotValid:
+            "passwordNotValid"
+        case .birthdayNotValid:
+            "birthdayNotValid"
+        case .passwordAndUserNameDidNotMatch:
+            "requestFailed"
+        case .requestFailed:
+            "requestFailed"
+        case .errorToHandle:
+            "errorToHandle"
+        case .unknown:
+            "unknown"
+        }
+    }
 
     var alert: Alert {
         switch self {
         case .noNetwork:
             Alert(title: Text(String(localized: "no_internet")))
-        case .badServerResponse:
+        case .badServerResponse, .unknown:
             Alert(title: Text(String(localized: "error")))
         case .fillAllValues:
             Alert(title: Text(String(localized: "fill_all_fields")))
@@ -41,5 +66,9 @@ enum HttpError: Error, Sendable, Identifiable {
         case let .errorToHandle(error: error):
             Alert(title: Text(error.title), message: Text(error.detail))
         }
+    }
+
+    static func == (lhs: HttpError, rhs: HttpError) -> Bool {
+        lhs.id == rhs.id
     }
 }

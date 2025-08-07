@@ -10,7 +10,6 @@ import Foundation
 protocol LoginUseCase: Sendable {
     func loginValid(isUsernameValid: Bool, isPasswordValid: Bool) -> Bool
     func login(username: String, password: String) async throws -> HttpError?
-    func checkHomeForUser() async throws -> HomeResponse
 }
 
 final class LoginUseCaseImpl: LoginUseCase {
@@ -29,10 +28,5 @@ final class LoginUseCaseImpl: LoginUseCase {
     @MainActor
     func login(username: String, password: String) async throws -> HttpError? {
         try await service.login(username: username, password: password)
-    }
-
-    @MainActor
-    func checkHomeForUser() async throws -> HomeResponse {
-        try await homeService.getHome()
     }
 }

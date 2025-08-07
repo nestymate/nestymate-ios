@@ -47,6 +47,7 @@ struct MyHomeView: View {
             } else {
                 let viewModel = CategoriesViewModel(
                     useCase: viewModel.categoryUseCase,
+                    homeUseCase: viewModel.homeUseCase,
                     logoutService: LogoutService()
                 )
                 CategoriesView(

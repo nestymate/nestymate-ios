@@ -6,23 +6,23 @@
 //
 
 final class ExpensesServiceFailedMock: ExpenseService {
-    func getExpenses() async throws -> ExpensesResponse {
+    func getExpenses(homeId _: Int) async throws -> ExpensesResponse {
         ExpensesResponse(expenses: nil, error: .badServerResponse, statusCode: 500)
     }
 
-    func getExpense(expenseId _: Int) async throws -> ExpenseResponse {
+    func getExpense(homeId _: Int, expenseId _: Int) async throws -> ExpenseResponse {
         ExpenseResponse(expense: nil, error: .badServerResponse, statusCode: 500)
     }
 
-    func createExpense(expense _: Expense) async throws -> GenericResponse {
+    func createExpense(homeId _: Int, expense _: Expense) async throws -> GenericResponse {
         GenericResponse(error: .badServerResponse, statusCode: 500)
     }
 
-    func editExpense(expense _: Expense) async throws -> GenericResponse {
+    func editExpense(homeId _: Int, expense _: Expense) async throws -> GenericResponse {
         GenericResponse(error: .badServerResponse, statusCode: 500)
     }
 
-    func deleteExpense(expense _: Expense) async throws -> GenericResponse {
+    func deleteExpense(homeId _: Int, expense _: Expense) async throws -> GenericResponse {
         GenericResponse(error: .badServerResponse, statusCode: 500)
     }
 }
