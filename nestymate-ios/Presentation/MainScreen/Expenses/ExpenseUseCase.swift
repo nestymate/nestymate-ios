@@ -8,11 +8,11 @@
 import Foundation
 
 protocol ExpenseUseCase: Sendable {
-    func getExpenses() async throws -> ExpensesResponse
-    func getExpense(expenseId: Int) async throws -> ExpenseResponse
-    func createExpense(expense: Expense) async throws -> GenericResponse
-    func editExpense(expense: Expense) async throws -> GenericResponse
-    func deleteExpense(expense: Expense) async throws -> GenericResponse
+    func getExpenses(homeId: Int) async throws -> ExpensesResponse
+    func getExpense(homeId: Int, expenseId: Int) async throws -> ExpenseResponse
+    func createExpense(homeId: Int, expense: Expense) async throws -> GenericResponse
+    func editExpense(homeId: Int, expense: Expense) async throws -> GenericResponse
+    func deleteExpense(homeId: Int, expense: Expense) async throws -> GenericResponse
     func createValid(
         isTitleValid: Bool,
         isDescriptionValid: Bool,
@@ -27,12 +27,12 @@ final class ExpenseUseCaseImpl: ExpenseUseCase {
         self.service = service
     }
 
-    func getExpenses() async throws -> ExpensesResponse {
-        try await service.getExpenses()
+    func getExpenses(homeId: Int) async throws -> ExpensesResponse {
+        try await service.getExpenses(homeId: homeId)
     }
 
-    func getExpense(expenseId: Int) async throws -> ExpenseResponse {
-        try await service.getExpense(expenseId: expenseId)
+    func getExpense(homeId: Int, expenseId: Int) async throws -> ExpenseResponse {
+        try await service.getExpense(homeId: homeId, expenseId: expenseId)
     }
 
     nonisolated func createValid(
@@ -46,15 +46,15 @@ final class ExpenseUseCaseImpl: ExpenseUseCase {
         return SuccessResponse(success: true, error: nil)
     }
 
-    func createExpense(expense: Expense) async throws -> GenericResponse {
-        try await service.createExpense(expense: expense)
+    func createExpense(homeId: Int, expense: Expense) async throws -> GenericResponse {
+        try await service.createExpense(homeId: homeId, expense: expense)
     }
 
-    func editExpense(expense: Expense) async throws -> GenericResponse {
-        try await service.editExpense(expense: expense)
+    func editExpense(homeId: Int, expense: Expense) async throws -> GenericResponse {
+        try await service.editExpense(homeId: homeId, expense: expense)
     }
 
-    func deleteExpense(expense: Expense) async throws -> GenericResponse {
-        try await service.deleteExpense(expense: expense)
+    func deleteExpense(homeId: Int, expense: Expense) async throws -> GenericResponse {
+        try await service.deleteExpense(homeId: homeId, expense: expense)
     }
 }

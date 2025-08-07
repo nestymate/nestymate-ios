@@ -10,6 +10,7 @@ import SwiftUI
 
 final class LoginViewModel: ObservableObject {
     let useCase: LoginUseCase
+    let homeUseCase: HomeUseCase
     @Published public var username: FieldModel = .init(value: "Kyriaz", fieldType: .username)
     @Published public var password: FieldModel = .init(value: "Sadface123!", fieldType: .password)
     @Published public var shouldShow: Bool?
@@ -19,8 +20,9 @@ final class LoginViewModel: ObservableObject {
         !username.value.isEmpty && !password.value.isEmpty
     }
 
-    init(useCase: LoginUseCase) {
+    init(useCase: LoginUseCase, homeUseCase: HomeUseCase) {
         self.useCase = useCase
+        self.homeUseCase = homeUseCase
     }
 
     @MainActor
@@ -29,8 +31,7 @@ final class LoginViewModel: ObservableObject {
             shouldShow = true
             do {
                 _ = try await useCase.login(username: username.value, password: password.value)
-                let responseHome = try await useCase.checkHomeForUser()
-                HomeUserDefaults().saveHome(with: responseHome.home?.id)
+                let responseHome = try await homeUseCase.getHome()
                 return LoginResponse(success: true, shouldShowHome: responseHome.home == nil)
             } catch {
                 self.error = error as? HttpError

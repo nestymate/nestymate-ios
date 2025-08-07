@@ -9,6 +9,7 @@ import Foundation
 
 final class CreateOrEditCategoryViewModel: ObservableObject {
     private let useCase: CategoryUseCase
+    private let homeUseCase: HomeUseCase
     private let logoutService: LogoutService
     @Published public var name: FieldModel = .init(value: "", fieldType: .name)
     @Published public var description: FieldModel = .init(value: "", fieldType: .description)
@@ -19,10 +20,16 @@ final class CreateOrEditCategoryViewModel: ObservableObject {
     var pageTitle: String = ""
     private var category: Category?
 
-    init(category: Category?, useCase: CategoryUseCase, logoutService: LogoutService) {
+    init(
+        category: Category?,
+        useCase: CategoryUseCase,
+        homeUseCase: HomeUseCase,
+        logoutService: LogoutService
+    ) {
         isEdit = category != nil
         self.category = category
         self.useCase = useCase
+        self.homeUseCase = homeUseCase
         self.logoutService = logoutService
         setupExpense()
         setupTitles()
@@ -52,12 +59,14 @@ final class CreateOrEditCategoryViewModel: ObservableObject {
                 description: description.value
             )
             do {
+                let responseHome = try await homeUseCase.getHome()
+                let homeId = responseHome.home?.id ?? -1
                 if isEdit {
-                    let response = try await useCase.editCategory(category: category)
+                    let response = try await useCase.editCategory(homeId: homeId, category: category)
                     shouldShowLoader = false
                     return logoutService.shouldLogout(statusCode: response.statusCode)
                 } else {
-                    let response = try await useCase.createCategory(category: category)
+                    let response = try await useCase.createCategory(homeId: homeId, category: category)
                     shouldShowLoader = false
                     return logoutService.shouldLogout(statusCode: response.statusCode)
                 }

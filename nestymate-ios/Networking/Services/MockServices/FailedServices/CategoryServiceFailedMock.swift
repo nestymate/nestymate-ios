@@ -6,19 +6,19 @@
 //
 
 final class CategoryServiceFailedMock: CategoryService {
-    func getCategories() async throws -> CategoriesResponse {
+    func getCategories(homeId _: Int) async throws -> CategoriesResponse {
         CategoriesResponse(categories: nil, statusCode: 500, shouldLogout: false)
     }
 
-    func createCategory(category _: Category) async throws -> GenericResponse {
+    func createCategory(homeId _: Int, category _: Category) async throws -> GenericResponse {
         GenericResponse(error: .badServerResponse, statusCode: 500)
     }
 
-    func editCategory(category _: Category) async throws -> GenericResponse {
+    func editCategory(homeId _: Int, category _: Category) async throws -> GenericResponse {
         GenericResponse(error: .badServerResponse, statusCode: 500)
     }
 
-    func deleteCategory(category _: Category) async throws -> GenericResponse {
+    func deleteCategory(homeId _: Int, category _: Category) async throws -> GenericResponse {
         GenericResponse(error: .badServerResponse, statusCode: 500)
     }
 }

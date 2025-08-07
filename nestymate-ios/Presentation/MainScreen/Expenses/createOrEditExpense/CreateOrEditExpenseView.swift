@@ -80,7 +80,8 @@ extension CreateOrEditExpenseView {
         expenseId: 0,
         useCase: ExpenseUseCaseImpl(
             service: ExpenseServiceImpl()
-        ), categoryUseCase: CategoryUseCaseImpl(service: CategoryServiceImpl()),
+        ), homeUseCase: HomeUseCaseImpl(homeService: HomeServiceImpl()),
+        categoryUseCase: CategoryUseCaseImpl(service: CategoryServiceImpl()),
         logoutService: LogoutService()
     ),
     output: CreateOrEditExpenseView.Output(goBack: {}, logout: {}))

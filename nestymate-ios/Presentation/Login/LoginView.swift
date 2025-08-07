@@ -67,7 +67,8 @@ struct LoginView: View {
         useCase: LoginUseCaseImpl(
             service: LoginServiceImpl(),
             homeService: HomeServiceImpl()
-        )),
+        ), homeUseCase: HomeUseCaseImpl(homeService: HomeServiceImpl())
+    ),
     output: LoginView.Output(goToMainScreen: {},
                              goToCreateHome: {}, goToSignUp: {}))
 }

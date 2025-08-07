@@ -69,6 +69,7 @@ private extension CategoriesView {
 #Preview {
     CategoriesView(viewModel: CategoriesViewModel(
         useCase: CategoryUseCaseImpl(service: CategoryServiceImpl()),
+        homeUseCase: HomeUseCaseImpl(homeService: HomeServiceImpl()),
         logoutService: LogoutService()
     ),
     output: CategoriesView.Output(

@@ -9,19 +9,22 @@ import Foundation
 
 final class ExpensesViewModel: ObservableObject {
     private let useCase: ExpenseUseCase
+    private let homeUseCase: HomeUseCase
     private let logoutService: LogoutService
     @Published var shouldShowLoader: Bool?
     @Published var error: HttpError?
 
-    init(useCase: ExpenseUseCase, logoutService: LogoutService) {
+    init(useCase: ExpenseUseCase, homeUseCase: HomeUseCase, logoutService: LogoutService) {
         self.useCase = useCase
+        self.homeUseCase = homeUseCase
         self.logoutService = logoutService
     }
 
     @MainActor
     public func getExpenses() async throws -> ExpensesResponse {
         shouldShowLoader = true
-        let apiResponse = try? await useCase.getExpenses()
+        let responseHome = try await homeUseCase.getHome()
+        let apiResponse = try? await useCase.getExpenses(homeId: responseHome.home?.id ?? -1)
         shouldShowLoader = false
         return ExpensesResponse(
             expenses: apiResponse?.expenses,
@@ -34,7 +37,8 @@ final class ExpensesViewModel: ObservableObject {
     @MainActor
     public func delete(expenseToBeDelete: Expense) async throws -> ExpensesResponse {
         shouldShowLoader = true
-        let response = try? await useCase.deleteExpense(expense: expenseToBeDelete)
+        let responseHome = try await homeUseCase.getHome()
+        let response = try? await useCase.deleteExpense(homeId: responseHome.home?.id ?? -1, expense: expenseToBeDelete)
         shouldShowLoader = false
         error = response?.error
         return try await getExpenses()

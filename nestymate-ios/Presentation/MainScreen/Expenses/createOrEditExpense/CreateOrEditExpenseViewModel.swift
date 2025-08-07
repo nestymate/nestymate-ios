@@ -9,6 +9,7 @@ import Foundation
 
 final class CreateOrEditExpenseViewModel: ObservableObject {
     private let useCase: ExpenseUseCase
+    private let homeUseCase: HomeUseCase
     private let categoryUseCase: CategoryUseCase
     private let logoutService: LogoutService
     var categoryTitle = String(localized: "category")
@@ -26,12 +27,14 @@ final class CreateOrEditExpenseViewModel: ObservableObject {
     init(
         expenseId: Int?,
         useCase: ExpenseUseCase,
+        homeUseCase: HomeUseCase,
         categoryUseCase: CategoryUseCase,
         logoutService: LogoutService
     ) {
         isEdit = expenseId != nil
         self.expenseId = expenseId
         self.useCase = useCase
+        self.homeUseCase = homeUseCase
         self.categoryUseCase = categoryUseCase
         self.logoutService = logoutService
         setupTitles()
@@ -52,10 +55,13 @@ final class CreateOrEditExpenseViewModel: ObservableObject {
     public func getCategories() async throws -> (Int?, Bool) {
         shouldShowLoader = true
         do {
-            let response = try await categoryUseCase.getCategories()
+            let responseHome = try await homeUseCase.getHome()
+            let homeId = responseHome.home?.id ?? -1
+            let response = try await categoryUseCase.getCategories(homeId: homeId)
             categories = response.categories ?? []
             if isEdit, let expenseId {
-                let response = try await useCase.getExpense(expenseId: expenseId)
+                let responseHome = try await homeUseCase.getHome()
+                let response = try await useCase.getExpense(homeId: responseHome.home?.id ?? -1, expenseId: expenseId)
                 setup(expense: response.expense)
                 shouldShowLoader = false
                 return (response.expense?.categoryId, logoutService.shouldLogout(statusCode: response.statusCode))
@@ -93,12 +99,20 @@ final class CreateOrEditExpenseViewModel: ObservableObject {
                 categoryId: expenseCategoryId
             )
             do {
+                let responseHome = try await homeUseCase.getHome()
+                let homeId = responseHome.home?.id ?? -1
                 if isEdit {
-                    let response = try await useCase.editExpense(expense: expense)
+                    let response = try await useCase.editExpense(
+                        homeId: homeId,
+                        expense: expense
+                    )
                     shouldShowLoader = false
                     return logoutService.shouldLogout(statusCode: response.statusCode)
                 } else {
-                    let response = try await useCase.createExpense(expense: expense)
+                    let response = try await useCase.createExpense(
+                        homeId: homeId,
+                        expense: expense
+                    )
                     shouldShowLoader = false
                     return logoutService.shouldLogout(statusCode: response.statusCode)
                 }

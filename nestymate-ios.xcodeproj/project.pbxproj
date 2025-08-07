@@ -76,6 +76,7 @@
 		017CFD1B2E3A1C24004DA242 /* ExpensesResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 017CFD1A2E3A1C19004DA242 /* ExpensesResponse.swift */; };
 		017CFD1D2E3B7151004DA242 /* SuccessResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 017CFD1C2E3B7147004DA242 /* SuccessResponse.swift */; };
 		017CFD1F2E3BA4CE004DA242 /* LoginResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 017CFD1E2E3BA4BA004DA242 /* LoginResponse.swift */; };
+		017CFD212E439EC9004DA242 /* ErrorToHandle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 017CFD202E439EC8004DA242 /* ErrorToHandle.swift */; };
 		018A04752BD114660051A3A4 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 018A04742BD114660051A3A4 /* LoginView.swift */; };
 		018DE0FB2D7F071A006D3105 /* SwiftFormat in Frameworks */ = {isa = PBXBuildFile; productRef = 018DE0FA2D7F071A006D3105 /* SwiftFormat */; };
 		0192BB402D1ECC74005A0CD7 /* SignUpTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0192BB3F2D1ECC69005A0CD7 /* SignUpTests.swift */; };
@@ -123,7 +124,6 @@
 		01D792302C8D9F5300EDA9D2 /* MyHomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01D7922F2C8D9F5200EDA9D2 /* MyHomeViewModel.swift */; };
 		01D792342C8DA52D00EDA9D2 /* CategoriesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01D792332C8DA52D00EDA9D2 /* CategoriesView.swift */; };
 		01D9A75E2CA872290081A181 /* DateUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01D9A75D2CA872270081A181 /* DateUtils.swift */; };
-		01D9A7602CB5C2E70081A181 /* HomeUserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01D9A75F2CB5C2D60081A181 /* HomeUserDefaults.swift */; };
 		01D9A7622CBA92150081A181 /* CategoryService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01D9A7612CBA920C0081A181 /* CategoryService.swift */; };
 		01F1CB212D50025C006276C5 /* ProfileTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01F1CB202D500251006276C5 /* ProfileTests.swift */; };
 		01F1CB232D513B4F006276C5 /* CreateHomeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01F1CB222D513B3D006276C5 /* CreateHomeTests.swift */; };
@@ -187,6 +187,7 @@
 		017CFD1A2E3A1C19004DA242 /* ExpensesResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpensesResponse.swift; sourceTree = "<group>"; };
 		017CFD1C2E3B7147004DA242 /* SuccessResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuccessResponse.swift; sourceTree = "<group>"; };
 		017CFD1E2E3BA4BA004DA242 /* LoginResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginResponse.swift; sourceTree = "<group>"; };
+		017CFD202E439EC8004DA242 /* ErrorToHandle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorToHandle.swift; sourceTree = "<group>"; };
 		018A04742BD114660051A3A4 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		0192BB3F2D1ECC69005A0CD7 /* SignUpTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpTests.swift; sourceTree = "<group>"; };
 		0192BB422D1ED602005A0CD7 /* SignUpTestsData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpTestsData.swift; sourceTree = "<group>"; };
@@ -236,7 +237,6 @@
 		01D7922F2C8D9F5200EDA9D2 /* MyHomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyHomeViewModel.swift; sourceTree = "<group>"; };
 		01D792332C8DA52D00EDA9D2 /* CategoriesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoriesView.swift; sourceTree = "<group>"; };
 		01D9A75D2CA872270081A181 /* DateUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateUtils.swift; sourceTree = "<group>"; };
-		01D9A75F2CB5C2D60081A181 /* HomeUserDefaults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeUserDefaults.swift; sourceTree = "<group>"; };
 		01D9A7612CBA920C0081A181 /* CategoryService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryService.swift; sourceTree = "<group>"; };
 		01F1CB202D500251006276C5 /* ProfileTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileTests.swift; sourceTree = "<group>"; };
 		01F1CB222D513B3D006276C5 /* CreateHomeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateHomeTests.swift; sourceTree = "<group>"; };
@@ -476,7 +476,7 @@
 		01B6DF9C2BD6A3C400E2983E /* Utils */ = {
 			isa = PBXGroup;
 			children = (
-				01D9A75F2CB5C2D60081A181 /* HomeUserDefaults.swift */,
+				017CFD202E439EC8004DA242 /* ErrorToHandle.swift */,
 				01D9A75D2CA872270081A181 /* DateUtils.swift */,
 				01B6DF982BD6A1D500E2983E /* FontManager.swift */,
 				01B6DF9D2BD6A3D900E2983E /* ColorManager.swift */,
@@ -822,7 +822,6 @@
 				011165D82BD69D7700817935 /* Nestymate.swift in Sources */,
 				01ABA47E2D7EE2EB00E6EEFD /* ExpensesServiceMock.swift in Sources */,
 				0106B6072BE1859F0024AFCB /* ProfileView.swift in Sources */,
-				01D9A7602CB5C2E70081A181 /* HomeUserDefaults.swift in Sources */,
 				017CFD142E39FE13004DA242 /* CategoriesResponse.swift in Sources */,
 				01D488292C96E8920024A7F2 /* MainViewModel.swift in Sources */,
 				01D792342C8DA52D00EDA9D2 /* CategoriesView.swift in Sources */,
@@ -880,6 +879,7 @@
 				01D488182C95F5840024A7F2 /* HomeUseCase.swift in Sources */,
 				0106B6302BFA79450024AFCB /* MainScreenUseCase.swift in Sources */,
 				01740D342D7ACBDF00C0D26F /* CategoryServiceFailedMock.swift in Sources */,
+				017CFD212E439EC9004DA242 /* ErrorToHandle.swift in Sources */,
 				01D792302C8D9F5300EDA9D2 /* MyHomeViewModel.swift in Sources */,
 				01740D322D7ACBD000C0D26F /* CategoryServiceMock.swift in Sources */,
 				013504792BD7D9950000C859 /* ActionButton.swift in Sources */,
