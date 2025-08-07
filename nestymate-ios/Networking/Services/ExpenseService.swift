@@ -9,30 +9,26 @@ import Combine
 import Foundation
 
 protocol ExpenseService: Sendable {
-    func getExpenses() async throws -> ExpensesResponse
-    func getExpense(expenseId: Int) async throws -> ExpenseResponse
-    func createExpense(expense: Expense) async throws -> GenericResponse
-    func editExpense(expense: Expense) async throws -> GenericResponse
-    func deleteExpense(expense: Expense) async throws -> GenericResponse
+    func getExpenses(homeId: Int) async throws -> ExpensesResponse
+    func getExpense(homeId: Int, expenseId: Int) async throws -> ExpenseResponse
+    func createExpense(homeId: Int, expense: Expense) async throws -> GenericResponse
+    func editExpense(homeId: Int, expense: Expense) async throws -> GenericResponse
+    func deleteExpense(homeId: Int, expense: Expense) async throws -> GenericResponse
 }
 
 final class ExpenseServiceImpl: ExpenseService {
     let baseUrl: URL
-    let helper: KeychainHelper
     let apiCall: APICalls
-    let homeUserDefaults: HomeUserDefaults
 
     init() {
-        homeUserDefaults = HomeUserDefaults()
         baseUrl = URL(string: "http://192.168.1.10/api/v1/home")!
-            .appendingPathComponent(homeUserDefaults.getHomeId())
-            .appendingPathComponent("expense")
         apiCall = APICalls()
-        helper = KeychainHelper()
     }
 
-    func getExpenses() async throws -> ExpensesResponse {
-        let apiResponse = try await apiCall.get(url: baseUrl, requestData: nil)
+    func getExpenses(homeId: Int) async throws -> ExpensesResponse {
+        let url = baseUrl.appendingPathComponent(String(homeId))
+            .appendingPathComponent("expense")
+        let apiResponse = try await apiCall.get(url: url, requestData: nil)
         do {
             guard let data = apiResponse.data
             else { return ExpensesResponse(
@@ -51,9 +47,11 @@ final class ExpenseServiceImpl: ExpenseService {
         }
     }
 
-    func getExpense(expenseId: Int) async throws -> ExpenseResponse {
-        let singleGetURL = baseUrl.appending(path: "\(expenseId)")
-        let apiResponse = try await apiCall.get(url: singleGetURL, requestData: nil)
+    func getExpense(homeId: Int, expenseId: Int) async throws -> ExpenseResponse {
+        let url = baseUrl.appendingPathComponent(String(homeId))
+            .appendingPathComponent("expense")
+            .appending(path: "\(expenseId)")
+        let apiResponse = try await apiCall.get(url: url, requestData: nil)
         do {
             guard let data = apiResponse.data
             else { return ExpenseResponse(expense: nil, error: .badServerResponse, statusCode: apiResponse.statusCode) }
@@ -64,23 +62,29 @@ final class ExpenseServiceImpl: ExpenseService {
         }
     }
 
-    func createExpense(expense: Expense) async throws -> GenericResponse {
+    func createExpense(homeId: Int, expense: Expense) async throws -> GenericResponse {
+        let url = baseUrl.appendingPathComponent(String(homeId))
+            .appendingPathComponent("expense")
         let data = try? JSONEncoder().encode(expense)
-        let apiResponse = try await apiCall.post(url: baseUrl, requestData: data)
+        let apiResponse = try await apiCall.post(url: url, requestData: data)
         return GenericResponse(error: apiResponse.error, statusCode: apiResponse.statusCode)
     }
 
-    func editExpense(expense: Expense) async throws -> GenericResponse {
+    func editExpense(homeId: Int, expense: Expense) async throws -> GenericResponse {
         let data = try? JSONEncoder().encode(expense)
-        let putURL = baseUrl.appending(path: "\(expense.id)")
-        let apiResponse = try await apiCall.put(url: putURL, requestData: data)
+        let url = baseUrl.appendingPathComponent(String(homeId))
+            .appendingPathComponent("expense")
+            .appending(path: "\(expense.id)")
+        let apiResponse = try await apiCall.put(url: url, requestData: data)
         return GenericResponse(error: apiResponse.error, statusCode: apiResponse.statusCode)
     }
 
-    func deleteExpense(expense: Expense) async throws -> GenericResponse {
+    func deleteExpense(homeId: Int, expense: Expense) async throws -> GenericResponse {
         let data = try? JSONEncoder().encode(expense)
-        let putURL = baseUrl.appending(path: "\(expense.id)")
-        let apiResponse = try await apiCall.delete(url: putURL, requestData: data)
+        let url = baseUrl.appendingPathComponent(String(homeId))
+            .appendingPathComponent("expense")
+            .appending(path: "\(expense.id)")
+        let apiResponse = try await apiCall.delete(url: url, requestData: data)
         return GenericResponse(error: apiResponse.error, statusCode: apiResponse.statusCode)
     }
 }

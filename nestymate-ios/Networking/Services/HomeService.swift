@@ -26,17 +26,18 @@ final class HomeServiceImpl: HomeService {
     }
 
     func getHome() async throws -> HomeResponse {
-        let apiResponse = try await apiCall.get(url: url.appendingPathComponent("active"), requestData: nil)
-        guard let data = apiResponse.data,
-              let response = try? JSONDecoder().decode(Home.self, from: data)
-        else {
-            if apiResponse.statusCode == 400 {
-                return HomeResponse(home: nil, error: nil, statusCode: apiResponse.statusCode)
+        do {
+            let apiResponse = try await apiCall.get(url: url.appendingPathComponent("active"), requestData: nil)
+            guard let data = apiResponse.data else { throw URLError(.badServerResponse) }
+            let response = try? JSONDecoder().decode(Home.self, from: data)
+            return HomeResponse(home: response, error: apiResponse.error, statusCode: apiResponse.statusCode)
+        } catch {
+            if let errorToHandle = error as? ErrorToHandle, errorToHandle.status == 400 {
+                return HomeResponse(home: nil, error: nil, statusCode: errorToHandle.status)
             } else {
-                return HomeResponse(home: nil, error: .badServerResponse, statusCode: apiResponse.statusCode)
+                return HomeResponse(home: nil, error: .badServerResponse, statusCode: 500)
             }
         }
-        return HomeResponse(home: response, error: apiResponse.error, statusCode: apiResponse.statusCode)
     }
 
     func createHome(home: Home) async throws -> GenericResponse {

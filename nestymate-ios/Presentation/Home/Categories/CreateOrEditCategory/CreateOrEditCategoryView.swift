@@ -41,7 +41,7 @@ struct CreateOrEditCategoryView: View {
         category: Category(),
         useCase: CategoryUseCaseImpl(
             service: CategoryServiceImpl()
-        ),
+        ), homeUseCase: HomeUseCaseImpl(homeService: HomeServiceImpl()),
         logoutService: LogoutService()
     ),
     output: CreateOrEditCategoryView.Output(goBack: {}, logout: {}))

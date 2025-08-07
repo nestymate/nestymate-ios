@@ -95,7 +95,10 @@ final class MainCoordinator: Hashable {
 
 private extension MainCoordinator {
     @MainActor func loginView() -> some View {
-        let viewModel = LoginViewModel(useCase: LoginUseCaseImpl(service: loginService, homeService: homeService))
+        let viewModel = LoginViewModel(
+            useCase: LoginUseCaseImpl(service: loginService, homeService: homeService),
+            homeUseCase: homeUseCase
+        )
         let loginView = LoginView(
             viewModel: viewModel,
             output:
@@ -193,6 +196,7 @@ private extension MainCoordinator {
         let viewModel = CreateOrEditCategoryViewModel(
             category: category,
             useCase: categoryUseCase,
+            homeUseCase: homeUseCase,
             logoutService: logoutService
         )
         return CreateOrEditCategoryView(viewModel: viewModel, output: CreateOrEditCategoryView.Output(goBack: {
@@ -206,6 +210,7 @@ private extension MainCoordinator {
         let viewModel = CreateOrEditExpenseViewModel(
             expenseId: expenseId,
             useCase: expenseUseCase,
+            homeUseCase: homeUseCase,
             categoryUseCase: categoryUseCase,
             logoutService: logoutService
         )

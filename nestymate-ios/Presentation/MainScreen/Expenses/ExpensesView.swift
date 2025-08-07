@@ -80,6 +80,7 @@ private extension ExpensesView {
 #Preview {
     ExpensesView(viewModel: ExpensesViewModel(
         useCase: ExpenseUseCaseImpl(service: ExpenseServiceImpl()),
+        homeUseCase: HomeUseCaseImpl(homeService: HomeServiceImpl()),
         logoutService: LogoutService()
     ),
     output: ExpensesView.Output(

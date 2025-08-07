@@ -19,42 +19,32 @@ class SignUpTests {
 
     @Test func shouldProceedToSignUpCorrectUser() {
         let result = useCase.shouldProceedToSignUp(user: SignUpTestsData.correctUser)
-        #expect(result.0)
+        #expect(result.success)
     }
 
     @Test func shouldProceedToSignUpUnEmptyValuesUser() {
         let result = useCase.shouldProceedToSignUp(user: SignUpTestsData.emptyValuesUser)
-        #expect(!result.0)
-        let error: Error? = result.1
-        #expect(error == .passwordNotValid)
+        #expect(result.error == .passwordNotValid)
     }
 
     @Test func shouldProceedToSignUpWeakPassword() {
         let result = useCase.shouldProceedToSignUp(user: SignUpTestsData.incorrectPasswordUser)
-        #expect(!result.0)
-        let error: Error? = result.1
-        #expect(error == .passwordNotValid)
+        #expect(result.error == .passwordNotValid)
     }
 
     @Test func shouldProceedToSignUpNotMatchingPassword() {
         let result = useCase.shouldProceedToSignUp(user: SignUpTestsData.notMatchingPasswordUser)
-        #expect(!result.0)
-        let error: Error? = result.1
-        #expect(error == .passwordDoNotMatch)
+        #expect(result.error == .passwordDoNotMatch)
     }
 
     @Test func shouldProceedToSignUpIncorrectBirthday() {
         let result = useCase.shouldProceedToSignUp(user: SignUpTestsData.incorrectBirthdayUser)
-        #expect(!result.0)
-        let error: Error? = result.1
-        #expect(error == .birthdayNotValid)
+        #expect(result.error == .birthdayNotValid)
     }
 
     @Test func shouldProceedToSignUpUserIsInvalid() {
         let result = useCase.shouldProceedToSignUp(user: SignUpTestsData.emptyNameUser)
-        #expect(!result.0)
-        let error: Error? = result.1
-        #expect(error == .fillAllValues)
+        #expect(result.error == .fillAllValues)
     }
 
     @Test func successfulSignUp() async {
