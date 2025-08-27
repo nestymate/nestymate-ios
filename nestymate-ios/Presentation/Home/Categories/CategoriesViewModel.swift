@@ -28,7 +28,7 @@ final class CategoriesViewModel: ObservableObject {
     public func getCategories() async throws -> CategoriesResponse? {
         shouldShowLoader = true
         do {
-            let responseHome = try await homeUseCase.getHome()
+            let responseHome = try await homeUseCase.getActiveHome()
             let homeId = responseHome.home?.id ?? -1
             let response = try await useCase.getCategories(homeId: homeId)
             shouldShowLoader = false
@@ -48,7 +48,7 @@ final class CategoriesViewModel: ObservableObject {
     public func delete(categoryToBeDelete: Category) async throws -> CategoriesResponse? {
         shouldShowLoader = true
         do {
-            let responseHome = try await homeUseCase.getHome()
+            let responseHome = try await homeUseCase.getActiveHome()
             let homeId = responseHome.home?.id ?? -1
             _ = try await useCase.deleteCategory(homeId: homeId, category: categoryToBeDelete)
             let categories = try await getCategories()

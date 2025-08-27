@@ -9,14 +9,14 @@ import Combine
 import Foundation
 
 protocol HomeService: Sendable {
-    func getHome() async throws -> HomeResponse
+    func getActiveHome() async throws -> HomeResponse
     func createHome(home: Home) async throws -> GenericResponse
     func editHome(home: Home) async throws -> GenericResponse
     func inviteUserToHome(email: String) async throws -> GenericResponse
 }
 
 final class HomeServiceImpl: HomeService {
-    let url = URL(string: "http://192.168.1.10/api/v1/home")!
+    let url = URL(string: "http://192.168.1.10/api/v1/user/home")!
     let helper: KeychainHelper
     let apiCall: APICalls
 
@@ -25,7 +25,7 @@ final class HomeServiceImpl: HomeService {
         helper = KeychainHelper()
     }
 
-    func getHome() async throws -> HomeResponse {
+    func getActiveHome() async throws -> HomeResponse {
         do {
             let apiResponse = try await apiCall.get(url: url.appendingPathComponent("active"), requestData: nil)
             guard let data = apiResponse.data else { throw URLError(.badServerResponse) }

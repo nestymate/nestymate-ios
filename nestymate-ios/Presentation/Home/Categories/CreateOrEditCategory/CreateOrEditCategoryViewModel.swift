@@ -59,7 +59,7 @@ final class CreateOrEditCategoryViewModel: ObservableObject {
                 description: description.value
             )
             do {
-                let responseHome = try await homeUseCase.getHome()
+                let responseHome = try await homeUseCase.getActiveHome()
                 let homeId = responseHome.home?.id ?? -1
                 if isEdit {
                     let response = try await useCase.editCategory(homeId: homeId, category: category)

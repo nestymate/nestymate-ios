@@ -41,6 +41,6 @@ final class SignUpUseCaseImpl: SignUpUseCase {
     }
 
     func checkHomeForUser() async throws -> HomeResponse {
-        try await homeService.getHome()
+        try await homeService.getActiveHome()
     }
 }

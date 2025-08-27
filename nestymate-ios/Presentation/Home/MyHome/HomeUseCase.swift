@@ -9,7 +9,7 @@ import Foundation
 
 protocol HomeUseCase: Sendable {
     func createValid(isNameValid: Bool, isDescriptionValid: Bool, isAddressValid: Bool) -> Bool
-    func getHome() async throws -> HomeResponse
+    func getActiveHome() async throws -> HomeResponse
     func editHome(home: Home) async throws -> GenericResponse
     func createHome(home: Home) async throws -> GenericResponse
     func inviteUserToHome(email: String) async throws -> GenericResponse
@@ -26,8 +26,8 @@ final class HomeUseCaseImpl: HomeUseCase {
         isNameValid && isDescriptionValid && isAddressValid
     }
 
-    func getHome() async throws -> HomeResponse {
-        try await homeService.getHome()
+    func getActiveHome() async throws -> HomeResponse {
+        try await homeService.getActiveHome()
     }
 
     func editHome(home: Home) async throws -> GenericResponse {

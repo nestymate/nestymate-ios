@@ -14,9 +14,13 @@ final class HomeServiceMock: HomeService {
         self.hasHome = hasHome
     }
 
-    func getHome() async throws -> HomeResponse {
+    func getActiveHome() async throws -> HomeResponse {
         if hasHome {
-            HomeResponse(home: Home(id: 0, name: "", description: "", address: ""), error: nil, statusCode: 200)
+            HomeResponse(
+                home: Home(id: 0, name: "", description: "", address: "", active: true),
+                error: nil,
+                statusCode: 200
+            )
         } else {
             HomeResponse(home: nil, error: nil, statusCode: 200)
         }

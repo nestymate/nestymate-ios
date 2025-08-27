@@ -34,7 +34,7 @@ final class CreateOrEditHomeViewModel: ObservableObject {
     @MainActor
     public func getHome() async {
         shouldShowLoader = true
-        let response = try? await useCase.getHome()
+        let response = try? await useCase.getActiveHome()
         shouldShowLoader = false
         error = response?.error
         if let home = response?.home {
@@ -62,7 +62,13 @@ final class CreateOrEditHomeViewModel: ObservableObject {
             isAddressValid: address.onValidate()
         ) {
             shouldShowLoader = true
-            let home = Home(id: 0, name: name.value, description: description.value, address: address.value)
+            let home = Home(
+                id: 0,
+                name: name.value,
+                description: description.value,
+                address: address.value,
+                active: true
+            )
             do {
                 let response = try await useCase.createHome(home: home)
                 shouldShowLoader = false
@@ -88,7 +94,8 @@ final class CreateOrEditHomeViewModel: ObservableObject {
                 id: originalHome.id,
                 name: name.value,
                 description: description.value,
-                address: address.value
+                address: address.value,
+                active: true
             )
             do {
                 let response = try await useCase.editHome(home: home)
