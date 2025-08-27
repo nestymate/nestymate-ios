@@ -44,6 +44,9 @@ struct ExpensesView: View {
                         Spacer()
                         Text(String(item.amount))
                     }
+                    .padding()
+                    .background(ColorManager.backgroundList)
+                    .cornerRadius(12)
                     .onTapGesture {
                         output.goToEditExpense(item.id)
                     }
@@ -55,7 +58,10 @@ struct ExpensesView: View {
                         handleExpenses(response.expenses, response.shouldLogout)
                     }
                 })
-                .listRowBackground(ColorManager.backgroundColour)
+                .listRowInsets(EdgeInsets())
+                .padding(.vertical, 2)
+                .listRowSeparator(.hidden)
+                .listRowBackground(Color.clear)
             }
             .scrollContentBackground(.hidden)
             .padding()
@@ -79,7 +85,7 @@ private extension ExpensesView {
 
 #Preview {
     ExpensesView(viewModel: ExpensesViewModel(
-        useCase: ExpenseUseCaseImpl(service: ExpenseServiceImpl()),
+        useCase: ExpenseUseCaseImpl(service: ExpensesServiceMock()),
         homeUseCase: HomeUseCaseImpl(homeService: HomeServiceImpl()),
         logoutService: LogoutService()
     ),
