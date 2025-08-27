@@ -31,7 +31,7 @@ final class LoginViewModel: ObservableObject {
             shouldShow = true
             do {
                 _ = try await useCase.login(username: username.value, password: password.value)
-                let responseHome = try await homeUseCase.getHome()
+                let responseHome = try await homeUseCase.getActiveHome()
                 return LoginResponse(success: true, shouldShowHome: responseHome.home == nil)
             } catch {
                 self.error = error as? HttpError

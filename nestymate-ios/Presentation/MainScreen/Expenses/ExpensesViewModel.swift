@@ -23,7 +23,7 @@ final class ExpensesViewModel: ObservableObject {
     @MainActor
     public func getExpenses() async throws -> ExpensesResponse {
         shouldShowLoader = true
-        let responseHome = try await homeUseCase.getHome()
+        let responseHome = try await homeUseCase.getActiveHome()
         let apiResponse = try? await useCase.getExpenses(homeId: responseHome.home?.id ?? -1)
         shouldShowLoader = false
         return ExpensesResponse(
@@ -37,7 +37,7 @@ final class ExpensesViewModel: ObservableObject {
     @MainActor
     public func delete(expenseToBeDelete: Expense) async throws -> ExpensesResponse {
         shouldShowLoader = true
-        let responseHome = try await homeUseCase.getHome()
+        let responseHome = try await homeUseCase.getActiveHome()
         let response = try? await useCase.deleteExpense(homeId: responseHome.home?.id ?? -1, expense: expenseToBeDelete)
         shouldShowLoader = false
         error = response?.error

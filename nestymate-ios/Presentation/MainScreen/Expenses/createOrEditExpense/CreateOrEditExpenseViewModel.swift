@@ -55,12 +55,11 @@ final class CreateOrEditExpenseViewModel: ObservableObject {
     public func getCategories() async throws -> (Int?, Bool) {
         shouldShowLoader = true
         do {
-            let responseHome = try await homeUseCase.getHome()
+            let responseHome = try await homeUseCase.getActiveHome()
             let homeId = responseHome.home?.id ?? -1
             let response = try await categoryUseCase.getCategories(homeId: homeId)
             categories = response.categories ?? []
             if isEdit, let expenseId {
-                let responseHome = try await homeUseCase.getHome()
                 let response = try await useCase.getExpense(homeId: responseHome.home?.id ?? -1, expenseId: expenseId)
                 setup(expense: response.expense)
                 shouldShowLoader = false
@@ -99,7 +98,7 @@ final class CreateOrEditExpenseViewModel: ObservableObject {
                 categoryId: expenseCategoryId
             )
             do {
-                let responseHome = try await homeUseCase.getHome()
+                let responseHome = try await homeUseCase.getActiveHome()
                 let homeId = responseHome.home?.id ?? -1
                 if isEdit {
                     let response = try await useCase.editExpense(

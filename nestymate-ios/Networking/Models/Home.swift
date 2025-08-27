@@ -12,6 +12,7 @@ struct Home: Encodable, Decodable, Sendable {
     let name: String
     let description: String
     let address: String
+    let active: Bool
 }
 
 struct HomeReference: Decodable {

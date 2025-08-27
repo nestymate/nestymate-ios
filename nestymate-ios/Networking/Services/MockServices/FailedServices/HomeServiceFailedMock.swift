@@ -8,7 +8,7 @@
 import Foundation
 
 final class HomeServiceFailedMock: HomeService {
-    func getHome() async throws -> HomeResponse {
+    func getActiveHome() async throws -> HomeResponse {
         HomeResponse(home: nil, error: .badServerResponse, statusCode: 500)
     }
 
