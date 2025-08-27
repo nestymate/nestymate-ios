@@ -32,10 +32,18 @@ struct CategoriesView: View {
 
             List {
                 ForEach(categories) { item in
-                    Text(item.name)
-                        .onTapGesture {
-                            output.goToEditCategory(item)
-                        }
+                    HStack {
+                        Text(item.name)
+                        Spacer()
+                        Image(systemName: "chevron.right")
+                            .foregroundColor(.gray)
+                    }
+                    .padding()
+                    .background(ColorManager.backgroundList)
+                    .cornerRadius(12)
+                    .onTapGesture {
+                        output.goToEditCategory(item)
+                    }
                 }
                 .onDelete(perform: { offset in
                     let index = offset[offset.startIndex]
@@ -44,7 +52,10 @@ struct CategoriesView: View {
                         handleCategories(response?.categories, response?.shouldLogout ?? false)
                     }
                 })
-                .listRowBackground(ColorManager.backgroundColour)
+                .listRowInsets(EdgeInsets())
+                .padding(.vertical, 2)
+                .listRowSeparator(.hidden)
+                .listRowBackground(Color.clear)
             }
             .scrollContentBackground(.hidden)
             .padding()
@@ -60,7 +71,7 @@ struct CategoriesView: View {
 }
 
 private extension CategoriesView {
-    func handleCategories(_: [Category]?, _ shouldLogout: Bool) {
+    func handleCategories(_ categories: [Category]?, _ shouldLogout: Bool) {
         guard !shouldLogout else { return output.logout() }
         self.categories = categories ?? []
     }
@@ -68,7 +79,7 @@ private extension CategoriesView {
 
 #Preview {
     CategoriesView(viewModel: CategoriesViewModel(
-        useCase: CategoryUseCaseImpl(service: CategoryServiceImpl()),
+        useCase: CategoryUseCaseImpl(service: CategoryServiceMock()),
         homeUseCase: HomeUseCaseImpl(homeService: HomeServiceImpl()),
         logoutService: LogoutService()
     ),
