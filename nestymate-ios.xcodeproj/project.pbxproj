@@ -100,6 +100,7 @@
 		01ABA4842D7EEB1000E6EEFD /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 01ABA4832D7EEB1000E6EEFD /* GoogleService-Info.plist */; };
 		01B6DF992BD6A1D500E2983E /* FontManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01B6DF982BD6A1D500E2983E /* FontManager.swift */; };
 		01B6DF9E2BD6A3D900E2983E /* ColorManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01B6DF9D2BD6A3D900E2983E /* ColorManager.swift */; };
+		01B816A72E61BFC7004704BC /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01B816A62E61BFC4004704BC /* Logger.swift */; };
 		01C8AC512CEE6D5E00D74BF8 /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = 01C8AC502CEE6D5E00D74BF8 /* .swiftlint.yml */; };
 		01C8AC552CEFE48100D74BF8 /* LoginServiceMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01C8AC532CEFE37E00D74BF8 /* LoginServiceMock.swift */; };
 		01C8AC572CEFE4FF00D74BF8 /* HomeServiceMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01C8AC562CEFE4F400D74BF8 /* HomeServiceMock.swift */; };
@@ -212,6 +213,7 @@
 		01ABA4832D7EEB1000E6EEFD /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		01B6DF982BD6A1D500E2983E /* FontManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FontManager.swift; sourceTree = "<group>"; };
 		01B6DF9D2BD6A3D900E2983E /* ColorManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorManager.swift; sourceTree = "<group>"; };
+		01B816A62E61BFC4004704BC /* Logger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
 		01C8AC4F2CEE6B6300D74BF8 /* .swiftformat */ = {isa = PBXFileReference; lastKnownFileType = text; path = .swiftformat; sourceTree = "<group>"; };
 		01C8AC502CEE6D5E00D74BF8 /* .swiftlint.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = "<group>"; };
 		01C8AC532CEFE37E00D74BF8 /* LoginServiceMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginServiceMock.swift; sourceTree = "<group>"; };
@@ -476,6 +478,7 @@
 		01B6DF9C2BD6A3C400E2983E /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				01B816A62E61BFC4004704BC /* Logger.swift */,
 				017CFD202E439EC8004DA242 /* ErrorToHandle.swift */,
 				01D9A75D2CA872270081A181 /* DateUtils.swift */,
 				01B6DF982BD6A1D500E2983E /* FontManager.swift */,
@@ -811,6 +814,7 @@
 				012815932C4135A2001FFA2D /* FieldType.swift in Sources */,
 				0106B6282BFA5E920024AFCB /* Login.swift in Sources */,
 				017CFD1B2E3A1C24004DA242 /* ExpensesResponse.swift in Sources */,
+				01B816A72E61BFC7004704BC /* Logger.swift in Sources */,
 				01D4882D2C96F1B70024A7F2 /* Category.swift in Sources */,
 				012815A52C4C605E001FFA2D /* DatePickerUIView.swift in Sources */,
 				0153EB502C98BB330033D970 /* LogoutService.swift in Sources */,

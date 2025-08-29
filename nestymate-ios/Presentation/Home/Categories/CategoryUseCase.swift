@@ -9,6 +9,7 @@ import Foundation
 
 protocol CategoryUseCase: Sendable {
     func getCategories(homeId: Int) async throws -> CategoriesResponse
+    func getCategory(categoryId: Int) async throws -> CategoryResponse
     func createCategory(homeId: Int, category: Category) async throws -> GenericResponse
     func editCategory(homeId: Int, category: Category) async throws -> GenericResponse
     func deleteCategory(homeId: Int, category: Category) async throws -> GenericResponse
@@ -24,6 +25,10 @@ final class CategoryUseCaseImpl: CategoryUseCase {
 
     func getCategories(homeId: Int) async throws -> CategoriesResponse {
         try await service.getCategories(homeId: homeId)
+    }
+
+    func getCategory(categoryId: Int) async throws -> CategoryResponse {
+        try await service.getCategory(categoryId: categoryId)
     }
 
     nonisolated func createValid(isNameValid: Bool, isDescriptionValid: Bool) -> Bool {

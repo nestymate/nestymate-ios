@@ -26,12 +26,12 @@ class CreateHomeTests {
     }
 
     @Test func successfulGetHome() async {
-        let response = try? await useCase.getHome()
+        let response = try? await useCase.getActiveHome()
         #expect(response?.error == nil)
     }
 
     @Test func unsuccessfulGetHome() async {
-        let response = try? await useCaseFailed.getHome()
+        let response = try? await useCaseFailed.getActiveHome()
         #expect(response?.error != nil)
     }
 

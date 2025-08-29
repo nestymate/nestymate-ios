@@ -32,6 +32,16 @@ class CategoriesTests {
         #expect(response?.categories == nil)
     }
 
+    @Test func successfulGetCategory() async {
+        let response = try? await useCase.getCategory(categoryId: 1)
+        #expect(response?.category != nil)
+    }
+
+    @Test func unsuccessfulGetCategory() async {
+        let response = try? await useCaseFailed.getCategory(categoryId: 1)
+        #expect(response?.category == nil)
+    }
+
     @Test func successfulEditCategory() async {
         let response = try? await useCase.editCategory(homeId: homeId, category: CategoryTestData.category)
         #expect(response?.error == nil)

@@ -10,6 +10,10 @@ final class CategoryServiceFailedMock: CategoryService {
         CategoriesResponse(categories: nil, statusCode: 500, shouldLogout: false)
     }
 
+    func getCategory(categoryId _: Int) async throws -> CategoryResponse {
+        CategoryResponse(category: nil, statusCode: 500, shouldLogout: false)
+    }
+
     func createCategory(homeId _: Int, category _: Category) async throws -> GenericResponse {
         GenericResponse(error: .badServerResponse, statusCode: 500)
     }

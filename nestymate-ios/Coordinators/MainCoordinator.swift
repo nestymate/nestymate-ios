@@ -194,7 +194,7 @@ private extension MainCoordinator {
 
     @MainActor func createCategoryView(category: Category?) -> some View {
         let viewModel = CreateOrEditCategoryViewModel(
-            category: category,
+            categoryId: category?.id,
             useCase: categoryUseCase,
             homeUseCase: homeUseCase,
             logoutService: logoutService
