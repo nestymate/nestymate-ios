@@ -33,12 +33,20 @@ struct CreateOrEditCategoryView: View {
             Spacer()
         }
         .background(ColorManager.backgroundColour)
+        .onAppear {
+            Task {
+                let shouldLogout = try await viewModel.getCategory()
+                if shouldLogout {
+                    output.logout()
+                }
+            }
+        }
     }
 }
 
 #Preview {
     CreateOrEditCategoryView(viewModel: CreateOrEditCategoryViewModel(
-        category: Category(),
+        categoryId: 1,
         useCase: CategoryUseCaseImpl(
             service: CategoryServiceImpl()
         ), homeUseCase: HomeUseCaseImpl(homeService: HomeServiceImpl()),
