@@ -8,7 +8,7 @@
 import Foundation
 import SwiftUI
 
-enum HttpError: Error, Sendable, Equatable, Identifiable {
+public enum HttpError: Error, Sendable, Equatable, Identifiable {
     case noNetwork
     case badServerResponse
     case fillAllValues
@@ -18,9 +18,10 @@ enum HttpError: Error, Sendable, Equatable, Identifiable {
     case passwordAndUserNameDidNotMatch
     case requestFailed(error: Error)
     case errorToHandle(error: ErrorToHandle)
+    case tokenExpired
     case unknown
 
-    var id: String {
+    public var id: String {
         switch self {
         case .noNetwork:
             "noNetwork"
@@ -42,33 +43,12 @@ enum HttpError: Error, Sendable, Equatable, Identifiable {
             "errorToHandle"
         case .unknown:
             "unknown"
+        case .tokenExpired:
+            "tokenExpired"
         }
     }
 
-    var alert: Alert {
-        switch self {
-        case .noNetwork:
-            Alert(title: Text(String(localized: "no_internet")))
-        case .badServerResponse, .unknown:
-            Alert(title: Text(String(localized: "error")))
-        case .fillAllValues:
-            Alert(title: Text(String(localized: "fill_all_fields")))
-        case .passwordDoNotMatch:
-            Alert(title: Text(String(localized: "password_not_match")))
-        case .passwordNotValid:
-            Alert(title: Text(String(localized: "password_not_valid")))
-        case .birthdayNotValid:
-            Alert(title: Text(String(localized: "fieldTypeEmptDateyMessage")))
-        case .passwordAndUserNameDidNotMatch:
-            Alert(title: Text(String(localized: "password_useraname_not_correcr")))
-        case .requestFailed:
-            Alert(title: Text(String(localized: "generic_error")))
-        case let .errorToHandle(error: error):
-            Alert(title: Text(error.title), message: Text(error.detail))
-        }
-    }
-
-    static func == (lhs: HttpError, rhs: HttpError) -> Bool {
+    public static func == (lhs: HttpError, rhs: HttpError) -> Bool {
         lhs.id == rhs.id
     }
 }

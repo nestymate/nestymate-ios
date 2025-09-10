@@ -24,11 +24,9 @@ struct InviteUserView: View {
                 shouldEnableButton: viewModel.shouldEnableButton
             ) {
                 Task {
-                    let shouldLogout = try await viewModel.inviteUser()
-                    if !shouldLogout {
+                    let success = try await viewModel.inviteUser()
+                    if success {
                         output.goBack()
-                    } else {
-                        output.logout()
                     }
                 }
             }

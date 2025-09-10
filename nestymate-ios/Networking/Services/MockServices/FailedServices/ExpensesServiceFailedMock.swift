@@ -14,15 +14,19 @@ final class ExpensesServiceFailedMock: ExpenseService {
         ExpenseResponse(expense: nil, error: .badServerResponse, statusCode: 500)
     }
 
+    func getUserForExpenses(homeId _: Int) async throws -> UserResponse {
+        UserResponse(users: nil, error: .badServerResponse, statusCode: 500)
+    }
+
     func createExpense(homeId _: Int, expense _: Expense) async throws -> GenericResponse {
         GenericResponse(error: .badServerResponse, statusCode: 500)
     }
 
-    func editExpense(homeId _: Int, expense _: Expense) async throws -> GenericResponse {
+    func editExpense(expense _: Expense) async throws -> GenericResponse {
         GenericResponse(error: .badServerResponse, statusCode: 500)
     }
 
-    func deleteExpense(homeId _: Int, expense _: Expense) async throws -> GenericResponse {
+    func deleteExpense(expense _: Expense) async throws -> GenericResponse {
         GenericResponse(error: .badServerResponse, statusCode: 500)
     }
 }

@@ -32,9 +32,10 @@ struct CreateOrEditHomeView: View {
                         shouldEnableButton: viewModel.shouldEnableButton
                     ) {
                         Task {
-                            let shouldLogout = try await viewModel.createOrEditHome()
-                            guard !shouldLogout else { return output.logout() }
-                            output.goToMainScreen()
+                            let success = try await viewModel.createOrEditHome()
+                            if success {
+                                output.goToMainScreen()
+                            }
                         }
                     }
                     Spacer()
@@ -42,7 +43,9 @@ struct CreateOrEditHomeView: View {
             }
             .background(ColorManager.backgroundColour)
             .alert(item: $viewModel.error) { error in
-                error.alert
+                handleHttpErrorAlert(error: error) {
+                    output.logout()
+                }
             }
             .onAppear {
                 if viewDidLoad == false, viewModel.isEdit {

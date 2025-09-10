@@ -32,7 +32,7 @@ final class HomeServiceImpl: HomeService {
             let response = try? JSONDecoder().decode(Home.self, from: data)
             return HomeResponse(home: response, error: apiResponse.error, statusCode: apiResponse.statusCode)
         } catch {
-            if let errorToHandle = error as? ErrorToHandle, errorToHandle.status == 400 {
+            if let errorToHandle = error as? ErrorToHandle {
                 return HomeResponse(home: nil, error: nil, statusCode: errorToHandle.status)
             } else {
                 return HomeResponse(home: nil, error: .badServerResponse, statusCode: 500)

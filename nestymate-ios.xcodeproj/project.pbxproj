@@ -126,6 +126,8 @@
 		01D792342C8DA52D00EDA9D2 /* CategoriesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01D792332C8DA52D00EDA9D2 /* CategoriesView.swift */; };
 		01D9A75E2CA872290081A181 /* DateUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01D9A75D2CA872270081A181 /* DateUtils.swift */; };
 		01D9A7622CBA92150081A181 /* CategoryService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01D9A7612CBA920C0081A181 /* CategoryService.swift */; };
+		01E5B27A2E716F9D000264CB /* HttpError+Alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01E5B2792E716F94000264CB /* HttpError+Alert.swift */; };
+		01E5B27C2E72BE90000264CB /* UserResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01E5B27B2E72BE8A000264CB /* UserResponse.swift */; };
 		01F1CB212D50025C006276C5 /* ProfileTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01F1CB202D500251006276C5 /* ProfileTests.swift */; };
 		01F1CB232D513B4F006276C5 /* CreateHomeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01F1CB222D513B3D006276C5 /* CreateHomeTests.swift */; };
 		01F1CB252D513D85006276C5 /* HomeTestsData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01F1CB242D513D7D006276C5 /* HomeTestsData.swift */; };
@@ -240,6 +242,8 @@
 		01D792332C8DA52D00EDA9D2 /* CategoriesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoriesView.swift; sourceTree = "<group>"; };
 		01D9A75D2CA872270081A181 /* DateUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateUtils.swift; sourceTree = "<group>"; };
 		01D9A7612CBA920C0081A181 /* CategoryService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryService.swift; sourceTree = "<group>"; };
+		01E5B2792E716F94000264CB /* HttpError+Alert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "HttpError+Alert.swift"; sourceTree = "<group>"; };
+		01E5B27B2E72BE8A000264CB /* UserResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserResponse.swift; sourceTree = "<group>"; };
 		01F1CB202D500251006276C5 /* ProfileTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileTests.swift; sourceTree = "<group>"; };
 		01F1CB222D513B3D006276C5 /* CreateHomeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateHomeTests.swift; sourceTree = "<group>"; };
 		01F1CB242D513D7D006276C5 /* HomeTestsData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeTestsData.swift; sourceTree = "<group>"; };
@@ -364,6 +368,7 @@
 		017CFD152E39FE17004DA242 /* Responses */ = {
 			isa = PBXGroup;
 			children = (
+				01E5B27B2E72BE8A000264CB /* UserResponse.swift */,
 				017CFD1E2E3BA4BA004DA242 /* LoginResponse.swift */,
 				017CFD1C2E3B7147004DA242 /* SuccessResponse.swift */,
 				017CFD1A2E3A1C19004DA242 /* ExpensesResponse.swift */,
@@ -478,6 +483,7 @@
 		01B6DF9C2BD6A3C400E2983E /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				01E5B2792E716F94000264CB /* HttpError+Alert.swift */,
 				01B816A62E61BFC4004704BC /* Logger.swift */,
 				017CFD202E439EC8004DA242 /* ErrorToHandle.swift */,
 				01D9A75D2CA872270081A181 /* DateUtils.swift */,
@@ -859,6 +865,7 @@
 				01A606292C3FC5ED00B7622E /* SignUpViewModel.swift in Sources */,
 				01C8AC572CEFE4FF00D74BF8 /* HomeServiceMock.swift in Sources */,
 				0106B6222BFA5D910024AFCB /* CreateOrEditHomeViewModel.swift in Sources */,
+				01E5B27A2E716F9D000264CB /* HttpError+Alert.swift in Sources */,
 				01D7922E2C8D9AFD00EDA9D2 /* ExpensesCoordinator.swift in Sources */,
 				0153EB4E2C9740C00033D970 /* InviteUserViewModel.swift in Sources */,
 				0106B62C2BFA746C0024AFCB /* Home.swift in Sources */,
@@ -868,6 +875,7 @@
 				0106B6262BFA5E530024AFCB /* HomeService.swift in Sources */,
 				0106B61D2BE811E60024AFCB /* MainView.swift in Sources */,
 				01B6DF992BD6A1D500E2983E /* FontManager.swift in Sources */,
+				01E5B27C2E72BE90000264CB /* UserResponse.swift in Sources */,
 				012815A72C4D98B3001FFA2D /* UtilMethods.swift in Sources */,
 				01ABA4802D7EE2FB00E6EEFD /* ExpensesServiceFailedMock.swift in Sources */,
 				01D4883B2C9721B00024A7F2 /* CreateOrEditExpenseViewModel.swift in Sources */,

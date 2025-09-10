@@ -54,8 +54,7 @@ struct ExpensesView: View {
                 .onDelete(perform: { offset in
                     let index = offset[offset.startIndex]
                     Task {
-                        let response = try await viewModel.delete(expenseToBeDelete: expenses[index])
-                        handleExpenses(response.expenses, response.shouldLogout)
+                        expenses = try await viewModel.delete(expenseToBeDelete: expenses[index]) ?? []
                     }
                 })
                 .listRowInsets(EdgeInsets())
@@ -69,17 +68,9 @@ struct ExpensesView: View {
         .background(ColorManager.backgroundColour)
         .onAppear {
             Task {
-                let response = try await viewModel.getExpenses()
-                handleExpenses(response.expenses, response.shouldLogout)
+                expenses = try await viewModel.getExpenses() ?? []
             }
         }
-    }
-}
-
-private extension ExpensesView {
-    func handleExpenses(_ expenses: [Expense]?, _ shouldLogout: Bool) {
-        guard !shouldLogout else { return output.logout() }
-        self.expenses = expenses ?? []
     }
 }
 

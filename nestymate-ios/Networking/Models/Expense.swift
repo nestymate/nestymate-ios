@@ -10,16 +10,31 @@ import Foundation
 public struct Expense: Encodable, Decodable, Sendable {
     public let id: Int
     public let title: String?
-    public let description: String
     public let amount: Double
-    public let categoryId: Int?
+    public let date: String?
+    public let description: String?
+    public let expenseCategory: Category?
+    public let expenseCategoryId: Int?
+    public let participatingUserIds: [Int]?
 
-    init(id: Int, title: String?, description: String, amount: Double, categoryId: Int?) {
+    init(
+        id: Int,
+        title: String?,
+        amount: Double,
+        date: String?,
+        description: String?,
+        expenseCategory: Category? = nil,
+        expenseCategoryId: Int?,
+        participatingUserIds: [Int]?
+    ) {
         self.id = id
         self.title = title
-        self.description = description
         self.amount = amount
-        self.categoryId = categoryId
+        self.date = date
+        self.description = description
+        self.expenseCategory = expenseCategory
+        self.expenseCategoryId = expenseCategoryId
+        self.participatingUserIds = participatingUserIds
     }
 
     init() {
@@ -27,6 +42,9 @@ public struct Expense: Encodable, Decodable, Sendable {
         title = ""
         description = ""
         amount = 0
-        categoryId = 0
+        expenseCategory = nil
+        expenseCategoryId = nil
+        date = ""
+        participatingUserIds = []
     }
 }
