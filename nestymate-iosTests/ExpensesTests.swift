@@ -61,7 +61,17 @@ class ExpensesTests {
         #expect(response?.error != nil)
     }
 
-    @Test func successfulCreateExpensey() async {
+    @Test func successfulGetUserForExpense() async {
+        let response = try? await useCase.getUserForHome(homeId: homeId)
+        #expect(response?.error == nil)
+    }
+
+    @Test func unsuccessfulGetUserForExpense() async {
+        let response = try? await useCaseFailed.getUserForHome(homeId: homeId)
+        #expect(response?.error != nil)
+    }
+
+    @Test func successfulCreateExpense() async {
         let response = try? await useCase.createExpense(homeId: homeId, expense: ExpenseTestData.expense)
         #expect(response?.error == nil)
     }

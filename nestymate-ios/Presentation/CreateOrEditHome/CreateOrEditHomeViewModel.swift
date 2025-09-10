@@ -34,14 +34,17 @@ final class CreateOrEditHomeViewModel: ObservableObject {
     @MainActor
     public func getHome() async {
         shouldShowLoader = true
-        let response = try? await useCase.getActiveHome()
-        shouldShowLoader = false
-        error = response?.error
-        if let home = response?.home {
-            self.home = home
-            name = .init(value: home.name, fieldType: .name)
-            description = .init(value: home.description, fieldType: .description)
-            address = .init(value: home.address, fieldType: .address)
+        do {
+            let response = try await useCase.getActiveHome()
+            shouldShowLoader = false
+            if let home = response.home {
+                self.home = home
+                name = .init(value: home.name, fieldType: .name)
+                description = .init(value: home.description, fieldType: .description)
+                address = .init(value: home.address, fieldType: .address)
+            }
+        } catch {
+            self.error = error as? HttpError
         }
     }
 
@@ -70,9 +73,9 @@ final class CreateOrEditHomeViewModel: ObservableObject {
                 active: true
             )
             do {
-                let response = try await useCase.createHome(home: home)
+                _ = try await useCase.createHome(home: home)
                 shouldShowLoader = false
-                return logoutService.shouldLogout(statusCode: response.statusCode)
+                return true
             } catch {
                 self.error = error as? HttpError
             }
@@ -98,9 +101,9 @@ final class CreateOrEditHomeViewModel: ObservableObject {
                 active: true
             )
             do {
-                let response = try await useCase.editHome(home: home)
+                _ = try await useCase.editHome(home: home)
                 shouldShowLoader = false
-                return logoutService.shouldLogout(statusCode: response.statusCode)
+                return true
             } catch {
                 self.error = error as? HttpError
             }

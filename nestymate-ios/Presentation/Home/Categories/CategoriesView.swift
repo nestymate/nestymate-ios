@@ -48,8 +48,7 @@ struct CategoriesView: View {
                 .onDelete(perform: { offset in
                     let index = offset[offset.startIndex]
                     Task {
-                        let response = try await viewModel.delete(categoryToBeDelete: categories[index])
-                        handleCategories(response?.categories, response?.shouldLogout ?? false)
+                        categories = try await viewModel.delete(categoryToBeDelete: categories[index]) ?? []
                     }
                 })
                 .listRowInsets(EdgeInsets())
@@ -63,17 +62,9 @@ struct CategoriesView: View {
         .background(ColorManager.backgroundColour)
         .onAppear {
             Task {
-                let response = try await viewModel.getCategories()
-                handleCategories(response?.categories, response?.shouldLogout ?? false)
+                categories = try await viewModel.getCategories() ?? []
             }
         }
-    }
-}
-
-private extension CategoriesView {
-    func handleCategories(_ categories: [Category]?, _ shouldLogout: Bool) {
-        guard !shouldLogout else { return output.logout() }
-        self.categories = categories ?? []
     }
 }
 

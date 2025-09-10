@@ -172,6 +172,16 @@
         }
       }
     },
+    "date" : {
+      "localizations" : {
+        "el" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ημερομηνία"
+          }
+        }
+      }
+    },
     "description" : {
       "localizations" : {
         "el" : {
@@ -424,6 +434,22 @@
         }
       }
     },
+    "log_οut_error" : {
+      "localizations" : {
+        "el" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Το session σας έχει λήξει"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "You session has expired"
+          }
+        }
+      }
+    },
     "login" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -536,6 +562,9 @@
           }
         }
       }
+    },
+    "OK" : {
+
     },
     "other" : {
       "localizations" : {
@@ -790,6 +819,22 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Username"
+          }
+        }
+      }
+    },
+    "users" : {
+      "localizations" : {
+        "el" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Χρήστες"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Users"
           }
         }
       }

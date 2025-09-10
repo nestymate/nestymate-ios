@@ -13,16 +13,22 @@ final class CreateOrEditExpenseViewModel: ObservableObject {
     private let categoryUseCase: CategoryUseCase
     private let logoutService: LogoutService
     var categoryTitle = String(localized: "category")
+    var usersTitle = String(localized: "users")
     @Published var categories: [Category] = []
+    @Published var users: [UserExpense] = []
     @Published var title: FieldModel = .init(value: "", fieldType: .name)
+    @Published var date: FieldModel = .init(value: "", fieldType: .date)
     @Published var description: FieldModel = .init(value: "", fieldType: .description)
     @Published var amount: FieldModel = .init(value: "", fieldType: .amount)
     @Published var shouldShowLoader: Bool?
     @Published var isEdit: Bool = false
     @Published var error: HttpError?
+    @Published var selectedCategory: Category?
+    @Published var selectedUser: UserExpense?
     var buttonTitle: String = ""
     var pageTitle: String = ""
     private var expenseId: Int?
+    private let formatter = DateFormatter()
 
     init(
         expenseId: Int?,
@@ -44,43 +50,48 @@ final class CreateOrEditExpenseViewModel: ObservableObject {
         !title.value.isEmpty && !description.value.isEmpty && !amount.value.isEmpty
     }
 
-    func setup(expense: Expense?) {
-        guard let expense else { return }
-        title = .init(value: expense.title ?? "''", fieldType: .name)
-        description = .init(value: expense.description, fieldType: .description)
-        amount = .init(value: String(expense.amount), fieldType: .amount)
-    }
-
     @MainActor
-    public func getCategories() async throws -> (Int?, Bool) {
+    func getExpense() async throws {
         shouldShowLoader = true
         do {
-            let responseHome = try await homeUseCase.getActiveHome()
-            let homeId = responseHome.home?.id ?? -1
-            let response = try await categoryUseCase.getCategories(homeId: homeId)
-            categories = response.categories ?? []
+            let homeId = try await getHome()
+            try await getCategories(homeId: homeId)
+            try await getUsers(homeId: homeId)
             if isEdit, let expenseId {
-                let response = try await useCase.getExpense(homeId: responseHome.home?.id ?? -1, expenseId: expenseId)
+                let response = try await useCase.getExpense(homeId: homeId, expenseId: expenseId)
                 setup(expense: response.expense)
                 shouldShowLoader = false
-                return (response.expense?.categoryId, logoutService.shouldLogout(statusCode: response.statusCode))
             } else {
-                shouldShowLoader = false
-                if categories.count > 0 {
-                    return (categories[0].id, logoutService.shouldLogout(statusCode: response.statusCode))
-                } else {
-                    return (nil, logoutService.shouldLogout(statusCode: response.statusCode))
-                }
+                selectedCategory = categories.first
+                selectedUser = users.first
             }
         } catch {
             self.error = error as? HttpError
         }
         shouldShowLoader = false
-        return (nil, false)
     }
 
     @MainActor
-    func createOrUpdateExpense(expenseCategoryId: Int?) async throws -> Bool {
+    private func getHome() async throws -> Int {
+        let responseHome = try await homeUseCase.getActiveHome()
+        return responseHome.home?.id ?? -1
+    }
+
+    @MainActor
+    private func getCategories(homeId: Int) async throws {
+        let response = try await categoryUseCase.getCategories(homeId: homeId)
+        categories = response.categories ?? []
+    }
+
+    @MainActor
+    private func getUsers(homeId: Int) async throws {
+        let response = try await useCase.getUserForHome(homeId: homeId)
+        users = response.users ?? []
+    }
+
+    @MainActor
+    func createOrUpdateExpense() async throws -> Bool {
+        formatter.dateFormat = DateUtils.backendFormat
         let response = useCase.createValid(
             isTitleValid: title.onValidate(),
             isDescriptionValid: description.onValidate(),
@@ -93,28 +104,26 @@ final class CreateOrEditExpenseViewModel: ObservableObject {
             let expense = Expense(
                 id: expenseId ?? 0,
                 title: title.value,
-                description: description.value,
                 amount: amountInDouble,
-                categoryId: expenseCategoryId
+                date: formatter.string(from: date.dateValue),
+                description: description.value,
+                expenseCategoryId: selectedCategory?.id,
+                participatingUserIds: [selectedUser?.id ?? 0]
             )
             do {
                 let responseHome = try await homeUseCase.getActiveHome()
                 let homeId = responseHome.home?.id ?? -1
                 if isEdit {
-                    let response = try await useCase.editExpense(
-                        homeId: homeId,
-                        expense: expense
-                    )
+                    _ = try await useCase.editExpense(expense: expense)
                     shouldShowLoader = false
-                    return logoutService.shouldLogout(statusCode: response.statusCode)
                 } else {
-                    let response = try await useCase.createExpense(
+                    _ = try await useCase.createExpense(
                         homeId: homeId,
                         expense: expense
                     )
                     shouldShowLoader = false
-                    return logoutService.shouldLogout(statusCode: response.statusCode)
                 }
+                return true
             } catch {
                 self.error = error as? HttpError
             }
@@ -128,5 +137,22 @@ final class CreateOrEditExpenseViewModel: ObservableObject {
     private func setupTitles() {
         buttonTitle = isEdit ? String(localized: "update") : String(localized: "save")
         pageTitle = isEdit ? String(localized: "edit_expense") : String(localized: "create_expense")
+    }
+
+    private func setup(expense: Expense?) {
+        guard let expense else { return }
+
+        title = .init(value: expense.title ?? "''", fieldType: .name)
+        description = .init(value: expense.description ?? "", fieldType: .description)
+        amount = .init(value: String(expense.amount), fieldType: .amount)
+        date = .init(value: calculateDate(dateValue: expense.date), fieldType: .date)
+        selectedCategory = expense.expenseCategory
+    }
+
+    private func calculateDate(dateValue: String?) -> String {
+        formatter.dateFormat = DateUtils.expenseFormat
+        guard let dateValue, let tempDate = formatter.date(from: dateValue) else { return DateUtils.getToday() }
+        formatter.dateFormat = DateUtils.appFormat
+        return formatter.string(from: tempDate)
     }
 }

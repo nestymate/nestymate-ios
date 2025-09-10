@@ -27,9 +27,9 @@ final class InviteUserViewModel: ObservableObject {
     public func inviteUser() async throws -> Bool {
         shouldShowLoader = true
         do {
-            let response = try await useCase.inviteUserToHome(email: email.value)
+            _ = try await useCase.inviteUserToHome(email: email.value)
             shouldShowLoader = false
-            return logoutService.shouldLogout(statusCode: response.statusCode)
+            return true
         } catch {
             self.error = error as? HttpError
         }

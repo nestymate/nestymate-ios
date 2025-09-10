@@ -25,18 +25,14 @@ final class CategoriesViewModel: ObservableObject {
     }
 
     @MainActor
-    public func getCategories() async throws -> CategoriesResponse? {
+    public func getCategories() async throws -> [Category]? {
         shouldShowLoader = true
         do {
             let responseHome = try await homeUseCase.getActiveHome()
             let homeId = responseHome.home?.id ?? -1
             let response = try await useCase.getCategories(homeId: homeId)
             shouldShowLoader = false
-            return CategoriesResponse(
-                categories: response.categories,
-                statusCode: nil,
-                shouldLogout: logoutService.shouldLogout(statusCode: response.statusCode)
-            )
+            return response.categories
         } catch {
             self.error = error as? HttpError
         }
@@ -45,7 +41,7 @@ final class CategoriesViewModel: ObservableObject {
     }
 
     @MainActor
-    public func delete(categoryToBeDelete: Category) async throws -> CategoriesResponse? {
+    public func delete(categoryToBeDelete: Category) async throws -> [Category]? {
         shouldShowLoader = true
         do {
             let responseHome = try await homeUseCase.getActiveHome()

@@ -21,26 +21,31 @@ final class ExpensesViewModel: ObservableObject {
     }
 
     @MainActor
-    public func getExpenses() async throws -> ExpensesResponse {
+    public func getExpenses() async throws -> [Expense]? {
         shouldShowLoader = true
-        let responseHome = try await homeUseCase.getActiveHome()
-        let apiResponse = try? await useCase.getExpenses(homeId: responseHome.home?.id ?? -1)
+        do {
+            let responseHome = try await homeUseCase.getActiveHome()
+            let apiResponse = try await useCase.getExpenses(homeId: responseHome.home?.id ?? -1)
+            shouldShowLoader = false
+            return apiResponse.expenses
+        } catch {
+            self.error = error as? HttpError
+        }
         shouldShowLoader = false
-        return ExpensesResponse(
-            expenses: apiResponse?.expenses,
-            error: apiResponse?.error,
-            statusCode: apiResponse?.statusCode,
-            shouldLogout: logoutService.shouldLogout(statusCode: apiResponse?.statusCode)
-        )
+        return nil
     }
 
     @MainActor
-    public func delete(expenseToBeDelete: Expense) async throws -> ExpensesResponse {
+    public func delete(expenseToBeDelete: Expense) async throws -> [Expense]? {
         shouldShowLoader = true
-        let responseHome = try await homeUseCase.getActiveHome()
-        let response = try? await useCase.deleteExpense(homeId: responseHome.home?.id ?? -1, expense: expenseToBeDelete)
+        do {
+            _ = try await useCase.deleteExpense(expense: expenseToBeDelete)
+            shouldShowLoader = false
+            return try await getExpenses()
+        } catch {
+            self.error = error as? HttpError
+        }
         shouldShowLoader = false
-        error = response?.error
-        return try await getExpenses()
+        return nil
     }
 }

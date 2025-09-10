@@ -85,13 +85,11 @@ final class CreateOrEditCategoryViewModel: ObservableObject {
                 let responseHome = try await homeUseCase.getActiveHome()
                 let homeId = responseHome.home?.id ?? -1
                 if isEdit {
-                    let response = try await useCase.editCategory(homeId: homeId, category: category)
+                    _ = try await useCase.editCategory(homeId: homeId, category: category)
                     shouldShowLoader = false
-                    return logoutService.shouldLogout(statusCode: response.statusCode)
                 } else {
-                    let response = try await useCase.createCategory(homeId: homeId, category: category)
+                    _ = try await useCase.createCategory(homeId: homeId, category: category)
                     shouldShowLoader = false
-                    return logoutService.shouldLogout(statusCode: response.statusCode)
                 }
             } catch {
                 self.error = error as? HttpError

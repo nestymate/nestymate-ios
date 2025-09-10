@@ -8,7 +8,7 @@
 import Foundation
 
 final class LogoutService: Sendable {
-    func shouldLogout(statusCode: Int?) -> Bool {
-        statusCode == 403
+    func shouldLogout(error: HttpError?) -> Bool {
+        error == .tokenExpired
     }
 }

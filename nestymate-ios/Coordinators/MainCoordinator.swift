@@ -241,7 +241,9 @@ private extension MainCoordinator {
     }
 
     func goBack() {
-        navigationPath.removeLast()
+        if !navigationPath.isEmpty {
+            navigationPath.removeLast()
+        }
     }
 
     func push(_ value: some Hashable) {

@@ -46,7 +46,7 @@ struct SignUpView: View {
             .background(ColorManager.backgroundColour)
             .hiddenNavigationBarStyle()
             .alert(item: $viewModel.error) { error in
-                error.alert
+                handleHttpErrorAlert(error: error)
             }
         }
     }

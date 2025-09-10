@@ -7,5 +7,12 @@
 @testable import nestymate_ios
 
 enum ExpenseTestData {
-    static let expense = Expense(id: 0, title: "test", description: "", amount: 12, categoryId: 0)
+    static let expense = Expense(
+        id: 0,
+        title: "",
+        amount: 12,
+        date: "2025-09-09T14:45:52.703Z",
+        description: "",
+        expenseCategoryId: 0
+    )
 }
