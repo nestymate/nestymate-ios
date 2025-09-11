@@ -56,12 +56,12 @@ class CreateHomeTests {
     }
 
     @Test func successfulInviteUserToHome() async {
-        let response = try? await useCase.inviteUserToHome(email: "test")
+        let response = try? await useCase.inviteUserToHome(homeId: 0, email: "test")
         #expect(response?.error == nil)
     }
 
     @Test func unSuccessfulInviteUserToHome() async {
-        let response = try? await useCaseFailed.inviteUserToHome(email: "test")
+        let response = try? await useCaseFailed.inviteUserToHome(homeId: 0, email: "test")
         #expect(response?.error != nil)
     }
 }

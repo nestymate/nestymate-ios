@@ -34,7 +34,11 @@ final class HomeServiceMock: HomeService {
         GenericResponse(error: nil, statusCode: 200)
     }
 
-    func inviteUserToHome(email _: String) async throws -> GenericResponse {
+    func inviteUserToHome(homeId _: Int, email _: String) async throws -> GenericResponse {
+        GenericResponse(error: nil, statusCode: 200)
+    }
+
+    func acceptInvite(inviteCode _: String) async throws -> GenericResponse {
         GenericResponse(error: nil, statusCode: 200)
     }
 }

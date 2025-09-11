@@ -418,6 +418,9 @@
         }
       }
     },
+    "Invite sent" : {
+
+    },
     "invite_user" : {
       "localizations" : {
         "el" : {
@@ -835,6 +838,16 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Users"
+          }
+        }
+      }
+    },
+    "You have joined a new home" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Έχετε προστεθεί σε ένα νέο σπίτι"
           }
         }
       }
