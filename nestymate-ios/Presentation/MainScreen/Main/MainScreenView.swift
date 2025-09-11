@@ -47,9 +47,9 @@ struct MainScreenView: View {
         .background(ColorManager.backgroundColour)
     }
 
-    // nestymateapp://invite?reference=home123
+    // nestymate://invite?code=002f8bea-848d-4f0d-b05a-5e559114bea2
     private func handleIncomingURL(_ url: URL) {
-        guard url.scheme == "nestymateapp" else {
+        guard url.scheme == "nestymate" else {
             return
         }
         guard let components = URLComponents(url: url, resolvingAgainstBaseURL: true) else {
@@ -62,8 +62,8 @@ struct MainScreenView: View {
             return
         }
 
-        guard let reference = components.queryItems?.first(where: { $0.name == "reference" })?.value else {
-            print("Recipe name not found")
+        guard let reference = components.queryItems?.first(where: { $0.name == "code" })?.value else {
+            print("Code not found")
             return
         }
 
