@@ -20,7 +20,11 @@ final class HomeServiceFailedMock: HomeService {
         GenericResponse(error: .badServerResponse, statusCode: 500)
     }
 
-    func inviteUserToHome(email _: String) async throws -> GenericResponse {
+    func inviteUserToHome(homeId _: Int, email _: String) async throws -> GenericResponse {
+        GenericResponse(error: .badServerResponse, statusCode: 500)
+    }
+
+    func acceptInvite(inviteCode _: String) async throws -> GenericResponse {
         GenericResponse(error: .badServerResponse, statusCode: 500)
     }
 }

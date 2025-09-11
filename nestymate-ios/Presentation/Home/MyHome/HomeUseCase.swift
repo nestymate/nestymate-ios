@@ -12,7 +12,8 @@ protocol HomeUseCase: Sendable {
     func getActiveHome() async throws -> HomeResponse
     func editHome(home: Home) async throws -> GenericResponse
     func createHome(home: Home) async throws -> GenericResponse
-    func inviteUserToHome(email: String) async throws -> GenericResponse
+    func inviteUserToHome(homeId: Int, email: String) async throws -> GenericResponse
+    func acceptInvite(inviteCode: String) async throws -> GenericResponse
 }
 
 final class HomeUseCaseImpl: HomeUseCase {
@@ -38,7 +39,11 @@ final class HomeUseCaseImpl: HomeUseCase {
         try await homeService.createHome(home: home)
     }
 
-    func inviteUserToHome(email: String) async throws -> GenericResponse {
-        try await homeService.inviteUserToHome(email: email)
+    func inviteUserToHome(homeId: Int, email: String) async throws -> GenericResponse {
+        try await homeService.inviteUserToHome(homeId: homeId, email: email)
+    }
+
+    func acceptInvite(inviteCode: String) async throws -> GenericResponse {
+        try await homeService.acceptInvite(inviteCode: inviteCode)
     }
 }

@@ -25,9 +25,7 @@ struct ProfileView: View {
             }
 
             ActionButton(title: String(localized: "invite_user"), shouldEnableButton: true) {
-                viewModel.logout {
-                    output.goToInviteUser()
-                }
+                output.goToInviteUser()
             }
             Spacer()
         }

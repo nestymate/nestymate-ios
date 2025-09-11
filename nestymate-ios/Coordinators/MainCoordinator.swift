@@ -132,8 +132,10 @@ private extension MainCoordinator {
     }
 
     @MainActor func mainScreenView() -> some View {
-        MainScreenView(viewModel: MainScreenViewModel(useCase: mainScreenUseCase),
-                       output: MainScreenView.Output())
+        MainScreenView(viewModel: MainScreenViewModel(useCase: mainScreenUseCase, homeUseCase: homeUseCase),
+                       output: MainScreenView.Output(logout: {
+                           self.logout()
+                       }))
     }
 
     @MainActor func createHome() -> some View {
@@ -231,7 +233,7 @@ private extension MainCoordinator {
     }
 
     @MainActor
-    func logout() {
+    private func logout() {
         push(
             MainCoordinator(
                 navigationPath: $navigationPath,
@@ -240,13 +242,13 @@ private extension MainCoordinator {
         )
     }
 
-    func goBack() {
+    private func goBack() {
         if !navigationPath.isEmpty {
             navigationPath.removeLast()
         }
     }
 
-    func push(_ value: some Hashable) {
+    private func push(_ value: some Hashable) {
         navigationPath.append(value)
     }
 }

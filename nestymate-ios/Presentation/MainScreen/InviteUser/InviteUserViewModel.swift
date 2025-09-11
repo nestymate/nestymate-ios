@@ -27,7 +27,8 @@ final class InviteUserViewModel: ObservableObject {
     public func inviteUser() async throws -> Bool {
         shouldShowLoader = true
         do {
-            _ = try await useCase.inviteUserToHome(email: email.value)
+            let homeId = try await getHome()
+            _ = try await useCase.inviteUserToHome(homeId: homeId, email: email.value)
             shouldShowLoader = false
             return true
         } catch {
@@ -35,5 +36,11 @@ final class InviteUserViewModel: ObservableObject {
         }
         shouldShowLoader = false
         return false
+    }
+
+    @MainActor
+    private func getHome() async throws -> Int {
+        let responseHome = try await useCase.getActiveHome()
+        return responseHome.home?.id ?? -1
     }
 }

@@ -13,6 +13,7 @@ enum ExpenseTestData {
         amount: 12,
         date: "2025-09-09T14:45:52.703Z",
         description: "",
-        expenseCategoryId: 0
+        expenseCategoryId: 0,
+        participatingUserIds: []
     )
 }
