@@ -9,7 +9,6 @@ import SwiftUI
 
 struct HomesView: View {
     @ObservedObject var viewModel: HomesViewModel
-    @State private var homes: [Home] = []
     struct Output {
         var goToEditHome: (Home?) -> Void
         var logout: () -> Void
@@ -24,7 +23,7 @@ struct HomesView: View {
             .padding()
 
             List {
-                ForEach(homes) { item in
+                ForEach(viewModel.homes) { item in
                     HStack(spacing: .zero) {
                         Text(item.name)
                             .padding(.trailing, PaddingManager.xsmallPadding)
@@ -44,9 +43,8 @@ struct HomesView: View {
                     }
                 }
                 .onDelete(perform: { offset in
-                    let index = offset[offset.startIndex]
                     Task {
-                        homes = try await viewModel.delete(homeToBeDelete: homes[index]) ?? []
+                        try await viewModel.delete(at: offset)
                     }
                 })
                 .listRowInsets(EdgeInsets())
@@ -60,7 +58,7 @@ struct HomesView: View {
         .background(ColorManager.backgroundColour)
         .onAppear {
             Task {
-                homes = try await viewModel.getHomes() ?? []
+                try await viewModel.getHomes()
             }
         }
     }
