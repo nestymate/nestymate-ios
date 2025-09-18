@@ -10,6 +10,7 @@ import Foundation
 final class HomesViewModel: ObservableObject {
     @Published public var shouldShowLoader: Bool?
     @Published var error: HttpError?
+    @Published var homes: [Home] = []
     private let useCase: HomeUseCase
     private let logoutService: LogoutService
 
@@ -19,31 +20,32 @@ final class HomesViewModel: ObservableObject {
     }
 
     @MainActor
-    public func getHomes() async throws -> [Home]? {
+    public func getHomes() async throws {
         shouldShowLoader = true
         do {
             let response = try await useCase.getAllHomes()
             shouldShowLoader = false
-            return response.homes
+            homes = response.homes ?? []
         } catch {
             self.error = error as? HttpError
         }
         shouldShowLoader = false
-        return nil
     }
 
     @MainActor
-    public func delete(homeToBeDelete: Home) async throws -> [Home]? {
+    public func delete(at offsets: IndexSet) async throws {
+        guard let index = offsets.first else { return }
+        let homeToBeDelete = homes[index]
+        homes.remove(at: index)
         shouldShowLoader = true
         do {
             _ = try await useCase.deleteHome(home: homeToBeDelete)
-            let homes = try await getHomes()
+            try await getHomes()
             shouldShowLoader = false
-            return homes
         } catch {
+            homes.insert(homeToBeDelete, at: index)
             self.error = error as? HttpError
         }
         shouldShowLoader = false
-        return nil
     }
 }
