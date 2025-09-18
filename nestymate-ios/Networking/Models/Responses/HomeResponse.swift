@@ -10,3 +10,9 @@ struct HomeResponse: Sendable {
     let error: HttpError?
     let statusCode: Int?
 }
+
+struct HomesResponse: Sendable {
+    let homes: [Home]?
+    let error: HttpError?
+    let statusCode: Int?
+}

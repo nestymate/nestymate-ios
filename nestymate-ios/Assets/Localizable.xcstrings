@@ -172,6 +172,16 @@
         }
       }
     },
+    "Current Home" : {
+      "localizations" : {
+        "el" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ενεργό σπίτι"
+          }
+        }
+      }
+    },
     "date" : {
       "localizations" : {
         "el" : {
@@ -398,6 +408,16 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Something went wrong"
+          }
+        }
+      }
+    },
+    "Homes" : {
+      "localizations" : {
+        "el" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Κατοικίες"
           }
         }
       }

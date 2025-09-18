@@ -8,5 +8,5 @@
 @testable import nestymate_ios
 
 enum HomeTestsData {
-    static let home = Home(id: 0, name: "test", description: "home", address: "unkon 1", active: true)
+    static let home = Home(id: 0, name: "test", active: true, description: "home", address: "unkon 1")
 }
