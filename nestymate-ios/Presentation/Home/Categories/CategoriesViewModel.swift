@@ -10,6 +10,7 @@ import Foundation
 final class CategoriesViewModel: ObservableObject {
     @Published public var shouldShowLoader: Bool?
     @Published var error: HttpError?
+    @Published var categories: [Category] = []
     private let useCase: CategoryUseCase
     private let homeUseCase: HomeUseCase
     private let logoutService: LogoutService
@@ -25,35 +26,37 @@ final class CategoriesViewModel: ObservableObject {
     }
 
     @MainActor
-    public func getCategories() async throws -> [Category]? {
+    public func getCategories() async throws {
         shouldShowLoader = true
         do {
             let responseHome = try await homeUseCase.getActiveHome()
             let homeId = responseHome.home?.id ?? -1
             let response = try await useCase.getCategories(homeId: homeId)
             shouldShowLoader = false
-            return response.categories
+            categories = response.categories ?? []
         } catch {
             self.error = error as? HttpError
         }
         shouldShowLoader = false
-        return nil
     }
 
     @MainActor
-    public func delete(categoryToBeDelete: Category) async throws -> [Category]? {
+    public func delete(at offsets: IndexSet) async throws {
+        guard let index = offsets.first else { return }
+        let categoryToBeDelete = categories[index]
+        categories.remove(at: index)
+
         shouldShowLoader = true
         do {
             let responseHome = try await homeUseCase.getActiveHome()
             let homeId = responseHome.home?.id ?? -1
             _ = try await useCase.deleteCategory(homeId: homeId, category: categoryToBeDelete)
-            let categories = try await getCategories()
+            try await getCategories()
             shouldShowLoader = false
-            return categories
         } catch {
+            categories.insert(categoryToBeDelete, at: index)
             self.error = error as? HttpError
         }
         shouldShowLoader = false
-        return nil
     }
 }
