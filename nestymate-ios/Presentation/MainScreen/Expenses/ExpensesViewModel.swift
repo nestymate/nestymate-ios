@@ -13,6 +13,7 @@ final class ExpensesViewModel: ObservableObject {
     private let logoutService: LogoutService
     @Published var shouldShowLoader: Bool?
     @Published var error: HttpError?
+    @Published var expenses: [Expense] = []
 
     init(useCase: ExpenseUseCase, homeUseCase: HomeUseCase, logoutService: LogoutService) {
         self.useCase = useCase
@@ -21,31 +22,33 @@ final class ExpensesViewModel: ObservableObject {
     }
 
     @MainActor
-    public func getExpenses() async throws -> [Expense]? {
+    public func getExpenses() async throws {
         shouldShowLoader = true
         do {
             let responseHome = try await homeUseCase.getActiveHome()
             let apiResponse = try await useCase.getExpenses(homeId: responseHome.home?.id ?? -1)
             shouldShowLoader = false
-            return apiResponse.expenses
+            expenses = apiResponse.expenses ?? []
         } catch {
             self.error = error as? HttpError
         }
         shouldShowLoader = false
-        return nil
     }
 
     @MainActor
-    public func delete(expenseToBeDelete: Expense) async throws -> [Expense]? {
+    public func delete(at offsets: IndexSet) async throws {
+        guard let index = offsets.first else { return }
+        let expenseToBeDelete = expenses[index]
+        expenses.remove(at: index)
         shouldShowLoader = true
         do {
             _ = try await useCase.deleteExpense(expense: expenseToBeDelete)
             shouldShowLoader = false
-            return try await getExpenses()
+            try await getExpenses()
         } catch {
+            expenses.insert(expenseToBeDelete, at: index)
             self.error = error as? HttpError
         }
         shouldShowLoader = false
-        return nil
     }
 }

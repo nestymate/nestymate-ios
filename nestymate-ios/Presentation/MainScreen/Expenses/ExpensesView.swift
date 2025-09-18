@@ -9,7 +9,6 @@ import SwiftUI
 
 struct ExpensesView: View {
     @ObservedObject var viewModel: ExpensesViewModel
-    @State private var expenses: [Expense] = []
     struct Output {
         var goToMyHome: () -> Void
         var goToCreateExpense: () -> Void
@@ -38,7 +37,7 @@ struct ExpensesView: View {
             }
             .padding()
             List {
-                ForEach(expenses, id: \.title) { item in
+                ForEach(viewModel.expenses, id: \.title) { item in
                     HStack {
                         Text(item.title ?? "")
                         Spacer()
@@ -52,9 +51,8 @@ struct ExpensesView: View {
                     }
                 }
                 .onDelete(perform: { offset in
-                    let index = offset[offset.startIndex]
                     Task {
-                        expenses = try await viewModel.delete(expenseToBeDelete: expenses[index]) ?? []
+                        try await viewModel.delete(at: offset)
                     }
                 })
                 .listRowInsets(EdgeInsets())
@@ -68,7 +66,7 @@ struct ExpensesView: View {
         .background(ColorManager.backgroundColour)
         .onAppear {
             Task {
-                expenses = try await viewModel.getExpenses() ?? []
+                try await viewModel.getExpenses()
             }
         }
     }
