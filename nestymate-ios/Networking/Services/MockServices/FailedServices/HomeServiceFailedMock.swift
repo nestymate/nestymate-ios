@@ -12,11 +12,23 @@ final class HomeServiceFailedMock: HomeService {
         HomeResponse(home: nil, error: .badServerResponse, statusCode: 500)
     }
 
+    func getAllHomes() async throws -> HomesResponse {
+        HomesResponse(homes: nil, error: .badServerResponse, statusCode: 500)
+    }
+
+    func getHome(homeId _: Int) async throws -> HomeResponse {
+        HomeResponse(home: nil, error: .badServerResponse, statusCode: 500)
+    }
+
     func createHome(home _: Home) async throws -> GenericResponse {
         GenericResponse(error: .badServerResponse, statusCode: 500)
     }
 
     func editHome(home _: Home) async throws -> GenericResponse {
+        GenericResponse(error: .badServerResponse, statusCode: 500)
+    }
+
+    func deleteHome(home _: Home) async throws -> GenericResponse {
         GenericResponse(error: .badServerResponse, statusCode: 500)
     }
 

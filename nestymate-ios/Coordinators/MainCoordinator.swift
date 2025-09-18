@@ -11,7 +11,7 @@ import SwiftUI
 enum LoginPage {
     case login
     case mainScreen
-    case createHome
+    case createHome(Home?)
     case createCategory(Category?)
     case createExpense(Int?)
     case myHome
@@ -66,8 +66,8 @@ final class MainCoordinator: Hashable {
             loginView()
         case .mainScreen:
             mainScreenView()
-        case .createHome:
-            createHome()
+        case let .createHome(home):
+            createHome(home: home)
         case .signup:
             signUpView()
         case .myHome:
@@ -104,18 +104,13 @@ private extension MainCoordinator {
             output:
             .init(
                 goToMainScreen: {
-                    self.push(
-                        MainCoordinator(
-                            navigationPath: self.$navigationPath,
-                            page: .mainScreen
-                        )
-                    )
+                    self.goToMainScreen()
                 },
                 goToCreateHome: {
                     self.push(
                         MainCoordinator(
                             navigationPath: self.$navigationPath,
-                            page: .createHome
+                            page: .createHome(nil)
                         )
                     )
                 }, goToSignUp: {
@@ -138,34 +133,36 @@ private extension MainCoordinator {
                        }))
     }
 
-    @MainActor func createHome() -> some View {
-        let viewModel = CreateOrEditHomeViewModel(useCase: HomeUseCaseImpl(homeService: homeService), isEdit: false)
-        return CreateOrEditHomeView(viewModel: viewModel, output: CreateOrEditHomeView.Output(goToMainScreen: {
-            self.push(
-                MainCoordinator(
-                    navigationPath: self.$navigationPath,
-                    page: .mainScreen
-                )
+    @MainActor func createHome(home: Home?) -> some View {
+        let viewModel = CreateOrEditHomeViewModel(
+            useCase: HomeUseCaseImpl(
+                homeService: homeService),
+            homeId: home?.id
+        )
+        return CreateOrEditHomeView(
+            viewModel: viewModel,
+            output: CreateOrEditHomeView.Output(
+                goToMainScreen: {
+                    self.goToMainScreen()
+                },
+                goBack: {
+                    self.goBack()
+                }, logout: {
+                    self.logout()
+                }
             )
-        }, logout: {
-            self.logout()
-        }))
+        )
     }
 
     @MainActor func signUpView() -> some View {
         let viewModel = SignUpViewModel(useCase: signUpUseCase)
         return SignUpView(viewModel: viewModel, output: SignUpView.Output(goToMainScreen: {
-            self.push(
-                MainCoordinator(
-                    navigationPath: self.$navigationPath,
-                    page: .mainScreen
-                )
-            )
+            self.goToMainScreen()
         }, goToCreateHome: {
             self.push(
                 MainCoordinator(
                     navigationPath: self.$navigationPath,
-                    page: .createHome
+                    page: .createHome(nil)
                 )
             )
         }))
@@ -175,6 +172,13 @@ private extension MainCoordinator {
         let viewModel = MyHomeViewModel(homeUseCase: homeUseCase, categoryUseCase: categoryUseCase)
         return MyHomeView(viewModel: viewModel, output: MyHomeView.Output(goBack: {
             self.goBack()
+        }, goToEditHome: { home in
+            self.push(
+                MainCoordinator(
+                    navigationPath: self.$navigationPath,
+                    page: .createHome(home)
+                )
+            )
         }, goToCreateCategory: {
             self.push(
                 MainCoordinator(
@@ -250,5 +254,15 @@ private extension MainCoordinator {
 
     private func push(_ value: some Hashable) {
         navigationPath.append(value)
+    }
+
+    @MainActor
+    private func goToMainScreen() {
+        push(
+            MainCoordinator(
+                navigationPath: $navigationPath,
+                page: .mainScreen
+            )
+        )
     }
 }

@@ -20,4 +20,5 @@ enum ColorManager {
     public static let errorColor: Color = .accentColor
     public static let backgroundList: Color = .gray.opacity(0.2)
     public static let backgroundColourUIKit: UIColor = .backgroundColour
+    public static let activeColor: Color = .green
 }

@@ -129,6 +129,8 @@
 		01E5B27A2E716F9D000264CB /* HttpError+Alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01E5B2792E716F94000264CB /* HttpError+Alert.swift */; };
 		01E5B27C2E72BE90000264CB /* UserResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01E5B27B2E72BE8A000264CB /* UserResponse.swift */; };
 		01E5B27E2E72D7C0000264CB /* Invite.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01E5B27D2E72D7AB000264CB /* Invite.swift */; };
+		01E5B2C62E7BFA33000264CB /* HomesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01E5B2C52E7BFA2B000264CB /* HomesView.swift */; };
+		01E5B2C82E7BFA40000264CB /* HomesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01E5B2C72E7BFA38000264CB /* HomesViewModel.swift */; };
 		01F1CB212D50025C006276C5 /* ProfileTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01F1CB202D500251006276C5 /* ProfileTests.swift */; };
 		01F1CB232D513B4F006276C5 /* CreateHomeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01F1CB222D513B3D006276C5 /* CreateHomeTests.swift */; };
 		01F1CB252D513D85006276C5 /* HomeTestsData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01F1CB242D513D7D006276C5 /* HomeTestsData.swift */; };
@@ -246,6 +248,8 @@
 		01E5B2792E716F94000264CB /* HttpError+Alert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "HttpError+Alert.swift"; sourceTree = "<group>"; };
 		01E5B27B2E72BE8A000264CB /* UserResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserResponse.swift; sourceTree = "<group>"; };
 		01E5B27D2E72D7AB000264CB /* Invite.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Invite.swift; sourceTree = "<group>"; };
+		01E5B2C52E7BFA2B000264CB /* HomesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomesView.swift; sourceTree = "<group>"; };
+		01E5B2C72E7BFA38000264CB /* HomesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomesViewModel.swift; sourceTree = "<group>"; };
 		01F1CB202D500251006276C5 /* ProfileTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileTests.swift; sourceTree = "<group>"; };
 		01F1CB222D513B3D006276C5 /* CreateHomeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateHomeTests.swift; sourceTree = "<group>"; };
 		01F1CB242D513D7D006276C5 /* HomeTestsData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeTestsData.swift; sourceTree = "<group>"; };
@@ -386,7 +390,6 @@
 			isa = PBXGroup;
 			children = (
 				01D488272C96E8700024A7F2 /* Root */,
-				01D488252C96DE490024A7F2 /* CreateOrEditHome */,
 				01D488222C96DDE00024A7F2 /* SignUp */,
 				01D4881E2C96DD470024A7F2 /* Login */,
 				01D7922A2C8D983C00EDA9D2 /* Home */,
@@ -663,9 +666,20 @@
 			isa = PBXGroup;
 			children = (
 				01D488192C96DCDF0024A7F2 /* MyHome */,
+				01E5B2C42E7BFA15000264CB /* Homes */,
 				01D4881D2C96DD310024A7F2 /* Categories */,
 			);
 			path = Home;
+			sourceTree = "<group>";
+		};
+		01E5B2C42E7BFA15000264CB /* Homes */ = {
+			isa = PBXGroup;
+			children = (
+				01D488252C96DE490024A7F2 /* CreateOrEditHome */,
+				01E5B2C72E7BFA38000264CB /* HomesViewModel.swift */,
+				01E5B2C52E7BFA2B000264CB /* HomesView.swift */,
+			);
+			path = Homes;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -879,6 +893,7 @@
 				0106B6262BFA5E530024AFCB /* HomeService.swift in Sources */,
 				0106B61D2BE811E60024AFCB /* MainView.swift in Sources */,
 				01B6DF992BD6A1D500E2983E /* FontManager.swift in Sources */,
+				01E5B2C62E7BFA33000264CB /* HomesView.swift in Sources */,
 				01E5B27C2E72BE90000264CB /* UserResponse.swift in Sources */,
 				012815A72C4D98B3001FFA2D /* UtilMethods.swift in Sources */,
 				01ABA4802D7EE2FB00E6EEFD /* ExpensesServiceFailedMock.swift in Sources */,
@@ -901,6 +916,7 @@
 				013504792BD7D9950000C859 /* ActionButton.swift in Sources */,
 				0106B62A2BFA610B0024AFCB /* KeychainHelper.swift in Sources */,
 				01A606212C3EC86200B7622E /* HomeScreenCoordinator.swift in Sources */,
+				01E5B2C82E7BFA40000264CB /* HomesViewModel.swift in Sources */,
 				01A6062B2C3FC62D00B7622E /* SignUpUseCase.swift in Sources */,
 				01D488362C9718460024A7F2 /* ExpenseUseCase.swift in Sources */,
 			);

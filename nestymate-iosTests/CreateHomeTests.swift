@@ -25,13 +25,33 @@ class CreateHomeTests {
         ))
     }
 
-    @Test func successfulGetHome() async {
+    @Test func successfulGetActiveHome() async {
         let response = try? await useCase.getActiveHome()
         #expect(response?.error == nil)
     }
 
-    @Test func unsuccessfulGetHome() async {
+    @Test func unsuccessfulGetActiveHome() async {
         let response = try? await useCaseFailed.getActiveHome()
+        #expect(response?.error != nil)
+    }
+
+    @Test func successfulGetHome() async {
+        let response = try? await useCase.getHome(homeId: 0)
+        #expect(response?.error == nil)
+    }
+
+    @Test func unsuccessfulGetHome() async {
+        let response = try? await useCaseFailed.getHome(homeId: 0)
+        #expect(response?.error != nil)
+    }
+
+    @Test func successfulGetAllHomes() async {
+        let response = try? await useCase.getAllHomes()
+        #expect(response?.error == nil)
+    }
+
+    @Test func unsuccessfulGetAllHomes() async {
+        let response = try? await useCaseFailed.getAllHomes()
         #expect(response?.error != nil)
     }
 
@@ -52,6 +72,16 @@ class CreateHomeTests {
 
     @Test func unSuccessfulCreateHome() async {
         let response = try? await useCaseFailed.createHome(home: HomeTestsData.home)
+        #expect(response?.error != nil)
+    }
+
+    @Test func successfulDeleteHome() async {
+        let response = try? await useCase.deleteHome(home: HomeTestsData.home)
+        #expect(response?.error == nil)
+    }
+
+    @Test func unSuccessfulDeleteHome() async {
+        let response = try? await useCaseFailed.deleteHome(home: HomeTestsData.home)
         #expect(response?.error != nil)
     }
 
