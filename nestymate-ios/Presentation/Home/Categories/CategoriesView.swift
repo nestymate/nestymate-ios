@@ -58,6 +58,11 @@ struct CategoriesView: View {
             .padding()
         }
         .background(ColorManager.backgroundColour)
+        .alert(item: $viewModel.error) { error in
+            handleHttpErrorAlert(error: error) {
+                output.logout()
+            }
+        }
         .onAppear {
             Task {
                 try await viewModel.getCategories()
