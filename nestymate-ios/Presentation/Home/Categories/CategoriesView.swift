@@ -9,7 +9,6 @@ import SwiftUI
 
 struct CategoriesView: View {
     @ObservedObject var viewModel: CategoriesViewModel
-    @State private var categories: [Category] = []
     struct Output {
         var goToCreateCategory: () -> Void
         var goToEditCategory: (Category?) -> Void
@@ -31,7 +30,7 @@ struct CategoriesView: View {
             .padding()
 
             List {
-                ForEach(categories) { item in
+                ForEach(viewModel.categories) { item in
                     HStack {
                         Text(item.name)
                         Spacer()
@@ -46,9 +45,8 @@ struct CategoriesView: View {
                     }
                 }
                 .onDelete(perform: { offset in
-                    let index = offset[offset.startIndex]
                     Task {
-                        categories = try await viewModel.delete(categoryToBeDelete: categories[index]) ?? []
+                        try await viewModel.delete(at: offset)
                     }
                 })
                 .listRowInsets(EdgeInsets())
@@ -62,7 +60,7 @@ struct CategoriesView: View {
         .background(ColorManager.backgroundColour)
         .onAppear {
             Task {
-                categories = try await viewModel.getCategories() ?? []
+                try await viewModel.getCategories()
             }
         }
     }
