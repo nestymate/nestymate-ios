@@ -8,9 +8,8 @@
 import Foundation
 
 final class MainViewModel: ObservableObject {
-    let keyChain = KeychainHelper()
     var shouldShowLogin: LoginPage {
-        guard keyChain.read() != nil else { return .login }
+        guard UserDefaults.standard.bool(forKey: "isLoggedIn") else { return .login }
         return .mainScreen
     }
 }

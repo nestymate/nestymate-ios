@@ -25,12 +25,17 @@ final class LoginViewModel: ObservableObject {
         self.homeUseCase = homeUseCase
     }
 
+    func save(inviteCode: String) {
+        UserDefaults.standard.set(inviteCode, forKey: "inviteCode")
+    }
+
     @MainActor
     public func login() async throws -> LoginResponse {
         if useCase.loginValid(isUsernameValid: username.onValidate(), isPasswordValid: password.onValidate()) {
             shouldShow = true
             do {
                 _ = try await useCase.login(username: username.value, password: password.value)
+                UserDefaults.standard.set(true, forKey: "isLoggedIn")
                 let responseHome = try await homeUseCase.getActiveHome()
                 return LoginResponse(success: true, shouldShowHome: responseHome.home == nil)
             } catch {

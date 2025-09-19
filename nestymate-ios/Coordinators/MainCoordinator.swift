@@ -155,7 +155,7 @@ private extension MainCoordinator {
     }
 
     @MainActor func signUpView() -> some View {
-        let viewModel = SignUpViewModel(useCase: signUpUseCase)
+        let viewModel = SignUpViewModel(useCase: signUpUseCase, homeUseCase: homeUseCase)
         return SignUpView(viewModel: viewModel, output: SignUpView.Output(goToMainScreen: {
             self.goToMainScreen()
         }, goToCreateHome: {

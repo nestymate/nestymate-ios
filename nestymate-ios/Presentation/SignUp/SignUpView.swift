@@ -108,6 +108,7 @@ private extension SignUpView {
         service: LoginServiceImpl(),
         homeService: HomeServiceImpl()
     )
-    return SignUpView(viewModel: SignUpViewModel(useCase: useCase),
-                      output: SignUpView.Output(goToMainScreen: {}, goToCreateHome: {}))
+    let homeUseCase = HomeUseCaseImpl(homeService: HomeServiceImpl())
+    SignUpView(viewModel: SignUpViewModel(useCase: useCase, homeUseCase: homeUseCase),
+               output: SignUpView.Output(goToMainScreen: {}, goToCreateHome: {}))
 }
