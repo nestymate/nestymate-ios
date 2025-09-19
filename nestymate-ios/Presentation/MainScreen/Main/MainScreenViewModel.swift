@@ -19,6 +19,10 @@ final class MainScreenViewModel: ObservableObject {
         self.homeUseCase = homeUseCase
     }
 
+    var isLoggedIn: Bool {
+        UserDefaults.standard.bool(forKey: "isLoggedIn")
+    }
+
     @MainActor
     public func acceptInvite(inviteCode: String) async throws -> Bool {
         shouldShowLoader = true

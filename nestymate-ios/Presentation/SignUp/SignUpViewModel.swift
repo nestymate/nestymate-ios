@@ -25,14 +25,24 @@ final class SignUpViewModel: ObservableObject {
             && !repeatPassword.value.isEmpty
     }
 
+    private var inviteCode: String? {
+        UserDefaults.standard.string(forKey: "inviteCode")
+    }
+
     var genderOptions = [String(localized: "male"),
                          String(localized: "female"),
                          String(localized: "other")]
     private var useCase: SignUpUseCase
+    private let homeUseCase: HomeUseCase
 
-    init(useCase: SignUpUseCase) {
+    init(useCase: SignUpUseCase, homeUseCase: HomeUseCase) {
         shouldShowLoader = false
         self.useCase = useCase
+        self.homeUseCase = homeUseCase
+    }
+
+    private func removeInviteCode() {
+        UserDefaults.standard.removeObject(forKey: "inviteCode")
     }
 }
 
@@ -55,9 +65,15 @@ extension SignUpViewModel {
             shouldShowLoader = true
             do {
                 _ = try await useCase.signUp(user: user)
-                let checkHomeResponse = try await useCase.checkHomeForUser()
-                shouldShowLoader = false
-                return LoginResponse(success: true, shouldShowHome: checkHomeResponse.home == nil)
+                UserDefaults.standard.set(true, forKey: "isLoggedIn")
+                if let inviteCode {
+                    _ = try await homeUseCase.acceptInvite(inviteCode: inviteCode)
+                    removeInviteCode()
+                    return sendLoginResponse(shouldShowHome: false)
+                } else {
+                    let checkHomeResponse = try await useCase.checkHomeForUser()
+                    return sendLoginResponse(shouldShowHome: checkHomeResponse.home == nil)
+                }
             } catch {
                 self.error = error as? HttpError
             }
@@ -66,5 +82,10 @@ extension SignUpViewModel {
         }
         shouldShowLoader = false
         return LoginResponse(success: false, shouldShowHome: false)
+    }
+
+    private func sendLoginResponse(shouldShowHome: Bool) -> LoginResponse {
+        shouldShowLoader = false
+        return LoginResponse(success: true, shouldShowHome: shouldShowHome)
     }
 }
