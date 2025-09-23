@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct FieldModel {
+struct FieldModel: Equatable {
     var value: String
     var dateValue: Date
     var error: String?
