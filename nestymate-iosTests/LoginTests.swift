@@ -44,12 +44,12 @@ class LoginTests {
     }
 
     @MainActor @Test func successfulCheckHomeForUser() async {
-        let response = try? await homeUseCaseWithHome.getHome()
+        let response = try? await homeUseCaseWithHome.getActiveHome()
         #expect(response?.home != nil)
     }
 
     @MainActor @Test func unsuccessfulCheckHomeForUser() async {
-        let response = try? await homeUseCaseWithoutHome.getHome()
+        let response = try? await homeUseCaseWithoutHome.getActiveHome()
         #expect(response?.error == nil && response?.home == nil)
     }
 }

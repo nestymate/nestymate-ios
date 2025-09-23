@@ -52,16 +52,26 @@ class ExpensesTests {
     }
 
     @Test func successfulEditExpense() async {
-        let response = try? await useCase.editExpense(homeId: homeId, expense: ExpenseTestData.expense)
+        let response = try? await useCase.editExpense(expense: ExpenseTestData.expense)
         #expect(response?.error == nil)
     }
 
     @Test func unSuccessfulEditExpense() async {
-        let response = try? await useCaseFailed.editExpense(homeId: homeId, expense: ExpenseTestData.expense)
+        let response = try? await useCaseFailed.editExpense(expense: ExpenseTestData.expense)
         #expect(response?.error != nil)
     }
 
-    @Test func successfulCreateExpensey() async {
+    @Test func successfulGetUserForExpense() async {
+        let response = try? await useCase.getUserForHome(homeId: homeId)
+        #expect(response?.error == nil)
+    }
+
+    @Test func unsuccessfulGetUserForExpense() async {
+        let response = try? await useCaseFailed.getUserForHome(homeId: homeId)
+        #expect(response?.error != nil)
+    }
+
+    @Test func successfulCreateExpense() async {
         let response = try? await useCase.createExpense(homeId: homeId, expense: ExpenseTestData.expense)
         #expect(response?.error == nil)
     }
@@ -72,12 +82,12 @@ class ExpensesTests {
     }
 
     @Test func successfulDeleteExpense() async {
-        let response = try? await useCase.deleteExpense(homeId: homeId, expense: ExpenseTestData.expense)
+        let response = try? await useCase.deleteExpense(expense: ExpenseTestData.expense)
         #expect(response?.error == nil)
     }
 
     @Test func unSuccessfulDeleteExpense() async {
-        let response = try? await useCaseFailed.deleteExpense(homeId: homeId, expense: ExpenseTestData.expense)
+        let response = try? await useCaseFailed.deleteExpense(expense: ExpenseTestData.expense)
         #expect(response?.error != nil)
     }
 }

@@ -10,6 +10,7 @@ import Foundation
 
 protocol CategoryService: Sendable {
     func getCategories(homeId: Int) async throws -> CategoriesResponse
+    func getCategory(categoryId: Int) async throws -> CategoryResponse
     func createCategory(homeId: Int, category: Category) async throws -> GenericResponse
     func editCategory(homeId: Int, category: Category) async throws -> GenericResponse
     func deleteCategory(homeId: Int, category: Category) async throws -> GenericResponse
@@ -17,10 +18,12 @@ protocol CategoryService: Sendable {
 
 final class CategoryServiceImpl: CategoryService {
     let baseUrl: URL
+    let categoryUrl: URL
     let apiCall: APICalls
 
     public init() {
         baseUrl = URL(string: "http://192.168.1.10/api/v1/home")!
+        categoryUrl = URL(string: "http://192.168.1.10/api/v1/expensecategory")!
         apiCall = APICalls()
     }
 
@@ -32,11 +35,28 @@ final class CategoryServiceImpl: CategoryService {
         guard let data = apiResponse.data else {
             throw URLError(.badServerResponse)
         }
-
         do {
             let categories = try JSONDecoder().decode([Category].self, from: data)
             return CategoriesResponse(
                 categories: categories,
+                statusCode: apiResponse.statusCode,
+                shouldLogout: false
+            )
+        } catch {
+            throw URLError(.cannotDecodeRawData)
+        }
+    }
+
+    func getCategory(categoryId: Int) async throws -> CategoryResponse {
+        let url = categoryUrl.appendingPathComponent(String(categoryId))
+        let apiResponse = try await apiCall.get(url: url, requestData: nil)
+        guard let data = apiResponse.data else {
+            throw URLError(.badServerResponse)
+        }
+        do {
+            let category = try JSONDecoder().decode(Category.self, from: data)
+            return CategoryResponse(
+                category: category,
                 statusCode: apiResponse.statusCode,
                 shouldLogout: false
             )
@@ -53,20 +73,16 @@ final class CategoryServiceImpl: CategoryService {
         return GenericResponse(error: apiResponse.error, statusCode: apiResponse.statusCode)
     }
 
-    func editCategory(homeId: Int, category: Category) async throws -> GenericResponse {
+    func editCategory(homeId _: Int, category: Category) async throws -> GenericResponse {
         let data = try? JSONEncoder().encode(category)
-        let url = baseUrl.appendingPathComponent(String(homeId))
-            .appendingPathComponent("expensecategory")
-            .appending(path: "\(category.id)")
+        let url = categoryUrl.appendingPathComponent(String(category.id))
         let apiResponse = try await apiCall.put(url: url, requestData: data)
         return GenericResponse(error: apiResponse.error, statusCode: apiResponse.statusCode)
     }
 
-    func deleteCategory(homeId: Int, category: Category) async throws -> GenericResponse {
+    func deleteCategory(homeId _: Int, category: Category) async throws -> GenericResponse {
         let data = try? JSONEncoder().encode(category)
-        let url = baseUrl.appendingPathComponent(String(homeId))
-            .appendingPathComponent("expensecategory")
-            .appending(path: "\(category.id)")
+        let url = categoryUrl.appendingPathComponent(String(category.id))
         let apiResponse = try await apiCall.delete(url: url, requestData: data)
         return GenericResponse(error: apiResponse.error, statusCode: apiResponse.statusCode)
     }

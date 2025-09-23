@@ -9,7 +9,6 @@ import SwiftUI
 
 struct ExpensesView: View {
     @ObservedObject var viewModel: ExpensesViewModel
-    @State private var expenses: [Expense] = []
     struct Output {
         var goToMyHome: () -> Void
         var goToCreateExpense: () -> Void
@@ -38,7 +37,7 @@ struct ExpensesView: View {
             }
             .padding()
             List {
-                ForEach(expenses, id: \.title) { item in
+                ForEach(viewModel.expenses, id: \.title) { item in
                     HStack {
                         Text(item.title ?? "")
                         Spacer()
@@ -52,10 +51,8 @@ struct ExpensesView: View {
                     }
                 }
                 .onDelete(perform: { offset in
-                    let index = offset[offset.startIndex]
                     Task {
-                        let response = try await viewModel.delete(expenseToBeDelete: expenses[index])
-                        handleExpenses(response.expenses, response.shouldLogout)
+                        try await viewModel.delete(at: offset)
                     }
                 })
                 .listRowInsets(EdgeInsets())
@@ -67,19 +64,16 @@ struct ExpensesView: View {
             .padding()
         }
         .background(ColorManager.backgroundColour)
-        .onAppear {
-            Task {
-                let response = try await viewModel.getExpenses()
-                handleExpenses(response.expenses, response.shouldLogout)
+        .alert(item: $viewModel.error) { error in
+            handleHttpErrorAlert(error: error) {
+                output.logout()
             }
         }
-    }
-}
-
-private extension ExpensesView {
-    func handleExpenses(_ expenses: [Expense]?, _ shouldLogout: Bool) {
-        guard !shouldLogout else { return output.logout() }
-        self.expenses = expenses ?? []
+        .onAppear {
+            Task {
+                try await viewModel.getExpenses()
+            }
+        }
     }
 }
 

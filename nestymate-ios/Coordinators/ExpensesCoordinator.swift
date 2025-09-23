@@ -63,7 +63,12 @@ final class ExpensesCoordinator: Hashable {
 
 private extension ExpensesCoordinator {
     @MainActor func mainScreenView() -> some View {
-        MainScreenView(viewModel: MainScreenViewModel(useCase: mainScreenUseCase), output: .init())
+        MainScreenView(viewModel: MainScreenViewModel(
+            useCase: mainScreenUseCase,
+            homeUseCase: homeUseCase
+        ), output: .init(logout: {
+            self.logout()
+        }))
     }
 
     @MainActor func expensesView() -> some View {
@@ -94,13 +99,18 @@ private extension ExpensesCoordinator {
                 )
             )
         }, logout: {
-            self.push(
-                MainCoordinator(
-                    navigationPath: self.$navigationPath,
-                    page: .login
-                )
-            )
+            self.logout()
         }))
+    }
+
+    @MainActor
+    private func logout() {
+        push(
+            MainCoordinator(
+                navigationPath: $navigationPath,
+                page: .login
+            )
+        )
     }
 
     func push(_ value: some Hashable) {

@@ -27,13 +27,20 @@ final class InviteUserViewModel: ObservableObject {
     public func inviteUser() async throws -> Bool {
         shouldShowLoader = true
         do {
-            let response = try await useCase.inviteUserToHome(email: email.value)
+            let homeId = try await getHome()
+            _ = try await useCase.inviteUserToHome(homeId: homeId, email: email.value)
             shouldShowLoader = false
-            return logoutService.shouldLogout(statusCode: response.statusCode)
+            return true
         } catch {
             self.error = error as? HttpError
         }
         shouldShowLoader = false
         return false
+    }
+
+    @MainActor
+    private func getHome() async throws -> Int {
+        let responseHome = try await useCase.getActiveHome()
+        return responseHome.home?.id ?? -1
     }
 }

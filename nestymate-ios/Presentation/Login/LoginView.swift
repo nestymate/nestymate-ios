@@ -56,9 +56,37 @@ struct LoginView: View {
             .background(ColorManager.backgroundColour)
             .navigationBarBackButtonHidden()
             .alert(item: $viewModel.error) { error in
-                error.alert
+                handleHttpErrorAlert(error: error)
+            }
+            .onOpenURL { incomingURL in
+                print("App was opened via URL: \(incomingURL)")
+                Task {
+                    try await handleIncomingURL(incomingURL)
+                }
             }
         }
+    }
+
+    private func handleIncomingURL(_ url: URL) async throws {
+        guard url.scheme == "nestymate" else {
+            return
+        }
+        guard let components = URLComponents(url: url, resolvingAgainstBaseURL: true) else {
+            print("Invalid URL")
+            return
+        }
+
+        guard let action = components.host, action == "invite" else {
+            print("Unknown URL, we can't handle this one!")
+            return
+        }
+
+        guard let inviteCode = components.queryItems?.first(where: { $0.name == "code" })?.value else {
+            print("Code not found")
+            return
+        }
+
+        viewModel.save(inviteCode: inviteCode)
     }
 }
 

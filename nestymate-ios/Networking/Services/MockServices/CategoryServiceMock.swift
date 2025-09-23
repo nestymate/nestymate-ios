@@ -6,9 +6,14 @@
 //
 
 final class CategoryServiceMock: CategoryService {
+    let category = Category(id: 123, name: "test category", description: "")
+
     func getCategories(homeId _: Int) async throws -> CategoriesResponse {
-        let categories = [Category(id: 123, code: "", name: "test category", description: "")]
-        return CategoriesResponse(categories: categories, statusCode: 200, shouldLogout: false)
+        CategoriesResponse(categories: [category], statusCode: 200, shouldLogout: false)
+    }
+
+    func getCategory(categoryId _: Int) async throws -> CategoryResponse {
+        CategoryResponse(category: category, statusCode: 200, shouldLogout: false)
     }
 
     func createCategory(homeId _: Int, category _: Category) async throws -> GenericResponse {

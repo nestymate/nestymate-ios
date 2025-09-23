@@ -12,6 +12,7 @@ struct MyHomeView: View {
     @State private var tab = 0
     struct Output {
         var goBack: () -> Void
+        var goToEditHome: (Home?) -> Void
         var goToCreateCategory: () -> Void
         var goToEditCategory: (Category?) -> Void
         var logout: () -> Void
@@ -33,14 +34,14 @@ struct MyHomeView: View {
             }
 
             if tab == 0 {
-                let viewModel = CreateOrEditHomeViewModel(
+                let viewModel = HomesViewModel(
                     useCase: viewModel.homeUseCase,
-                    isEdit: true
+                    logoutService: LogoutService()
                 )
-                CreateOrEditHomeView(
+                HomesView(
                     viewModel: viewModel,
-                    output: CreateOrEditHomeView.Output(
-                        goToMainScreen: { output.goBack() },
+                    output: HomesView.Output(
+                        goToEditHome: output.goToEditHome,
                         logout: { output.logout() }
                     )
                 )
@@ -70,6 +71,11 @@ struct MyHomeView: View {
     MyHomeView(viewModel: MyHomeViewModel(
         homeUseCase: HomeUseCaseImpl(homeService: HomeServiceImpl()),
         categoryUseCase: CategoryUseCaseImpl(service: CategoryServiceImpl())
-    ),
-    output: MyHomeView.Output(goBack: {}, goToCreateCategory: {}, goToEditCategory: { _ in }, logout: {}))
+    ), output: MyHomeView.Output(
+        goBack: {},
+        goToEditHome: { _ in },
+        goToCreateCategory: {},
+        goToEditCategory: { _ in },
+        logout: {}
+    ))
 }

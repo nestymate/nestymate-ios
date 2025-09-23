@@ -11,7 +11,6 @@ import SwiftUI
 struct CreateOrEditExpenseView: View {
     @ObservedObject var viewModel: CreateOrEditExpenseViewModel
     @State private var viewDidLoad = false
-    @State private var selectedCategory: Int?
     struct Output {
         var goBack: () -> Void
         var logout: () -> Void
@@ -26,9 +25,11 @@ struct CreateOrEditExpenseView: View {
             ScrollView {
                 VStack {
                     Text(viewModel.pageTitle).font(FontManager.title)
+                    usersPicker
                     categoryPicker
                     SingleTextField(fieldModel: $viewModel.title)
                     SingleTextField(fieldModel: $viewModel.description)
+                    DatePickerUIView(title: String(localized: "date"), fieldModel: $viewModel.date)
                     SingleTextField(fieldModel: $viewModel.amount)
 
                     ActionButton(
@@ -36,13 +37,9 @@ struct CreateOrEditExpenseView: View {
                         shouldEnableButton: viewModel.shouldEnableButton
                     ) {
                         Task {
-                            let shouldLogout = try await viewModel.createOrUpdateExpense(
-                                expenseCategoryId: selectedCategory
-                            )
-                            if !shouldLogout {
+                            let success = try await viewModel.createOrUpdateExpense()
+                            if success {
                                 output.goBack()
-                            } else {
-                                output.logout()
                             }
                         }
                     }
@@ -52,13 +49,13 @@ struct CreateOrEditExpenseView: View {
             .hiddenNavigationBarStyle()
             .background(ColorManager.backgroundColour)
             .alert(item: $viewModel.error) { error in
-                error.alert
+                handleHttpErrorAlert(error: error) {
+                    output.logout()
+                }
             }
             .onAppear {
                 Task {
-                    let categoriesResponse = try await viewModel.getCategories()
-                    selectedCategory = categoriesResponse.0
-                    guard !categoriesResponse.1 else { return output.logout() }
+                    try await viewModel.getExpense()
                 }
             }
         }
@@ -67,9 +64,17 @@ struct CreateOrEditExpenseView: View {
 
 extension CreateOrEditExpenseView {
     var categoryPicker: some View {
-        Picker(viewModel.categoryTitle, selection: $selectedCategory) {
+        Picker(viewModel.categoryTitle, selection: $viewModel.selectedCategory) {
             ForEach(viewModel.categories, id: \.self) { category in
-                Text(category.name).tag(category.id)
+                Text(category.name).tag(Optional(category))
+            }
+        }
+    }
+
+    var usersPicker: some View {
+        Picker(viewModel.usersTitle, selection: $viewModel.selectedUser) {
+            ForEach(viewModel.users, id: \.self) { user in
+                Text(user.username).tag(Optional(user))
             }
         }
     }

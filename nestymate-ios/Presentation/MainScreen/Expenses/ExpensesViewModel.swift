@@ -13,6 +13,7 @@ final class ExpensesViewModel: ObservableObject {
     private let logoutService: LogoutService
     @Published var shouldShowLoader: Bool?
     @Published var error: HttpError?
+    @Published var expenses: [Expense] = []
 
     init(useCase: ExpenseUseCase, homeUseCase: HomeUseCase, logoutService: LogoutService) {
         self.useCase = useCase
@@ -21,26 +22,33 @@ final class ExpensesViewModel: ObservableObject {
     }
 
     @MainActor
-    public func getExpenses() async throws -> ExpensesResponse {
+    public func getExpenses() async throws {
         shouldShowLoader = true
-        let responseHome = try await homeUseCase.getActiveHome()
-        let apiResponse = try? await useCase.getExpenses(homeId: responseHome.home?.id ?? -1)
+        do {
+            let responseHome = try await homeUseCase.getActiveHome()
+            let apiResponse = try await useCase.getExpenses(homeId: responseHome.home?.id ?? -1)
+            shouldShowLoader = false
+            expenses = apiResponse.expenses ?? []
+        } catch {
+            self.error = error as? HttpError
+        }
         shouldShowLoader = false
-        return ExpensesResponse(
-            expenses: apiResponse?.expenses,
-            error: apiResponse?.error,
-            statusCode: apiResponse?.statusCode,
-            shouldLogout: logoutService.shouldLogout(statusCode: apiResponse?.statusCode)
-        )
     }
 
     @MainActor
-    public func delete(expenseToBeDelete: Expense) async throws -> ExpensesResponse {
+    public func delete(at offsets: IndexSet) async throws {
+        guard let index = offsets.first else { return }
+        let expenseToBeDelete = expenses[index]
+        expenses.remove(at: index)
         shouldShowLoader = true
-        let responseHome = try await homeUseCase.getActiveHome()
-        let response = try? await useCase.deleteExpense(homeId: responseHome.home?.id ?? -1, expense: expenseToBeDelete)
+        do {
+            _ = try await useCase.deleteExpense(expense: expenseToBeDelete)
+            shouldShowLoader = false
+            try await getExpenses()
+        } catch {
+            expenses.insert(expenseToBeDelete, at: index)
+            self.error = error as? HttpError
+        }
         shouldShowLoader = false
-        error = response?.error
-        return try await getExpenses()
     }
 }

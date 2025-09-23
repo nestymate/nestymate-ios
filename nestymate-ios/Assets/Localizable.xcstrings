@@ -172,6 +172,26 @@
         }
       }
     },
+    "Current Home" : {
+      "localizations" : {
+        "el" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ενεργό σπίτι"
+          }
+        }
+      }
+    },
+    "date" : {
+      "localizations" : {
+        "el" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ημερομηνία"
+          }
+        }
+      }
+    },
     "description" : {
       "localizations" : {
         "el" : {
@@ -392,6 +412,16 @@
         }
       }
     },
+    "Homes" : {
+      "localizations" : {
+        "el" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Κατοικίες"
+          }
+        }
+      }
+    },
     "invite" : {
       "localizations" : {
         "el" : {
@@ -408,6 +438,9 @@
         }
       }
     },
+    "Invite sent" : {
+
+    },
     "invite_user" : {
       "localizations" : {
         "el" : {
@@ -420,6 +453,22 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Invite User"
+          }
+        }
+      }
+    },
+    "log_οut_error" : {
+      "localizations" : {
+        "el" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Το session σας έχει λήξει"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "You session has expired"
           }
         }
       }
@@ -536,6 +585,9 @@
           }
         }
       }
+    },
+    "OK" : {
+
     },
     "other" : {
       "localizations" : {
@@ -790,6 +842,32 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Username"
+          }
+        }
+      }
+    },
+    "users" : {
+      "localizations" : {
+        "el" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Χρήστες"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Users"
+          }
+        }
+      }
+    },
+    "You have joined a new home" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Έχετε προστεθεί σε ένα νέο σπίτι"
           }
         }
       }

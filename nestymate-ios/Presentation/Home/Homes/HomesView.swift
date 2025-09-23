@@ -1,17 +1,16 @@
 //
-//  CategoriesView.swift
+//  HomesView.swift
 //  nestymate-ios
 //
-//  Created by Selini Kyriazidou on 8/9/24.
+//  Created by Selini Kyriazidou on 18/9/25.
 //
 
 import SwiftUI
 
-struct CategoriesView: View {
-    @ObservedObject var viewModel: CategoriesViewModel
+struct HomesView: View {
+    @ObservedObject var viewModel: HomesViewModel
     struct Output {
-        var goToCreateCategory: () -> Void
-        var goToEditCategory: (Category?) -> Void
+        var goToEditHome: (Home?) -> Void
         var logout: () -> Void
     }
 
@@ -19,20 +18,19 @@ struct CategoriesView: View {
     var body: some View {
         VStack {
             HStack(alignment: .center) {
-                Text(String(localized: "categories")).font(FontManager.title)
-                Spacer()
-                Button {
-                    output.goToCreateCategory()
-                } label: {
-                    Image(systemName: "plus")
-                }
+                Text(String(localized: "Homes")).font(FontManager.title)
             }
             .padding()
 
             List {
-                ForEach(viewModel.categories) { item in
-                    HStack {
+                ForEach(viewModel.homes) { item in
+                    HStack(spacing: .zero) {
                         Text(item.name)
+                            .padding(.trailing, PaddingManager.xsmallPadding)
+                        if item.active {
+                            Image(systemName: "checkmark.seal.fill")
+                                .foregroundColor(ColorManager.activeColor)
+                        }
                         Spacer()
                         Image(systemName: "chevron.right")
                             .foregroundColor(.gray)
@@ -41,7 +39,7 @@ struct CategoriesView: View {
                     .background(ColorManager.backgroundList)
                     .cornerRadius(12)
                     .onTapGesture {
-                        output.goToEditCategory(item)
+                        output.goToEditHome(item)
                     }
                 }
                 .onDelete(perform: { offset in
@@ -65,21 +63,12 @@ struct CategoriesView: View {
         }
         .onAppear {
             Task {
-                try await viewModel.getCategories()
+                try await viewModel.getHomes()
             }
         }
     }
 }
 
 #Preview {
-    CategoriesView(viewModel: CategoriesViewModel(
-        useCase: CategoryUseCaseImpl(service: CategoryServiceMock()),
-        homeUseCase: HomeUseCaseImpl(homeService: HomeServiceImpl()),
-        logoutService: LogoutService()
-    ),
-    output: CategoriesView.Output(
-        goToCreateCategory: {},
-        goToEditCategory: { _ in },
-        logout: {}
-    ))
+    // HomesView()
 }

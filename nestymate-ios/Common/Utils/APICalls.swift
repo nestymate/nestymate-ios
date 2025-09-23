@@ -59,22 +59,16 @@ final class APICalls: Sendable {
             guard let httpResponse = response as? HTTPURLResponse else {
                 throw HttpError.badServerResponse
             }
-            print("----Api Call-----------", "\(method) \(url) \(httpResponse.statusCode)")
-            let statusCode = httpResponse.statusCode
-            switch statusCode {
-            case 200 ... 299:
-                break
-            case 401:
-                throw HttpError.passwordDoNotMatch
-            case 400:
-                let error = try JSONDecoder().decode(ErrorToHandle.self, from: data)
-                throw HttpError.errorToHandle(error: error)
-            default:
-                throw HttpError.badServerResponse
-            }
+            logResponse(
+                data: data,
+                response: response,
+                url: url.absoluteString,
+                method: method, requestData: requestData
+            )
+            try handleStatusCode(statusCode: httpResponse.statusCode, data: data)
             return APIResponse(data, httpResponse.statusCode, nil)
         } catch {
-            print("Receiver error \(error)")
+            print("❌ Error:", error.localizedDescription)
             guard let urlError = error as? URLError else { throw error }
             switch urlError.code {
             case .networkConnectionLost, .notConnectedToInternet:
@@ -82,6 +76,22 @@ final class APICalls: Sendable {
             default:
                 throw HttpError.requestFailed(error: error)
             }
+        }
+    }
+
+    private func handleStatusCode(statusCode: Int, data: Data) throws {
+        switch statusCode {
+        case 200 ... 299:
+            break
+        case 401:
+            throw HttpError.passwordDoNotMatch
+        case 400:
+            let error = try JSONDecoder().decode(ErrorToHandle.self, from: data)
+            throw HttpError.errorToHandle(error: error)
+        case 403:
+            throw HttpError.tokenExpired
+        default:
+            throw HttpError.badServerResponse
         }
     }
 }

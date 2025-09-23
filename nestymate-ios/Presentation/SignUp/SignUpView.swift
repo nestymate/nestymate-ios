@@ -22,82 +22,35 @@ struct SignUpView: View {
         )) {
             ScrollView {
                 VStack {
-                    title
-                    name
-                    surname
-                    birthday
-                    gender
-                    username
-                    password
-                    repeatPassword
-                    button
+                    Text(String(localized: "signup")).font(FontManager.title)
+                    SingleTextField(fieldModel: $viewModel.name)
+                    SingleTextField(fieldModel: $viewModel.surname)
+                    DatePickerUIView(title: String(localized: "select_birthday"), fieldModel: $viewModel.birthdate)
+                    SelectionPickerView(options: viewModel.genderOptions, fieldModel: $viewModel.gender)
+                    SingleTextField(fieldModel: $viewModel.username)
+                    PasswordTextField(fieldModel: $viewModel.password)
+                    PasswordTextField(fieldModel: $viewModel.repeatPassword)
+                    ActionButton(
+                        title: String(localized: "signup"),
+                        shouldEnableButton: viewModel.shouldEnableButton
+                    ) {
+                        Task {
+                            let result = try await viewModel.signUp()
+                            guard result.success else { return }
+                            if !result.shouldShowHome {
+                                output.goToMainScreen()
+                            } else {
+                                output.goToCreateHome()
+                            }
+                        }
+                    }
                     Spacer()
                 }
             }
-//            .onTapGesture {
-//                let keyWindow = UIApplication.shared.connectedScenes
-//                    .filter { $0.activationState == .foregroundActive }
-//                    .map { $0 as? UIWindowScene }
-//                    .compactMap { $0 }
-//                    .first?.windows
-//                    .filter { $0.isKeyWindow }.first
-//                keyWindow?.endEditing(true)
-//            }
             .background(ColorManager.backgroundColour)
             .hiddenNavigationBarStyle()
             .alert(item: $viewModel.error) { error in
-                error.alert
-            }
-        }
-    }
-}
-
-private extension SignUpView {
-    var title: some View {
-        Text(String(localized: "signup")).font(FontManager.title)
-    }
-
-    var name: some View {
-        SingleTextField(fieldModel: $viewModel.name)
-    }
-
-    var surname: some View {
-        SingleTextField(fieldModel: $viewModel.surname)
-    }
-
-    var birthday: some View {
-        DatePickerUIView(title: String(localized: "select_birthday"), fieldModel: $viewModel.birthdate)
-    }
-
-    var gender: some View {
-        SelectionPickerView(options: viewModel.genderOptions, fieldModel: $viewModel.gender)
-    }
-
-    var username: some View {
-        SingleTextField(fieldModel: $viewModel.username)
-    }
-
-    var password: some View {
-        PasswordTextField(fieldModel: $viewModel.password)
-    }
-
-    var repeatPassword: some View {
-        PasswordTextField(fieldModel: $viewModel.repeatPassword)
-    }
-
-    var button: some View {
-        ActionButton(
-            title: String(localized: "signup"),
-            shouldEnableButton: viewModel.shouldEnableButton
-        ) {
-            Task {
-                let result = try await viewModel.signUp()
-                guard result.success else { return }
-                if !result.shouldShowHome {
-                    output.goToMainScreen()
-                } else {
-                    output.goToCreateHome()
-                }
+                handleHttpErrorAlert(error: error)
             }
         }
     }
@@ -108,6 +61,7 @@ private extension SignUpView {
         service: LoginServiceImpl(),
         homeService: HomeServiceImpl()
     )
-    return SignUpView(viewModel: SignUpViewModel(useCase: useCase),
-                      output: SignUpView.Output(goToMainScreen: {}, goToCreateHome: {}))
+    let homeUseCase = HomeUseCaseImpl(homeService: HomeServiceImpl())
+    SignUpView(viewModel: SignUpViewModel(useCase: useCase, homeUseCase: homeUseCase),
+               output: SignUpView.Output(goToMainScreen: {}, goToCreateHome: {}))
 }

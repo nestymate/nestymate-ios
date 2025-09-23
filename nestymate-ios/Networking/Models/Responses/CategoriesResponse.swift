@@ -10,3 +10,9 @@ struct CategoriesResponse: Sendable {
     let statusCode: Int?
     let shouldLogout: Bool
 }
+
+struct CategoryResponse: Sendable {
+    let category: Category?
+    let statusCode: Int?
+    let shouldLogout: Bool
+}

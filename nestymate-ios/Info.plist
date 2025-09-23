@@ -11,7 +11,7 @@
 			<string>gr.selini.nestymate-ios</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>nestymateapp</string>
+				<string>nestymate</string>
 			</array>
 		</dict>
 	</array>

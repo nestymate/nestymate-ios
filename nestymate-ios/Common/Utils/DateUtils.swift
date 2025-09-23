@@ -9,6 +9,8 @@ import Foundation
 
 final class DateUtils {
     static let backendFormat = "yyyy-MM-dd"
+    static let appFormat = "dd-MM-yyyy"
+    static let expenseFormat = "HH:mm:ss.SSS"
 
     class func getToday() -> String {
         let formatter = DateFormatter()

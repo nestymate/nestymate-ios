@@ -7,12 +7,12 @@
 
 import Foundation
 
-struct Home: Encodable, Decodable, Sendable {
+struct Home: Encodable, Decodable, Sendable, Identifiable {
     let id: Int
     let name: String
-    let description: String
-    let address: String
     let active: Bool
+    let description: String?
+    let address: String?
 }
 
 struct HomeReference: Decodable {

@@ -23,6 +23,7 @@ enum FieldType: FieldValidatorProtocol {
     case birthday
     case amount
     case email
+    case date
 
     var placeHolder: String {
         switch self {
@@ -48,6 +49,8 @@ enum FieldType: FieldValidatorProtocol {
             String(localized: "amount")
         case .email:
             String(localized: "email")
+        case .date:
+            String(localized: "date")
         }
     }
 

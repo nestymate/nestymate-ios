@@ -14,6 +14,7 @@ final class CreateOrEditHomeViewModel: ObservableObject {
     @Published public var name: FieldModel = .init(value: "", fieldType: .name)
     @Published public var description: FieldModel = .init(value: "", fieldType: .description)
     @Published public var address: FieldModel = .init(value: "", fieldType: .address)
+    @Published public var active: Bool = false
     @Published public var shouldShowLoader: Bool?
     @Published var isEdit: Bool = false
     @Published var error: HttpError?
@@ -23,25 +24,32 @@ final class CreateOrEditHomeViewModel: ObservableObject {
         !name.value.isEmpty && !description.value.isEmpty && !address.value.isEmpty
     }
 
+    private let homeId: Int?
     private var home: Home?
 
-    init(useCase: HomeUseCase, isEdit: Bool) {
+    init(useCase: HomeUseCase, homeId: Int?) {
         self.useCase = useCase
-        self.isEdit = isEdit
+        isEdit = homeId != nil
+        self.homeId = homeId
         setupTitles()
     }
 
     @MainActor
     public func getHome() async {
+        guard let homeId else { return }
         shouldShowLoader = true
-        let response = try? await useCase.getActiveHome()
-        shouldShowLoader = false
-        error = response?.error
-        if let home = response?.home {
-            self.home = home
-            name = .init(value: home.name, fieldType: .name)
-            description = .init(value: home.description, fieldType: .description)
-            address = .init(value: home.address, fieldType: .address)
+        do {
+            let response = try await useCase.getHome(homeId: homeId)
+            shouldShowLoader = false
+            if let home = response.home {
+                self.home = home
+                name = .init(value: home.name, fieldType: .name)
+                description = .init(value: home.description ?? "", fieldType: .description)
+                address = .init(value: home.address ?? "", fieldType: .address)
+                active = home.active
+            }
+        } catch {
+            self.error = error as? HttpError
         }
     }
 
@@ -65,14 +73,14 @@ final class CreateOrEditHomeViewModel: ObservableObject {
             let home = Home(
                 id: 0,
                 name: name.value,
+                active: true,
                 description: description.value,
-                address: address.value,
-                active: true
+                address: address.value
             )
             do {
-                let response = try await useCase.createHome(home: home)
+                _ = try await useCase.createHome(home: home)
                 shouldShowLoader = false
-                return logoutService.shouldLogout(statusCode: response.statusCode)
+                return true
             } catch {
                 self.error = error as? HttpError
             }
@@ -93,14 +101,14 @@ final class CreateOrEditHomeViewModel: ObservableObject {
             let home = Home(
                 id: originalHome.id,
                 name: name.value,
+                active: active,
                 description: description.value,
-                address: address.value,
-                active: true
+                address: address.value
             )
             do {
-                let response = try await useCase.editHome(home: home)
+                _ = try await useCase.editHome(home: home)
                 shouldShowLoader = false
-                return logoutService.shouldLogout(statusCode: response.statusCode)
+                return true
             } catch {
                 self.error = error as? HttpError
             }

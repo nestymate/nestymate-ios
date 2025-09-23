@@ -8,6 +8,7 @@
 import Foundation
 
 final class HomeServiceMock: HomeService {
+    private let home = Home(id: 0, name: "", active: true, description: "", address: "")
     private let hasHome: Bool
 
     init(hasHome: Bool) {
@@ -17,13 +18,21 @@ final class HomeServiceMock: HomeService {
     func getActiveHome() async throws -> HomeResponse {
         if hasHome {
             HomeResponse(
-                home: Home(id: 0, name: "", description: "", address: "", active: true),
+                home: home,
                 error: nil,
                 statusCode: 200
             )
         } else {
             HomeResponse(home: nil, error: nil, statusCode: 200)
         }
+    }
+
+    func getAllHomes() async throws -> HomesResponse {
+        HomesResponse(homes: [home], error: nil, statusCode: 200)
+    }
+
+    func getHome(homeId _: Int) async throws -> HomeResponse {
+        HomeResponse(home: home, error: nil, statusCode: 200)
     }
 
     func createHome(home _: Home) async throws -> GenericResponse {
@@ -34,7 +43,15 @@ final class HomeServiceMock: HomeService {
         GenericResponse(error: nil, statusCode: 200)
     }
 
-    func inviteUserToHome(email _: String) async throws -> GenericResponse {
+    func deleteHome(home _: Home) async throws -> GenericResponse {
+        GenericResponse(error: nil, statusCode: 200)
+    }
+
+    func inviteUserToHome(homeId _: Int, email _: String) async throws -> GenericResponse {
+        GenericResponse(error: nil, statusCode: 200)
+    }
+
+    func acceptInvite(inviteCode _: String) async throws -> GenericResponse {
         GenericResponse(error: nil, statusCode: 200)
     }
 }
